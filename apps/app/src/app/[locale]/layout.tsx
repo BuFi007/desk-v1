@@ -5,6 +5,9 @@ import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
+import "@rainbow-me/rainbowkit/styles.css";
+import { Web3Provider } from "@/context/Web3";
+import { Header } from "@/components/header";
 
 export const metadata: Metadata = {
   title: "Create bu",
@@ -28,7 +31,7 @@ export default function RootLayout({
       <body
         className={cn(
           `${GeistSans.variable} ${GeistMono.variable}`,
-          "antialiased",
+          "antialiased"
         )}
       >
         <ThemeProvider
@@ -37,9 +40,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
-
-          <Footer />
+          <Web3Provider>
+            <Header />
+            {children}
+            <Footer />
+          </Web3Provider>
         </ThemeProvider>
       </body>
     </html>

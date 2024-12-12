@@ -26,6 +26,7 @@
     "./tailwind.config": "./tailwind.config.ts",
     "./globals.css": "./src/globals.css",
     "./cn": "./src/utils/cn.ts",
+    "./sheet": "./src/components/sheet.tsx",
     "./accordion": "./src/components/accordion.tsx",
     "./alert-dialog": "./src/components/alert-dialog.tsx",
     "./alert": "./src/components/alert.tsx",

@@ -1,5 +1,6 @@
 import { logger } from "@bu/logger";
 import { createClient } from "@bu/supabase/server";
+import { Client } from "../types";
 
 export async function getUser() {
   const supabase = createClient();
@@ -26,4 +27,18 @@ export async function getPosts() {
     logger.error(error);
     throw error;
   }
+}
+
+export async function getUserQuery(supabase: Client, userId: string) {
+  return supabase
+    .from("users")
+    .select(
+      `
+      *,
+      team:team_id(*)
+    `,
+    )
+    .eq("id", userId)
+    .single()
+    .throwOnError();
 }

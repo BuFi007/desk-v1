@@ -20,6 +20,7 @@
     "typescript": "^5.5.4"
   },
   "exports": {
+    "./cached-queries": "./src/queries/cached-queries.ts",
     "./server": "./src/clients/server.ts",
     "./client": "./src/clients/client.ts",
     "./mutations": "./src/mutations/index.ts",
