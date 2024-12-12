@@ -3,12 +3,11 @@ import { useAccount } from "wagmi";
 import { GoogleSignin } from "../google-signin";
 import { Button } from "@bu/ui/button";
 
-export const LoginButton = () => {
+export const ConnectWalletButton = () => {
   const { address } = useAccount();
   if (address) {
     return null;
   }
-
   return (
     <>
       <Button>Connect your wallet</Button>

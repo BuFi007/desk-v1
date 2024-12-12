@@ -8,6 +8,23 @@ const nextConfig = {
     instrumentationHook: process.env.NODE_ENV === "production",
   },
   reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**.googleusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "**.githubusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "**.supabase.co",
+      },
+    ],
+  },
+  
 };
 
 export default withSentryConfig(nextConfig, {

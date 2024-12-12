@@ -233,7 +233,7 @@ export function MainMenu({ initialItems, onSelect }: Props) {
     <div
       className="mt-6"
       //{...bind()}
-      ref={ref}
+      ref={ref as any}
     >
       <nav>
         <Reorder.Group

@@ -1,4 +1,4 @@
-import { getUser } from "@bu/supabase/cached-queries";
+"use client";
 import { Avatar, AvatarFallback, AvatarImageNext } from "@bu/ui/avatar";
 import {
   DropdownMenu,
@@ -7,24 +7,35 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@bu/ui/dropdown-menu";
 import Link from "next/link";
 import { SignOut } from "./sign-out";
-// import { ThemeSwitch } from "./theme-switch"; // TODO: THEME SWITCH HERE
-
-export async function UserMenu({ onlySignOut }: { onlySignOut: boolean }) {
-  const userData = await getUser();
+import { useAccount } from "wagmi";
+import { createClient } from "../utils/client";
+import { useEffect, useState } from "react";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { truncateAddress } from "@/utils";
+export function UserMenu({ onlySignOut }: { onlySignOut: boolean }) {
+  const supabase = createClient();
+  const [userData, setUserData] = useState<any>(null);
+  const { address } = useAccount();
+  async function fetchUserData() {
+    const { data } = await supabase.auth.getUser();
+    setUserData(data?.user);
+  }
+  useEffect(() => {
+    fetchUserData();
+  }, []);
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className="rounded-full w-8 h-8 cursor-pointer">
-          {userData?.data?.avatar_url && (
+          {userData?.user_metadata?.avatar_url && (
             <AvatarImageNext
-              src={userData?.data?.avatar_url}
-              alt={userData?.data?.full_name!}
+              src={userData?.user_metadata?.avatar_url}
+              alt={userData?.user_metadata?.full_name!}
               width={32}
               height={32}
               quality={100}
@@ -32,7 +43,7 @@ export async function UserMenu({ onlySignOut }: { onlySignOut: boolean }) {
           )}
           <AvatarFallback>
             <span className="text-xs">
-              {userData?.data?.full_name?.charAt(0)?.toUpperCase()}
+              {userData?.user_metadata?.full_name?.charAt(0)?.toUpperCase()}
             </span>
           </AvatarFallback>
         </Avatar>
@@ -44,10 +55,10 @@ export async function UserMenu({ onlySignOut }: { onlySignOut: boolean }) {
               <div className="flex justify-between items-center">
                 <div className="flex flex-col">
                   <span className="truncate line-clamp-1 max-w-[155px] block">
-                    {userData?.data?.full_name}
+                    {userData?.user_metadata?.full_name}
                   </span>
                   <span className="truncate text-xs text-[#606060] font-normal">
-                    {userData?.data?.email}
+                    {userData?.email}
                   </span>
                 </div>
                 <div className="border py-0.5 px-3 rounded-full text-[11px] font-normal">
@@ -62,9 +73,18 @@ export async function UserMenu({ onlySignOut }: { onlySignOut: boolean }) {
               <Link prefetch href="/account">
                 <DropdownMenuItem>
                   Account
-                  <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                  {/* <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut> */}
                 </DropdownMenuItem>
               </Link>
+              {address ? (
+                <Link prefetch href="/account/teams">
+                  <DropdownMenuItem>
+                    {truncateAddress(address)}
+                  </DropdownMenuItem>
+                </Link>
+              ) : (
+                <ConnectButton />
+              )}
 
               <Link prefetch href="/account/support">
                 <DropdownMenuItem>Support</DropdownMenuItem>
@@ -73,17 +93,17 @@ export async function UserMenu({ onlySignOut }: { onlySignOut: boolean }) {
               <Link prefetch href="/account/teams">
                 <DropdownMenuItem>
                   Teams
-                  <DropdownMenuShortcut>⌘E</DropdownMenuShortcut>
+                  {/* <DropdownMenuShortcut>⌘E</DropdownMenuShortcut> */}
                 </DropdownMenuItem>
               </Link>
             </DropdownMenuGroup>
 
             <DropdownMenuSeparator />
-            <div className="flex flex-row justify-between items-center p-2">
+            {/* <div className="flex flex-row justify-between items-center p-2">
               <p className="text-sm">Theme</p>
-              {/* <ThemeSwitch /> */}
+              <ThemeSwitch />
             </div>
-            <DropdownMenuSeparator />
+            <DropdownMenuSeparator /> */}
           </>
         )}
 

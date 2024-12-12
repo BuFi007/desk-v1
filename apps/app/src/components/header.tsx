@@ -10,6 +10,7 @@ import { Suspense } from "react";
 // import { DesktopTrafficLight } from "./desktop-traffic-light";
 // import { FeedbackForm } from "./feedback-form";
 import { MobileMenu } from "./mobile-menu";
+import { useAccount } from "wagmi";
 
 export function Header() {
   return (
@@ -33,7 +34,7 @@ export function Header() {
         {/* <NotificationCenter /> */}
 
         <Suspense fallback={<Skeleton className="h-8 w-8 rounded-full" />}>
-          <UserMenu onlySignOut={true} />
+          <UserMenu onlySignOut={false} />
         </Suspense>
       </div>
     </header>
