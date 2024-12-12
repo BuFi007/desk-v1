@@ -5,6 +5,7 @@ import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
+import { SdkProvider } from "@/context/W3sProvider";
 
 export const metadata: Metadata = {
   title: "Create bu",
@@ -28,7 +29,7 @@ export default function RootLayout({
       <body
         className={cn(
           `${GeistSans.variable} ${GeistMono.variable}`,
-          "antialiased",
+          "antialiased"
         )}
       >
         <ThemeProvider
@@ -37,8 +38,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
-          <Footer />
+          <SdkProvider>
+            {children}
+            <Footer />
+          </SdkProvider>
         </ThemeProvider>
       </body>
     </html>
