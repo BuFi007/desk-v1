@@ -6,7 +6,6 @@ import {
 } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
 import {
-  mainnet,
   optimism,
   base,
   zksyncSepoliaTestnet,
@@ -18,7 +17,7 @@ export const Web3Provider = ({ children }: { children: React.ReactNode }) => {
   const config = getDefaultConfig({
     appName: "My RainbowKit App",
     projectId: "399ae947aec63dc8675622dc36f5ab08",
-    chains: [mainnet, sepolia, optimism, base, zksyncSepoliaTestnet, zksync],
+    chains: [optimism, base, zksyncSepoliaTestnet, zksync, sepolia],
     ssr: true,
   });
 

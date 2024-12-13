@@ -16,6 +16,7 @@ import { createClient } from "../utils/client";
 import { useEffect, useState } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { truncateAddress } from "@/utils";
+import { Chain } from "./blockchain/chain";
 export function UserMenu({ onlySignOut }: { onlySignOut: boolean }) {
   const supabase = createClient();
   const [userData, setUserData] = useState<any>(null);
@@ -75,7 +76,8 @@ export function UserMenu({ onlySignOut }: { onlySignOut: boolean }) {
               </Link>
               {address ? (
                 <Link prefetch href="/account/teams">
-                  <DropdownMenuItem>
+                  <DropdownMenuItem className="flex items-center gap-2">
+                    <Chain />
                     {truncateAddress(address)}
                   </DropdownMenuItem>
                 </Link>
