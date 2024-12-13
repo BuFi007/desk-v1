@@ -19,7 +19,7 @@ export default function Page() {
 
       <p className="relative z-10 text-center max-w-[80%] mt-0 md:mt-4">
         An open-source starter kit based on{" "}
-        <a href="https://bu.ai?utm_source=bu" className="underline">
+        <a href="https://bu.finance?utm_source=bu" className="underline">
           Bu
         </a>
         .

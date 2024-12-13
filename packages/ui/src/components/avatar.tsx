@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Image from "next/image";
 import * as AvatarPrimitive from "@radix-ui/react-avatar"
 
 import { cn } from '../utils'
@@ -32,6 +33,32 @@ const AvatarImage = React.forwardRef<
 ))
 AvatarImage.displayName = AvatarPrimitive.Image.displayName
 
+
+const AvatarImageNext = React.forwardRef<
+  React.ElementRef<typeof Image>,
+  React.ComponentPropsWithoutRef<typeof Image>
+>(({ className, onError, ...props }, ref) => {
+  const [hasError, setHasError] = React.useState(false);
+
+  if (hasError || !props.src) {
+    return null;
+  }
+
+  return (
+    <Image
+      ref={ref}
+      className={cn("aspect-square h-full w-full absolute z-10", className)}
+      onError={(e) => {
+        setHasError(true);
+        onError?.(e);
+      }}
+      {...props}
+    />
+  );
+});
+
+AvatarImageNext.displayName = "AvatarImageNext";
+
 const AvatarFallback = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Fallback>,
   React.ComponentPropsWithoutRef<typeof AvatarPrimitive.Fallback>
@@ -47,4 +74,4 @@ const AvatarFallback = React.forwardRef<
 ))
 AvatarFallback.displayName = AvatarPrimitive.Fallback.displayName
 
-export { Avatar, AvatarImage, AvatarFallback }
+export { Avatar, AvatarImage, AvatarImageNext, AvatarFallback }

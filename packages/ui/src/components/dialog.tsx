@@ -4,6 +4,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
 import * as React from 'react'
 import { cn } from '../utils'
+import { Cross2Icon } from '@radix-ui/react-icons'
 
 const Dialog = DialogPrimitive.Root
 const DialogTrigger = DialogPrimitive.Trigger
@@ -30,13 +31,13 @@ const DialogContent = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & {
     size?: 'sm' | 'md' | 'lg' | 'xl' | 'full'
   }
->(({ className, children, size = 'md', ...props }, ref) => {
-  const sizeClasses = {
-    sm: 'max-w-sm',
-    md: 'max-w-lg',
-    lg: 'max-w-3xl',
-    xl: 'max-w-5xl',
-    full: 'max-w-[calc(100vw-2rem)]'
+  >(({ className, children, hideClose, ...props }, ref) => {
+    const sizeClasses = {
+      sm: 'max-w-sm',
+      md: 'max-w-lg',
+      lg: 'max-w-3xl',
+      xl: 'max-w-5xl',
+      full: 'max-w-[calc(100vw-2rem)]'
   }
 
   return (
@@ -65,15 +66,36 @@ const DialogContent = React.forwardRef<
         {...props}
       >
         {children}
-        <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-white data-[state=open]:text-black">
-          <X className="h-4 w-4" />
+        {!hideClose && (
+        <DialogPrimitive.Close className="absolute right-6 top-6 opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+          <Cross2Icon className="h-4 w-4" />
           <span className="sr-only">Close</span>
-        </DialogPrimitive.Close>
+          </DialogPrimitive.Close>
+        )}
       </DialogPrimitive.Content>
     </DialogPortal>
   )
 })
 DialogContent.displayName = DialogPrimitive.Content.displayName
+
+const DialogContentFrameless = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Content>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
+>(({ className, children, ...props }, ref) => (
+  <DialogPortal>
+    <DialogOverlay />
+    <DialogPrimitive.Content
+      ref={ref}
+      className={cn(
+        "fixed bg-background top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] max-w-xl border dark:border-none dark:p-px text-primary z-50 data-[state=closed]:animate-[dialog-content-hide_100ms] data-[state=open]:animate-[dialog-content-show_100ms]",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </DialogPrimitive.Content>
+  </DialogPortal>
+));
 
 const DialogHeader = ({
   className,
@@ -141,4 +163,5 @@ export {
   DialogFooter,
   DialogTitle,
   DialogDescription,
+  DialogContentFrameless
 }
