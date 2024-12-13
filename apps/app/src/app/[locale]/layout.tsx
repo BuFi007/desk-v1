@@ -7,8 +7,8 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
-  title: "Create bu",
-  description: "Production ready Next.js app",
+  title: "Bu",
+  description: "Bu Desk",
 };
 
 export const viewport = {
