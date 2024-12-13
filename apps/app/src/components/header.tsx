@@ -1,3 +1,5 @@
+"use client";
+
 import { AssistantButton } from "@/components/assistant/button";
 import { DesktopAssistantButton } from "@/components/assistant/button-desktop";
 // import { ConnectionStatus } from "@/components/connection-status";
@@ -11,31 +13,37 @@ import { Suspense } from "react";
 // import { FeedbackForm } from "./feedback-form";
 import { MobileMenu } from "./mobile-menu";
 import { useAccount } from "wagmi";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 export function Header() {
+  const { isConnected } = useAccount();
   return (
-    <header className="-ml-4 -mr-4 md:m-0 z-10 px-4 md:px-0 md:border-b-[1px] flex justify-between pt-4 pb-2 md:pb-4 items-center todesktop:sticky todesktop:top-0 todesktop:bg-background todesktop:border-none sticky md:static top-0 backdrop-filter backdrop-blur-xl md:backdrop-filter md:backdrop-blur-none dark:bg-[#121212] bg-[#fff] bg-opacity-70 ">
-      <MobileMenu />
+    <header className="-ml-4 -mr-4   md:m-0 z-10 px-4 md:px-0 md:border-b-[1px] flex justify-between pt-4 pb-2 md:pb-4 items-center todesktop:sticky todesktop:top-0 todesktop:bg-background todesktop:border-none sticky md:static top-0 backdrop-filter backdrop-blur-xl md:backdrop-filter md:backdrop-blur-none dark:bg-[#121212] bg-[#fff] bg-opacity-70 ">
+      <div className="w-11/12 flex m-auto justify-between items-center px-4 gap-3">
+        <MobileMenu />
 
-      {/* {isDesktopApp() && <DesktopTrafficLight />}
+        {/* {isDesktopApp() && <DesktopTrafficLight />}
         {isDesktopApp() && <BrowserNavigation />} */}
 
-      <AssistantButton />
+        <AssistantButton />
 
-      <div className="flex space-x-2 ml-auto">
-        {/* {isDesktopApp() && <DesktopAssistantButton />} */}
+        <div className="flex space-x-2 ml-auto">
+          {/* {isDesktopApp() && <DesktopAssistantButton />} */}
 
-        {/* <FeedbackForm /> */}
+          {/* <FeedbackForm /> */}
 
-        {/* <Suspense>
+          {/* <Suspense>
           <ConnectionStatus />
+
         </Suspense> */}
 
-        {/* <NotificationCenter /> */}
+          {!isConnected && <ConnectButton />}
+          {/* <NotificationCenter /> */}
 
-        <Suspense fallback={<Skeleton className="h-8 w-8 rounded-full" />}>
-          <UserMenu onlySignOut={false} />
-        </Suspense>
+          <Suspense fallback={<Skeleton className="h-8 w-8 rounded-full" />}>
+            <UserMenu onlySignOut={false} />
+          </Suspense>
+        </div>
       </div>
     </header>
   );

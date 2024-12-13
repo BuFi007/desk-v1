@@ -41,9 +41,11 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Web3Provider>
-            <Header />
-            {children}
-            <Footer />
+            <div className="w-screen flex flex-col">
+              <Header />
+              {children}
+              <Footer />
+            </div>
           </Web3Provider>
         </ThemeProvider>
       </body>

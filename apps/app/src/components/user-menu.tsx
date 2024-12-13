@@ -61,9 +61,6 @@ export function UserMenu({ onlySignOut }: { onlySignOut: boolean }) {
                     {userData?.email}
                   </span>
                 </div>
-                <div className="border py-0.5 px-3 rounded-full text-[11px] font-normal">
-                  Beta
-                </div>
               </div>
             </DropdownMenuLabel>
 
@@ -83,7 +80,7 @@ export function UserMenu({ onlySignOut }: { onlySignOut: boolean }) {
                   </DropdownMenuItem>
                 </Link>
               ) : (
-                <ConnectButton />
+                <DropdownMenuItem>Not connected</DropdownMenuItem>
               )}
 
               <Link prefetch href="/account/support">

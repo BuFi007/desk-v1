@@ -10,7 +10,6 @@ export const ConnectWalletButton = () => {
   }
   return (
     <>
-      <Button>Connect your wallet</Button>
       <ConnectButton />
     </>
   );
