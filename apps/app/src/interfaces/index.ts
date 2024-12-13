@@ -1,7 +1,8 @@
 import { Token, Chain } from "@/types";
-import { PaymentTab, ViewTab } from "../../../../packages/ui/src/store/interface";
-
-
+import {
+  PaymentTab,
+  ViewTab,
+} from "../../../../packages/ui/src/store/interface";
 
 interface PaymentStore {
   currentPaymentTab: PaymentTab;
@@ -74,4 +75,10 @@ export interface PayLinkStore {
   setAmount: (amount: string) => void;
   setToken: (token: Token) => void;
   setChainId: (chainId: number) => void;
+}
+export interface TokenChipProps {
+  token: Token;
+  onClick?: (token: Token) => void;
+  className?: string;
+  amount?: string;
 }

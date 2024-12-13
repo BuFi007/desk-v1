@@ -5,17 +5,11 @@ import {
   getDefaultConfig,
 } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
-import {
-  optimism,
-  base,
-  zksyncSepoliaTestnet,
-  zksync,
-  sepolia,
-} from "wagmi/chains";
+import { optimism, zksyncSepoliaTestnet, zksync, sepolia } from "wagmi/chains";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 export const Web3Provider = ({ children }: { children: React.ReactNode }) => {
   const config = getDefaultConfig({
-    appName: "My RainbowKit App",
+    appName: "Bufi desk app",
     projectId: "399ae947aec63dc8675622dc36f5ab08",
     chains: [optimism, zksyncSepoliaTestnet, zksync, sepolia],
     ssr: true,

@@ -55,10 +55,10 @@ export const authActionClient = actionClientWithMeta
     return result;
   })
   .use(async ({ next, metadata }) => {
-    const ip = headers().get("x-forwarded-for");
+    const ip = (await headers()).get("x-forwarded-for");
 
     const { success, remaining } = await ratelimit.limit(
-      `${ip}-${metadata.name}`,
+      `${ip}-${metadata.name}`
     );
 
     if (!success) {
