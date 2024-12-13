@@ -1,9 +1,7 @@
 import type { UpdateTransactionValues } from "@/actions/schema";
 import { Drawer, DrawerContent } from "@bu/ui/drawer";
-import { useMediaQuery } from "@bu/ui/hooks";
-import { Sheet, SheetContent } from "@bu/ui/sheet";
 import React from "react";
-import { TransactionDetails } from "../transaction-details";
+import { TransactionDetails } from "@/components/transaction-details";
 
 type Props = {
   setOpen: (open: boolean) => void;
@@ -23,21 +21,6 @@ export function TransactionSheet({
   ids,
   updateTransaction,
 }: Props) {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
-
-  if (isDesktop) {
-    return (
-      <Sheet open={isOpen} onOpenChange={setOpen}>
-        <SheetContent>
-          <TransactionDetails
-            data={data}
-            ids={ids}
-            updateTransaction={updateTransaction}
-          />
-        </SheetContent>
-      </Sheet>
-    );
-  }
 
   return (
     <Drawer

@@ -1,5 +1,4 @@
 import { AI } from "@/actions/ai/chat";
-import { DefaultSettings } from "@/components/default-settings.server";
 import { Header } from "@/components/header";
 import { GlobalSheets } from "@/components/sheets/global-sheets";
 import { Sidebar } from "@/components/sidebar";
@@ -8,54 +7,12 @@ import { getCountryCode, getCurrency } from "@bu/location";
 import { uniqueCurrencies } from "@bu/location/currencies";
 import { getUser } from "@bu/supabase/queries";
 import { nanoid } from "nanoid";
-import dynamic from "next/dynamic";
 import { redirect } from "next/navigation";
+import { AssistantModal } from "@/components/assistant/assistant-modal";
+import { SelectBankAccountsModal } from "@/components/modals/select-bank-accounts";
+import { ImportModal } from "@/components/modals/import-modal";
+import { ConnectTransactionsModal } from "@/components/modals/connect-transactions-modal";
 import { Suspense } from "react";
-
-const AssistantModal = dynamic(
-  () =>
-    import("@/components/assistant/assistant-modal").then(
-      (mod) => mod.AssistantModal,
-    ),
-  {
-    ssr: false,
-  },
-);
-
-const ExportStatus = dynamic(
-  () => import("@/components/export-status").then((mod) => mod.ExportStatus),
-  {
-    ssr: false,
-  },
-);
-
-const SelectBankAccountsModal = dynamic(
-  () =>
-    import("@/components/modals/select-bank-accounts").then(
-      (mod) => mod.SelectBankAccountsModal,
-    ),
-  {
-    ssr: false,
-  },
-);
-
-const ImportModal = dynamic(
-  () =>
-    import("@/components/modals/import-modal").then((mod) => mod.ImportModal),
-  {
-    ssr: false,
-  },
-);
-
-const ConnectTransactionsModal = dynamic(
-  () =>
-    import("@/components/modals/connect-transactions-modal").then(
-      (mod) => mod.ConnectTransactionsModal,
-    ),
-  {
-    ssr: false,
-  },
-);
 
 export default async function Layout({
   children,
@@ -93,16 +50,11 @@ export default async function Layout({
             currencies={uniqueCurrencies}
             defaultCurrency={currency}
           />
-          <ExportStatus />
 
           <Suspense>
             <GlobalSheets defaultCurrency={currency} />
           </Suspense>
 
-          <Suspense>
-            {/* Set default user timezone and locale */}
-            <DefaultSettings />
-          </Suspense>
         </AI>
       </div>
     </UserProvider>

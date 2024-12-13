@@ -2,7 +2,7 @@
 
 import { Button } from "@bu/ui/button";
 import { Icons } from "@bu/ui/icons";
-import { Sheet, SheetContent, SheetTrigger } from "@bu/ui/sheet";
+import { Sheet, SheetContent } from "@bu/ui/sheet";
 import { useState } from "react";
 import { MainMenu } from "./main-menu";
 

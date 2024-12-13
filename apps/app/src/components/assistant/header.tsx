@@ -1,7 +1,6 @@
 import { useAssistantStore } from "@/store/assistant";
 import { Button } from "@bu/ui/button";
 import { Icons } from "@bu/ui/icons";
-import { Experimental } from "../experimental";
 
 type Props = {
   isExpanded: boolean;
@@ -38,10 +37,6 @@ export function Header({ toggleSidebar, isExpanded }: Props) {
       >
         <Icons.Close />
       </Button>
-
-      <div className="space-x-2 items-center hidden md:flex todesktop:flex">
-        <Experimental className="border-border text-[#878787]" />
-      </div>
     </div>
   );
 }

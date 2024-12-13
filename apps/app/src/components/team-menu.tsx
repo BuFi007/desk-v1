@@ -1,5 +1,6 @@
 import { TeamDropdown } from "@/components/team-dropdown";
-import { getUser, getTeams } from "@bu/supabase/cached-queries";
+import { getTeams } from "@bu/supabase/cached-queries";
+import { getUser } from "@bu/supabase/queries";
 
 export async function TeamMenu() {
   const user = await getUser();

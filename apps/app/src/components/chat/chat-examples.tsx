@@ -2,7 +2,7 @@
 
 import { shuffle } from "@bu/utils";
 import { motion } from "framer-motion";
-import { useMemo, useRef } from "react";
+import { MutableRefObject, useMemo, useRef } from "react";
 import { useDraggable } from "react-use-draggable-scroll";
 import { chatExamples } from "./examples";
 
@@ -23,10 +23,10 @@ const itemVariant = {
   show: { y: 0, opacity: 1 },
 };
 
-export function ChatExamples({ onSubmit }) {
+export function ChatExamples({ onSubmit }: { onSubmit: (example: string) => void }) {
   const items = useMemo(() => shuffle(chatExamples), []);
   const ref = useRef();
-  const { events } = useDraggable(ref);
+  const { events } = useDraggable(ref as unknown as MutableRefObject<HTMLElement>);
 
   const totalLength = chatExamples.reduce((accumulator, currentString) => {
     return accumulator + currentString.length * 8.2 + 20;
@@ -36,7 +36,7 @@ export function ChatExamples({ onSubmit }) {
     <div
       className="absolute z-10 bottom-[100px] left-0 right-0 overflow-scroll scrollbar-hide cursor-grabbing hidden md:block"
       {...events}
-      ref={ref}
+      ref={ref as unknown as MutableRefObject<HTMLDivElement>}
     >
       <motion.ul
         variants={listVariant}
@@ -45,7 +45,7 @@ export function ChatExamples({ onSubmit }) {
         className="flex space-x-4 ml-4 items-center"
         style={{ width: `${totalLength}px` }}
       >
-        {items.map((example) => (
+        {items.map((example: string) => (
           <button key={example} type="button" onClick={() => onSubmit(example)}>
             <motion.li
               variants={itemVariant}

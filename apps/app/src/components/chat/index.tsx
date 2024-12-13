@@ -11,9 +11,17 @@ import { nanoid } from "nanoid";
 import { useEffect, useRef } from "react";
 import { ChatEmpty } from "./chat-empty";
 import { ChatExamples } from "./chat-examples";
-import { ChatFooter } from "./chat-footer";
 import { ChatList } from "./chat-list";
 import { UserMessage } from "./messages";
+
+type ChatProps = {
+  messages: any;
+  submitMessage: any;
+  user: any;
+  onNewChat: any;
+  input: any;
+  setInput: any;
+};
 
 export function Chat({
   messages,
@@ -22,8 +30,7 @@ export function Chat({
   onNewChat,
   input,
   setInput,
-  showFeedback,
-}) {
+}: ChatProps) {
   const { submitUserMessage } = useActions();
   const { formRef, onKeyDown } = useEnterSubmit();
   const ref = useRef(false);
@@ -68,7 +75,7 @@ export function Chat({
 
   useEffect(() => {
     requestAnimationFrame(() => {
-      inputRef?.current.focus();
+      inputRef?.current?.focus();
     });
   }, [messages]);
 
@@ -110,18 +117,13 @@ export function Chat({
             autoCorrect="off"
             value={input}
             className="h-12 min-h-12 pt-3 resize-none border-none"
-            placeholder="Ask Midday a question..."
+            placeholder="Ask bu a question..."
             onKeyDown={onKeyDown}
             onChange={(evt) => {
               setInput(evt.target.value);
             }}
           />
         </form>
-
-        <ChatFooter
-          onSubmit={() => onSubmit(input)}
-          showFeedback={showFeedback}
-        />
       </div>
     </div>
   );

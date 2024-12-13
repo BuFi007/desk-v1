@@ -6,9 +6,10 @@ import { Suspense } from "react";
 import { MainMenu } from "./main-menu";
 import { TeamMenu } from "./team-menu";
 
-export function Sidebar() {
-  const initialItems = cookies().has(Cookies.MenuConfig)
-    ? JSON.parse(cookies().get(Cookies.MenuConfig)?.value)
+export async function Sidebar() {
+  const cookieStore = await cookies();
+  const initialItems = cookieStore.has(Cookies.MenuConfig)
+    ? JSON.parse(cookieStore.get(Cookies.MenuConfig)!.value)
     : null;
 
   return (

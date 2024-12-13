@@ -4,7 +4,7 @@ import { createPlaidLinkTokenAction } from "@/actions/institutions/create-plaid-
 import { exchangePublicToken } from "@/actions/institutions/exchange-public-token";
 import { getInstitutions } from "@/actions/institutions/get-institutions";
 import { useConnectParams } from "@/hooks/use-connect-params";
-import type { Institutions } from "@bu-ai/engine/resources/institutions/institutions";
+import type { Institutions } from "@bu/engine/resources/institutions/institutions";
 import { track } from "@bu/events/client";
 import { LogEvents } from "@bu/events/events";
 import { Button } from "@bu/ui/button";
@@ -21,10 +21,10 @@ import { useDebounce, useScript } from "@uidotdev/usehooks";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { usePlaidLink } from "react-plaid-link";
-import { BankLogo } from "../bank-logo";
-import { ConnectBankProvider } from "../connect-bank-provider";
-import { CountrySelector } from "../country-selector";
-import { InstitutionInfo } from "../institution-info";
+import { BankLogo } from "@/components/bank-logo";
+import { ConnectBankProvider } from "@/components/connect-bank-provider";
+import { CountrySelector } from "@/components/country-selector";
+import { InstitutionInfo } from "@/components/institution-info";
 
 function SearchSkeleton() {
   return (
@@ -115,7 +115,7 @@ export function ConnectTransactionsModal({
     token: plaidToken,
     publicKey: "",
     env: process.env.NEXT_PUBLIC_PLAID_ENVIRONMENT!,
-    clientName: "Midday",
+    clientName: "bu",
     product: ["transactions"],
     onSuccess: async (public_token, metadata) => {
       const { access_token, item_id } = await exchangePublicToken(public_token);
@@ -174,7 +174,7 @@ export function ConnectTransactionsModal({
 
   useEffect(() => {
     if (
-      (isOpen && !results?.length > 0) ||
+      (isOpen && results?.length === 0) ||
       countryCode !== initialCountryCode
     ) {
       fetchData();
@@ -239,7 +239,7 @@ export function ConnectTransactionsModal({
                 <div className="absolute right-0">
                   <CountrySelector
                     defaultValue={countryCode}
-                    onSelect={(countryCode) => {
+                    onSelect={(countryCode: any) => {
                       setParams({ countryCode });
                       setResults([]);
                     }}
@@ -250,7 +250,7 @@ export function ConnectTransactionsModal({
               <div className="h-[430px] space-y-4 overflow-auto scrollbar-hide pt-2 mt-2">
                 {loading && <SearchSkeleton />}
 
-                {results?.map((institution) => {
+                {results?.map((institution: any) => {
                   if (!institution) {
                     return null;
                   }

@@ -1,6 +1,6 @@
 "use client";
 
-import { changeTeamAction } from "@/actions/change-team-actions";
+import { changeTeamAction } from "@/actions/change-team-action";
 import { CreateTeamModal } from "@/components/modals/create-team-modal";
 import { Avatar, AvatarFallback, AvatarImage } from "@bu/ui/avatar";
 import { Button } from "@bu/ui/button";
@@ -10,8 +10,14 @@ import { useClickAway } from "@uidotdev/usehooks";
 import { motion } from "framer-motion";
 import { useAction } from "next-safe-action/hooks";
 import { useState } from "react";
+import { MutableRefObject } from "react";
 
-export function TeamDropdown({ selectedTeamId: initialId, teams }) {
+interface TeamDropdownProps {
+  selectedTeamId: string;
+  teams: any[];
+}
+
+export function TeamDropdown({ selectedTeamId: initialId, teams }: TeamDropdownProps) {
   const [selectedId, setSelectedId] = useState(initialId);
   const [isActive, setActive] = useState(false);
   const [isOpen, onOpenChange] = useState(false);
@@ -32,7 +38,11 @@ export function TeamDropdown({ selectedTeamId: initialId, teams }) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <motion.div ref={ref} layout className="w-[32px] h-[32px] relative">
+      <motion.div
+        ref={ref as unknown as MutableRefObject<HTMLDivElement>}
+        layout
+        className="w-[32px] h-[32px] relative"
+      >
         {sortedTeams.map(({ team }, index) => (
           <motion.div
             key={team.id}

@@ -8,7 +8,7 @@ import { useConnectParams } from "@/hooks/use-connect-params";
 import { useI18n } from "@/locales/client";
 import { getInitials } from "@/utils/format";
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { Accounts } from "@bu-ai/engine/resources/accounts.mjs";
+import type { Accounts } from "@bu/engine/resources/accounts.mjs";
 import { Avatar, AvatarFallback } from "@bu/ui/avatar";
 import { Button } from "@bu/ui/button";
 import {
