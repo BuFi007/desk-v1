@@ -1,6 +1,5 @@
 import { useInvoiceParams } from "@/hooks/useInvoiceParams";
 import { Drawer, DrawerContent } from "@bu/ui/drawer";
-import { useMediaQuery } from "@bu/ui/hooks";
 import { Sheet, SheetContent } from "@bu/ui/sheet";
 import React from "react";
 import { InvoiceDetails } from "@/components/invoiceDetails";
@@ -14,18 +13,7 @@ type Props = {
 };
 
 export function InvoiceDetailsSheet({ setOpen, isOpen, data, locale }: Props) {
-  const isDesktop = useMediaQuery("(min-width: 768px)");
   const { invoiceId } = useInvoiceParams();
-
-  if (isDesktop) {
-    return (
-      <Sheet open={isOpen} onOpenChange={setOpen}>
-        <SheetContent>
-          <InvoiceDetails id={invoiceId} data={data} />
-        </SheetContent>
-      </Sheet>
-    );
-  }
 
   return (
     <Drawer
