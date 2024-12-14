@@ -339,6 +339,242 @@ export const usePeanut = () => {
       });
   };
 
+  const createRequestLink = async (
+    amount: string,
+    tokenAddress: Token | string,
+    onInProgress?: () => void,
+    onSuccess?: () => void,
+    onFailed?: (error: Error) => void,
+    onFinished?: () => void
+  ) => {
+    setIsLoading(true);
+    setLoading(true);
+    setError(null);
+
+    try {
+      if (!address) {
+        throw new Error("Wallet not connected");
+      }
+
+      const actualTokenAddress =
+        typeof tokenAddress === "string" ? tokenAddress : tokenAddress.address;
+
+      const tokenDetails = getTokenDetails(actualTokenAddress);
+
+      const { link } = await peanut.createRequestLink({
+        chainId: chainId.toString(),
+        tokenAddress: actualTokenAddress,
+        tokenAmount: amount,
+        tokenType:
+          tokenDetails.tokenType === 0
+            ? peanut.interfaces.EPeanutLinkType.native
+            : peanut.interfaces.EPeanutLinkType.erc20,
+        tokenDecimals: tokenDetails.tokenDecimals.toString(),
+        recipientAddress: address as `0x${string}`,
+        APIKey: PEANUTAPIKEY!,
+      });
+
+      toast({
+        title: "Request link created",
+        description: "Your payment request link has been created.",
+      });
+
+      onSuccess?.();
+      return { requestLink: link };
+    } catch (error: any) {
+      console.error("Error creating request link:", error);
+      const errorMessage =
+        error instanceof Error ? error.message : String(error);
+      setError(errorMessage);
+      toast({
+        title: "Error creating request link",
+        description: errorMessage,
+        variant: "destructive",
+      });
+      onFailed?.(error);
+      throw error;
+    } finally {
+      setIsLoading(false);
+      setLoading(false);
+      onFinished?.();
+    }
+  };
+
+  // Al crear un request link, se debe crear un link de pago con el mismo token y cantidad
+
+  const fulfillRequestLink = async (
+    link: string,
+    onInProgress?: () => void,
+    onSuccess?: () => void,
+    onFailed?: (error: Error) => void,
+    onFinished?: () => void
+  ) => {
+    setIsLoading(true);
+    setLoading(true);
+    setError(null);
+
+    try {
+      if (!address || !signer) {
+        throw new Error("Wallet not connected or signer unavailable");
+      }
+
+      // Get the details of the request link
+      const linkDetails = await peanut.getRequestLinkDetails({
+        link,
+        APIKey: PEANUTAPIKEY!,
+      });
+
+      // Prepare the unsigned transaction
+      const { unsignedTx } = peanut.prepareRequestLinkFulfillmentTransaction({
+        recipientAddress: linkDetails.recipientAddress!,
+        tokenAddress: linkDetails.tokenAddress,
+        tokenAmount: linkDetails.tokenAmount,
+        tokenDecimals: linkDetails.tokenDecimals,
+        tokenType:
+          linkDetails.tokenType === 0
+            ? peanut.interfaces.EPeanutLinkType.native
+            : peanut.interfaces.EPeanutLinkType.erc20,
+      });
+
+      // Sign and submit the transaction
+      const { tx, txHash } = await peanut.signAndSubmitTx({
+        unsignedTx,
+        structSigner: {
+          signer,
+          gasLimit: BigInt(2000000),
+        },
+      });
+
+      onInProgress?.();
+
+      // Wait for transaction confirmation
+      await tx.wait();
+
+      // Submit the fulfillment
+      await peanut.submitRequestLinkFulfillment({
+        chainId: linkDetails.chainId,
+        hash: txHash,
+        payerAddress: address,
+        link,
+        amountUsd: "",
+      });
+
+      toast({
+        title: "Request fulfilled",
+        description: `Transaction hash: ${txHash}. Payment completed!`,
+      });
+
+      onSuccess?.();
+      return txHash;
+    } catch (error: any) {
+      console.error("Error fulfilling request:", error);
+      const errorMessage =
+        error instanceof Error ? error.message : String(error);
+      setError(errorMessage);
+      toast({
+        title: "Error fulfilling request",
+        description: errorMessage,
+        variant: "destructive",
+      });
+      onFailed?.(error);
+      throw error;
+    } finally {
+      setIsLoading(false);
+      setLoading(false);
+      onFinished?.();
+    }
+  };
+
+  const fulfillRequestLinkXChain = async (
+    link: string,
+    fromToken: string,
+    fromChainId: string,
+    tokenDecimals: number,
+    onInProgress?: () => void,
+    onSuccess?: () => void,
+    onFailed?: (error: Error) => void,
+    onFinished?: () => void,
+    isMainnet?: boolean
+  ) => {
+    setIsLoading(true);
+    setLoading(true);
+    setError(null);
+
+    try {
+      if (!address || !signer) {
+        throw new Error("Wallet not connected or signer unavailable");
+      }
+
+      // Get the details of the request link
+      const linkDetails = await peanut.getRequestLinkDetails({
+        link,
+        APIKey: PEANUTAPIKEY!,
+      });
+
+      // Prepare the cross-chain transaction
+      const xchainUnsignedTxs =
+        await peanut.prepareXchainRequestFulfillmentTransaction({
+          fromChainId,
+          senderAddress: address as `0x${string}`,
+          fromToken,
+          squidRouterUrl: peanut.getSquidRouterUrl(isMainnet || false, false),
+          provider: signer.provider!,
+          fromTokenDecimals: tokenDecimals,
+          tokenType: peanut.interfaces.EPeanutLinkType.erc20,
+          linkDetails,
+        });
+
+      let lastHash = "";
+      for (const unsignedTx of xchainUnsignedTxs.unsignedTxs) {
+        const { tx, txHash } = await peanut.signAndSubmitTx({
+          unsignedTx,
+          structSigner: {
+            signer,
+            gasLimit: BigInt(2000000),
+          },
+        });
+
+        lastHash = txHash;
+        onInProgress?.();
+
+        await tx.wait();
+      }
+
+      // Submit the fulfillment
+      await peanut.submitRequestLinkFulfillment({
+        chainId: linkDetails.chainId,
+        hash: lastHash,
+        payerAddress: address,
+        link,
+        amountUsd: "",
+      });
+
+      toast({
+        title: "Cross-chain request fulfilled",
+        description: `Transaction hash: ${lastHash}. This may take a few minutes to complete.`,
+      });
+
+      onSuccess?.();
+      return lastHash;
+    } catch (error: any) {
+      console.error("Error fulfilling cross-chain request:", error);
+      const errorMessage =
+        error instanceof Error ? error.message : String(error);
+      setError(errorMessage);
+      toast({
+        title: "Error fulfilling cross-chain request",
+        description: errorMessage,
+        variant: "destructive",
+      });
+      onFailed?.(error);
+      throw error;
+    } finally {
+      setIsLoading(false);
+      setLoading(false);
+      onFinished?.();
+    }
+  };
+
   return {
     isLoading,
     address: address || null,
@@ -347,5 +583,8 @@ export const usePeanut = () => {
     claimPayLink,
     claimPayLinkXChain,
     copyToClipboard,
+    createRequestLink,
+    fulfillRequestLink,
+    fulfillRequestLinkXChain,
   };
 };

@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@bu/analytics": "workspace:*",
+    "@bu/app": "workspace:*",
     "@bu/kv": "workspace:*",
     "@bu/supabase": "workspace:*",
     "@bu/ui": "workspace:*",
