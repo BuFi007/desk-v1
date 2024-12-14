@@ -2,7 +2,7 @@
 
 import { Button } from "@bu/ui/button";
 import { Icons } from "@bu/ui/icons";
-import { Sheet, SheetContent, SheetTrigger } from "@bu/ui/sheet";
+import { Sheet, SheetContent } from "@bu/ui/sheet";
 import { useState } from "react";
 import { MainMenu } from "./main-menu";
 
@@ -16,7 +16,7 @@ export function MobileMenu() {
           variant="outline"
           size="icon"
           onClick={() => setOpen(true)}
-          className="rounded-full w-8 h-8 items-center relative flex md:hidden"
+          className="rounded-full w-8 h-8 items-center relative flex"
         >
           <Icons.Menu size={16} />
         </Button>
