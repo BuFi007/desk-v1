@@ -1,6 +1,6 @@
 import { createClient } from "../clients/server";
 import { unstable_cache } from "next/cache";
-import { getTeamsByUserIdQuery, getUser } from "./index";
+import { getTeamsByUserIdQuery, getTeamSettingsQuery, getUser } from "./index";
 import {
   type GetTeamBankAccountsParams,
   getTeamBankAccountsQuery,
@@ -48,6 +48,27 @@ export const getTeams = async () => {
     {
       tags: [`teams_${userId}`],
       revalidate: 180,
+    },
+  )();
+};
+
+export const getTeamSettings = async () => {
+  const supabase = createClient();
+  const user = await getUser();
+  const teamId = user?.data?.team_id;
+
+  if (!teamId) {
+    return null;
+  }
+
+  return unstable_cache(
+    async () => {
+      return getTeamSettingsQuery(supabase, teamId);
+    },
+    ["team_settings", teamId],
+    {
+      tags: [`team_settings_${teamId}`],
+      revalidate: 3600,
     },
   )();
 };
