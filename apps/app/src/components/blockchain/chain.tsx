@@ -6,9 +6,8 @@ import { useChainId } from "wagmi";
 
 export const Chain = () => {
   const chainId = useChainId();
-  console.log(chainId, "chainId");
   const chain = AllChains.find((chain) => chain.chainId === chainId);
-  console.log(chain);
+
   return (
     <>
       {chain && (

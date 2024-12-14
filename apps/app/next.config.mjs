@@ -22,10 +22,18 @@ const nextConfig = {
         protocol: "https",
         hostname: "**.supabase.co",
       },
+      {
+        protocol: "https",
+        hostname: "**.coingecko.com",
+      },
+      {
+        protocol: "https",
+        hostname: "**.dynamic.xyz",
+      },
     ],
   },
-  
 };
+
 
 export default withSentryConfig(nextConfig, {
   silent: !process.env.CI,
