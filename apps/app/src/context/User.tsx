@@ -1,4 +1,5 @@
 "use client";
+
 import { BlockchainContextProps } from "@/types";
 import React, {
   createContext,
@@ -16,9 +17,7 @@ const BlockchainContext = createContext<BlockchainContextProps | undefined>(
 export const useBlockchain = () => {
   const context = useContext(BlockchainContext);
   if (!context) {
-    throw new Error(
-      "useBlockchain debe ser usado dentro de un BlockchainProvider"
-    );
+    throw new Error("useBlockchain must be used within a BlockchainProvider");
   }
   return context;
 };

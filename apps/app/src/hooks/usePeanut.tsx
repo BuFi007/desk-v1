@@ -1,16 +1,17 @@
-import { useCallback, useState } from "react";
+import { PEANUTAPIKEY } from "@/constants/Env";
+import { NATIVE_TOKEN_ADDRESS } from "@/constants/Tokens";
+import { useEthersSigner } from "@/constants/wagmi";
+import { useTransactionStore } from "@/store";
+import { Token } from "@/types";
+import { useToast } from "@bu/ui/use-toast";
 import peanut, {
   getRandomString,
   claimLinkGasless,
   claimLinkXChainGasless,
 } from "@squirrel-labs/peanut-sdk";
-import { useTransactionStore } from "@/store";
-import { useToast } from "@bu/ui/use-toast";
+import { useCallback, useState } from "react";
 import { useAccount, useChainId } from "wagmi";
-import { useEthersSigner } from "@/constants/wagmi";
-import { NATIVE_TOKEN_ADDRESS } from "@/constants/Tokens";
-import { Token } from "@/types";
-import { PEANUTAPIKEY } from "@/constants/Env";
+
 // import { playAudio, saveCreatedLinkToLocalStorage } from "@/utils";
 
 export const usePeanut = () => {
@@ -271,8 +272,6 @@ export const usePeanut = () => {
       if (!address) {
         throw new Error("Wallet not connected");
       }
-
-      console.log("this is the destinationTokenAddress 1", destinationToken);
 
       const claimedLinkResponse = await claimLinkXChainGasless({
         link,

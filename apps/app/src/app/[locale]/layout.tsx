@@ -8,7 +8,6 @@ import { ThemeProvider } from "next-themes";
 import "@rainbow-me/rainbowkit/styles.css";
 import { Web3Provider } from "@/context/Web3";
 import { Header } from "@/components/header";
-
 export const metadata: Metadata = {
   title: "Create bu",
   description: "Production ready Next.js app",
@@ -34,6 +33,8 @@ export default function RootLayout({
           "antialiased"
         )}
       >
+        <script src="/fhevmjs/fhevmjs.min.js" />
+
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
