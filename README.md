@@ -1,146 +1,95 @@
-![hero](image.png)
+# 🌐 Bu: Decentralized Financial & Project Management Platform
 
+## 👀 Vision
 
-<p align="center">
-	<h1 align="center"><b>Create bu</b></h1>
-<p align="center">
-    An open-source starter kit based on <a href="https://bu.ai">Bu</a>.
-    <br />
-    <br />
-    <a href="https://bu.run"><strong>Website</strong></a> · 
-    <a href="https://github.com/bu-ai/bu/issues"><strong>Issues</strong></a> · 
-    <a href="#whats-included"><strong>What's included</strong></a> ·
-    <a href="#prerequisites"><strong>Prerequisites</strong></a> ·
-    <a href="#getting-started"><strong>Getting Started</strong></a> ·
-    <a href="#how-to-use"><strong>How to use</strong></a>
-  </p>
-</p>
+Bu empowers freelancers, SMEs, and remote teams in emerging markets with an integrated financial and project management platform leveraging stablecoins and decentralized finance (DeFi).
 
-Everything you need to build a production ready SaaS, it's a opinionated stack based on learnings from building Bu using the latest Next.js framework, it's a monorepo with a focus on code reuse and best practices that will grow with your business.
+## 🎯 Overview
 
-## What's included
+We've created a comprehensive invoicing system for 'ghosts' 👻 with USDC payment capabilities. Our platform leverages multiple blockchain technologies to provide secure, efficient, and flexible payment solutions.
 
-[Next.js](https://nextjs.org/) - Framework<br>
-[Turborepo](https://turbo.build) - Build system<br>
-[Biome](https://biomejs.dev) - Linter, formatter<br>
-[TailwindCSS](https://tailwindcss.com/) - Styling<br>
-[Shadcn](https://ui.shadcn.com/) - UI components<br>
-[TypeScript](https://www.typescriptlang.org/) - Type safety<br>
-[Supabase](https://supabase.com/) - Authentication, database, storage<br>
-[Upstash](https://upstash.com/) - Cache and rate limiting<br>
-[React Email](https://react.email/) - Email templates<br>
-[Resend](https://resend.com/) - Email delivery<br>
-[i18n](https://next-international.vercel.app/) - Internationalization<br>
-[Sentry](https://sentry.io/) - Error handling/monitoring<br>
-[Dub](https://dub.sh/) - Sharable links<br>
-[Trigger.dev](https://trigger.dev/) - Background jobs<br>
-[OpenPanel](https://openpanel.dev/) - Analytics<br>
-[Polar](https://polar.sh) - Billing (coming soon)<br>
-[react-safe-action](https://next-safe-action.dev) - Validated Server Actions<br>
-[nuqs](https://nuqs.47ng.com/) - Type-safe search params state manager<br>
-[next-themes](https://next-themes-example.vercel.app/) - Theme manager<br>
+## 🚀 Key Features
 
-## Directory Structure
+### Multi-Chain Payment Solutions
+- **Peanut Protocol Integration**: Request payment links supporting zkSync, Optimism, Base, and other networks
+- **Confidential Invoicing**: Secure transfers on Ethereum Sepolia using Zama
+- **Automated Payments**: Recurring invoice handling on zkSync and Optimism
+- **DeFi Integration**: Link payments across multiple networks with personalized Bu names and ghost-themed QR codes
 
-```
-.
-├── apps                         # App workspace
-│    ├── api                     # Supabase (API, Auth, Storage, Realtime, Edge Functions)
-│    ├── app                     # App - your product
-│    ├── web                     # Marketing site
-│    └── ...
-├── packages                     # Shared packages between apps
-│    ├── analytics               # OpenPanel analytics
-│    ├── email                   # React email library
-│    ├── jobs                    # Trigger.dev background jobs
-│    ├── kv                      # Upstash rate-limited key-value storage
-│    ├── logger                  # Logger library
-│    ├── supabase                # Supabase - Queries, Mutations, Clients
-│    └── ui                      # Shared UI components (Shadcn)
-├── tooling                      # are the shared configuration that are used by the apps and packages
-│    └── typescript              # Shared TypeScript configuration
-├── .cursorrules                 # Cursor rules specific to this project
-├── biome.json                   # Biome configuration
-├── turbo.json                   # Turbo configuration
-├── LICENSE
-└── README.md
-```
+### 🔐 Confidential Payment System (Zama Track)
 
-## Prerequisites
+Built on Zama's FHEVM, our system enables:
 
-- **[Bun](https://bun.sh)**: A fast JavaScript runtime with built-in tools for bundling, transpiling, and package management, aiming to improve performance and developer experience.
+1. **Store Payment** 📝
+   - Encrypted payment amount storage
+   - Secure fund locking in smart contracts
+   - Receiver address association
 
-- **[Docker](https://www.docker.com)**: A platform for developing, shipping, and running applications in isolated containers, ensuring consistency across environments.
+2. **Claim Payment** 🎯
+   - Payment verification
+   - Encrypted fund transfers
+   - Automated processing tracking
 
-- **[Upstash](https://upstash.com)**: A serverless database solution optimized for Redis and Kafka, offering on-demand scaling and a pay-per-request model.
+3. **Request Payment** 📨
+   - Encrypted payment request creation
+   - Sender address association
+   - On-chain notification system
 
-- **[Dub](https://dub.sh)**: A modern URL shortener service that provides fast, customizable links with analytics to track engagement.
+4. **Pay Request** 💳
+   - Request review interface
+   - Encrypted amount transfers
+   - Automated fulfillment tracking
 
-- **[Trigger.dev](https://trigger.dev)**: An automation platform that allows you to automate workflows directly in your codebase with pre-built API integrations.
+## 🛠 Technical Implementation
 
-- **[Resend](https://resend.com)**: An API that simplifies sending transactional emails with a focus on speed, deliverability, and modern templates.
+### Smart Contracts
+- [Experimental zkSync Repository](https://github.com/BuFi007/experimental-zksync)
+- [Experimental Zama Repository](https://github.com/BuFi007/experimental-zama)
 
-- **[Supabase](https://supabase.com)**: An open-source alternative to Firebase, offering real-time APIs, authentication, and a built-in SQL database.
+### Supported Networks
+- Ethereum Sepolia (Confidential Transactions)
+- zkSync
+- Optimism
+- Base
+- Additional EVM-compatible networks
 
-- **[Sentry](https://sentry.io)**: A monitoring tool for tracking and fixing errors in real-time, providing insights into crashes and performance issues.
+### 🌉 OPERC20 Bridge & Automated Payments
 
-- **[OpenPanel](https://openpanel.io)**: An open-source user analytics tool for tracking and analyzing user behavior across web and mobile apps.
+#### Custom OP-ERC20 Token (MCL2T)
+Our specialized token for Optimism L2 features:
+- Seamless bridging between L1 and L2
+- Gas-optimized operations
+- Native meta transaction support
+- Privacy-preserving mechanisms
 
+#### ⚡ Automatic Payment System
+- **Meta Transactions**: Gas-less operations using TrustedForwarder pattern
+- **ZK-Proof Integration**: Privacy-preserving payment verification
+- **Scheduled Payments**: Automated recurring payment handling
+- **Bridge Operations**: Streamlined L1 <> L2 token transfers
 
-## Getting Started
+#### 📍 Deployed Contracts (Optimism Sepolia)
 
-Clone this repo locally with the following command:
+| Contract          | Address                                      |
+|------------------|---------------------------------------------|
+| MyCustomL2Token   | `0x5FbDB2315678afecb367f032d93F642f64180aa3` |
+| TrustedForwarder  | `0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512` |
+| AutomaticPayments | `0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0` |
 
-```bash
-bunx degit bu-ai/bu bu
-```
+#### Key Features
+- ⚡ Optimized gas consumption
+- 🔐 Privacy-preserving transactions
+- 🌉 Efficient L1-L2 bridging
+- 📱 User-friendly meta transactions
+- 🔄 Flexible payment scheduling
 
-1. Install dependencies using bun:
+#### Technical Stack
+- Optimism Network
+- Hardhat & Ignition deployment
+- Solidity v0.8.28
+- ZK-SNARK circuits
+- Meta transaction infrastructure
 
-```sh
-bun i
-```
+## 🏗 Getting Started
 
-2. Copy `.env.example` to `.env` and update the variables.
-
-```sh
-# Copy .env.example to .env for each app
-cp apps/api/.env.example apps/api/.env
-cp apps/app/.env.example apps/app/.env
-cp apps/web/.env.example apps/web/.env
-```
-
-4. Start the development server from either bun or turbo:
-
-```ts
-bun dev // starts everything in development mode (web, app, api, email)
-bun dev:web // starts the web app in development mode
-bun dev:app // starts the app in development mode
-bun dev:api // starts the api in development mode
-bun dev:email // starts the email app in development mode
-
-// Database
-bun migrate // run migrations
-bun seed // run seed
-```
-
-## How to use
-This boilerplate is inspired by our work on Bu, and it's designed to serve as a reference for real-world apps. Feel free to dive into the code and see how we've tackled various features. Whether you're looking to understand authentication flows, database interactions, or UI components, you'll find practical, battle-tested implementations throughout the codebase. It's not just a starting point; it's a learning resource that can help you build your own applications.
-
-With this, you have a great starting point for your own project.
-
-## Deploy to Vercel
-
-Vercel deployment will guide you through creating a Supabase account and project.
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmidday-ai%2Fbu&env=RESEND_API_KEY,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN,SENTRY_AUTH_TOKEN,NEXT_PUBLIC_SENTRY_DSN,SENTRY_ORG,SENTRY_PROJECT,DUB_API_KEY,NEXT_PUBLIC_OPENPANEL_CLIENT_ID,OPENPANEL_SECRET_KEY&project-name=create-bu&repository-name=create-bu&redirect-url=https%3A%2F%2Fbu.run&demo-title=Create%20bu&demo-description=An%20open-source%20starter%20kit%20based%20on%20Midday.&demo-url=https%3A%2F%2Fbu.run&demo-image=https%3A%2F%2Fbu.run%2Fopengraph-image.png&integration-ids=oac_VqOgBHqhEoFTPzGkPd7L0iH6)
-
-## Recognition
-
-<a href="https://news.ycombinator.com/item?id=41408929">
-  <img
-    style="width: 250px; height: 54px;" width="250" height="54"
-    alt="Featured on Hacker News"
-    src="https://hackernews-badge.vercel.app/api?id=41408929"
-  />
-</a>
+### Prerequisites
