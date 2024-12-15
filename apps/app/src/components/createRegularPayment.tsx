@@ -18,7 +18,7 @@ import {
 } from "@bu/ui/sheet";
 import { TokenSelect } from "./tokenSelect";
 import { allTokens } from "@/constants/Tokens";
-
+import { createClient } from "@bu/supabase/client";
 interface ForwardRequest {
   [key: string]: unknown;
   from: string;
@@ -57,6 +57,8 @@ export function CreateRegularPaymentSheet() {
     ],
   };
 
+  const supabase = createClient();
+
   const handleSign = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!amount || !token || !recipient) {
@@ -71,8 +73,8 @@ export function CreateRegularPaymentSheet() {
     setIsLoading(true);
 
     const value: ForwardRequest = {
-      from: address || "0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826",
-      to: "0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB",
+      from: address!,
+      to: recipient,
       value: parseInt(amount),
       gas: 100000,
       nonce: 0,
@@ -125,6 +127,17 @@ export function CreateRegularPaymentSheet() {
         data: encodedData,
       };
 
+      const { data, error } = await supabase
+        .from("regular_invoice")
+        .insert([
+          {
+            sign: JSON.stringify(signature),
+            address: address as string,
+            requestData: JSON.stringify(requestData),
+          },
+        ])
+        .select();
+
       toast({
         title: "Payment authorized",
         description: "You can now receive payments",
@@ -142,6 +155,12 @@ export function CreateRegularPaymentSheet() {
     }
   };
 
+  if (!address)
+    return (
+      <div className="flex flex-col items-center justify-center h-screen">
+        <p>Connect your wallet to create a regular payment</p>
+      </div>
+    );
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
