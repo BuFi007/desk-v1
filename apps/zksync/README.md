@@ -2,6 +2,10 @@
 
 A decentralized automatic payment system leveraging ZKSync's Layer 2 scaling and zero-knowledge proofs for efficient, gas-optimized recurring payments.
 
+> **Note**: To run the tests, please visit [experimental-zksync repository](https://github.com/BuFi007/experimental-zksync). This is a turbo repo and is not configured for direct testing in this project.
+
+[Reference: experimental-zksync repository](https://github.com/BuFi007/experimental-zksync)
+
 ## 🎯 Overview
 
 This project implements a smart contract system that enables:
