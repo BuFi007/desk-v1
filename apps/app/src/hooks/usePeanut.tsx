@@ -11,6 +11,7 @@ import { useEthersSigner } from "@/constants/wagmi";
 import { NATIVE_TOKEN_ADDRESS } from "@/constants/Tokens";
 import { Token } from "@/types";
 import { PEANUTAPIKEY } from "@/constants/Env";
+import { BigNumber } from "ethers";
 // import { playAudio, saveCreatedLinkToLocalStorage } from "@/utils";
 
 export const usePeanut = () => {
@@ -342,6 +343,7 @@ export const usePeanut = () => {
   const createRequestLink = async (
     amount: string,
     tokenAddress: Token | string,
+    recipientAddress: string,
     onInProgress?: () => void,
     onSuccess?: () => void,
     onFailed?: (error: Error) => void,
@@ -365,10 +367,7 @@ export const usePeanut = () => {
         chainId: chainId.toString(),
         tokenAddress: actualTokenAddress,
         tokenAmount: amount,
-        tokenType:
-          tokenDetails.tokenType === 0
-            ? peanut.interfaces.EPeanutLinkType.native
-            : peanut.interfaces.EPeanutLinkType.erc20,
+        tokenType: peanut.interfaces.EPeanutLinkType.erc20,
         tokenDecimals: tokenDetails.tokenDecimals.toString(),
         recipientAddress: address as `0x${string}`,
         APIKey: PEANUTAPIKEY!,
@@ -430,10 +429,7 @@ export const usePeanut = () => {
         tokenAddress: linkDetails.tokenAddress,
         tokenAmount: linkDetails.tokenAmount,
         tokenDecimals: linkDetails.tokenDecimals,
-        tokenType:
-          linkDetails.tokenType === 0
-            ? peanut.interfaces.EPeanutLinkType.native
-            : peanut.interfaces.EPeanutLinkType.erc20,
+        tokenType: peanut.interfaces.EPeanutLinkType.erc20,
       });
 
       // Sign and submit the transaction
@@ -441,7 +437,7 @@ export const usePeanut = () => {
         unsignedTx,
         structSigner: {
           signer,
-          gasLimit: BigInt(2000000),
+          gasLimit: BigNumber.from(2000000),
         },
       });
 
@@ -530,7 +526,7 @@ export const usePeanut = () => {
           unsignedTx,
           structSigner: {
             signer,
-            gasLimit: BigInt(2000000),
+            gasLimit: BigNumber.from(2000000),
           },
         });
 

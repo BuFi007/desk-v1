@@ -8,7 +8,7 @@ import { ThemeProvider } from "next-themes";
 import "@rainbow-me/rainbowkit/styles.css";
 import { Web3Provider } from "@/context/Web3";
 import { Header } from "@/components/header";
-
+import { Toaster } from "@bu/ui/toaster";
 export const metadata: Metadata = {
   title: "Create bu",
   description: "Production ready Next.js app",
@@ -44,6 +44,7 @@ export default function RootLayout({
             <div className="w-screen flex flex-col">
               <Header />
               {children}
+              <Toaster />
               <Footer />
             </div>
           </Web3Provider>

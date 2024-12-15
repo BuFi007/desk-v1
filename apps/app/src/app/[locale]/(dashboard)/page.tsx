@@ -1,20 +1,26 @@
 import { SignOut } from "@/components/sign-out";
-import { getI18n } from "@/locales/server";
 import { getUser } from "@bu/supabase/queries";
-
-export const metadata = {
-  title: "Home",
-};
+import { InvoiceContainer } from "@/components/peanut-zk-invoices/invoice-container";
 
 export default async function Page() {
   const { data } = await getUser();
-  const t = await getI18n();
+
+  const userData = {
+    data: {
+      id: data?.user?.id || "",
+      email: data?.user?.email || "",
+    },
+  };
 
   return (
-    <div className="h-screen w-screen flex flex-col items-center justify-center">
-      <div className="flex flex-col items-center justify-center gap-4">
-        <p>{t("welcome", { name: data?.user?.email })}</p>
+    <div className="min-h-screen relative">
+      {/* Top right invoice container */}
+      <div className="absolute top-4 right-4">
+        <InvoiceContainer userData={userData} />
+      </div>
 
+      {/* Centered sign out button */}
+      <div className="h-screen flex flex-col items-center justify-center">
         <SignOut />
       </div>
     </div>
