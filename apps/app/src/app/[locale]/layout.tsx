@@ -9,9 +9,11 @@ import "@rainbow-me/rainbowkit/styles.css";
 import { Web3Provider } from "@/context/Web3";
 import { Header } from "@/components/header";
 import { Toaster } from "@bu/ui/toaster";
+import { DotPattern } from "@bu/ui/dot-pattern";
+
 export const metadata: Metadata = {
-  title: "Create bu",
-  description: "Production ready Next.js app",
+  title: "Bu 👻 | Invoice Module",
+  description: "Create invoice confidential and automated invoicerequests",
 };
 
 export const viewport = {
@@ -41,8 +43,13 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Web3Provider>
-            <div className="w-screen flex flex-col">
+            <div className="w-screen flex flex-col custom-scrollbar">
               <Header />
+              <DotPattern
+                className={cn(
+                  "[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]"
+                )}
+              />{" "}
               {children}
               <Toaster />
               <Footer />

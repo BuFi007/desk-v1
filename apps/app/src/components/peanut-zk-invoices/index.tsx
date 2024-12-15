@@ -24,8 +24,12 @@ import { NoteDetails } from "@/components/invoice/note-details";
 import { EditBlock } from "@/components/invoice/edit-block";
 import { useToast } from "@bu/ui/use-toast";
 import { useAccount } from "wagmi";
+import { usePeanut } from "@/hooks/usePeanut";
 import { OpenURL } from "@/components/open-url";
-
+import { useChain } from "@/hooks/useChain";
+import { useGetTokensOrChain } from "@/hooks/useTokensOrChain";
+import { Token, TransactionDetails } from "@/types";
+import ShinyButton from "@bu/ui/shiny-button";
 function InvoiceSheetHeader() {
   return (
     <SheetHeader className="mb-6 flex flex-col">
@@ -44,6 +48,27 @@ function InvoiceContent() {
   const { watch, handleSubmit } = useFormContext();
   const { toast } = useToast();
   const { address, isConnected } = useAccount();
+  const {
+    createRequestLink,
+    isLoading: isPeanutLoading,
+    copyToClipboard,
+  } = usePeanut();
+  const [currentText, setCurrentText] = useState<string>("");
+  const [transactionDetails, setTransactionDetails] =
+    useState<TransactionDetails | null>(null);
+
+  const { getValues } = useFormContext();
+  const amount = getValues("amount");
+  const recipientAddress = address as `0x${string}`;
+
+  const chain = useChain();
+  const availableTokens = useGetTokensOrChain(
+    chain?.chainId!,
+    "tokens"
+  ) as Token[];
+
+  const usdc = availableTokens?.find((token) => token.symbol === "USDC");
+  const tokenAddress = usdc!.address;
 
   useEffect(() => {
     const savedDraft = localStorage.getItem(`invoice_draft_${address}`);
@@ -88,6 +113,44 @@ function InvoiceContent() {
     }
   };
 
+  const handleCreateLinkRequest = async () => {
+    setCurrentText("Beginning invoice request");
+    try {
+      console.log("Sending request with tokenAddress:", tokenAddress);
+      console.log("Sending request with amount:", amount.toString());
+      console.log("Sending request with recipientAddress:", recipientAddress);
+
+      const linkResponse = await createRequestLink(
+        tokenAddress,
+        amount.toString(),
+        recipientAddress,
+        () => setCurrentText("In Progress"),
+        () => setCurrentText("Success"),
+        (error: Error) => setCurrentText(`Error: ${error.message}`),
+        () => setCurrentText("Complete")
+      );
+
+      console.log("Link Response in try:", linkResponse);
+
+      if (linkResponse) {
+        setTransactionDetails(linkResponse as unknown as TransactionDetails);
+        console.log("Payment link created successfully:", linkResponse);
+      } else {
+        setCurrentText("Error creating pay link");
+        console.log("Link Response in else:", linkResponse);
+      }
+    } catch (error: any) {
+      console.error("Error creating pay link:", error);
+      toast({
+        title: `Error`,
+        description: error.message,
+        variant: "destructive",
+      });
+    } finally {
+      setCurrentText("Finished Invoice Request");
+    }
+  };
+
   const onSubmit = async (data: any) => {
     if (isDraftSaving) {
       toast({
@@ -109,11 +172,12 @@ function InvoiceContent() {
         timestamp: new Date().toISOString(),
         walletAddress: address,
       });
-
+      await handleCreateLinkRequest();
       toast({
         title: "Success",
-        description: "Invoice submitted successfully",
+        description: `Invoice submitted successfully ${transactionDetails?.transactionHash}`,
       });
+      console.log("Transaction Details:", transactionDetails);
       localStorage.removeItem(`invoice_draft_${address}`);
       setLastEditedText("");
     } catch (error) {
@@ -154,7 +218,7 @@ function InvoiceContent() {
                 id={""}
                 name={""}
                 email={""}
-                customer_wallet_address={address as `0x${string}`}
+                address={address as `0x${string}`}
               />
             </div>
           </div>
@@ -191,21 +255,23 @@ function InvoiceContent() {
       </div>
 
       <SheetFooter className="flex gap-2">
-        <Button
-          variant="outline"
-          type="submit"
-          disabled={isDraftSaving || isSubmitting}
-          className="min-w-[100px]"
-        >
-          {isSubmitting ? (
-            <>
-              <span className="mr-2">Submitting</span>
-              <span className="h-4 w-4 animate-spin rounded-full border-2 border-gray-400 border-t-transparent" />
-            </>
-          ) : (
-            "Submit Invoice"
-          )}
-        </Button>
+        <ShinyButton>
+          <Button
+            variant="ghost"
+            type="submit"
+            disabled={isDraftSaving || isSubmitting}
+            className="min-w-[100px]"
+          >
+            {isSubmitting ? (
+              <>
+                <span className="mr-2">Submitting</span>
+                <span className="h-4 w-4 animate-spin rounded-full border-2 border-gray-400 border-t-transparent" />
+              </>
+            ) : (
+              "Submit Invoice"
+            )}
+          </Button>
+        </ShinyButton>
       </SheetFooter>
     </form>
   );
@@ -270,17 +336,17 @@ export function InvoiceSheetWrapper() {
     },
   });
 
-  //   if (!isConnected) {
-  //     return <InvoiceNotVisible />;
-  //   }
+  if (!isConnected) {
+    return <InvoiceNotVisible />;
+  }
 
-  //   if (!address) {
-  //     return (
-  //       <div className="flex flex-col items-center justify-center p-4 space-y-4 rounded-lg border border-dashed">
-  //         <span className="text-muted-foreground">Wallet address not found</span>
-  //       </div>
-  //     );
-  //   }
+  if (!address) {
+    return (
+      <div className="flex flex-col items-center justify-center p-4 space-y-4 rounded-lg border border-dashed">
+        <span className="text-muted-foreground">Wallet address not found</span>
+      </div>
+    );
+  }
 
   return (
     <FormProvider {...methods}>

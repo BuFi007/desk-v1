@@ -369,9 +369,23 @@ export const usePeanut = () => {
         tokenAmount: amount,
         tokenType: peanut.interfaces.EPeanutLinkType.erc20,
         tokenDecimals: tokenDetails.tokenDecimals.toString(),
-        recipientAddress: address as `0x${string}`,
+        recipientAddress: recipientAddress as `0x${string}`,
+        baseUrl: `${window.location.origin}/invoice/id`,
         APIKey: PEANUTAPIKEY!,
+        reference: `invoice-bu-${Date.now()}`,
+        attachment: new File(
+          [
+            JSON.stringify({
+              createdAt: new Date().toISOString(),
+              creator: address,
+              type: "invoice",
+            }),
+          ],
+          "attachment.json",
+          { type: "application/json" }
+        ),
       });
+      console.log("this is the link for peanut payment requests", link);
 
       toast({
         title: "Request link created",

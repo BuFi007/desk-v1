@@ -10,23 +10,23 @@ export default {
         fontFamily: {
           sans: "var(--font-geist-sans)",
           mono: "var(--font-geist-mono)",
-        neue: "BaseNeue, sans-serif",
-        nupower: "PowerNeue, sans-serif",
+          neue: "BaseNeue, sans-serif",
+          nupower: "PowerNeue, sans-serif",
         },
-        main: '#c4a1ff',
-        mainAccent: '#9e66ff',
-        overlay: 'rgba(0,0,0,0.8)',
+        main: "#c4a1ff",
+        mainAccent: "#9e66ff",
+        overlay: "rgba(0,0,0,0.8)",
 
-          // light mode
-        bg: '#daf5f0',
-        text: '#000',
-        border: '#000',
+        // light mode
+        bg: "#daf5f0",
+        text: "#000",
+        border: "#000",
 
         // dark mode
-        darkBg: '#1D1F27',
-        darkText: '#eeefe9',
-        darkBorder: '#000',
-        secondaryBlack: '#1b1b1b', 
+        darkBg: "#1D1F27",
+        darkText: "#eeefe9",
+        darkBorder: "#000",
+        secondaryBlack: "#1b1b1b",
 
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -62,29 +62,33 @@ export default {
         },
       },
       borderRadius: {
-        base: '10px',
+        base: "10px",
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
       boxShadow: {
-        light: '4px 4px 0px 0px #000',
-        dark: '4px 4px 0px 0px #000',
+        light: "4px 4px 0px 0px #000",
+        dark: "4px 4px 0px 0px #000",
       },
-        translate: {
-        boxShadowX: '4px',
-        boxShadowY: '4px',
-        reverseBoxShadowX: '-4px',
-        reverseBoxShadowY: '-4px',
+      translate: {
+        boxShadowX: "4px",
+        boxShadowY: "4px",
+        reverseBoxShadowX: "-4px",
+        reverseBoxShadowY: "-4px",
       },
       fontWeight: {
-        base: '600',
-        heading: '700',
+        base: "600",
+        heading: "700",
       },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "background-position-spin": {
+          "0%": { backgroundPosition: "top center" },
+          "100%": { backgroundPosition: "bottom center" },
         },
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
@@ -172,6 +176,8 @@ export default {
         third: "moveInCircle 40s linear infinite",
         fourth: "moveHorizontal 40s ease infinite",
         fifth: "moveInCircle 20s ease infinite",
+        "background-position-spin":
+          "background-position-spin 3000ms infinite alternate",
         scroll:
           "scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite",
       },
