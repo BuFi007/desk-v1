@@ -1,44 +1,28 @@
-import "@bu/ui/globals.css";
-import { Footer } from "@/components/footer";
-import { Header } from "@/components/header";
-import { Provider as AnalyticsProvider } from "@bu/analytics/client";
-import { cn } from "@bu/ui/cn";
-import { GeistMono } from "geist/font/mono";
-import { GeistSans } from "geist/font/sans";
-import type { Metadata } from "next";
-import localFont from "next/font/local";
+import type { Metadata } from 'next'
+import { DM_Sans } from 'next/font/google'
+import './globals.css'
+import { ThemeSwitcher } from '@bu/ui/theme-switcher'
+import { ThemeProvider } from '@/components/theme-provider'
 
-const DepartureMono = localFont({
-  src: "../fonts/DepartureMono-Regular.woff2",
-  variable: "--font-departure-mono",
-});
+const dmSans = DM_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://bu.run"),
-  title: "Create bu",
-  description:
-    "A free, open-source starter kit for your next project, built with insights from Bu.",
-};
+  title: 'Neobrutalism Saas template',
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={cn(
-          `${DepartureMono.variable} ${GeistSans.variable} ${GeistMono.variable}`,
-          "antialiased dark",
-        )}
-      >
-        <Header />
-        {children}
-        <Footer />
-
-        <AnalyticsProvider />
+    <html lang="en">
+      <body className={dmSans.className}>
+        <ThemeProvider attribute="class" disableTransitionOnChange>
+          {children}
+          <ThemeSwitcher />
+        </ThemeProvider>
       </body>
     </html>
-  );
+  )
 }

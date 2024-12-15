@@ -1,23 +1,25 @@
-import { CreateRegularPaymentSheet } from "@/components/createRegularPayment";
-import { SignOut } from "@/components/sign-out";
-import { AutomaticPayments, MyCustomL2Token } from "@/constants/Contracts";
-import { getI18n } from "@/locales/server";
 import { getUser } from "@bu/supabase/queries";
-
-export const metadata = {
-  title: "Home",
-};
-
+import { InvoiceContainer } from "@/components/peanut-zk-invoices/invoice-container";
+import { CreateRegularPaymentSheet } from "@/components/createRegularPayment";
 export default async function Page() {
   const { data } = await getUser();
-  const t = await getI18n();
+
+  const userData = {
+    data: {
+      id: data?.user?.id || "",
+      email: data?.user?.email || "",
+    },
+  };
 
   return (
-    <div className="h-screen w-screen flex flex-col items-center justify-center">
-      <div className="flex flex-col items-center justify-center gap-4">
-        <p>{t("welcome", { name: data?.user?.email })}</p>
-        <CreateRegularPaymentSheet />
-        <SignOut />
+    <div className="min-h-screen relative p-4">
+      <div className="absolute top-4 right-4 z-10">
+        <InvoiceContainer userData={userData} />
+      </div>
+      <div className="h-screen w-screen flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center gap-4">
+          <CreateRegularPaymentSheet />
+        </div>
       </div>
     </div>
   );

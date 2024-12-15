@@ -1,7 +1,8 @@
 import { BLOCKSCOUT_EXPLORERS } from "@/constants";
+import { PEANUTAPIKEY } from "@/constants/Env";
 import { Chain, ExtendedPaymentInfo, IGetLinkDetailsResponse } from "@/types";
 import { toast } from "@bu/ui/use-toast";
-import { getLinkDetails } from "@squirrel-labs/peanut-sdk";
+import peanut, { getLinkDetails } from "@squirrel-labs/peanut-sdk";
 
 export const truncateAddress = (address: string) => {
   return `${address.slice(0, 6)}...${address.slice(-4)}`;
@@ -56,6 +57,20 @@ export const fetchLinkDetails = async (
     });
   }
 };
+
+export async function getLinkDetailsRequest(id: string) {
+  try {
+    const linkDetails = await peanut.getRequestLinkDetails({
+      link: id,
+      APIKey: PEANUTAPIKEY!,
+    });
+    console.log("linkDetails", linkDetails);
+    return linkDetails;
+  } catch (error) {
+    console.error("Error in getLinkDetailsRequest:", error);
+    throw error;
+  }
+}
 
 export function playAudio(audioFilePath: string): void {
   const audio = new Audio(audioFilePath);

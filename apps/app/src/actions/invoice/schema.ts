@@ -152,9 +152,14 @@ export const invoiceFormSchema = z.object({
   token: z.string().optional(),
 });
 
+export const invoiceZkSchema = z.object({
+  id: z.string().uuid(),
+});
+
 export const createInvoiceSchema = z.object({
   id: z.string().uuid(),
 });
 
 export type InvoiceFormValues = z.infer<typeof invoiceFormSchema>;
+export type InvoiceZkValues = z.infer<typeof invoiceZkSchema>;
 export type InvoiceTemplate = z.infer<typeof invoiceTemplateSchema>;

@@ -1,14 +1,16 @@
-import { useCallback } from "react";
 import { NATIVE_TOKEN_ADDRESS } from "@/constants/Tokens";
 import { useGetTokensOrChain } from "@/hooks/useTokensOrChain";
 import { Token } from "@/types";
+import { useMemo } from "react";
 
 export const useDestinationToken = () => {
-  const getDestinationTokenAddress = useCallback(
-    (tokenSymbol: string, destinationChainId: string | number) => {
+  // Call the hook at the top level
+  const getTokensForChain = useGetTokensOrChain;
+
+  const getDestinationTokenAddress = useMemo(() => {
+    return (tokenSymbol: string, destinationChainId: string | number) => {
       try {
-        // Use the existing hook to get tokens for the destination chain
-        const destinationTokens = useGetTokensOrChain(
+        const destinationTokens = getTokensForChain(
           Number(destinationChainId),
           "tokens"
         );
@@ -17,6 +19,7 @@ export const useDestinationToken = () => {
           console.warn(`No tokens found for chain ${destinationChainId}`);
           return NATIVE_TOKEN_ADDRESS;
         }
+
         // Find the matching token by symbol
         let matchingToken;
         if (Array.isArray(destinationTokens)) {
@@ -42,9 +45,8 @@ export const useDestinationToken = () => {
         console.error("Error getting destination token address:", error);
         return NATIVE_TOKEN_ADDRESS;
       }
-    },
-    []
-  );
+    };
+  }, [getTokensForChain]);
 
   return getDestinationTokenAddress;
 };

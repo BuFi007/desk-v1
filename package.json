@@ -29,6 +29,14 @@
   },
   "packageManager": "bun@1.1.26",
   "dependencies": {
-    "@storybook/addon-backgrounds": "^8.4.7"
+    "@date-fns/tz": "^1.2.0",
+    "@date-fns/utc": "^2.1.0",
+    "@storybook/addon-backgrounds": "^8.4.7",
+    "@tanstack/react-table": "^8.20.6",
+    "nuqs": "^2.2.3",
+    "pino-pretty": "^13.0.0",
+    "resend": "^4.0.1",
+    "responsive-react-email": "^0.0.5",
+    "vaul": "^1.1.2"
   }
 }
