@@ -2,7 +2,6 @@
 
 // import { updateMenuAction } from "@/actions/update-menu-action";
 import { useMenuStore } from "@/store/menu";
-import { Button } from "@bu/ui/button";
 import { cn } from "@bu/ui/cn";
 import { Icons } from "@bu/ui/icons";
 import {
@@ -13,11 +12,9 @@ import {
 } from "@bu/ui/tooltip";
 import { useClickAway } from "@uidotdev/usehooks";
 import { Reorder, motion, useMotionValue } from "framer-motion";
-import { useAction } from "next-safe-action/hooks";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { useLongPress } from "use-long-press";
 
 const icons = {
   "/": () => <Icons.Overview size={22} />,
@@ -83,19 +80,14 @@ const Item = ({
         <Tooltip>
           <TooltipTrigger className="w-full">
             <Reorder.Item
-              onDragEnd={onDragEnd}
               key={item.path}
               value={item}
               id={item.path}
               style={{ y }}
               layoutRoot
               className={cn(
-                "relative border border-transparent md:w-[45px] h-[45px] flex items-center md:justify-center",
-                "hover:bg-accent hover:border-[#DCDAD2] hover:dark:border-[#2C2C2C]",
-                isActive &&
-                  "bg-[#F2F1EF] dark:bg-secondary border-[#DCDAD2] dark:border-[#2C2C2C]",
-                isCustomizing &&
-                  "bg-background border-[#DCDAD2] dark:border-[#2C2C2C]"
+                "relative border border-transparent md:w-[75px] h-[75px] flex items-center "
+                // "hover:bg-accent hover:border-[#DCDAD2] hover:dark:border-[#2C2C2C]"
               )}
             >
               <motion.div
@@ -104,37 +96,20 @@ const Item = ({
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                {!disableRemove && isCustomizing && (
-                  <Button
-                    onClick={() => onRemove(item.path)}
-                    variant="ghost"
-                    size="icon"
-                    className="absolute -left-4 -top-4 w-4 h-4 p-0 rounded-full bg-border hover:bg-border hover:scale-150 z-10 transition-all"
-                  >
-                    <Icons.Remove className="w-3 h-3" />
-                  </Button>
-                )}
-
-                <div
-                  className={cn(
-                    "flex space-x-3 p-0 items-center pl-2 md:pl-0",
-                    isCustomizing &&
-                      "animate-[jiggle_0.3s_ease-in-out_infinite] transform-gpu pointer-events-none"
-                  )}
-                >
+                <div className={cn("flex space-x-3 p-0 items-center m-auto")}>
                   <Icon />
-                  <span className="flex md:hidden">{item.name}</span>
+                  <span className="flex">{item.name}</span>
                 </div>
               </motion.div>
             </Reorder.Item>
           </TooltipTrigger>
-          <TooltipContent
+          {/* <TooltipContent
             side="left"
-            className="px-3 py-1.5 text-xs hidden md:flex"
+            className="px-3 py-1.5 text-xs "
             sideOffset={10}
           >
             {item.name}
-          </TooltipContent>
+          </TooltipContent> */}
         </Tooltip>
       </Link>
     </TooltipProvider>
@@ -168,48 +143,16 @@ export function MainMenu({ initialItems, onSelect }: Props) {
   const part = pathname?.split("/")[1];
   //   const updateMenu = useAction(updateMenuAction);
 
-  const hiddenItems = defaultItems.filter(
-    (item) => !items.some((i) => i.path === item.path)
-  );
-
   const onReorder = (reorderedItems: typeof items) => {
     setItems(reorderedItems);
   };
-
-  //   const onDragEnd = () => {
-  //     updateMenu.execute(items);
-  //   };
-
-  //   const onRemove = (path: string) => {
-  //     setItems((prevItems) => prevItems.filter((item) => item.path !== path));
-  //     updateMenu.execute(items.filter((item) => item.path !== path));
-  //   };
-
-  //   const onAdd = (item) => {
-  //     const updatedItems = [...items, item];
-  //     setItems(updatedItems);
-  //     updateMenu.execute(updatedItems);
-  //   };
-
-  const bind = useLongPress(
-    () => {
-      setCustomizing(true);
-    },
-    {
-      cancelOnMovement: 0,
-    }
-  );
 
   const ref = useClickAway(() => {
     setCustomizing(false);
   });
 
   return (
-    <div
-      className="mt-6"
-      //{...bind()}
-      ref={ref as any}
-    >
+    <div className="mt-6" ref={ref as any}>
       <nav>
         <Reorder.Group
           axis="y"
@@ -237,46 +180,6 @@ export function MainMenu({ initialItems, onSelect }: Props) {
           })}
         </Reorder.Group>
       </nav>
-
-      {hiddenItems.length > 0 && isCustomizing && (
-        <nav className="border-t-[1px] mt-6 pt-6">
-          <motion.ul
-            variants={listVariant}
-            initial="hidden"
-            animate="show"
-            className="flex flex-col gap-1.5"
-          >
-            {hiddenItems.map((item) => {
-              const Icon = icons[item.path as keyof typeof icons];
-
-              return (
-                <motion.li
-                  variants={itemVariant}
-                  key={item.path}
-                  className={cn(
-                    "border border-transparent w-[45px] h-[45px] flex items-center md:justify-center",
-                    "hover:bg-secondary hover:border-[#DCDAD2] hover:dark:border-[#2C2C2C]",
-                    "bg-background border-[#DCDAD2] dark:border-[#2C2C2C]"
-                  )}
-                >
-                  {/* <div className="relative">
-                    <Button
-                      onClick={() => onAdd(item)}
-                      variant="ghost"
-                      size="icon"
-                      className="absolute -left-4 -top-4 w-4 h-4 p-0 rounded-full bg-border hover:bg-border hover:scale-150 z-10 transition-all"
-                    >
-                      <Icons.Add className="w-3 h-3" />
-                    </Button>
-
-                    <Icon />
-                  </div> */}
-                </motion.li>
-              );
-            })}
-          </motion.ul>
-        </nav>
-      )}
     </div>
   );
 }

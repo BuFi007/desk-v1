@@ -82,3 +82,8 @@ export interface TokenChipProps {
   className?: string;
   amount?: string;
 }
+
+export interface PaymentScoreVisualizerProps {
+  score: number;
+  paymentStatus: "good" | "average" | "bad" | "none";
+}

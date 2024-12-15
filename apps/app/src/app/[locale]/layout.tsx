@@ -36,6 +36,8 @@ export default function RootLayout({
           "antialiased"
         )}
       >
+        <script src="/fhevmjs/fhevmjs.min.js" />
+
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

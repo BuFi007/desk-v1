@@ -16,7 +16,7 @@ export const getUser = cache(async () => {
     return null;
   }
 
-  const supabase = createClient();
+  const supabase = await createClient();
 
   return unstable_cache(
     async () => {

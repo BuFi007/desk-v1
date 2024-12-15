@@ -1,4 +1,10 @@
 "use client";
+
+import { createClient } from "../utils/client";
+import { Chain } from "./blockchain/chain";
+import { WalletSwitcherModal } from "./blockchain/chainSwitch/modal";
+import { SignOut } from "./sign-out";
+import { truncateAddress } from "@/utils";
 import { Avatar, AvatarFallback, AvatarImageNext } from "@bu/ui/avatar";
 import {
   DropdownMenu,
@@ -9,14 +15,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@bu/ui/dropdown-menu";
-import Link from "next/link";
-import { SignOut } from "./sign-out";
-import { useAccount } from "wagmi";
-import { createClient } from "../utils/client";
-import { useEffect, useState } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { truncateAddress } from "@/utils";
-import { Chain } from "./blockchain/chain";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useAccount } from "wagmi";
+
 export function UserMenu({ onlySignOut }: { onlySignOut: boolean }) {
   const supabase = createClient();
   const [userData, setUserData] = useState<any>(null);
@@ -96,6 +99,7 @@ export function UserMenu({ onlySignOut }: { onlySignOut: boolean }) {
                 </DropdownMenuItem>
               </Link>
             </DropdownMenuGroup>
+            <WalletSwitcherModal />
 
             <DropdownMenuSeparator />
             {/* <div className="flex flex-row justify-between items-center p-2">

@@ -1,3 +1,5 @@
+import { SignOut } from "@/components/sign-out";
+import { getI18n } from "@/locales/server";
 import { getUser } from "@bu/supabase/queries";
 import { InvoiceContainer } from "@/components/peanut-zk-invoices/invoice-container";
 import { Suspense } from "react";
@@ -16,10 +18,11 @@ export default async function Page() {
   };
 
   return (
-    <div className="min-h-screen relative p-4">
-      {/* Top right invoice container */}
-      <div className="absolute top-4 right-4 z-10">
-        <InvoiceContainer userData={userData} />
+    <div className="h-screen w-screen flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center gap-4">
+        <p>{t("welcome", { name: data?.user?.email })}</p>
+
+        <SignOut />
       </div>
       {/* Main content grid */}
       {/* <div className="h-screen flex flex-col items-center justify-center">
