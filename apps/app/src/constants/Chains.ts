@@ -18,6 +18,26 @@ export const Base = {
   iconUrls: ["https://app.dynamic.xyz/assets/networks/base.svg"],
 };
 
+export const BaseSepolia = {
+  chainId: 84532,
+  isMainnet: false,
+  name: "Base",
+  nativeCurrency: {
+    name: "Base",
+    symbol: "ETH",
+    decimals: 18,
+    iconUrls: ["https://app.dynamic.xyz/assets/networks/base.svg"],
+  },
+  rpcUrls: [
+    `https://base-sepolia.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_API_KEY}`,
+  ],
+  blockExplorerUrls: ["https://base-sepolia.blockscout.com"],
+  chainName: "BaseSepolia",
+  vanityName: "Base Sepolia",
+  networkId: 84532,
+  iconUrls: ["https://app.dynamic.xyz/assets/networks/base.svg"],
+};
+
 export const EthereumSepolia = {
   chainId: 11155111,
   name: "Ethereum Sepolia",

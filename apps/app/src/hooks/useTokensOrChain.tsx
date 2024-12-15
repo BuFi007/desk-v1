@@ -11,16 +11,12 @@ import {
   ZkSyncTokens,
 } from "@/constants/Tokens";
 import {
-  Avalanche,
   Base,
-  BaseSepolia,
-  AvalancheFuji,
-  Arbitrum,
-  ArbitrumSepolia,
   ZkSyncSepolia,
   Bsc,
   ZkSync,
   Optimism,
+  BaseSepolia,
 } from "@/constants/Chains";
 
 export const useGetTokensOrChain = (
@@ -45,16 +41,11 @@ export const useGetTokensOrChain = (
   }
 
   if (type === "chain") {
-    if (chainId === 43113) return AvalancheFuji;
     if (chainId === 84532) return BaseSepolia;
-    if (chainId === 421614) return ArbitrumSepolia;
     if (chainId === 11155111) return ZkSyncSepolia;
     if (chainId === 59144) return Bsc;
-    if (chainId === 42161) return Arbitrum;
     if (chainId === 361) return ZkSync;
     if (chainId === 8453) return Base;
-    if (chainId === 43114) return Avalanche;
-    if (chainId === 42161) return Arbitrum;
     if (chainId === 56) return Bsc;
     if (chainId === 10) return Optimism;
     if (chainId === 361) return ZkSync;
