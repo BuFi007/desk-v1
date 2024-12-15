@@ -45,7 +45,7 @@ Built on Zama's FHEVM, our system enables:
 ### Smart Contracts
 - [Experimental zkSync Repository](https://github.com/BuFi007/experimental-zksync)
 - [Experimental Zama Repository](https://github.com/BuFi007/experimental-zama)
-
+- [Optimism Bridge Contracts](https://github.com/BuFi007/optimism-op-auto-invoices)
 ### Supported Networks
 - Ethereum Sepolia (Confidential Transactions)
 - zkSync
