@@ -4,7 +4,7 @@ export default function Footer() {
       Released under MIT License. The source code is available on{' '}
       <a
         target="_blank"
-        href="https://github.com/neobrutalism-templates/saas"
+        href="https://github.com/BuFi007"
         className="font-heading underline"
       >
         Github

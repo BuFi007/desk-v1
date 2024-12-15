@@ -68,13 +68,26 @@ Our specialized token for Optimism L2 features:
 - **Scheduled Payments**: Automated recurring payment handling
 - **Bridge Operations**: Streamlined L1 <> L2 token transfers
 
-#### 📍 Deployed Contracts (Optimism Sepolia)
+## 📍 Deployed Contracts (Optimism Sepolia)
 
 | Contract          | Address                                      |
-|------------------|---------------------------------------------|
-| MyCustomL2Token   | `0x5FbDB2315678afecb367f032d93F642f64180aa3` |
-| TrustedForwarder  | `0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512` |
-| AutomaticPayments | `0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0` |
+| ----------------- | -------------------------------------------- |
+| MyCustomL2Token   | `0x4BdE0740740b8dBb5f6Eb8c9ccB4Fc01171e953C` |
+| TrustedForwarder  | `0x6e1180674368878f6b67E1DCB6E4DFd0C102703A` |
+| AutomaticPayments | `0x6e5f00C0b246E8c7C2aF4A74cd2b8bd33Fb5Ab94` |
+
+## Deployed Contracts in Sepolia
+
+> [!Note] deployed with remix.org, i dont use mnemonic, i use private key The currently deployed contracts on Sepolia
+> are:
+>
+> - Confidential Payments: `0xA9fB4A1a42BA87e1590cd0F55A11a96071d2D943`
+> - ERC20: `0xa5e6b43506154f54F63Cd57Cc85c971b431Dc161`
+
+| Contract          | Address                                       |
+| ----------------- | --------------------------------------------- |
+| ERC20CONFIDENTIAL   | `0xa5e6b43506154f54F63Cd57Cc85c971b431Dc161`|
+| ConfidentialPayments| `0xA9fB4A1a42BA87e1590cd0F55A11a96071d2D943`|
 
 #### Key Features
 - ⚡ Optimized gas consumption

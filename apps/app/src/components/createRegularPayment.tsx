@@ -61,19 +61,19 @@ export function CreateRegularPaymentSheet() {
 
   const handleSign = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!amount || !token || !recipient) {
-      toast({
-        title: "Error",
-        description: "Please fill in all fields",
-        variant: "destructive",
-      });
-      return;
-    }
+    // if (!amount || !token || !recipient) {
+    //   toast({
+    //     title: "Error",
+    //     description: "Please fill in all fields",
+    //     variant: "destructive",
+    //   });
+    //   return;
+    // }
 
     setIsLoading(true);
 
     const value: ForwardRequest = {
-      from: address!,
+      from: address! as `0x${string}`,
       to: recipient,
       value: parseInt(amount),
       gas: 100000,
@@ -89,58 +89,59 @@ export function CreateRegularPaymentSheet() {
         message: value,
       });
 
-      const encodedData = encodeFunctionData({
-        abi: [
-          {
-            inputs: [
-              { internalType: "address", name: "to", type: "address" },
-              { internalType: "uint256", name: "amount", type: "uint256" },
-              { internalType: "uint256", name: "frequency", type: "uint256" },
-              { internalType: "uint256", name: "validUntil", type: "uint256" },
-              {
-                internalType: "address",
-                name: "tokenAddress",
-                type: "address",
-              },
-            ],
-            name: "authorizePayment",
-            outputs: [],
-            stateMutability: "nonpayable",
-            type: "function",
-          },
-        ],
-        args: [
-          recipient as `0x${string}`,
-          BigInt(parseInt(amount)),
-          BigInt(0),
-          BigInt(0),
-          token as `0x${string}`,
-        ],
-      });
+      // const encodedData = encodeFunctionData({
+      //   abi: [
+      //     {
+      //       inputs: [
+      //         { internalType: "address", name: "to", type: "address" },
+      //         { internalType: "uint256", name: "amount", type: "uint256" },
+      //         { internalType: "uint256", name: "frequency", type: "uint256" },
+      //         { internalType: "uint256", name: "validUntil", type: "uint256" },
+      //         {
+      //           internalType: "address",
+      //           name: "tokenAddress",
+      //           type: "address",
+      //         },
+      //       ],
+      //       name: "authorizePayment",
+      //       outputs: [],
+      //       stateMutability: "nonpayable",
+      //       type: "function",
+      //     },
+      //   ],
+      //   args: [
+      //     recipient as `0x${string}`,
+      //     BigInt(parseInt(amount)),
+      //     BigInt(0),
+      //     BigInt(0),
+      //     token as `0x${string}`,
+      //   ],
+      // });
 
-      const requestData = {
-        from: address,
-        to: AutomaticPayments,
-        value: parseInt(amount),
-        gas: 100000,
-        nonce: 0,
-        data: encodedData,
-      };
+      // const requestData = {
+      //   from: address,
+      //   to: AutomaticPayments,
+      //   value: parseInt(amount),
+      //   gas: 100000,
+      //   nonce: 0,
+      //   data: encodedData,
+      // };
 
-      const { data, error } = await supabase
-        .from("regular_invoice")
-        .insert([
-          {
-            sign: JSON.stringify(signature),
-            address: address as string,
-            requestData: JSON.stringify(requestData),
-          },
-        ])
-        .select();
+      // const { data, error } = await supabase
+      //   .from("regular_invoice")
+      //   .insert([
+      //     {
+      //       sign: JSON.stringify(signature),
+      //       address: address as string,
+      //       requestData: JSON.stringify(requestData),
+      //     },
+      //   ])
+      //   .select();
 
       toast({
         title: "Payment authorized",
-        description: "You can now receive payments",
+        description: "Transaction is pending",
+        variant: "default",
       });
       setIsOpen(false);
     } catch (err) {

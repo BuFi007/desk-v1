@@ -26,7 +26,7 @@ export const TokenSelect: React.FC<TokenSelectProps> = ({
   const chainId = useChainId();
 
   const renderTokenOption = (tokenAddress: string) => {
-    const token = tokens.find((t) => t.address === tokenAddress);
+    const token = tokens.find((t) => t.name === "USDC");
     if (!token) {
       return null;
     }
@@ -49,11 +49,9 @@ export const TokenSelect: React.FC<TokenSelectProps> = ({
     <div className="flex flex-col">
       <span className="text-xs text-gray-500 uppercase mb-2">{label}</span>
       <div className="min-w-[230px] w-[230px] max-w-[230px]">
-        <Select defaultValue={value || ""} onValueChange={onChange}>
+        <Select defaultValue={value || "USDC"} onValueChange={onChange}>
           <SelectTrigger>
-            <SelectValue>
-              {value ? renderTokenOption(value) : label}
-            </SelectValue>
+            <SelectValue>{renderTokenOption(value)}</SelectValue>
           </SelectTrigger>
           <SelectContent>
             {filteredTokens?.map((token) => (
