@@ -43,6 +43,7 @@ Built on Zama's FHEVM, our system enables:
 ## 🛠 Technical Implementation
 
 ### Smart Contracts
+You can find the smart contracts in the following repositories and you can test them here, show the code, images, etc:
 - [Experimental zkSync Repository](https://github.com/BuFi007/experimental-zksync)
 - [Experimental Zama Repository](https://github.com/BuFi007/experimental-zama)
 - [Optimism Bridge Contracts](https://github.com/BuFi007/optimism-op-auto-invoices)
