@@ -13,6 +13,7 @@ import {
   MdAutoAwesome,
   MdBarChart,
   MdChangeHistory,
+  MdDragIndicator,
   MdChevronLeft,
   MdChevronRight,
   MdClose,
@@ -103,6 +104,7 @@ import {
   MdTopic,
   MdTrendingDown,
   MdTrendingUp,
+  MdEdit,
 } from "react-icons/md";
 import { PiDiscordLogo } from "react-icons/pi";
 import { JSX } from "react/jsx-runtime";
@@ -721,6 +723,7 @@ export const Icons = {
       <path d="M160-120v-720h640v400H240v80h200v80H240v80h200v80H160Zm456 0L504-232l56-56 56 56 142-142 56 56-198 198ZM240-520h200v-80H240v80Zm280 0h200v-80H520v80ZM240-680h200v-80H240v80Zm280 0h200v-80H520v80Z" />
     </svg>
   ),
+
   DotRaster: (props: any) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -747,6 +750,7 @@ export const Icons = {
       </g>
     </svg>
   ),
+  Edit: MdEdit,
   Fence: MdFence,
   Refresh: MdRefresh,
   Currency: MdAttachMoney,
@@ -764,6 +768,7 @@ export const Icons = {
   MoreHoriz: MdMoreHoriz,
   Pdf: MdPictureAsPdf,
   DriveFileMove: MdDriveFileMove,
+  DragIndicator: MdDragIndicator,
   Enter: MdSubdirectoryArrowLeft,
   FolderSpecial: MdFolderSpecial,
   Topic: MdTopic,

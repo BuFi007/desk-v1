@@ -151,10 +151,10 @@ function InvoiceContent() {
             </div>
             <div>
               <CustomerDetails
-                address={address as `0x${string}`}
                 id={""}
                 name={""}
                 email={""}
+                customer_wallet_address={address as `0x${string}`}
               />
             </div>
           </div>
@@ -243,6 +243,7 @@ export function InvoiceSheetWrapper() {
   const methods = useForm({
     defaultValues: {
       customer_details: null,
+      customer_wallet_address: null,
       from_details: null,
       line_items: [],
       payment_details: null,
@@ -253,6 +254,7 @@ export function InvoiceSheetWrapper() {
       customer_id: "",
       from_details_label: "From",
       customer_details_label: "To",
+      customer_wallet_address_label: "Customer Wallet Address 0x...",
       description_label: "Items",
       price_label: "Price",
       quantity_label: "#",

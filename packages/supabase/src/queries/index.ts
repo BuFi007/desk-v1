@@ -1,6 +1,7 @@
 import { logger } from "@bu/logger";
 import { createClient } from "@bu/supabase/server";
 import { Client } from "../types";
+import { UTCDate } from "@date-fns/utc";
 
 export async function getUser() {
   const supabase = await createClient();
