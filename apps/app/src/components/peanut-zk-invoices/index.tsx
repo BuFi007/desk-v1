@@ -30,6 +30,7 @@ import { useChain } from "@/hooks/useChain";
 import { useGetTokensOrChain } from "@/hooks/useTokensOrChain";
 import { Token, TransactionDetails } from "@/types";
 import ShinyButton from "@bu/ui/shiny-button";
+
 function InvoiceSheetHeader() {
   return (
     <SheetHeader className="mb-6 flex flex-col">
@@ -62,13 +63,14 @@ function InvoiceContent() {
   const recipientAddress = address as `0x${string}`;
 
   const chain = useChain();
-  const availableTokens = useGetTokensOrChain(
-    chain?.chainId!,
+  const chainId = chain?.chainId!;
+
+  const availableTokens = useGetTokensOrChain(chainId,
     "tokens"
   ) as Token[];
 
   const usdc = availableTokens?.find((token) => token.symbol === "USDC");
-  const tokenAddress = usdc!.address;
+  const tokenAddress = usdc?.address;
 
   useEffect(() => {
     const savedDraft = localStorage.getItem(`invoice_draft_${address}`);
@@ -112,7 +114,7 @@ function InvoiceContent() {
       e.preventDefault();
     }
   };
-
+  
   const handleCreateLinkRequest = async () => {
     setCurrentText("Beginning invoice request");
     try {
@@ -121,9 +123,10 @@ function InvoiceContent() {
       console.log("Sending request with recipientAddress:", recipientAddress);
 
       const linkResponse = await createRequestLink(
-        tokenAddress,
+        chainId,
+        tokenAddress as `0x${string}`, 
         amount.toString(),
-        recipientAddress,
+        recipientAddress as `0x${string}`,
         () => setCurrentText("In Progress"),
         () => setCurrentText("Success"),
         (error: Error) => setCurrentText(`Error: ${error.message}`),
