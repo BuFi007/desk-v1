@@ -1,21 +1,10 @@
-import { cookies } from "next/headers"
-
-import { SidebarProvider, SidebarTrigger, SidebarInset } from "@/bu/ui/sidebar"
-import { AppSidebar } from "@/components/app-sidebar"
+// Layout.tsx (Server Component)
+import { cookies } from "next/headers";
+import { LayoutWrapper } from "@/components/app-sidebar/sidebar-layout-wrapper";
 
 export async function Layout({ children }: { children: React.ReactNode }) {
-  const cookieStore = await cookies()
-  const defaultOpen = cookieStore.get("sidebar:state")?.value === "true"
+  const cookieStore = await cookies();
+  const defaultOpen = cookieStore.get("sidebar:state")?.value === "true";
 
-  return (
-    <SidebarProvider defaultOpen={defaultOpen}>
-      <AppSidebar />
-      <main>
-        <SidebarInset>
-          <SidebarTrigger />
-          {children}
-        </SidebarInset>
-      </main>
-    </SidebarProvider>
-  )
+  return <LayoutWrapper defaultOpen={defaultOpen}>{children}</LayoutWrapper>;
 }

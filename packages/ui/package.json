@@ -86,7 +86,8 @@
     "./tooltip": "./src/components/tooltip.tsx",
     "./theme-switcher": "./src/components/theme-switcher.tsx",
     "./quantity-input": "./src/components/quantity-input.tsx",
-    "./use-toast": "./src/components/use-toast.ts"
+    "./use-toast": "./src/components/use-toast.ts",
+    "./use-mobile": "./src/hooks/use-mobile.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
