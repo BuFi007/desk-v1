@@ -3,6 +3,7 @@ import { Footer } from "@/components/footer";
 import { cn } from "@bu/ui/cn";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
+import { cookies } from "next/headers"
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import "@rainbow-me/rainbowkit/styles.css";
@@ -28,6 +29,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const cookieStore = cookies()
+  const theme = cookieStore.get('theme')
+  const defaultOpen = cookieStore.get("sidebar:state")?.value === "true"
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -38,8 +44,8 @@ export default function RootLayout({
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme={theme?.value || 'yellow'} 
+          enableSystem={false}
           disableTransitionOnChange
         >
           <Web3Provider>

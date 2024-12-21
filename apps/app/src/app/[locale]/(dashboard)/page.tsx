@@ -1,6 +1,7 @@
 import { getUser } from "@bu/supabase/queries";
 import { InvoiceContainer } from "@/components/peanut-zk-invoices/invoice-container";
 import { CreateRegularPaymentSheet } from "@/components/createRegularPayment";
+
 export default async function Page() {
   const { data } = await getUser();
 

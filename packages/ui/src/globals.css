@@ -60,65 +60,107 @@
   font-style: oblique;
 }
 
-
-
 @layer base {
   :root {
-    --background: 0, 0%, 100%;
-    --foreground: 0, 0%, 7%;
-    --card: 45 18% 96%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 45 18% 96%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 40, 11%, 89%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 40, 11%, 89%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 40, 10%, 94%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --muted-foreground: 0, 0%, 38%;
-    --border: 45, 5%, 85%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
-    --radius: 0.5rem;
+    --main: 54 100% 67%;
+    --overlay: 0 0% 0%;
+    --bg: 39 100% 95%;
+    --text: 0 0% 0%;
+    --border: 0 0% 0%;
+
+    /* Yellow theme sidebar (light) */
+    --sidebar-background: 39 100% 95%;
+    --sidebar-foreground: 0 0% 0%;
+    --sidebar-primary: 54 100% 67%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 45 93% 83%;
+    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-border: 0 0% 0%;
+    --sidebar-ring: 54 100% 67%;
   }
 
   .dark {
-    --background: 0, 0%, 7%;
-    --foreground: 0 0% 98%;
-    --card: 0, 0%, 7%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0, 0%, 7%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 0, 0%, 11%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0, 0%, 11%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 0, 0%, 11%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 359, 100%, 61%;
-    --destructive-foreground: 0, 0%, 100%;
-    --muted-foreground: 0, 0%, 38%;
-    --border: 0, 0%, 17%;
-    --input: 0, 0%, 11%;
-    --ring: 240 4.9% 83.9%;
+    --bg: 220 17% 26%;
+    --text: 60 11% 93%;
+    --border: 0 0% 0%;
+
+    /* Yellow theme sidebar (dark) */
+    --sidebar-background: 220 17% 26%;
+    --sidebar-foreground: 60 11% 93%;
+    --sidebar-primary: 54 100% 67%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 220 13% 31%;
+    --sidebar-accent-foreground: 60 11% 93%;
+    --sidebar-border: 0 0% 0%;
+    --sidebar-ring: 54 100% 67%;
+  }
+
+  .theme-blue {
+    --main: 220 80% 73%;
+    --bg: 220 54% 91%;
+
+    /* Blue theme sidebar (light) */
+    --sidebar-background: 220 54% 91%;
+    --sidebar-foreground: 0 0% 0%;
+    --sidebar-primary: 220 80% 73%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 213 94% 89%;
+    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-border: 0 0% 0%;
+    --sidebar-ring: 220 80% 73%;
+  }
+
+  .theme-blue.dark {
+    --bg: 228 19% 18%;
+
+    /* Blue theme sidebar (dark) */
+    --sidebar-background: 228 19% 18%;
+    --sidebar-foreground: 60 11% 93%;
+    --sidebar-primary: 220 80% 73%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 228 15% 23%;
+    --sidebar-accent-foreground: 60 11% 93%;
+    --sidebar-border: 0 0% 0%;
+    --sidebar-ring: 220 80% 73%;
+  }
+
+  .theme-green {
+    --main: 84 81% 55%;
+    --bg: 210 44% 91%;
+
+    /* Green theme sidebar (light) */
+    --sidebar-background: 210 44% 91%;
+    --sidebar-foreground: 0 0% 0%;
+    --sidebar-primary: 84 81% 55%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 84 81% 89%;
+    --sidebar-accent-foreground: 0 0% 0%;
+    --sidebar-border: 0 0% 0%;
+    --sidebar-ring: 84 81% 55%;
+  }
+
+  .theme-green.dark {
+    --bg: 120 7% 18%;
+
+    /* Green theme sidebar (dark) */
+    --sidebar-background: 120 7% 18%;
+    --sidebar-foreground: 60 11% 93%;
+    --sidebar-primary: 84 81% 55%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 120 5% 23%;
+    --sidebar-accent-foreground: 60 11% 93%;
+    --sidebar-border: 0 0% 0%;
+    --sidebar-ring: 84 81% 55%;
   }
 }
- 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    font-family: var(--font-sans), system-ui, sans-serif;
-    @apply bg-background text-foreground;
-  }
+
+* {
+  @apply border-[hsl(var(--border-color))];
+}
+
+body {
+  @apply bg-[hsl(var(--bg))] text-[hsl(var(--text))] border-[hsl(var(--border))];
+  font-family: var(--font-sans), system-ui, sans-serif;
 }
 
  .scrollbar-hide::-webkit-scrollbar {
