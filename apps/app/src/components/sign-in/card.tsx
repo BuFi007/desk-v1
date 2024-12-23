@@ -7,16 +7,15 @@ import { Input } from "@bu/ui/input";
 import { BuLogo } from "@bu/ui/bu-logo";
 import { Label } from "@bu/ui/label";
 import { GoogleSignin } from "@/components/google-signin";
-import Image from "next/image";
+import { Globe } from "lucide-react";
 
 const SignInCard = () => {
   return (
-    <div className="relative w-full max-w-md mx-auto">
+    <div className="relative w-full max-w-3xl mx-auto">
       {/* Enhanced background effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-blue-300 to-blue-200 opacity-75 blur-2xl" />
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-blue-300 to-blue-200 opacity-75 blur-3xl" />
 
-      {/* Improved glassmorphism card with 3D effect */}
-      <Card className="relative overflow-hidden backdrop-blur-lg bg-white/30 dark:bg-gray-800/30 border border-white/30 shadow-2xl transition-all duration-300 hover:shadow-blue-200/50 dark:hover:shadow-blue-500/30 hover:translate-y-[-5px]">
+      <Card className="w-96 md:w-72 lg:w-96 xl:w-[60vh]  relative overflow-hidden backdrop-blur-sm hover:backdrop-blur-xl bg-white/30 dark:bg-gray-800/30 border border-white/30 shadow-2xl transition-all duration-300 hover:shadow-blue-200/50 dark:hover:shadow-blue-500/30 hover:translate-y-[-5px]">
         <div className="p-8 space-y-6">
           <div className="flex flex-col items-center text-center space-y-4">
             <BuLogo
@@ -36,6 +35,19 @@ const SignInCard = () => {
           </div>
 
           <div className="space-y-5">
+            <Button variant="outline" className="w-full">
+              <Globe className="mr-2 h-4 w-4" />
+              Sign in with Google
+            </Button>
+
+            <div className="flex items-center gap-4">
+              <span className="h-px w-full bg-gray-300 dark:bg-gray-600"></span>
+              <span className="text-xs text-gray-500 dark:text-gray-400">
+                OR
+              </span>
+              <span className="h-px w-full bg-gray-300 dark:bg-gray-600"></span>
+            </div>
+
             <div>
               <Label
                 htmlFor="email"
@@ -66,8 +78,8 @@ const SignInCard = () => {
                 className="mt-1 bg-white/50 dark:bg-gray-700/50 border-gray-300 dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-2 sm:space-y-0">
+              <div className="flex items-center space-x-2">
                 <Checkbox
                   id="remember"
                   className="border-gray-300 dark:border-gray-600"
@@ -81,7 +93,7 @@ const SignInCard = () => {
               </div>
               <a
                 href="#"
-                className="text-sm font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 hover:underline"
+                className="text-sm font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 hover:underline sm:ml-4"
               >
                 Forgot password?
               </a>
@@ -93,7 +105,6 @@ const SignInCard = () => {
             >
               Sign in
             </Button>
-            <GoogleSignin />
           </div>
         </div>
       </Card>
