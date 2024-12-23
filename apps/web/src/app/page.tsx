@@ -9,7 +9,7 @@ import { BuLogo } from '@bu/ui/bu-logo'
 export default function Home() {
   return (
     <>
-      <BuLogo logo="/BooFi-icon.png" text="bu.fi" />
+      <BuLogo logo="/BooFi-icon.png" text="bu.fi"  width={50} height={50}/>
       <Header />
       <Features />
       <Community />

@@ -73,6 +73,8 @@
     "./retro-grid": "./src/components/retro-grid.tsx",
     "./scratch-emoji": "./src/components/scratch-emoji.tsx",
     "./scroll-area": "./src/components/scroll-area.tsx",
+    "./scroll-infinity-x": "./src/components/animation/scroll-infinity-x.tsx",
+    "./scroll-infinity-y": "./src/components/animation/scroll-infinity-y.tsx",
     "./select": "./src/components/select.tsx",
     "./separator": "./src/components/separator.tsx",
     "./shiny-button": "./src/components/shiny-button.tsx",

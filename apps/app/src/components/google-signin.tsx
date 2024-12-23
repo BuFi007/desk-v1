@@ -1,4 +1,5 @@
 "use client";
+import { FcGoogle } from "react-icons/fc";
 
 import { createClient } from "@bu/supabase/client";
 import { Button } from "@bu/ui/button";
@@ -16,7 +17,8 @@ export function GoogleSignin() {
   };
 
   return (
-    <Button onClick={handleSignin} variant="outline" className="font-mono">
+    <Button onClick={handleSignin} variant="outline" className="w-full">
+      <FcGoogle className="mr-2 size-5" />
       Sign in with Google
     </Button>
   );

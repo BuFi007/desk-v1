@@ -11,6 +11,7 @@ import { Header } from "@/components/header";
 import { Toaster } from "@bu/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
 import SetStylingPref from "@/components/styling/SetStylingPref";
+
 export const metadata: Metadata = {
   title: "Bu 👻 | Invoice Module",
   description: "Create invoice confidential and automated invoice requests",
@@ -47,7 +48,7 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <Web3Provider>
-            {children}
+            <div className="size-full">{children}</div>
             <Toaster />
             <Footer />
           </Web3Provider>

@@ -183,9 +183,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       {" "}
       <Sidebar variant="inset" collapsible="icon" {...props}>
         {isExpanded ? (
-          <BuLogo logo="/BooFi-icon.png" text="Bu" />
+          <BuLogo logo="/BooFi-icon.png" text="Bu" width={50} height={50} />
         ) : (
-          <BuLogo logo="/BooFi-icon.png" text="" />
+          <BuLogo logo="/BooFi-icon.png" text="" width={50} height={50} />
         )}
         <SidebarHeader>
           <TeamSwitcher teams={[]} />
