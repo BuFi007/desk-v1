@@ -15,16 +15,8 @@ export default async function Page() {
 
   return (
     <PageContainer>
-      <div className="relative p-4">
-        <div className="absolute top-4 right-4 z-10">
-          <InvoiceContainer userData={userData} />
-        </div>
-        <div className="h-screen w-screen flex flex-col items-center justify-center">
-          <div className="flex flex-col items-center justify-center gap-4">
-            <CreateRegularPaymentSheet />
-          </div>
-        </div>
-      </div>
+      <InvoiceContainer userData={userData} />
+      <CreateRegularPaymentSheet />
     </PageContainer>
   );
 }

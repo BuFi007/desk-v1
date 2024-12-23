@@ -37,7 +37,7 @@ export default async function RootLayout({
       <body
         className={cn(
           `${GeistSans.variable} ${GeistMono.variable}`,
-          "antialiased bg-[hsl(var(--bg))] text-[hsl(var(--text))]"
+          "antialiased bg-[(var(--bg))] text-[(var(--text))]"
         )}
       >
         <ThemeProvider
@@ -47,12 +47,9 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <Web3Provider>
-            <div className="relative flex min-h-screen flex-col">
-              <Header />
-              <div className="flex-1 flex">{children}</div>
-              <Toaster />
-              <Footer />
-            </div>
+            {children}
+            <Toaster />
+            <Footer />
           </Web3Provider>
           <SetStylingPref />
         </ThemeProvider>

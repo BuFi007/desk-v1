@@ -17,6 +17,7 @@ import {
 } from "./dropdown-menu";
 import { Button } from "./button";
 import { useState } from "react";
+import { isMac } from "../hooks/use-is-mac";
 
 const meta: Meta<typeof DropdownMenu> = {
   title: "Components/DropdownMenu",
@@ -25,7 +26,8 @@ const meta: Meta<typeof DropdownMenu> = {
     layout: "centered",
     docs: {
       description: {
-        component: "A dropdown menu component with support for submenus, checkboxes, radio groups, and keyboard shortcuts.",
+        component:
+          "A dropdown menu component with support for submenus, checkboxes, radio groups, and keyboard shortcuts.",
       },
     },
   },
@@ -43,16 +45,25 @@ const BasicDropdownMenu = () => (
     <DropdownMenuContent>
       <DropdownMenuItem>
         New Tab
-        <DropdownMenuShortcut>⌘T</DropdownMenuShortcut>
+        <DropdownMenuShortcut>
+          <span className="text-xs">{isMac ? "⌘" : "Ctrl"}</span>
+          <span className="text-xs">T</span>
+        </DropdownMenuShortcut>
       </DropdownMenuItem>
       <DropdownMenuItem>
         New Window
-        <DropdownMenuShortcut>⌘N</DropdownMenuShortcut>
+        <DropdownMenuShortcut>
+          <span className="text-xs">{isMac ? "⌘" : "Ctrl"}</span>
+          <span className="text-xs">N</span>
+        </DropdownMenuShortcut>
       </DropdownMenuItem>
       <DropdownMenuSeparator />
       <DropdownMenuItem>
         Settings
-        <DropdownMenuShortcut>⌘,</DropdownMenuShortcut>
+        <DropdownMenuShortcut>
+          <span className="text-xs">{isMac ? "⌘" : "Ctrl"}</span>
+          <span className="text-xs">,</span>
+        </DropdownMenuShortcut>
       </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>
@@ -143,9 +154,7 @@ export const AllVariants: Story = {
             <DropdownMenuCheckboxItem checked>
               Show Toolbar
             </DropdownMenuCheckboxItem>
-            <DropdownMenuCheckboxItem>
-              Show Statusbar
-            </DropdownMenuCheckboxItem>
+            <DropdownMenuCheckboxItem>Show Statusbar</DropdownMenuCheckboxItem>
             <DropdownMenuCheckboxItem disabled>
               Show Panels
             </DropdownMenuCheckboxItem>
@@ -163,7 +172,9 @@ export const AllVariants: Story = {
           <DropdownMenuContent>
             <DropdownMenuRadioGroup defaultValue="medium">
               <DropdownMenuRadioItem value="small">Small</DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="medium">Medium</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="medium">
+                Medium
+              </DropdownMenuRadioItem>
               <DropdownMenuRadioItem value="large">Large</DropdownMenuRadioItem>
             </DropdownMenuRadioGroup>
           </DropdownMenuContent>

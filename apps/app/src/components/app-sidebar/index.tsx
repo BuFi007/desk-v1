@@ -14,22 +14,27 @@ import {
   Users,
   PieChart,
 } from "lucide-react";
+import { Suspense } from "react";
+import { Skeleton } from "@bu/ui/skeleton";
 
 import { NavMain } from "@bu/ui/nav-main";
 import { NavProjects } from "@bu/ui/nav-projects";
 import { NavSecondary } from "@bu/ui/nav-secondary";
-import { NavUser } from "@bu/ui/nav-user";
+import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
+  useSidebar,
 } from "@bu/ui/sidebar";
+
 import { TeamSwitcher } from "@bu/ui/team-switcher";
 import { ThemeSwitcherMultiple } from "@/components/styling/theme-switcher-multiple";
+import { BuLogo } from "@bu/ui/bu-logo";
 
-import { SidebarOptInForm } from "@bu/ui/nav-opt-in";
+// import { SidebarOptInForm } from "@bu/ui/nav-opt-in";
 
 const data = {
   user: {
@@ -138,29 +143,6 @@ const data = {
         },
       ],
     },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
   ],
   navSecondary: [
     {
@@ -194,24 +176,36 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { state, isMobile } = useSidebar();
+  const isExpanded = state === "expanded";
   return (
-    <Sidebar variant="inset" collapsible="icon" {...props}>
-      <SidebarHeader>
-        <TeamSwitcher teams={[]} />
-        <ThemeSwitcherMultiple />
-      </SidebarHeader>
-      <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
-      </SidebarContent>
-      <SidebarFooter>
-        <div className="p-1">
+    <>
+      {" "}
+      <Sidebar variant="inset" collapsible="icon" {...props}>
+        {isExpanded ? (
+          <BuLogo logo="/BooFi-icon.png" text="Bu" />
+        ) : (
+          <BuLogo logo="/BooFi-icon.png" text="" />
+        )}
+        <SidebarHeader>
+          <TeamSwitcher teams={[]} />
+          <ThemeSwitcherMultiple />
+        </SidebarHeader>
+        <SidebarContent>
+          <NavMain items={data.navMain} />
+          <NavProjects projects={data.projects} />
+          <NavSecondary items={data.navSecondary} className="mt-auto" />
+        </SidebarContent>
+        <SidebarFooter>
+          {/* <div className="p-1">
           <SidebarOptInForm />
-        </div>
-        <NavUser user={data.user} />
-      </SidebarFooter>
-      <SidebarRail />
-    </Sidebar>
+        </div> */}
+          <Suspense fallback={<Skeleton className="h-8 w-8 rounded-full" />}>
+            <NavUser onlySignOut={false} />
+          </Suspense>
+        </SidebarFooter>
+        <SidebarRail />
+      </Sidebar>
+    </>
   );
 }

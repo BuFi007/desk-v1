@@ -1,4 +1,3 @@
-// Layout.tsx (Server Component)
 import { cookies } from "next/headers";
 import { LayoutWrapper } from "@/components/app-sidebar/sidebar-layout-wrapper";
 

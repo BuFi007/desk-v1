@@ -112,11 +112,7 @@ export const WithIcons: StoryObj<typeof NavigationMenu> = {
           </NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 p-4 w-[300px]">
-              <ListItem 
-                title="Profile"
-                href="#"
-                className="flex items-center"
-              >
+              <ListItem title="Profile" href="#" className="flex items-center">
                 <Icons.Person className="mr-2 h-4 w-4" />
                 Manage your account settings
               </ListItem>
@@ -128,11 +124,7 @@ export const WithIcons: StoryObj<typeof NavigationMenu> = {
                 <Icons.Settings className="mr-2 h-4 w-4" />
                 Customize your experience
               </ListItem>
-              <ListItem
-                title="Security"
-                href="#"
-                className="flex items-center"
-              >
+              <ListItem title="Security" href="#" className="flex items-center">
                 <Icons.Security className="mr-2 h-4 w-4" />
                 Security and privacy settings
               </ListItem>
@@ -177,9 +169,7 @@ export const GridLayout: StoryObj<typeof NavigationMenu> = {
                 <li key={item.title}>
                   <NavigationMenuLink asChild>
                     <a className="flex select-none flex-col gap-2 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                      <div className="text-muted-foreground">
-                        {item.icon}
-                      </div>
+                      <div className="text-muted-foreground">{item.icon}</div>
                       <div className="text-sm font-medium leading-none">
                         {item.title}
                       </div>
@@ -207,11 +197,7 @@ export const WithViewport: StoryObj<typeof NavigationMenu> = {
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
               {solutions.map((solution) => (
-                <ListItem
-                  key={solution.title}
-                  title={solution.title}
-                  href="#"
-                >
+                <ListItem key={solution.title} title={solution.title} href="#">
                   {solution.description}
                 </ListItem>
               ))}

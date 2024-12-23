@@ -2,27 +2,36 @@
 
 import { SidebarProvider, SidebarTrigger, SidebarInset } from "@bu/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
-import { useMobile } from "@bu/ui/use-mobile";
-import { Header } from "@/components/header";
 import { Separator } from "@bu/ui/separator";
-import { DynamicBreadcrumb } from "@/components/dynamic-breadcrumb"; // Add this import
+import { DynamicBreadcrumb } from "@/components/dynamic-breadcrumb";
+import GridPattern from "@bu/ui/grid-pattern";
+import { Header } from "@/components/header";
+import { cn } from "@bu/ui/cn";
 
 interface LayoutWrapperProps {
   children: React.ReactNode;
   defaultOpen: boolean;
 }
 export function LayoutWrapper({ children, defaultOpen }: LayoutWrapperProps) {
-  const isMobile = useMobile();
-
   return (
-    <div className="relative flex flex-1">
+    <>
       <SidebarProvider defaultOpen={defaultOpen}>
-        {!isMobile && <AppSidebar />}
+        <AppSidebar />
         <main className="flex-1">
+          <Header />
           <SidebarInset>
-            <header className="sticky top-16 z-40 flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear">
+            <header className="top-12 z-40 flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear bg-transparent">
+              <GridPattern
+                width={20}
+                height={20}
+                x={-1}
+                y={-1}
+                className={cn(
+                  "[mask-image:linear-gradient(to_bottom_right,white,transparent,transparent)]"
+                )}
+              />
               <div className="flex items-center gap-2 px-4 flex-1">
-                {!isMobile && <SidebarTrigger className="-ml-1" />}
+                <SidebarTrigger className="-ml-1" />
                 <Separator orientation="vertical" className="mr-2 h-4" />
                 <DynamicBreadcrumb />
               </div>
@@ -33,6 +42,6 @@ export function LayoutWrapper({ children, defaultOpen }: LayoutWrapperProps) {
           </SidebarInset>
         </main>
       </SidebarProvider>
-    </div>
+    </>
   );
 }

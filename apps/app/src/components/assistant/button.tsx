@@ -2,6 +2,7 @@
 
 import { useAssistantStore } from "@/store/assistant";
 import { Button } from "@bu/ui/button";
+import { isMac } from "@bu/ui/use-is-mac";
 
 export function AssistantButton() {
   const { setOpen } = useAssistantStore();
@@ -14,7 +15,8 @@ export function AssistantButton() {
     >
       <span className="ml-4 md:ml-0">Ask Bu 👻 a question...</span>
       <kbd className="pointer-events-none absolute right-1.5 top-1.5 hidden h-5 select-none items-center gap-1 border bg-accent px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
-        <span className="text-xs">⌘</span>K
+        <span className="text-xs">{isMac ? "⌘" : "Ctrl"}</span>
+        <span className="text-xs">K</span>
       </kbd>
     </Button>
   );
