@@ -3,7 +3,23 @@ import type { Config } from "tailwindcss";
 export default {
   darkMode: ["class"],
   content: ["./src/**/*.{ts,tsx}"],
-  safelist: ["dark", "light"],
+  safelist: [
+    "dark",
+    // Add "theme-yellow" so Tailwind knows about it
+    "theme-yellow",
+    "theme-blue",
+    "theme-green",
+    "theme-orange",
+    "theme-red",
+    "theme-purple",
+    // Also add the " dark" variants if you need them:
+    "theme-yellow dark",
+    "theme-blue dark",
+    "theme-green dark",
+    "theme-orange dark",
+    "theme-red dark",
+    "theme-purple dark",
+  ],
   theme: {
     extend: {
       colors: {
@@ -13,72 +29,25 @@ export default {
           neue: "BaseNeue, sans-serif",
           nupower: "PowerNeue, sans-serif",
         },
-        yellow: {
-          main: '#FFDC58',
-          overlay: 'rgba(0,0,0,0.8)',
-          bg: '#FEF2E8',
-          text: '#000',
-          border: '#000',
-          darkBg: '#374151',
-          darkText: '#eeefe9',
-          darkBorder: '#000',
-          secondaryBlack: '#212121',
-        },
-        blue: {
-          main: '#88aaee',
-          overlay: 'rgba(0,0,0,0.8)',
-          bg: '#dfe5f2',
-          text: '#000',
-          border: '#000',
-          darkBg: '#272933',
-          darkText: '#eeefe9',
-          darkBorder: '#000',
-          secondaryBlack: '#212121',
-        },
-        green: {
-          main: '#A3E636',
-          overlay: 'rgba(0,0,0,0.8)',
-          bg: '#E0E7F1',
-          text: '#000',
-          border: '#000',
-          darkBg: '#2c312b',
-          darkText: '#eeefe9',
-          darkBorder: '#000',
-          secondaryBlack: '#212121',
-        },
+        main: "var(--main)",
+        bg: "var(--bg)",
+        text: "var(--text)",
+        border: "var(--border)",
+        overlay: "var(--overlay)",
+        bw: "var(--bw)",
+        blank: "var(--blank)",
+        mtext: "var(--mtext)",
+        ring: "var(--ring)",
+        ringOffset: "var(--ring-offset)",
 
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
+        // dark mode
+        darkBg: "var(--dark-bg)",
+        darkText: "var(--dark-text)",
+
+        darkBorder: "var(--dark-border)",
+        darkNavBorder: "var(--dark-nav-border)",
+
+        secondaryBlack: "var(--secondary-black)",
       },
       borderRadius: {
         base: "10px",

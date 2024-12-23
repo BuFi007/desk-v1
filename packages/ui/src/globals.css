@@ -61,96 +61,45 @@
 }
 
 @layer base {
-  :root {
-    --main: 54 100% 67%;
-    --overlay: 0 0% 0%;
-    --bg: 39 100% 95%;
-    --text: 0 0% 0%;
-    --border: 0 0% 0%;
 
-    /* Yellow theme sidebar (light) */
-    --sidebar-background: 39 100% 95%;
-    --sidebar-foreground: 0 0% 0%;
-    --sidebar-primary: 54 100% 67%;
-    --sidebar-primary-foreground: 0 0% 0%;
-    --sidebar-accent: 45 93% 83%;
-    --sidebar-accent-foreground: 0 0% 0%;
-    --sidebar-border: 0 0% 0%;
-    --sidebar-ring: 54 100% 67%;
+:root {
+  --main: #88aaee;
+  --main50: #88aaeeb3;
+
+  --bg: #dfe5f2;
+  --border: #000;
+  --text: '#000';
+  --secondary-secondary: '#212121';
+
+  --dark-bg: #272933;
+  --dark-border: #000;
+  --dark-text: #eeefe9;
+  --dark-nav-border: #000;
+
+  --border-radius: 5px;
+  --horizontal-box-shadow: 4px;
+  --vertical-box-shadow: 4px;
+  --heading-font-weight: 700;
+  --base-font-weight: 500;
+  --sidebar-background: 0 0% 98%;
+  --sidebar-foreground: 240 5.3% 26.1%;
+  --sidebar-primary: 240 5.9% 10%;
+  --sidebar-primary-foreground: 0 0% 98%;
+  --sidebar-accent: 240 4.8% 95.9%;
+  --sidebar-accent-foreground: 240 5.9% 10%;
+  --sidebar-border: 220 13% 91%;
+  --sidebar-ring: 217.2 91.2% 59.8%;
   }
-
+ 
   .dark {
-    --bg: 220 17% 26%;
-    --text: 60 11% 93%;
-    --border: 0 0% 0%;
-
-    /* Yellow theme sidebar (dark) */
-    --sidebar-background: 220 17% 26%;
-    --sidebar-foreground: 60 11% 93%;
-    --sidebar-primary: 54 100% 67%;
-    --sidebar-primary-foreground: 0 0% 0%;
-    --sidebar-accent: 220 13% 31%;
-    --sidebar-accent-foreground: 60 11% 93%;
-    --sidebar-border: 0 0% 0%;
-    --sidebar-ring: 54 100% 67%;
-  }
-
-  .theme-blue {
-    --main: 220 80% 73%;
-    --bg: 220 54% 91%;
-
-    /* Blue theme sidebar (light) */
-    --sidebar-background: 220 54% 91%;
-    --sidebar-foreground: 0 0% 0%;
-    --sidebar-primary: 220 80% 73%;
-    --sidebar-primary-foreground: 0 0% 0%;
-    --sidebar-accent: 213 94% 89%;
-    --sidebar-accent-foreground: 0 0% 0%;
-    --sidebar-border: 0 0% 0%;
-    --sidebar-ring: 220 80% 73%;
-  }
-
-  .theme-blue.dark {
-    --bg: 228 19% 18%;
-
-    /* Blue theme sidebar (dark) */
-    --sidebar-background: 228 19% 18%;
-    --sidebar-foreground: 60 11% 93%;
-    --sidebar-primary: 220 80% 73%;
-    --sidebar-primary-foreground: 0 0% 0%;
-    --sidebar-accent: 228 15% 23%;
-    --sidebar-accent-foreground: 60 11% 93%;
-    --sidebar-border: 0 0% 0%;
-    --sidebar-ring: 220 80% 73%;
-  }
-
-  .theme-green {
-    --main: 84 81% 55%;
-    --bg: 210 44% 91%;
-
-    /* Green theme sidebar (light) */
-    --sidebar-background: 210 44% 91%;
-    --sidebar-foreground: 0 0% 0%;
-    --sidebar-primary: 84 81% 55%;
-    --sidebar-primary-foreground: 0 0% 0%;
-    --sidebar-accent: 84 81% 89%;
-    --sidebar-accent-foreground: 0 0% 0%;
-    --sidebar-border: 0 0% 0%;
-    --sidebar-ring: 84 81% 55%;
-  }
-
-  .theme-green.dark {
-    --bg: 120 7% 18%;
-
-    /* Green theme sidebar (dark) */
-    --sidebar-background: 120 7% 18%;
-    --sidebar-foreground: 60 11% 93%;
-    --sidebar-primary: 84 81% 55%;
-    --sidebar-primary-foreground: 0 0% 0%;
-    --sidebar-accent: 120 5% 23%;
-    --sidebar-accent-foreground: 60 11% 93%;
-    --sidebar-border: 0 0% 0%;
-    --sidebar-ring: 84 81% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -159,9 +108,10 @@
 }
 
 body {
-  @apply bg-[hsl(var(--bg))] text-[hsl(var(--text))] border-[hsl(var(--border))];
+  @apply bg-[var(--bg)] text-[var(--text)] border-[var(--border)];
   font-family: var(--font-sans), system-ui, sans-serif;
 }
+
 
  .scrollbar-hide::-webkit-scrollbar {
   display: none;

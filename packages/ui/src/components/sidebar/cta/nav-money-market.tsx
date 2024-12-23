@@ -14,8 +14,8 @@ const SidebarLoanBorrowCta = () => {
             alt="img"
             className="absolute left-0 top-0 z-[-1] h-full w-full rounded-2xl object-cover md:block"
           />
-          <Link 
-            href="https://defi.bu.finance?tab=loan" 
+          <Link
+            href="https://defi.bu.finance?tab=loan"
             target="_blank"
             className="group relative flex h-[600px] w-full cursor-pointer flex-col items-start gap-8 p-10 transition-all duration-300 md:w-1/2 hover:md:w-2/3"
           >
@@ -28,7 +28,9 @@ const SidebarLoanBorrowCta = () => {
             </Button>
             <h1 className="text-5xl text-white">Loan & Earn</h1>
             <p className="max-w-80 text-left text-white">
-              Provide liquidity to our money market protocol and earn yield from multiple DeFi protocols. Maximize your returns with our innovative index-based lending.
+              Provide liquidity to our money market protocol and earn yield from
+              multiple DeFi protocols. Maximize your returns with our innovative
+              index-based lending.
             </p>
             <Button
               variant="outline"
@@ -43,8 +45,8 @@ const SidebarLoanBorrowCta = () => {
             <div className="absolute bottom-0 left-[-40px] h-[40px] w-[40px] rounded-[1rem] shadow-[10px_10px_0_0_#fff]" />
             <div className="absolute bottom-0 right-[-40px] h-[40px] w-[40px] rounded-[1rem] shadow-[-10px_10px_0_0_#fff]" />
           </div>
-          <Link 
-            href="https://defi.bu.finance?tab=borrow" 
+          <Link
+            href="https://defi.bu.finance?tab=borrow"
             target="_blank"
             className="group relative flex h-[600px] w-full cursor-pointer flex-col items-end gap-8 p-10 transition-all duration-300 md:w-1/2 hover:md:w-2/3"
           >
@@ -59,7 +61,9 @@ const SidebarLoanBorrowCta = () => {
               Access Liquidity
             </h1>
             <p className="max-w-80 text-right text-white md:text-left">
-              Borrow against your crypto assets with competitive rates. Our money market protocol leverages multiple DeFi platforms to offer you the best terms and flexibility.
+              Borrow against your crypto assets with competitive rates. Our
+              money market protocol leverages multiple DeFi platforms to offer
+              you the best terms and flexibility.
             </p>
             <Button
               variant="outline"

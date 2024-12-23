@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 import {
   BookOpen,
   Bot,
@@ -13,23 +13,23 @@ import {
   SquareTerminal,
   Users,
   PieChart,
-} from "lucide-react"
+} from "lucide-react";
 
-import { NavMain } from "@/bu/ui/sidebar/nav-main"
-import { NavProjects } from "@/bu/ui/sidebar/nav-projects"
-import { NavSecondary } from "@/bu/ui/sidebar/nav-secondary"
-import { NavUser } from "@/bu/ui/sidebar/nav-user"
+import { NavMain } from "@bu/ui/nav-main";
+import { NavProjects } from "@bu/ui/nav-projects";
+import { NavSecondary } from "@bu/ui/nav-secondary";
+import { NavUser } from "@bu/ui/nav-user";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
   SidebarRail,
-} from "@/bu/ui/sidebar"
-import { TeamSwitcher } from "@/bu/ui/sidebar/team-switcher"
-import { ThemeSwitcher } from "@/bu/ui/theme-switcher"
+} from "@bu/ui/sidebar";
+import { TeamSwitcher } from "@bu/ui/team-switcher";
+import { ThemeSwitcherMultiple } from "@/components/styling/theme-switcher-multiple";
 
-import { SidebarOptInForm } from "@/bu/ui/sidebar/cta/nav-opt-in"
+import { SidebarOptInForm } from "@bu/ui/nav-opt-in";
 
 const data = {
   user: {
@@ -39,7 +39,7 @@ const data = {
   },
 
   // TODO: replace icons with https://icons.pqoqubbw.dev/
- 
+
   navMain: [
     {
       title: "Home",
@@ -191,14 +191,14 @@ const data = {
       icon: Map,
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar variant="inset" {...props}>
+    <Sidebar variant="inset" collapsible="icon" {...props}>
       <SidebarHeader>
-       <TeamSwitcher />
-       <ThemeSwitcher />
+        <TeamSwitcher teams={[]} />
+        <ThemeSwitcherMultiple />
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
@@ -213,5 +213,5 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }
