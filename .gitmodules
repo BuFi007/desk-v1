@@ -1,0 +1,3 @@
+[submodule "apps/money-market-contracts/money/lib/forge-std"]
+	path = apps/money-market-contracts/money/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
