@@ -31,7 +31,7 @@ import {
 } from "@bu/ui/sidebar";
 
 import { TeamSwitcher } from "@bu/ui/team-switcher";
-import { ThemeSwitcherMultiple } from "@/components/styling/theme-switcher-multiple";
+import { ThemeSwitcherRadio } from "@/components/styling/theme-switch-radio";
 import { BuLogo } from "@bu/ui/bu-logo";
 
 // import { SidebarOptInForm } from "@bu/ui/nav-opt-in";
@@ -189,12 +189,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         )}
         <SidebarHeader>
           <TeamSwitcher teams={[]} />
-          <ThemeSwitcherMultiple />
         </SidebarHeader>
         <SidebarContent>
           <NavMain items={data.navMain} />
           <NavProjects projects={data.projects} />
           <NavSecondary items={data.navSecondary} className="mt-auto" />
+          <ThemeSwitcherRadio />
         </SidebarContent>
         <SidebarFooter>
           {/* <div className="p-1">

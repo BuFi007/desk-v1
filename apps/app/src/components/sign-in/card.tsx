@@ -7,7 +7,6 @@ import { Input } from "@bu/ui/input";
 import { BuLogo } from "@bu/ui/bu-logo";
 import { Label } from "@bu/ui/label";
 import { GoogleSignin } from "@/components/google-signin";
-import { Globe } from "lucide-react";
 
 const SignInCard = () => {
   return (
@@ -18,13 +17,7 @@ const SignInCard = () => {
       <Card className="w-96 md:w-72 lg:w-96 xl:w-[60vh]  relative overflow-hidden backdrop-blur-sm hover:backdrop-blur-xl bg-white/30 dark:bg-gray-800/30 border border-white/30 shadow-2xl transition-all duration-300 hover:shadow-blue-200/50 dark:hover:shadow-blue-500/30 hover:translate-y-[-5px]">
         <div className="p-8 space-y-6">
           <div className="flex flex-col items-center text-center space-y-4">
-            <BuLogo
-              text=""
-              logo="/BooFi-icon.png"
-              width={80}
-              height={80}
-              className="drop-shadow-lg"
-            />
+            <BuLogo text="" logo="/BooFi-icon.png" width={80} height={80} />
 
             <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
               Welcome Back
@@ -35,10 +28,7 @@ const SignInCard = () => {
           </div>
 
           <div className="space-y-5">
-            <Button variant="outline" className="w-full">
-              <Globe className="mr-2 h-4 w-4" />
-              Sign in with Google
-            </Button>
+            <GoogleSignin />
 
             <div className="flex items-center gap-4">
               <span className="h-px w-full bg-gray-300 dark:bg-gray-600"></span>
