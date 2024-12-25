@@ -43,3 +43,32 @@ export async function getUserQuery(supabase: Client, userId: string) {
     .single()
     .throwOnError();
 }
+
+export async function getCurrentUserTeamQuery(supabase: Client) {
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session?.user) {
+    return;
+  }
+
+  return getUserQuery(supabase, session.user?.id);
+}
+
+type GetUserInviteQueryParams = {
+  code: string;
+  email: string;
+};
+
+export async function getUserInviteQuery(
+  supabase: Client,
+  params: GetUserInviteQueryParams
+) {
+  return supabase
+    .from("user_invites")
+    .select("*")
+    .eq("code", params.code)
+    .eq("email", params.email)
+    .single();
+}

@@ -23,6 +23,7 @@
     "./cached-queries": "./src/queries/cached-queries.ts",
     "./server": "./src/clients/server.ts",
     "./client": "./src/clients/client.ts",
+    "./storage": "./src/storage/index.ts",
     "./mutations": "./src/mutations/index.ts",
     "./middleware": "./src/clients/middleware.ts",
     "./queries": "./src/queries/index.ts",

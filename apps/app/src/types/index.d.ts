@@ -2,6 +2,33 @@ import { Dispatch } from "react";
 import { SetStateAction } from "react";
 import { Address, Hex } from "viem";
 
+// Get User types
+// Base user type representing the database schema
+export type SupabaseUser = {
+  id: string;
+  email: string;
+  avatar_url: string | null;
+  created_at: string | null;
+  updated_at: string | null;
+  full_name: string | null;
+};
+
+// Type for team-related errors
+export type SelectQueryError<T extends string> = {
+  message: T;
+  details: string;
+  hint: string;
+  code: string;
+};
+
+// Props type for the Setup page component
+export type SetupPageProps = {
+  params: Record<string, string>;
+  searchParams: Record<string, string>;
+};
+
+// Blockchain related types
+
 export interface BlockchainContextProps {
   address: Address | string | undefined;
   isConnected?: boolean;

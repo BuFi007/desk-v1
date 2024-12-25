@@ -79,7 +79,57 @@ export type Database = {
           },
         ];
       };
+      teams: {
+        Row: {
+          id: string | null;
+          name: string | null;
+          created_at: string | null;
+          updated_at: string | null;
+        };
+        Insert: {
+          id?: string | null;
+          name: string | null;
+          created_at?: string | null;
+          updated_at?: string | null;
+        };
+        Update: {
+          id?: string | null;
+          name?: string | null;
+          created_at?: string | null;
+          updated_at?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "fk_users_on_team";
+            columns: ["id"];
+            isOneToOne: false;
+            referencedRelation: "users_on_team";
+            referencedColumns: ["team_id"];
+          },
+        ];
+      };
+      users_on_team: {
+        Row: {
+          user_id: string | null;
+          team_id: string | null;
+          role: "owner" | "member";
+          created_at: string | null;
+        };
+        Insert: {
+          user_id: string;
+          team_id: string;
+          role: "owner" | "member";
+          created_at?: string;
+        };
+        Update: {
+          user_id?: string;
+          team_id?: string;
+          role?: "owner" | "member";
+          created_at?: string;
+        };
+      };
     };
+
     Views: {
       [_ in never]: never;
     };
