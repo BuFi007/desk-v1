@@ -13,10 +13,17 @@ import "./HubGetters.sol";
 import "./HubChecks.sol";
 import "./HubWormholeUtilities.sol";
 
-contract Hub is HubSpokeStructs, HubSpokeMessages, HubGetters, HubSetters, HubWormholeUtilities, HubChecks {
+contract Hub is
+    HubSpokeStructs,
+    HubSpokeMessages,
+    HubGetters,
+    HubSetters,
+    HubWormholeUtilities,
+    HubChecks
+{
     /**
      * @notice Hub constructor - Initializes a new hub with given parameters
-     * 
+     *
      * @param wormhole: Address of the Wormhole contract on the Hub chain
      * @param tokenBridge: Address of the TokenBridge contract on the Hub chain
      * @param consistencyLevel: Desired level of finality the Wormhole guardians will reach before signing the messages
@@ -108,15 +115,18 @@ contract Hub is HubSpokeStructs, HubSpokeMessages, HubGetters, HubSetters, HubWo
 
         allowAsset(assetAddress);
 
-        PiecewiseInterestRateModel memory interestRateModel = PiecewiseInterestRateModel({
-            ratePrecision: ratePrecision,
-            kinks: kinks,
-            rates: rates,
-            reserveFactor: reserveFactor,
-            reservePrecision: reservePrecision
-        });
+        PiecewiseInterestRateModel
+            memory interestRateModel = PiecewiseInterestRateModel({
+                ratePrecision: ratePrecision,
+                kinks: kinks,
+                rates: rates,
+                reserveFactor: reserveFactor,
+                reservePrecision: reservePrecision
+            });
 
-        (, bytes memory queriedDecimals) = assetAddress.staticcall(abi.encodeWithSignature("decimals()"));
+        (, bytes memory queriedDecimals) = assetAddress.staticcall(
+            abi.encodeWithSignature("decimals()")
+        );
         uint8 decimals = abi.decode(queriedDecimals, (uint8));
         if (decimals > 18) {
             decimals = 18;
@@ -144,7 +154,10 @@ contract Hub is HubSpokeStructs, HubSpokeMessages, HubGetters, HubSetters, HubWo
      * @param chainId - The chain id which the spoke is deployed on
      * @param spokeContractAddress - The address of the spoke contract on its chain
      */
-    function registerSpoke(uint16 chainId, address spokeContractAddress) public onlyOwner {
+    function registerSpoke(
+        uint16 chainId,
+        address spokeContractAddress
+    ) public onlyOwner {
         registerSpokeContract(chainId, spokeContractAddress);
     }
 
@@ -190,17 +203,22 @@ contract Hub is HubSpokeStructs, HubSpokeMessages, HubGetters, HubSetters, HubWo
      * @param encodedMessage - Encoded wormhole message with either a TokenBridge payload with tokens as well as deposit/repay info, or a regular wormhole payload with withdraw/borrow info
      * @param isTokenBridgePayload - Whether or not the wormhole payload is a TokenBridge message (for Deposit or Repay) or a normal message (for Borrow or Withdraw)
      */
-    function completeAction(bytes memory encodedMessage, bool isTokenBridgePayload)
-        internal
-        returns (bool completed, uint64 sequence)
-    {
+    function completeAction(
+        bytes memory encodedMessage,
+        bool isTokenBridgePayload
+    ) internal returns (bool completed, uint64 sequence) {
         bytes memory encodedActionPayload;
         IWormhole.VM memory parsed = getWormholeParsed(encodedMessage);
 
         if (isTokenBridgePayload) {
-            encodedActionPayload = extractPayloadFromTransferPayload(getTransferPayload(encodedMessage));
+            encodedActionPayload = extractPayloadFromTransferPayload(
+                getTransferPayload(encodedMessage)
+            );
         } else {
-            verifySenderIsSpoke(parsed.emitterChainId, address(uint160(uint256(parsed.emitterAddress))));
+            verifySenderIsSpoke(
+                parsed.emitterChainId,
+                address(uint160(uint256(parsed.emitterAddress)))
+            );
             encodedActionPayload = parsed.payload;
         }
 
@@ -214,24 +232,46 @@ contract Hub is HubSpokeStructs, HubSpokeMessages, HubGetters, HubSetters, HubWo
         updateAccrualIndices(params.assetAddress);
 
         if (action == Action.Withdraw) {
-            checkAllowedToWithdraw(params.sender, params.assetAddress, params.assetAmount);
+            checkAllowedToWithdraw(
+                params.sender,
+                params.assetAddress,
+                params.assetAmount
+            );
             transferTokensToSender = true;
         } else if (action == Action.Borrow) {
-            checkAllowedToBorrow(params.sender, params.assetAddress, params.assetAmount);
+            checkAllowedToBorrow(
+                params.sender,
+                params.assetAddress,
+                params.assetAmount
+            );
             transferTokensToSender = true;
         } else if (action == Action.Repay) {
-            completed = allowedToRepay(params.sender, params.assetAddress, params.assetAmount);
+            completed = allowedToRepay(
+                params.sender,
+                params.assetAddress,
+                params.assetAmount
+            );
             if (!completed) {
                 transferTokensToSender = true;
             }
         }
 
         if (completed) {
-            logActionOnHub(action, params.sender, params.assetAddress, params.assetAmount);
+            logActionOnHub(
+                action,
+                params.sender,
+                params.assetAddress,
+                params.assetAmount
+            );
         }
 
         if (transferTokensToSender) {
-            sequence = transferTokens(params.sender, params.assetAddress, params.assetAmount, parsed.emitterChainId);
+            sequence = transferTokens(
+                params.sender,
+                params.assetAddress,
+                params.assetAmount,
+                parsed.emitterChainId
+            );
         }
     }
 
@@ -254,30 +294,58 @@ contract Hub is HubSpokeStructs, HubSpokeMessages, HubGetters, HubSetters, HubWo
         uint256[] memory assetReceiptAmounts
     ) public {
         // check if inputs are valid
-        checkLiquidationInputsValid(assetRepayAddresses, assetRepayAmounts, assetReceiptAddresses, assetReceiptAmounts);
+        checkLiquidationInputsValid(
+            assetRepayAddresses,
+            assetRepayAmounts,
+            assetReceiptAddresses,
+            assetReceiptAmounts
+        );
 
         // check if intended liquidation is valid
         checkAllowedToLiquidate(
-            vault, assetRepayAddresses, assetRepayAmounts, assetReceiptAddresses, assetReceiptAmounts
+            vault,
+            assetRepayAddresses,
+            assetRepayAmounts,
+            assetReceiptAddresses,
+            assetReceiptAmounts
         );
 
         // for repay assets update amounts for vault and global
         for (uint256 i = 0; i < assetRepayAddresses.length; i++) {
-            logActionOnHub(Action.Repay, vault, assetRepayAddresses[i], assetRepayAmounts[i]);
+            logActionOnHub(
+                Action.Repay,
+                vault,
+                assetRepayAddresses[i],
+                assetRepayAmounts[i]
+            );
         }
 
         // for received assets update amounts for vault and global
         for (uint256 i = 0; i < assetReceiptAddresses.length; i++) {
-            logActionOnHub(Action.Withdraw, vault, assetReceiptAddresses[i], assetReceiptAmounts[i]);
+            logActionOnHub(
+                Action.Withdraw,
+                vault,
+                assetReceiptAddresses[i],
+                assetReceiptAmounts[i]
+            );
         }
 
         // send repay tokens from liquidator to contract
         for (uint256 i = 0; i < assetRepayAddresses.length; i++) {
-            SafeERC20.safeTransferFrom(IERC20(assetRepayAddresses[i]), msg.sender, address(this), assetRepayAmounts[i]);
+            SafeERC20.safeTransferFrom(
+                IERC20(assetRepayAddresses[i]),
+                msg.sender,
+                address(this),
+                assetRepayAmounts[i]
+            );
         }
         // send receive tokens from contract to liquidator
         for (uint256 i = 0; i < assetReceiptAddresses.length; i++) {
-            SafeERC20.safeTransfer(IERC20(assetReceiptAddresses[i]), msg.sender, assetReceiptAmounts[i]);
+            SafeERC20.safeTransfer(
+                IERC20(assetReceiptAddresses[i]),
+                msg.sender,
+                assetReceiptAmounts[i]
+            );
         }
     }
 
@@ -289,30 +357,48 @@ contract Hub is HubSpokeStructs, HubSpokeMessages, HubGetters, HubSetters, HubWo
      * @param assetAddress - the address of the relevant asset being logged
      * @param amount - the amount of the asset assetAddress being logged
      */
-    function logActionOnHub(Action action, address vault, address assetAddress, uint256 amount)
-        internal
-    {
-
+    function logActionOnHub(
+        Action action,
+        address vault,
+        address assetAddress,
+        uint256 amount
+    ) internal {
         VaultAmount memory vaultAmounts = getVaultAmounts(vault, assetAddress);
         VaultAmount memory globalAmounts = getGlobalAmounts(assetAddress);
 
         AccrualIndices memory indices = getInterestAccrualIndices(assetAddress);
 
         if (action == Action.Deposit) {
-            uint256 normalizedDeposit = normalizeAmount(amount, indices.deposited, Round.DOWN);
+            uint256 normalizedDeposit = normalizeAmount(
+                amount,
+                indices.deposited,
+                Round.DOWN
+            );
             vaultAmounts.deposited += normalizedDeposit;
             globalAmounts.deposited += normalizedDeposit;
         } else if (action == Action.Withdraw) {
-            uint256 normalizedWithdraw = normalizeAmount(amount, indices.deposited, Round.UP);
+            uint256 normalizedWithdraw = normalizeAmount(
+                amount,
+                indices.deposited,
+                Round.UP
+            );
             vaultAmounts.deposited -= normalizedWithdraw;
             globalAmounts.deposited -= normalizedWithdraw;
         } else if (action == Action.Borrow) {
-            uint256 normalizedBorrow = normalizeAmount(amount, indices.borrowed, Round.UP);
+            uint256 normalizedBorrow = normalizeAmount(
+                amount,
+                indices.borrowed,
+                Round.UP
+            );
             vaultAmounts.borrowed += normalizedBorrow;
             globalAmounts.borrowed += normalizedBorrow;
         } else if (action == Action.Repay) {
-            uint256 normalizedRepay = normalizeAmount(amount, indices.borrowed, Round.DOWN);
-            if(normalizedRepay > vaultAmounts.borrowed) {
+            uint256 normalizedRepay = normalizeAmount(
+                amount,
+                indices.borrowed,
+                Round.DOWN
+            );
+            if (normalizedRepay > vaultAmounts.borrowed) {
                 normalizedRepay = vaultAmounts.borrowed;
             }
             vaultAmounts.borrowed -= normalizedRepay;

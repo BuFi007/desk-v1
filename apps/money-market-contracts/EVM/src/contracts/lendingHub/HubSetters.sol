@@ -34,11 +34,17 @@ contract HubSetters is HubSpokeStructs, HubState, HubGetters {
         _state.consistencyLevel = consistencyLevel;
     }
 
-    function registerSpokeContract(uint16 chainId, address spokeContractAddress) internal {
+    function registerSpokeContract(
+        uint16 chainId,
+        address spokeContractAddress
+    ) internal {
         _state.spokeContracts[chainId] = spokeContractAddress;
     }
 
-    function registerAssetInfo(address assetAddress, AssetInfo memory info) internal {
+    function registerAssetInfo(
+        address assetAddress,
+        AssetInfo memory info
+    ) internal {
         uint256[] memory kinks = info.interestRateModel.kinks;
         uint256[] memory rates = info.interestRateModel.rates;
 
@@ -46,16 +52,25 @@ contract HubSetters is HubSpokeStructs, HubState, HubGetters {
         uint m = rates.length;
 
         require(n == m, "lengths of kinks and rates arrays don't match");
-        require(kinks[0]==0, "first kink must be at 0");
+        require(kinks[0] == 0, "first kink must be at 0");
 
-        for(uint i=1; i < n; i++) {
-            require(kinks[i] > kinks[i-1], "kinks must be monotonically increasing");
+        for (uint i = 1; i < n; i++) {
+            require(
+                kinks[i] > kinks[i - 1],
+                "kinks must be monotonically increasing"
+            );
         }
 
-        require(kinks[n-1]==info.interestRateModel.ratePrecision, "last kink must be 1 (i.e. ratePrecision)");
+        require(
+            kinks[n - 1] == info.interestRateModel.ratePrecision,
+            "last kink must be 1 (i.e. ratePrecision)"
+        );
 
-        for(uint i=1; i < m; i++) {
-            require(rates[i] >= rates[i-1], "rates must be monotonically non-decreasing");
+        for (uint i = 1; i < m; i++) {
+            require(
+                rates[i] >= rates[i - 1],
+                "rates must be monotonically non-decreasing"
+            );
         }
 
         _state.assetInfos[assetAddress] = info;
@@ -81,20 +96,31 @@ contract HubSetters is HubSpokeStructs, HubState, HubGetters {
         _state.allowList.push(assetAddress);
     }
 
-    function setLastActivityBlockTimestamp(address assetAddress, uint256 blockTimestamp) internal {
+    function setLastActivityBlockTimestamp(
+        address assetAddress,
+        uint256 blockTimestamp
+    ) internal {
         _state.lastActivityBlockTimestamps[assetAddress] = blockTimestamp;
     }
 
-    function setInterestAccrualIndices(address assetAddress, AccrualIndices memory indices) internal {
+    function setInterestAccrualIndices(
+        address assetAddress,
+        AccrualIndices memory indices
+    ) internal {
         _state.indices[assetAddress] = indices;
     }
 
-    function setInterestAccrualIndexPrecision(uint256 interestAccrualIndexPrecision) internal {
+    function setInterestAccrualIndexPrecision(
+        uint256 interestAccrualIndexPrecision
+    ) internal {
         _state.interestAccrualIndexPrecision = interestAccrualIndexPrecision;
     }
 
-    function setCollateralizationRatioPrecision(uint256 collateralizationRatioPrecision) internal {
-        _state.collateralizationRatioPrecision = collateralizationRatioPrecision;
+    function setCollateralizationRatioPrecision(
+        uint256 collateralizationRatioPrecision
+    ) internal {
+        _state
+            .collateralizationRatioPrecision = collateralizationRatioPrecision;
     }
 
     function setMaxDecimals(uint8 maxDecimals) internal {
@@ -105,11 +131,18 @@ contract HubSetters is HubSpokeStructs, HubState, HubGetters {
         _state.maxLiquidationBonus = maxLiquidationBonus;
     }
 
-    function setVaultAmounts(address vaultOwner, address assetAddress, VaultAmount memory vaultAmount) internal {
+    function setVaultAmounts(
+        address vaultOwner,
+        address assetAddress,
+        VaultAmount memory vaultAmount
+    ) internal {
         _state.vault[vaultOwner][assetAddress] = vaultAmount;
     }
 
-    function setGlobalAmounts(address assetAddress, VaultAmount memory vaultAmount) internal {
+    function setGlobalAmounts(
+        address assetAddress,
+        VaultAmount memory vaultAmount
+    ) internal {
         _state.totalAssets[assetAddress] = vaultAmount;
     }
 
@@ -117,23 +150,39 @@ contract HubSetters is HubSpokeStructs, HubState, HubGetters {
         _state.maxLiquidationPortion = maxLiquidationPortion;
     }
 
-    function setMaxLiquidationPortionPrecision(uint256 maxLiquidationPortionPrecision) internal {
+    function setMaxLiquidationPortionPrecision(
+        uint256 maxLiquidationPortionPrecision
+    ) internal {
         _state.maxLiquidationPortionPrecision = maxLiquidationPortionPrecision;
     }
 
-    function setMockPyth(uint256 validTimePeriod, uint256 singleUpdateFeeInWei) internal {
-        _state.provider.mockPyth = new MockPyth(validTimePeriod, singleUpdateFeeInWei);
+    function setMockPyth(
+        uint256 validTimePeriod,
+        uint256 singleUpdateFeeInWei
+    ) internal {
+        _state.provider.mockPyth = new MockPyth(
+            validTimePeriod,
+            singleUpdateFeeInWei
+        );
     }
 
-    function setPriceStandardDeviations(uint64 priceStandardDeviations) internal {
+    function setPriceStandardDeviations(
+        uint64 priceStandardDeviations
+    ) internal {
         _state.priceStandardDeviations = priceStandardDeviations;
     }
 
-    function setPriceStandardDeviationsPrecision(uint64 priceStandardDeviationsPrecision) internal {
-        _state.priceStandardDeviationsPrecision = priceStandardDeviationsPrecision;
+    function setPriceStandardDeviationsPrecision(
+        uint64 priceStandardDeviationsPrecision
+    ) internal {
+        _state
+            .priceStandardDeviationsPrecision = priceStandardDeviationsPrecision;
     }
 
-    function setOraclePrice(bytes32 oracleId, Price memory price) public onlyOwner {
+    function setOraclePrice(
+        bytes32 oracleId,
+        Price memory price
+    ) public onlyOwner {
         _state.oracle[oracleId] = price;
     }
 
@@ -146,8 +195,19 @@ contract HubSetters is HubSpokeStructs, HubState, HubGetters {
         uint64 emaConf,
         uint64 publishTime
     ) public onlyOwner {
-        bytes memory priceFeedData =
-            _state.provider.mockPyth.createPriceFeedUpdateData(id, price, conf, expo, emaPrice, emaConf, publishTime);
+        bytes memory priceFeedData = _state
+            .provider
+            .mockPyth
+            .createPriceFeedUpdateData(
+                id,
+                price,
+                conf,
+                expo,
+                emaPrice,
+                emaConf,
+                publishTime,
+                0
+            );
 
         bytes[] memory updateData = new bytes[](1);
         updateData[0] = priceFeedData;
