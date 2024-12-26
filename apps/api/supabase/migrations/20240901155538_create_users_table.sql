@@ -4,10 +4,14 @@ create table public.users (
     email text unique not null,
     full_name text,
     avatar_url text,
+    team_id uuid,
+    locale text default 'en',
+    week_starts_on_monday boolean default false,
     created_at timestamp with time zone default now(),
     updated_at timestamp with time zone default now(),
     constraint fk_auth_user foreign key (id) references auth.users(id) on delete cascade
 );
+
 
 -- enable row level security (rls)
 alter table public.users enable row level security;

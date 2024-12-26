@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default async function Setup(props: SetupPageProps) {
   const response = await getUser();
-  const data = response?.data as SupabaseUser;
+  const data = response?.data;
 
   if (!data?.id) {
     return redirect("/");

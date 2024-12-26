@@ -38,7 +38,7 @@ export function Footer() {
             <Row className="mb-1.5">
               <Link
                 className="text-[#707070] text-[14px]"
-                href="https://go.bu.ai/bOp4NOx"
+                href="https://desk.bu.finance/bOp4NOx"
               >
                 Overview
               </Link>
@@ -46,7 +46,7 @@ export function Footer() {
             <Row className="mb-1.5">
               <Link
                 className="text-[#707070] text-[14px]"
-                href="https://go.bu.ai/VFcNsmQ"
+                href="https://desk.bu.finance/VFcNsmQ"
               >
                 Inbox
               </Link>
@@ -54,7 +54,7 @@ export function Footer() {
             <Row className="mb-1.5">
               <Link
                 className="text-[#707070] text-[14px]"
-                href="https://go.bu.ai/uA06kWO"
+                href="https://desk.bu.finance/uA06kWO"
               >
                 Vault
               </Link>
@@ -62,7 +62,7 @@ export function Footer() {
             <Row className="mb-1.5">
               <Link
                 className="text-[#707070] text-[14px]"
-                href="https://go.bu.ai/x7Fow9L"
+                href="https://desk.bu.finance/x7Fow9L"
               >
                 Tracker
               </Link>
@@ -71,7 +71,7 @@ export function Footer() {
             <Row className="mb-1.5">
               <Link
                 className="text-[#707070] text-[14px]"
-                href="https://go.bu.ai/fkYXc95"
+                href="https://desk.bu.finance/fkYXc95"
               >
                 Invoice
               </Link>
@@ -80,7 +80,7 @@ export function Footer() {
             <Row className="mb-1.5">
               <Link
                 className="text-[#707070] text-[14px]"
-                href="https://go.bu.ai/dEnP9h5"
+                href="https://desk.bu.finance/dEnP9h5"
               >
                 Pricing
               </Link>
@@ -89,7 +89,7 @@ export function Footer() {
             <Row className="mb-1.5">
               <Link
                 className="text-[#707070] text-[14px]"
-                href="https://go.bu.ai/E24P3oY"
+                href="https://desk.bu.finance/E24P3oY"
               >
                 Engine
               </Link>
@@ -114,7 +114,7 @@ export function Footer() {
             <Row className="mb-1.5">
               <Link
                 className="text-[#707070] text-[14px]"
-                href="https://go.bu.ai/fhEy5CL"
+                href="https://desk.bu.finance/fhEy5CL"
               >
                 Homepage
               </Link>
@@ -130,7 +130,7 @@ export function Footer() {
             <Row className="mb-1.5">
               <Link
                 className="text-[#707070] text-[14px]"
-                href="https://go.bu.ai/ZrhEMbR"
+                href="https://desk.bu.finance/ZrhEMbR"
               >
                 Support
               </Link>
@@ -138,7 +138,7 @@ export function Footer() {
             <Row className="mb-1.5">
               <Link
                 className="text-[#707070] text-[14px]"
-                href="https://go.bu.ai/rofdWKi"
+                href="https://desk.bu.finance/rofdWKi"
               >
                 Terms of service
               </Link>
@@ -146,7 +146,7 @@ export function Footer() {
             <Row className="mb-1.5">
               <Link
                 className="text-[#707070] text-[14px]"
-                href="https://go.bu.ai/TJIL5mQ"
+                href="https://desk.bu.finance/TJIL5mQ"
               >
                 Privacy policy
               </Link>
@@ -155,7 +155,7 @@ export function Footer() {
             <Row className="mb-1.5">
               <Link
                 className="text-[#707070] text-[14px]"
-                href="https://go.bu.ai/IQ1kcN0"
+                href="https://desk.bu.finance/IQ1kcN0"
               >
                 Branding
               </Link>
@@ -164,7 +164,7 @@ export function Footer() {
             <Row className="mb-1.5">
               <Link
                 className="text-[#707070] text-[14px]"
-                href="https://go.bu.ai/x5ohOs7"
+                href="https://desk.bu.finance/x5ohOs7"
               >
                 Feature Request
               </Link>
@@ -180,7 +180,7 @@ export function Footer() {
             <Row className="mb-1.5">
               <Link
                 className="text-[#707070] text-[14px]"
-                href="https://go.bu.ai/186swoH"
+                href="https://desk.bu.finance/186swoH"
               >
                 Story
               </Link>
@@ -188,7 +188,7 @@ export function Footer() {
             <Row className="mb-1.5">
               <Link
                 className="text-[#707070] text-[14px]"
-                href="https://go.bu.ai/QWyX8Um"
+                href="https://desk.bu.finance/QWyX8Um"
               >
                 Updates
               </Link>
@@ -196,7 +196,7 @@ export function Footer() {
             <Row className="mb-1.5">
               <Link
                 className="text-[#707070] text-[14px]"
-                href="https://go.bu.ai/Dd7M8cl"
+                href="https://desk.bu.finance/Dd7M8cl"
               >
                 Open startup
               </Link>
@@ -204,7 +204,7 @@ export function Footer() {
             <Row className="mb-1.5">
               <Link
                 className="text-[#707070] text-[14px]"
-                href="https://go.bu.ai/M2Hv420"
+                href="https://desk.bu.finance/M2Hv420"
               >
                 OSS Friends
               </Link>
@@ -219,7 +219,7 @@ export function Footer() {
 
       <Row>
         <Column className="align-middle w-[40px]">
-          <Link href="https://go.bu.ai/lS72Toq">
+          <Link href="https://desk.bu.finance/lS72Toq">
             <Img
               src={`${baseUrl}/email/x.png`}
               width="22"
@@ -229,7 +229,7 @@ export function Footer() {
           </Link>
         </Column>
         <Column className="align-middle w-[40px]">
-          <Link href="https://go.bu.ai/7rhA3rz">
+          <Link href="https://desk.bu.finance/7rhA3rz">
             <Img
               src={`${baseUrl}/email/producthunt.png`}
               width="22"
@@ -240,7 +240,7 @@ export function Footer() {
         </Column>
 
         <Column className="align-middle w-[40px]">
-          <Link href="https://go.bu.ai/anPiuRx">
+          <Link href="https://desk.bu.finance/anPiuRx">
             <Img
               src={`${baseUrl}/email/discord.png`}
               width="22"
@@ -251,7 +251,7 @@ export function Footer() {
         </Column>
 
         <Column className="align-middle">
-          <Link href="https://go.bu.ai/Ct3xybK">
+          <Link href="https://desk.bu.finance/Ct3xybK">
             <Img
               src={`${baseUrl}/email/linkedin.png`}
               width="22"
@@ -285,7 +285,7 @@ export function Footer() {
       <br />
 
       <Row>
-        <Link href="https://go.bu.ai/FZwOHud">
+        <Link href="https://desk.bu.finance/FZwOHud">
           <Img
             src={`${baseUrl}/email/logo-footer.png`}
             width="100"

@@ -72,3 +72,80 @@ export async function getUserInviteQuery(
     .eq("email", params.email)
     .single();
 }
+
+export async function getTeamMembersQuery(supabase: Client, teamId: string) {
+  const { data } = await supabase
+    .from("users_on_team")
+    .select(
+      `
+      id,
+      role,
+      team_id,
+      user:users(id, full_name, avatar_url, email)
+    `
+    )
+    .eq("team_id", teamId)
+    .order("created_at")
+    .throwOnError();
+
+  return {
+    data,
+  };
+}
+
+type GetTeamUserParams = {
+  teamId: string;
+  userId: string;
+};
+
+export async function getTeamUserQuery(
+  supabase: Client,
+  params: GetTeamUserParams
+) {
+  const { data } = await supabase
+    .from("users_on_team")
+    .select(
+      `
+      id,
+      role,
+      team_id,
+      user:users(id, full_name, avatar_url, email)
+    `
+    )
+    .eq("team_id", params.teamId)
+    .eq("user_id", params.userId)
+    .throwOnError()
+    .single();
+
+  return {
+    data,
+  };
+}
+export async function getTeamsByUserIdQuery(supabase: Client, userId: string) {
+  return supabase
+    .from("users_on_team")
+    .select(
+      `
+      id,
+      role,
+      team:team_id(*)`
+    )
+    .eq("user_id", userId)
+    .throwOnError();
+}
+
+export async function getTeamInvitesQuery(supabase: Client, teamId: string) {
+  return supabase
+    .from("user_invites")
+    .select("id, email, code, role, user:invited_by(*), team:team_id(*)")
+    .eq("team_id", teamId)
+    .throwOnError();
+}
+
+export async function getUserInvitesQuery(supabase: Client, email: string) {
+  return supabase
+    .from("user_invites")
+    .select("id, email, code, role, user:invited_by(*), team:team_id(*)")
+    .eq("email", email)
+    .throwOnError();
+}
