@@ -3,7 +3,7 @@ import type { NextRequest, NextResponse } from "next/server";
 
 export const updateSession = async (
   request: NextRequest,
-  response: NextResponse,
+  response: NextResponse
 ) => {
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -23,7 +23,7 @@ export const updateSession = async (
           }
         },
       },
-    },
+    }
   );
 
   // This is to ensure the session is updated

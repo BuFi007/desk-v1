@@ -1,4 +1,5 @@
-project_id = "uqehvkrcmhzcykwrzbfz"
+# project_id = "uqehvkrcmhzcykwrzbfz"
+project_id = "qoobwsmxxxudmxccyfxb"
 
 [api]
 enabled = true
@@ -9,7 +10,7 @@ max_rows = 100
 
 [auth]
 site_url = "http://localhost:3000"
-additional_redirect_urls = ["https://localhost:3000", "http://localhost:54321/auth/bu/callback"]
+additional_redirect_urls = ["http://localhost:3000/api/auth/bu/callback"]
 jwt_expiry = 36000
 
 [db]
@@ -22,7 +23,7 @@ port = 54323
 enabled = true
 client_id = "env(GOOGLE_CLIENT_ID)"
 secret = "env(GOOGLE_SECRET)"
-redirect_uri = "http://localhost:54321/auth/bu/callback"
+redirect_uri = "http://localhost:3000/api/auth/bu/callback"
 
 [auth.email]
 double_confirm_changes = true
