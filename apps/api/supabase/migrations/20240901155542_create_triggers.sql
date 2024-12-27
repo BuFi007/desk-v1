@@ -40,12 +40,10 @@ BEGIN
   -- Insert into public.teams with error handling
   BEGIN
     INSERT INTO public.teams (
-      name,
       email,
       inbox_email
     )
     VALUES (
-      COALESCE(new.raw_user_meta_data->>'full_name', 'New Team'),
       COALESCE(new.email, ''),
       COALESCE(new.email, '')
     )

@@ -149,3 +149,16 @@ export async function getUserInvitesQuery(supabase: Client, email: string) {
     .eq("email", email)
     .throwOnError();
 }
+
+export async function getTeamNameQuery(supabase: Client, teamId: string) {
+  const { data } = await supabase
+    .from("teams")
+    .select("name")
+    .eq("id", teamId)
+    .single()
+    .throwOnError();
+
+  return {
+    data,
+  };
+}

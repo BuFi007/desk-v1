@@ -2,6 +2,7 @@ import { updateSession } from "@bu/supabase/middleware";
 import { createI18nMiddleware } from "next-international/middleware";
 import { type NextRequest, NextResponse } from "next/server";
 import { createClient } from "@bu/supabase/client";
+import { getUser, getTeamName } from "@bu/supabase/cached-queries";
 
 const I18nMiddleware = createI18nMiddleware({
   locales: ["en", "fr"],
@@ -32,20 +33,7 @@ export async function middleware(request: NextRequest) {
     data: { session },
   } = await supabase.auth.getSession();
 
-  // Not authenticated
-  if (!session && newUrl.pathname !== "/login") {
-    const encodedSearchParams = `${newUrl.pathname.substring(1)}${
-      newUrl.search
-    }`;
-
-    const url = new URL("/login", request.url);
-
-    if (encodedSearchParams) {
-      url.searchParams.append("return_to", encodedSearchParams);
-    }
-
-    return NextResponse.redirect(url);
-  }
+  const userData = await getUser();
 
   // Not authenticated
   if (!session && newUrl.pathname !== "/login") {
@@ -62,21 +50,46 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  // If authenticated but no full_name redirect to user setup page
-  if (
-    newUrl.pathname !== "/setup" &&
-    newUrl.pathname !== "/teams/create" &&
-    session &&
-    !session?.user?.user_metadata?.full_name
-  ) {
-    // Check if the URL contains an invite code
-    const inviteCodeMatch = newUrl.pathname.startsWith("/teams/invite/");
+  // Not authenticated
+  if (!session && newUrl.pathname !== "/login") {
+    const encodedSearchParams = `${newUrl.pathname.substring(1)}${
+      newUrl.search
+    }`;
 
-    if (inviteCodeMatch) {
-      return NextResponse.redirect(`${url.origin}${newUrl.pathname}`);
+    const url = new URL("/login", request.url);
+
+    if (encodedSearchParams) {
+      url.searchParams.append("return_to", encodedSearchParams);
     }
 
-    return NextResponse.redirect(`${url.origin}/setup`);
+    return NextResponse.redirect(url);
+  }
+
+  if (!userData && newUrl.pathname !== "/login") {
+    const encodedSearchParams = `${newUrl.pathname.substring(1)}${newUrl.search}`;
+    const url = new URL("/login", request.url);
+    if (encodedSearchParams) {
+      url.searchParams.append("return_to", encodedSearchParams);
+    }
+    return NextResponse.redirect(url);
+  }
+
+  // If authenticated but no team name redirect to user setup page
+  if (userData) {
+    const teamId = userData?.data?.team_id;
+    // Check if user's team has a name using cached query
+    const teamData = teamId ? await getTeamName(teamId) : null;
+    const hasTeamName = teamData?.data?.name;
+
+    // Redirect to team creation if no team name and not already on setup pages
+    if (
+      !hasTeamName &&
+      !newUrl.pathname.startsWith("/setup") &&
+      !newUrl.pathname.startsWith("/teams/create") &&
+      !newUrl.pathname.startsWith("/teams/invite/")
+    ) {
+      return NextResponse.redirect(`${url.origin}/teams/create`);
+    }
   }
 
   return response;
