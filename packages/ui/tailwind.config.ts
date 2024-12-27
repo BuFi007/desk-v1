@@ -174,8 +174,7 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       boxShadow: {
-        light: "4px 4px 0px 0px #000",
-        dark: "4px 4px 0px 0px #000",
+        shadow: "var(--shadow)",
       },
       translate: {
         boxShadowX: "4px",
@@ -184,7 +183,7 @@ export default {
         reverseBoxShadowY: "-4px",
       },
       fontWeight: {
-        base: "600",
+        base: "500",
         heading: "700",
       },
       keyframes: {

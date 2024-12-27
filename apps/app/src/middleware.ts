@@ -1,25 +1,21 @@
 import { updateSession } from "@bu/supabase/middleware";
+import { createClient } from "@bu/supabase/server";
 import { createI18nMiddleware } from "next-international/middleware";
 import { type NextRequest, NextResponse } from "next/server";
-import { createClient } from "@bu/supabase/client";
-import { getUser, getTeamName } from "@bu/supabase/cached-queries";
+import { getCurrentUserTeamQuery } from "@bu/supabase/queries";
 
 const I18nMiddleware = createI18nMiddleware({
-  locales: ["en", "fr"],
+  locales: ["en"],
   defaultLocale: "en",
   urlMappingStrategy: "rewrite",
 });
 
 export async function middleware(request: NextRequest) {
-  const { response, user } = await updateSession(
-    request,
-    I18nMiddleware(request)
-  );
-
-  const supabase = createClient();
-
+  const response = await updateSession(request, I18nMiddleware(request));
+  const supabase = await createClient();
   const url = new URL("/", request.url);
   const nextUrl = request.nextUrl;
+
   const pathnameLocale = nextUrl.pathname.split("/", 2)?.[1];
 
   // Remove the locale from the pathname
@@ -27,14 +23,13 @@ export async function middleware(request: NextRequest) {
     ? nextUrl.pathname.slice(pathnameLocale.length + 1)
     : nextUrl.pathname;
 
+  // Create a new URL without the locale in the pathname
   const newUrl = new URL(pathnameWithoutLocale || "/", request.url);
 
   const {
     data: { session },
   } = await supabase.auth.getSession();
 
-  const userData = await getUser();
-
   // Not authenticated
   if (!session && newUrl.pathname !== "/login") {
     const encodedSearchParams = `${newUrl.pathname.substring(1)}${
@@ -50,44 +45,40 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
 
-  // Not authenticated
-  if (!session && newUrl.pathname !== "/login") {
-    const encodedSearchParams = `${newUrl.pathname.substring(1)}${
-      newUrl.search
-    }`;
+  // If authenticated but no full_name redirect to user setup page
+  if (
+    newUrl.pathname !== "/setup" &&
+    newUrl.pathname !== "/teams/create" &&
+    session &&
+    !session?.user?.user_metadata?.full_name
+  ) {
+    // Check if the URL contains an invite code
+    const inviteCodeMatch = newUrl.pathname.startsWith("/teams/invite/");
 
-    const url = new URL("/login", request.url);
-
-    if (encodedSearchParams) {
-      url.searchParams.append("return_to", encodedSearchParams);
+    if (inviteCodeMatch) {
+      return NextResponse.redirect(`${url.origin}${newUrl.pathname}`);
     }
 
-    return NextResponse.redirect(url);
+    return NextResponse.redirect(`${url.origin}/setup`);
   }
+  // If authenticated but no team, redirect to teams/create
+  if (
+    session &&
+    session?.user?.user_metadata?.full_name &&
+    newUrl.pathname !== "/teams/create" &&
+    !newUrl.pathname.startsWith("/teams/invite/")
+  ) {
+    try {
+      const userTeam = await getCurrentUserTeamQuery(supabase);
+      const teamName = userTeam?.data?.team?.name;
 
-  if (!userData && newUrl.pathname !== "/login") {
-    const encodedSearchParams = `${newUrl.pathname.substring(1)}${newUrl.search}`;
-    const url = new URL("/login", request.url);
-    if (encodedSearchParams) {
-      url.searchParams.append("return_to", encodedSearchParams);
-    }
-    return NextResponse.redirect(url);
-  }
+      console.log("userTeam", userTeam);
 
-  // If authenticated but no team name redirect to user setup page
-  if (userData) {
-    const teamId = userData?.data?.team_id;
-    // Check if user's team has a name using cached query
-    const teamData = teamId ? await getTeamName(teamId) : null;
-    const hasTeamName = teamData?.data?.name;
-
-    // Redirect to team creation if no team name and not already on setup pages
-    if (
-      !hasTeamName &&
-      !newUrl.pathname.startsWith("/setup") &&
-      !newUrl.pathname.startsWith("/teams/create") &&
-      !newUrl.pathname.startsWith("/teams/invite/")
-    ) {
+      if (!teamName || teamName === null) {
+        return NextResponse.redirect(`${url.origin}/teams/create`);
+      }
+    } catch (error) {
+      // If there's an error fetching the team, we should still redirect to teams/create
       return NextResponse.redirect(`${url.origin}/teams/create`);
     }
   }
@@ -96,7 +87,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/((?!_next/static|api|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
-  ],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|api|monitoring).*)"],
 };

@@ -1,27 +1,34 @@
 import { unstable_cache } from "next/cache";
 import { cache } from "react";
-import { createClient } from "../clients/server";
+import { createClient } from "../client/server";
 import { getUserQuery, getTeamNameQuery } from "./index";
 
+// Cache per request
 export const getSession = cache(async () => {
   const supabase = createClient();
-  return (await supabase).auth.getSession();
+
+  const client = await supabase;
+  return client.auth.getSession();
 });
 
+// Cache per request and revalidate every 30 minutes
 export const getUser = cache(async () => {
-  const session = await getSession();
+  const {
+    data: { session },
+  } = await getSession();
 
-  const userId = session?.data?.session?.user?.id;
+  const userId = session?.user?.id;
 
   if (!userId) {
     return null;
   }
 
-  const supabase = await createClient();
+  const supabase = createClient();
 
   return unstable_cache(
     async () => {
-      return getUserQuery(await supabase, userId);
+      const resolvedSupabase = await supabase;
+      return getUserQuery(resolvedSupabase, userId);
     },
     ["user", userId],
     {
@@ -31,6 +38,25 @@ export const getUser = cache(async () => {
     }
   )();
 });
+
+// export const getTeamUser = async () => {
+//   const supabase = createClient();
+//   const { data } = await getUser();
+
+//   return unstable_cache(
+//     async () => {
+//       return getTeamUserQuery(supabase, {
+//         userId: data.id,
+//         teamId: data.team_id,
+//       });
+//     },
+//     ["team", "user", data.id],
+//     {
+//       tags: [`team_user_${data.id}`],
+//       revalidate: 1800,
+//     },
+//   )(data.id);
+// };
 
 export const getTeamName = cache(async (teamId: string) => {
   if (!teamId) return null;

@@ -6,6 +6,7 @@ const nextConfig = {
   transpilePackages: ["@bu/supabase"],
   experimental: {
     instrumentationHook: process.env.NODE_ENV === "production",
+    serverActions: true,
   },
   reactStrictMode: true,
   images: {

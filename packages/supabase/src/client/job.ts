@@ -11,5 +11,5 @@ export const createClient = () =>
           "sb-lb-routing-mode": "alpha-all-services",
         },
       },
-    },
+    }
   );

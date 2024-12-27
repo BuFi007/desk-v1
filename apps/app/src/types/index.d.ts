@@ -11,6 +11,11 @@ export type SupabaseUser = {
   created_at: string | null;
   updated_at: string | null;
   full_name: string | null;
+  locale: string | null;
+  week_starts_on_monday: boolean | null;
+  timezone: string | null;
+  time_format: number | null;
+  date_format: string | null;
 };
 
 // Type for team-related errors

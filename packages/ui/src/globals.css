@@ -71,6 +71,23 @@
   --text: '#000';
   --secondary-secondary: '#212121';
 
+  --blank: #000; /* blank black and white */
+  --border: #000;
+  --text: #000;
+  --mtext: #000; /* text that is placed on background with main color e.g. text color of default button */
+  --ring: #000;
+  --ring-offset: #fff;
+
+  --border-radius: 5px;
+  --box-shadow-x: 4px;
+  --box-shadow-y: 4px;
+  --reverse-box-shadow-x: -4px;
+  --reverse-box-shadow-y: -4px;
+  --base-font-weight: 500;
+  --heading-font-weight: 700;
+
+  --shadow: var(--box-shadow-x) var(--box-shadow-y) 0px 0px var(--border);
+
   --dark-bg: #272933;
   --dark-border: #000;
   --dark-text: #eeefe9;
@@ -100,6 +117,9 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --shadow: var(--box-shadow-x) var(--box-shadow-y) 0px 0px var(--border);
+
   }
 }
 

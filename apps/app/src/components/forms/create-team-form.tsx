@@ -42,7 +42,7 @@ export function CreateTeamForm() {
               <FormControl>
                 <Input
                   autoFocus
-                  className="mt-3"
+                  className="mt-3 bg-blue-100 "
                   placeholder="Ex: Acme Marketing or Acme Co"
                   autoComplete="off"
                   autoCapitalize="none"
@@ -58,15 +58,15 @@ export function CreateTeamForm() {
         />
 
         <Button
-          className="mt-6 w-full"
+          className="w-full mt-6"
+          variant="duende"
           type="submit"
           disabled={createTeam.status === "executing"}
         >
           {createTeam.status === "executing" ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
-          ) : (
-            "Next"
-          )}
+            <Loader2 className="h-4 w-4 animate-spin mr-2" />
+          ) : null}
+          {createTeam.status === "executing" ? "Creating..." : "Create Team"}
         </Button>
       </form>
     </Form>
