@@ -7,7 +7,6 @@ CREATE TABLE public.users (
     email text UNIQUE NOT NULL,
     full_name text,
     avatar_url text,
-    team_id uuid,
     locale text DEFAULT 'en',
     week_starts_on_monday boolean DEFAULT false,
     created_at timestamp with time zone DEFAULT now(),
@@ -45,17 +44,14 @@ CREATE TABLE public.users_on_team (
     user_id uuid REFERENCES public.users(id) ON DELETE CASCADE,
     team_id uuid REFERENCES public.teams(id) ON DELETE CASCADE,
     role public.teamRoles,
+    is_primary_team boolean DEFAULT false,
     created_at timestamp with time zone DEFAULT now(),
     PRIMARY KEY (user_id, team_id, id)
 );
 
--- Add foreign key constraints
-ALTER TABLE public.users
-    ADD CONSTRAINT users_team_id_fkey 
-    FOREIGN KEY (team_id) REFERENCES public.teams(id) ON DELETE SET NULL;
-
 -- Create indexes
 CREATE INDEX users_on_team_team_id_idx ON public.users_on_team USING btree (team_id);
+CREATE UNIQUE INDEX one_primary_team_per_user ON public.users_on_team (user_id) WHERE is_primary_team = true;
 
 -- Enable RLS
 ALTER TABLE public.users ENABLE ROW LEVEL SECURITY;

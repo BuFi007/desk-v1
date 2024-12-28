@@ -59,23 +59,20 @@ BEGIN
     INSERT INTO public.users_on_team (
       user_id,
       team_id,
-      role
+      role,
+      is_primary_team
     )
     VALUES (
       new.id,
       new_team_id,
-      'owner'
+      'owner',
+      true
     );
     RAISE LOG 'Successfully added user to team';
   EXCEPTION WHEN OTHERS THEN
     RAISE LOG 'Error adding user to team: % %', SQLERRM, SQLSTATE;
     RETURN new;
   END;
-
-  -- Update user's team_id
-  UPDATE public.users
-  SET team_id = new_team_id
-  WHERE id = new.id;
   
   RETURN new;
 END;

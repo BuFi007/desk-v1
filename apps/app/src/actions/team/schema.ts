@@ -10,6 +10,7 @@ export const createTeamSchema = z.object({
   name: z.string().min(2, {
     message: "Team name must be at least 2 characters.",
   }),
+  logo_url: z.instanceof(File).optional(),
   redirectTo: z.string().optional(),
 });
 

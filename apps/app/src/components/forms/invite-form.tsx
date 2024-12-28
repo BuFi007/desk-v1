@@ -65,7 +65,7 @@ export function InviteForm() {
       <form onSubmit={onSubmit}>
         {fields.map((field, index) => (
           <div
-            className="flex items-center justify-between mt-3 space-x-4"
+            className="flex items-center justify-between mt-4 space-x-4"
             key={index.toString()}
           >
             <FormField
@@ -78,6 +78,7 @@ export function InviteForm() {
                     <Input
                       placeholder="jane@example.com"
                       type="email"
+                      className="w-full"
                       autoComplete="off"
                       autoCapitalize="none"
                       autoCorrect="off"
@@ -103,7 +104,7 @@ export function InviteForm() {
                         <SelectValue placeholder="Select role" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent>
+                    <SelectContent className="bg-bg">
                       <SelectItem value="owner">Owner</SelectItem>
                       <SelectItem value="member">Member</SelectItem>
                     </SelectContent>
@@ -115,12 +116,12 @@ export function InviteForm() {
         ))}
 
         <Button
-          variant="outline"
+          variant="default"
           type="button"
-          className="mt-4 border-none bg-[#F2F1EF] text-[11px] dark:bg-[#1D1D1D]"
+          className="mt-4"
           onClick={() => append({ email: undefined, role: "member" })}
         >
-          Add more
+          + Add more
         </Button>
 
         <div className="border-t-[1px] pt-4 mt-8 items-center justify-between">
@@ -135,7 +136,7 @@ export function InviteForm() {
           <div className="flex items-center justify-between">
             <Link href="/">
               <Button
-                variant="ghost"
+                variant="link"
                 className="p-0 hover:bg-transparent font-normal"
               >
                 Skip this step
@@ -144,6 +145,7 @@ export function InviteForm() {
 
             <Button
               type="submit"
+              variant="duende"
               disabled={inviteMembers.status === "executing"}
             >
               {inviteMembers.status === "executing" ? (

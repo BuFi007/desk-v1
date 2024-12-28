@@ -5,12 +5,13 @@ CREATE POLICY select_own_profile ON public.users
 CREATE POLICY update_own_profile ON public.users
     FOR UPDATE USING (auth.uid() = id);
 
-CREATE POLICY "Users can select users if they are in the same team" ON public.users
+CREATE POLICY "Users can select users if they share any team" ON public.users
     FOR SELECT TO authenticated
     USING (EXISTS (
-        SELECT 1 FROM public.users_on_team
-        WHERE users_on_team.user_id = auth.uid()
-        AND users_on_team.team_id = users.team_id
+        SELECT 1 FROM public.users_on_team uot1
+        JOIN public.users_on_team uot2 ON uot1.team_id = uot2.team_id
+        WHERE uot1.user_id = auth.uid()
+        AND uot2.user_id = users.id
     ));
 
 -- Create RLS policies for teams
@@ -62,3 +63,19 @@ CREATE POLICY "Enable updates for users on team" ON public.users_on_team
 
 CREATE POLICY "Users on team can be deleted by a member of the team" ON public.users_on_team
     FOR DELETE USING (team_id IN (SELECT private.get_teams_for_authenticated_user()));
+
+-- Create Storage RLS policies for teams photo
+insert into storage.buckets (id, name)
+values ('teams', 'teams')
+ON CONFLICT (id) DO NOTHING;
+
+create policy "Team logos are publicly accessible"
+  on storage.objects for select
+  using ( bucket_id = 'teams' );
+
+create policy "Authenticated users can upload team logos"
+  on storage.objects for insert
+  with check (
+    bucket_id = 'teams' AND
+    auth.role() = 'authenticated'
+  );

@@ -227,6 +227,7 @@ export type Database = {
         Args: {
           name: string;
           currency?: string;
+          logo_url?: string | null;
         };
         Returns: string;
       };

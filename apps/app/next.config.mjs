@@ -6,10 +6,13 @@ const nextConfig = {
   transpilePackages: ["@bu/supabase"],
   experimental: {
     instrumentationHook: process.env.NODE_ENV === "production",
-    serverActions: true,
+    serverActions: { 
+      bodySizeLimit: "10mb",
+    }
   },
   reactStrictMode: true,
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",

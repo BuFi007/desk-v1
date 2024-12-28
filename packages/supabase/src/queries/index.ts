@@ -36,14 +36,24 @@ export async function getUserQuery(supabase: Client, userId: string) {
     .select(
       `
       *,
-      team:team_id(*)
+      users_on_team!inner (
+        team:team_id (
+          id,
+          name,
+          email,
+          inbox_id,
+          logo_url,
+          created_at,
+          inbox_email,
+          inbox_forwarding
+        )
+      )
     `
     )
     .eq("id", userId)
     .single()
     .throwOnError();
 }
-
 export async function getCurrentUserTeamQuery(supabase: Client) {
   const {
     data: { session },

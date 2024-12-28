@@ -130,12 +130,14 @@ export async function deleteTeamMember(
 type CreateTeamParams = {
   name: string;
   currency?: string;
+  logo_url?: string | File | undefined;
 };
 
 export async function createTeam(supabase: Client, params: CreateTeamParams) {
   const { data } = await supabase.rpc("create_team_v2", {
     name: params.name,
     currency: params.currency,
+    logo_url: params.logo_url,
   });
 
   return data;

@@ -102,11 +102,6 @@ export function UserMenu({ onlySignOut }: { onlySignOut: boolean }) {
             <WalletSwitcherModal />
 
             <DropdownMenuSeparator />
-            {/* <div className="flex flex-row justify-between items-center p-2">
-              <p className="text-sm">Theme</p>
-              <ThemeSwitch />
-            </div>
-            <DropdownMenuSeparator /> */}
           </>
         )}
 

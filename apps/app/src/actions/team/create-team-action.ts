@@ -2,7 +2,7 @@
 
 import { LogEvents } from "@bu/events/events";
 import { getCurrency } from "@bu/location";
-import { createTeam, updateUser } from "@bu/supabase/mutations";
+import { createTeam } from "@bu/supabase/mutations";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { authActionClient } from "../safe-action";
@@ -17,21 +17,38 @@ export const createTeamAction = authActionClient
       channel: LogEvents.CreateTeam.channel,
     },
   })
-  .action(async ({ parsedInput: { name, redirectTo }, ctx: { supabase } }) => {
-    const currency = getCurrency();
-    const team_id = await createTeam(supabase, { name, currency });
-    const user = await updateUser(supabase, { team_id });
+  .action(
+    async ({
+      parsedInput: { name, logo_url, redirectTo },
+      ctx: { supabase },
+    }) => {
+      try {
+        const resolvedSupabase = await supabase;
+        const currency = await getCurrency();
 
-    if (!user?.data) {
-      return;
+        // Get user session
+        const {
+          data: { session },
+        } = await resolvedSupabase.auth.getSession();
+        if (!session?.user?.id) throw new Error("No session found");
+
+        const team_id = await createTeam(resolvedSupabase, {
+          name,
+          currency,
+          logo_url,
+        });
+
+        // Revalidate tags using session user id
+        revalidateTag(`teams_${session.user.id}`);
+
+        if (redirectTo) {
+          redirect(redirectTo);
+        }
+
+        return team_id;
+      } catch (error) {
+        console.error("Error creating team:", error);
+        throw error;
+      }
     }
-
-    revalidateTag(`user_${user.data.id}`);
-    revalidateTag(`teams_${user.data.id}`);
-
-    if (redirectTo) {
-      redirect(redirectTo);
-    }
-
-    return team_id;
-  });
+  );

@@ -1,13 +1,8 @@
 "use client";
 
 import { AssistantButton } from "@/components/assistant/button";
-import { MobileMenu } from "./mobile-menu";
 import { useAccount } from "wagmi";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { BuLogo } from "@bu/ui/bu-logo";
-import { UserMenu } from "@/components/user-menu";
-import { Skeleton } from "@bu/ui/skeleton";
-import { Suspense } from "react";
 
 export function Header() {
   const { isConnected } = useAccount();

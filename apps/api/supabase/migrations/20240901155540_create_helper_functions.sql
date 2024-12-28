@@ -15,7 +15,8 @@ declare
     new_team_id uuid;
 begin
     insert into teams (name) values (name) returning id into new_team_id;
-    insert into users_on_team (user_id, team_id, role) values (auth.uid(), new_team_id, 'owner');
+    insert into users_on_team (user_id, team_id, role, is_primary_team) 
+    values (auth.uid(), new_team_id, 'owner', true);
     return new_team_id;
 end;
 $$;

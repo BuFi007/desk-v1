@@ -70,7 +70,7 @@ export async function middleware(request: NextRequest) {
   ) {
     try {
       const userTeam = await getCurrentUserTeamQuery(supabase);
-      const teamName = userTeam?.data?.team?.name;
+      const teamName = userTeam?.data?.users_on_team?.[0]?.team?.name;
 
       console.log("userTeam", userTeam);
 
