@@ -7,7 +7,6 @@ import { BuLogo } from "@bu/ui/bu-logo";
 import { GradientText } from "@bu/ui/gradient-text";
 import { getUser } from "@bu/supabase/cached-queries";
 import { Icons } from "@bu/ui/icons";
-import { Terminal } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@bu/ui/alert";
 
 export default async function SetupLayout({

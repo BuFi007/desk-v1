@@ -31,13 +31,13 @@ interface Props {
 const baseAppUrl = getAppUrl();
 
 export const InviteEmail = ({
-  invitedByEmail = "bukinoshita@example.com",
-  invitedByName = "Pontus Abrahamsson",
-  email = "pontus@lostisland.co",
+  invitedByEmail = "example@example.com",
+  invitedByName = "Tomas Cordero",
+  email = "tomas@gmail.co",
   teamName = "Acme Co",
   inviteCode = "jnwe9203frnwefl239jweflasn1230oqef",
   ip = "204.13.186.218",
-  location = "São Paulo, Brazil",
+  location = "Buenos Aires, Argentina",
   locale = "en",
 }: Props) => {
   const { t } = getI18n({ locale });
@@ -69,7 +69,7 @@ export const InviteEmail = ({
             fontStyle="normal"
           />
         </head>
-        <Preview>{t("invite.preview", { teamName })}</Preview>
+        <Preview>{t("invite.preview", { teamName }) as string}</Preview>
 
         <Body className="bg-[#fff] my-auto mx-auto font-sans">
           <Container
@@ -78,8 +78,8 @@ export const InviteEmail = ({
           >
             <Logo />
             <Heading className="mx-0 my-[30px] p-0 text-[24px] font-normal text-[#121212] text-center">
-              {t("invite.title1")} <strong>{teamName}</strong>{" "}
-              {t("invite.title2")} <strong>Bu</strong>
+              <strong> {t("invite.title1", { teamName })} </strong>
+              {t("invite.title2", {})} <strong>Bu</strong>
             </Heading>
 
             <Text className="text-[14px] leading-[24px] text-[#121212]">
@@ -90,20 +90,20 @@ export const InviteEmail = ({
               >
                 {invitedByEmail}
               </Link>
-              ) {t("invite.link1")} <strong>{teamName}</strong>{" "}
-              {t("invite.link2")} <strong>Bu</strong>.
+              ) {t("invite.link1", {})} <strong>{teamName}</strong>{" "}
+              {t("invite.link2", {})} <strong>Bu</strong>.
             </Text>
             <Section className="mb-[42px] mt-[32px] text-center">
               <Button
                 className="bg-transparent text-primary text-[14px] text-[#121212] font-medium no-underline text-center px-6 py-3 border border-solid border-[#121212]"
                 href={inviteLink}
               >
-                {t("invite.join")}
+                {t("invite.join", {})}
               </Button>
             </Section>
 
             <Text className="text-[14px] leading-[24px] text-[#707070] break-all">
-              {t("invite.link3")}:{" "}
+              {t("invite.link3", {})}:{" "}
               <Link href={inviteLink} className="text-[#707070] underline">
                 {inviteLink}
               </Link>
@@ -112,13 +112,13 @@ export const InviteEmail = ({
             <br />
             <Section>
               <Text className="text-[12px] leading-[24px] text-[#666666]">
-                {t("invite.footer1")}{" "}
+                {t("invite.footer1", {})}{" "}
                 <span className="text-[#121212] ">{email}</span>.{" "}
-                {t("invite.footer2")}{" "}
+                {t("invite.footer2", {})}{" "}
                 <span className="text-[#121212] ">{ip}</span>{" "}
-                {t("invite.footer3")}{" "}
+                {t("invite.footer3", {})}{" "}
                 <span className="text-[#121212] ">{location}</span>.{" "}
-                {t("invite.footer4")}
+                {t("invite.footer4", {})}
               </Text>
             </Section>
 

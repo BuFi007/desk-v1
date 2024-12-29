@@ -41,6 +41,7 @@ const defaultTransactions = [
     amount: -1000,
     currency: "USD",
     name: "Spotify",
+    teamName: "Viktor Hofte AB",
   },
   {
     id: "2",
@@ -49,6 +50,7 @@ const defaultTransactions = [
     currency: "USD",
     name: "H23504959",
     category: "income",
+    teamName: "Viktor Hofte AB",
   },
   {
     id: "3",
@@ -56,6 +58,7 @@ const defaultTransactions = [
     amount: -1000,
     currency: "USD",
     name: "Webflow",
+    teamName: "Viktor Hofte AB",
   },
   {
     id: "4",
@@ -63,6 +66,7 @@ const defaultTransactions = [
     amount: -1000,
     currency: "USD",
     name: "Netflix",
+    teamName: "Viktor Hofte AB",
   },
   {
     id: "5",
@@ -70,6 +74,7 @@ const defaultTransactions = [
     amount: -2500,
     currency: "USD",
     name: "Adobe Creative Cloud",
+    teamName: "Viktor Hofte AB",
   },
   {
     id: "6",
@@ -77,6 +82,7 @@ const defaultTransactions = [
     amount: -1499,
     currency: "USD",
     name: "Amazon Prime",
+    teamName: "Viktor Hofte AB",
   },
   {
     id: "7",
@@ -84,6 +90,7 @@ const defaultTransactions = [
     amount: -999,
     currency: "USD",
     name: "Disney+",
+    teamName: "Viktor Hofte AB",
   },
   {
     id: "8",
@@ -91,6 +98,7 @@ const defaultTransactions = [
     amount: -1299,
     currency: "USD",
     name: "Microsoft 365",
+    teamName: "Viktor Hofte AB",
   },
   {
     id: "9",
@@ -98,6 +106,7 @@ const defaultTransactions = [
     amount: -899,
     currency: "USD",
     name: "Apple Music",
+    teamName: "Viktor Hofte AB",
   },
   {
     id: "10",
@@ -105,6 +114,7 @@ const defaultTransactions = [
     amount: -1599,
     currency: "USD",
     name: "HBO Max",
+    teamName: "Viktor Hofte AB",
   },
   {
     id: "11",
@@ -112,6 +122,7 @@ const defaultTransactions = [
     amount: -1999,
     currency: "USD",
     name: "Adobe Photoshop",
+    teamName: "Viktor Hofte AB",
   },
   {
     id: "12",
@@ -119,6 +130,7 @@ const defaultTransactions = [
     amount: -799,
     currency: "USD",
     name: "YouTube Premium",
+    teamName: "Viktor Hofte AB",
   },
   {
     id: "13",
@@ -126,6 +138,7 @@ const defaultTransactions = [
     amount: -1499,
     currency: "USD",
     name: "Dropbox Plus",
+    teamName: "Viktor Hofte AB",
   },
   {
     id: "14",
@@ -133,6 +146,7 @@ const defaultTransactions = [
     amount: -999,
     currency: "USD",
     name: "Nintendo Online",
+    teamName: "Viktor Hofte AB",
   },
   {
     id: "15",
@@ -140,6 +154,7 @@ const defaultTransactions = [
     amount: -1299,
     currency: "USD",
     name: "Slack",
+    teamName: "Viktor Hofte AB",
   },
 ];
 
@@ -149,7 +164,6 @@ export const TransactionsEmail = ({
   fullName = "Viktor Hofte",
   transactions = defaultTransactions,
   locale = "en",
-  teamName = "Viktor Hofte AB",
 }: Props) => {
   const { t } = getI18n({ locale });
   const firstName = fullName.split(" ").at(0);
@@ -187,7 +201,7 @@ export const TransactionsEmail = ({
             fontStyle="normal"
           />
         </head>
-        <Preview>{previewText}</Preview>
+        <Preview>{previewText as string}</Preview>
 
         <Body className="bg-[#fff] my-auto mx-auto font-sans">
           <Container
@@ -196,7 +210,7 @@ export const TransactionsEmail = ({
           >
             <Logo />
             <Heading className="text-[#121212] text-[21px] font-normal text-center p-0 my-[30px] mx-0">
-              {t("transactions.title1")}
+              {t("transactions.title1", {})}
               <span className="font-semibold">
                 {t("transactions.title2", {
                   numberOfTransactions: transactions.length,
@@ -207,13 +221,15 @@ export const TransactionsEmail = ({
               {t("transactions.description1", { firstName })},
               <br />
               <br />
-              {t("transactions.description2")}{" "}
+              {t("transactions.description2", {})}{" "}
               <span className="font-semibold">
                 {t("transactions.description3", {
                   numberOfTransactions: transactions.length,
                 })}{" "}
               </span>
-              {t("transactions.description4", { teamName })}
+              {t("transactions.description4", {
+                teamName: transactions[0]?.teamName,
+              })}
             </Text>
 
             <br />
@@ -226,17 +242,17 @@ export const TransactionsEmail = ({
                 <tr className="border-0 border-t-[1px] border-b-[1px] border-solid border-[#E8E7E1] h-[45px]">
                   <th align="left">
                     <Text className="text-[14px] font-semibold m-0 p-0">
-                      {t("transactions.date")}
+                      {t("transactions.date", {})}
                     </Text>
                   </th>
                   <th align="left" style={{ width: "50%" }}>
                     <Text className="text-[14px] font-semibold m-0 p-0">
-                      {t("transactions.description")}
+                      {t("transactions.description", {})}
                     </Text>
                   </th>
                   <th align="left">
                     <Text className="text-[14px] font-semibold m-0 p-0">
-                      {t("transactions.amount")}
+                      {t("transactions.amount", {})}
                     </Text>
                   </th>
                 </tr>
@@ -295,7 +311,7 @@ export const TransactionsEmail = ({
                   transactions[transactions.length - 1]?.date
                 }&end=${transactions.at(0)?.date}`}
               >
-                {t("transactions.button")}
+                {t("transactions.button", {})}
               </Button>
             </Section>
 

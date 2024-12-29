@@ -17,7 +17,7 @@ import {
   SelectValue,
 } from "@bu/ui/select";
 import { useToast } from "@bu/ui/use-toast";
-import { Loader2 } from "lucide-react";
+import { Loader2, X } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
 import Link from "next/link";
 import { useFieldArray, useForm } from "react-hook-form";
@@ -55,11 +55,10 @@ export function InviteForm() {
     });
   });
 
-  const { fields, append } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     name: "invites",
     control: form.control,
   });
-
   return (
     <Form {...form}>
       <form onSubmit={onSubmit}>
@@ -112,6 +111,18 @@ export function InviteForm() {
                 </FormItem>
               )}
             />
+
+            {fields.length > 1 && (
+              <Button
+                type="button"
+                variant="duende"
+                size="icon"
+                className="flex-shrink-0"
+                onClick={() => remove(index)}
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            )}
           </div>
         ))}
 

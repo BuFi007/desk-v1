@@ -12,6 +12,19 @@ import { redirect } from "next/navigation";
 import { authActionClient } from "../safe-action";
 import { inviteTeamMembersSchema } from "./schema";
 
+type InviteData = {
+  email: string | null;
+  code: string | null;
+  user: {
+    full_name: string | null;
+    email: string | null;
+    locale: string | null;
+  } | null;
+  team: {
+    name: string | null;
+  } | null;
+};
+
 export const inviteTeamMembersAction = authActionClient
   .schema(inviteTeamMembersSchema)
   .metadata({
@@ -26,7 +39,18 @@ export const inviteTeamMembersAction = authActionClient
       parsedInput: { invites, redirectTo, revalidatePath },
       ctx: { user, supabase },
     }) => {
-      const { t } = getI18n({ locale: user.locale });
+      console.log("Starting invite process with data:", { invites, user });
+
+      // Get team ID from the first team in users_on_team
+      const teamId = user.users_on_team?.[0]?.team?.id;
+      if (!teamId) {
+        console.error("No team found in user data:", user);
+        throw new Error("User does not belong to any team");
+      }
+
+      console.log("Using team ID:", teamId);
+
+      const { t } = getI18n({ locale: user.locale as string });
 
       const headersData = await headers();
       const location = headersData.get("x-vercel-ip-city") ?? "Unknown";
@@ -34,52 +58,91 @@ export const inviteTeamMembersAction = authActionClient
 
       const data = invites?.map((invite) => ({
         ...invite,
-        team_id: user.team_id,
+        team_id: teamId,
         invited_by: user.id,
       }));
 
-      const { data: invitesData } = await supabase
+      console.log("Prepared data for Supabase:", data);
+
+      const supabaseClient = await supabase;
+
+      const { data: invitesData, error: inviteError } = await supabaseClient
         .from("user_invites")
         .upsert(data, {
           onConflict: "email, team_id",
           ignoreDuplicates: false,
-        })
-        .select("email, code, user:invited_by(*), team:team_id(*)");
+        }).select(`
+          email,
+          code,
+          user:invited_by(
+            full_name,
+            email,
+            locale
+          ),
+          team:team_id(
+            name
+          )
+        `);
 
-      const emails = invitesData?.map(
-        async (invites: {
-          email: string;
-          user: { full_name: string; email: string; locale: string };
-          team: { name: string };
-          code: any;
-        }) => ({
+      if (inviteError) {
+        console.error("Error creating invites:", inviteError);
+        throw inviteError;
+      }
+
+      console.log("Received invites data from Supabase:", invitesData);
+
+      const emails = invitesData?.map(async (invite: InviteData) => {
+        console.log("Processing invite:", invite);
+
+        if (
+          !invite.email ||
+          !invite.user?.full_name ||
+          !invite.user?.email ||
+          !invite.user?.locale ||
+          !invite.team?.name ||
+          !invite.code
+        ) {
+          console.error("Missing required fields:", { invite });
+          throw new Error("Missing required fields for email invitation");
+        }
+
+        const subject = t("invite.subject", {
+          invitedByName: user.full_name,
+          teamName: invite.team.name,
+        });
+
+        console.log("Generated email subject:", subject);
+
+        return {
           from: "Bu <bubot@bu.finance>",
-          to: [invites.email],
-          subject: t("invite.subject", {
-            invitedByName: invites.user.full_name,
-            teamName: invites.team.name,
-          }),
+          to: [invite.email],
+          subject,
           headers: {
             "X-Entity-Ref-ID": nanoid(),
           },
-          html: await render(
-            InviteEmail({
-              invitedByEmail: invites.user.email,
-              invitedByName: invites.user.full_name,
-              email: invites.email,
-              teamName: invites.team.name,
-              inviteCode: invites.code,
-              ip,
-              location,
-              locale: invites.user.locale,
-            })
-          ),
-        })
-      );
+          react: InviteEmail({
+            invitedByEmail: user.email as string,
+            invitedByName: user.full_name as string,
+            email: invite.email,
+            teamName: invite.team.name,
+            inviteCode: invite.code,
+            ip,
+            location,
+            locale: user.locale as string,
+          }),
+        };
+      });
 
-      const htmlEmails = await Promise.all(emails);
+      const htmlEmails = emails ? await Promise.all(emails) : [];
+      console.log("Prepared emails for sending:", htmlEmails);
 
-      await resend.batch.send(htmlEmails);
+      try {
+        const result = await resend.batch.send(htmlEmails as any);
+        console.log("Email sending result:", result);
+      } catch (emailError) {
+        console.error("Failed to send emails:", emailError);
+        throw emailError;
+      }
 
       if (revalidatePath) {
         revalidatePathFunc(revalidatePath);

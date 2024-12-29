@@ -82,7 +82,7 @@ export const ConnectionExpireEmail = ({
               <strong>{bankName}</strong> for your team{" "}
               <strong>{teamName}</strong> will expire in{" "}
               {formatDistance(new Date(expiresAt), new Date())}. To ensure that
-              Bu continues to run smoothly, please reconnect your bank.
+              Bu Desk continues to run smoothly, please reconnect your bank.
               <br />
               <br />
               The good news? It only takes 60 seconds to get everything back on

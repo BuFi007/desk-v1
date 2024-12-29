@@ -11,7 +11,11 @@ export function getI18n({ locale = "en" }: Options) {
   const safeLocale = supportedLocales.includes(locale) ? locale : "en";
 
   // Get translations for the locale
-  const getTranslation = (key: string, params?: TranslationParams) => {
+  const getTranslation = (
+    key: string,
+    Preview: unknown,
+    params?: TranslationParams
+  ) => {
     const translationSet: { [key: string]: string } = Object.fromEntries(
       Object.entries(translations(safeLocale, params) || {}).map(([k, v]) => [
         k,

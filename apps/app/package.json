@@ -39,7 +39,7 @@
     "little-date": "^1.0.0",
     "next": "^15.1.0",
     "next-international": "^1.2.4",
-    "next-safe-action": "^7.9.0",
+    "next-safe-action": "^7.9.3",
     "next-themes": "^0.3.0",
     "nuqs": "^1.18.0",
     "react": "^19.0.0",
