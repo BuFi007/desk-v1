@@ -1,19 +1,11 @@
 import { SelectTeamTable } from "@/components/tables/select-team/table";
-import { UserMenu } from "@/components/user-menu";
 import { getUser } from "@bu/supabase/cached-queries";
 import { getTeamsByUserIdQuery } from "@bu/supabase/queries";
 import { createClient } from "@bu/supabase/server";
+import { Card } from "@bu/ui/card";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import {
-  Card,
-  CardHeader,
-  CardFooter,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@bu/ui/card";
 
 export const metadata: Metadata = {
   title: "Teams | Bu Desk",

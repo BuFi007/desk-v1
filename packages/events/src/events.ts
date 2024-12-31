@@ -107,6 +107,10 @@ export const LogEvents = {
     name: "Change Team",
     channel: "team",
   },
+  SwitchTeam: {
+    name: "Switch Team",
+    channel: "team",
+  },
   CreateTeam: {
     name: "Create Team",
     channel: "team",

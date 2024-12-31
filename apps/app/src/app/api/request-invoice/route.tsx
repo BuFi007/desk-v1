@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 
 // Especificar que este endpoint se ejecuta en el runtime de Edge
 export const runtime = "edge";
@@ -29,7 +29,7 @@ export async function GET(request: NextRequest) {
         }}
       >
         <img
-          src={`${baseUrl}/images/BooFi-icon.png`}
+          src={`${baseUrl}/images/logo.png`}
           alt="Bu.fi"
           width="128"
           height="128"

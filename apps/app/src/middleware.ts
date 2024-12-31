@@ -1,8 +1,8 @@
 import { updateSession } from "@bu/supabase/middleware";
+import { getCurrentUserTeamQuery } from "@bu/supabase/queries";
 import { createClient } from "@bu/supabase/server";
 import { createI18nMiddleware } from "next-international/middleware";
 import { type NextRequest, NextResponse } from "next/server";
-import { getCurrentUserTeamQuery } from "@bu/supabase/queries";
 
 const I18nMiddleware = createI18nMiddleware({
   locales: ["en"],
@@ -63,6 +63,7 @@ export async function middleware(request: NextRequest) {
   }
   // If authenticated but no team, redirect to teams/create
   if (
+    // biome-ignore lint/complexity/useOptionalChain: <explanation>
     session &&
     session?.user?.user_metadata?.full_name &&
     newUrl.pathname !== "/teams/create" &&
@@ -87,5 +88,7 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|api|monitoring).*)"],
+  matcher: [
+    '/((?!_next/static|_next/image|favicon.ico|api|monitoring|images|logo.png|.*\\.png$).*)',
+  ],
 };

@@ -14,6 +14,10 @@ export const createTeamSchema = z.object({
   redirectTo: z.string().optional(),
 });
 
+export const switchTeamSchema = z.object({
+  teamId: z.string().uuid(),
+});
+
 export const changeUserRoleSchema = z.object({
   userId: z.string(),
   teamId: z.string(),

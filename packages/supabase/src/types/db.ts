@@ -180,6 +180,7 @@ export type Database = {
           role: Database["public"]["Enums"]["teamRoles"] | null;
           team_id: string;
           user_id: string;
+          is_primary_team: boolean;
         };
         Insert: {
           created_at?: string | null;
@@ -187,6 +188,7 @@ export type Database = {
           role?: Database["public"]["Enums"]["teamRoles"] | null;
           team_id: string;
           user_id: string;
+          is_primary_team?: boolean;
         };
         Update: {
           created_at?: string | null;
@@ -194,6 +196,7 @@ export type Database = {
           role?: Database["public"]["Enums"]["teamRoles"] | null;
           team_id?: string;
           user_id?: string;
+          is_primary_team?: boolean;
         };
         Relationships: [
           {

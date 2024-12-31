@@ -1,9 +1,9 @@
 "use client";
 
-import React from "react";
-import { twMerge } from "tailwind-merge";
 import { BuLogo } from "@bu/ui/bu-logo";
 import { Button } from "@bu/ui/button";
+import React from "react";
+import { twMerge } from "tailwind-merge";
 import Hamburger from "./hamburger";
 
 export default function NavBar() {
@@ -13,7 +13,7 @@ export default function NavBar() {
       <div className="sticky top-0 z-10 flex h-20 w-full items-center justify-between border-2 border-slate-900 bg-nepal-100 px-4 md:px-24">
         <h1 className="text-shadow-neo scroll-m-20 font-Space_Grotesk text-4xl font-extrabold tracking-tight text-cerulean-400 lg:text-5xl">
           <BuLogo
-            logo="/BooFi-icon.png"
+            logo="/logo.png"
             text="Bu Desk"
             width={50}
             height={50}

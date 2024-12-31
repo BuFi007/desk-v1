@@ -1,7 +1,9 @@
+'use server';
+
 import { logger } from "@bu/logger";
 import { createClient } from "@bu/supabase/server";
-import { Client } from "../types";
 import { UTCDate } from "@date-fns/utc";
+import type { Client } from "../types";
 
 export async function getUser() {
   const supabase = await createClient();
@@ -171,4 +173,50 @@ export async function getTeamNameQuery(supabase: Client, teamId: string) {
   return {
     data,
   };
+}
+
+export async function getUserTeamsQuery(supabase: Client, userId: string) {
+  return supabase
+    .from("users_on_team")
+    .select(`
+      id,
+      role,
+      is_primary_team,
+      team:team_id (
+        id,
+        name,
+        logo_url,
+        email,
+        inbox_id,
+        created_at,
+        inbox_email,
+        inbox_forwarding
+      )
+    `)
+    .eq("user_id", userId)
+    .order("created_at")
+    .throwOnError();
+}
+
+export async function getPrimaryTeamQuery(supabase: Client, userId: string) {
+  return supabase
+    .from("users_on_team")
+    .select(`
+      id,
+      role,
+      team:team_id (
+        id,
+        name,
+        logo_url,
+        email,
+        inbox_id,
+        created_at,
+        inbox_email,
+        inbox_forwarding
+      )
+    `)
+    .eq("user_id", userId)
+    .eq("is_primary_team", true)
+    .single()
+    .throwOnError();
 }

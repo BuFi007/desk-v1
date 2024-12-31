@@ -1,8 +1,8 @@
 import { logger } from "@bu/logger";
 import { createClient } from "@bu/supabase/server";
-import type { Client } from "../types";
+import type { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { getCurrentUserTeamQuery, getUserInviteQuery } from "../queries";
-import { PostgrestSingleResponse } from "@supabase/supabase-js";
+import type { Client } from "../types";
 
 import type { Database, Tables, TablesUpdate } from "../types";
 
@@ -70,6 +70,7 @@ export async function deleteUser(supabase: Client) {
   return session.user.id;
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export async function updateTeam(supabase: Client, data: any) {
   const response = await getCurrentUserTeamQuery(supabase);
   const userData = response?.data;
@@ -137,7 +138,7 @@ export async function createTeam(supabase: Client, params: CreateTeamParams) {
   const { data } = await supabase.rpc("create_team_v2", {
     name: params.name,
     currency: params.currency,
-    logo_url: params.logo_url,
+    logo_url: params.logo_url as string,
   });
 
   return data;
@@ -180,6 +181,7 @@ export async function joinTeamByInviteCode(supabase: Client, code: string) {
     email: session.user.email,
   });
 
+  // biome-ignore lint/complexity/useOptionalChain: <explanation>
   if (inviteData && inviteData.team_id) {
     // Add user team
     await supabase.from("users_on_team").insert({
@@ -205,4 +207,24 @@ export async function joinTeamByInviteCode(supabase: Client, code: string) {
   }
 
   return null;
+}
+
+export async function switchPrimaryTeam(
+  supabase: Client,
+  params: { userId: string; teamId: string }
+) {
+  const { userId, teamId } = params;
+  
+  await supabase
+    .from("users_on_team")
+    .update({ is_primary_team: false })
+    .eq("user_id", userId);
+    
+  return supabase
+    .from("users_on_team")
+    .update({ is_primary_team: true })
+    .eq("user_id", userId)
+    .eq("team_id", teamId)
+    .select()
+    .single();
 }

@@ -1,27 +1,27 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { useAccount } from "wagmi";
-import { createClient } from "@/utils/client";
 import { Chain } from "@/components/blockchain/chain";
 import { WalletSwitcherModal } from "@/components/blockchain/chainSwitch/modal";
 import { SignOut } from "@/components/sign-out";
+import { createClient } from "@/utils/client";
 import {
   BadgeCheck,
-  UserCog,
   ChevronsUpDown,
   CreditCard,
   LogOut,
-  Sparkles,
   Network,
+  Sparkles,
+  UserCog,
 } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
+import { useAccount } from "wagmi";
 
 import { truncateAddress } from "@/utils";
 import {
   Avatar,
-  AvatarImage,
   AvatarFallback,
+  AvatarImage,
   AvatarImageNext,
 } from "@bu/ui/avatar";
 import {
@@ -42,19 +42,22 @@ import {
 
 export function NavUser({ onlySignOut }: { onlySignOut: boolean }) {
   const supabase = createClient();
-  const [userData, setUserData] = useState<any>(null);
+  const [userData, setUserData] = useState<{ user_metadata?: { avatar_url?: string; full_name?: string, email?: string } } | null>(null);
   const { address } = useAccount();
   const { isMobile } = useSidebar();
 
-  // Fetch user data from Supabase
-  async function fetchUserData() {
-    const { data } = await supabase.auth.getUser();
-    setUserData(data?.user);
-  }
+ const fetchUserData = useMemo(
+    () => async () => {
+      const { data } = await supabase.auth.getUser();
+      setUserData(data?.user);
+    },
+    [supabase]
+  );
+
 
   useEffect(() => {
     fetchUserData();
-  }, []);
+  }, [fetchUserData]);
 
   return (
     <SidebarMenu>
@@ -63,19 +66,19 @@ export function NavUser({ onlySignOut }: { onlySignOut: boolean }) {
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
               size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              className="data-[state=open]:bg-main data-[state=open]:text-sidebar-accent-foreground"
             >
-              <Avatar className="h-8 w-8 rounded-lg">
+              <Avatar className="h-8 w-8 rounded-lg bg-main">
                 {userData?.user_metadata?.avatar_url && (
                   <AvatarImageNext
                     src={userData?.user_metadata?.avatar_url}
-                    alt={userData?.user_metadata?.full_name!}
+                    alt={userData?.user_metadata?.full_name ?? "User"}
                     width={32}
                     height={32}
                     quality={100}
                   />
                 )}
-                <AvatarFallback className="rounded-lg">
+                <AvatarFallback className="rounded-lg bg-main">
                   {userData?.user_metadata?.full_name
                     ?.charAt(0)
                     ?.toUpperCase() ?? ""}
@@ -87,7 +90,7 @@ export function NavUser({ onlySignOut }: { onlySignOut: boolean }) {
                   {userData?.user_metadata?.full_name ?? "—"}
                 </span>
                 <span className="truncate text-xs">
-                  {userData?.email ?? "—"}
+                  {userData?.user_metadata?.email ?? "—"}
                 </span>
               </div>
 
@@ -129,7 +132,7 @@ export function NavUser({ onlySignOut }: { onlySignOut: boolean }) {
                         {userData?.user_metadata?.full_name ?? "—"}
                       </span>
                       <span className="truncate text-xs">
-                        {userData?.email ?? "—"}
+                        {userData?.user_metadata?.email ?? "—"}
                       </span>
                     </div>
                   </div>

@@ -42,7 +42,9 @@ export const createClient = async (options?: CreateClientOptions) => {
   const cookieStore = await cookies();
 
   const key = admin
+    // biome-ignore lint/style/noNonNullAssertion: <explanation>
     ? process.env.SUPABASE_SERVICE_KEY!
+    // biome-ignore lint/style/noNonNullAssertion: <explanation>
     : process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
   const auth = admin
@@ -54,6 +56,7 @@ export const createClient = async (options?: CreateClientOptions) => {
     : {};
 
   return createServerClient<Database>(
+    // biome-ignore lint/style/noNonNullAssertion: <explanation>
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     key,
     {

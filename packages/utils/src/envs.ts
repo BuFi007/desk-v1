@@ -10,7 +10,7 @@ export function getAppUrl() {
     return `https://${process.env.VERCEL_URL}`;
   }
 
-  return "http://localhost:3001";
+  return "http://localhost:3000";
 }
 
 export function getEmailUrl() {

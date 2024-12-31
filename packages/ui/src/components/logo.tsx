@@ -1,8 +1,8 @@
 "use client";
-import Link from "next/link";
 import SparklesText from "@bu/ui/sparkles-text";
-import Image from "next/image";
 import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
 
 export function BuLogo({
   logo,
@@ -30,7 +30,6 @@ export function BuLogo({
               alt="Bu Logo"
               width={width}
               height={height}
-              priority
             />
           </SparklesText>
           <span className="absolute mt-28 sm:mt-20 transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:-rotate-12">

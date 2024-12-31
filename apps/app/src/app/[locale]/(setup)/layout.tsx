@@ -1,13 +1,13 @@
-import React from "react";
 import MarqueeY from "@/components/marquee";
-import { Suspense } from "react";
 import { UserMenu } from "@/components/user-menu";
-import { Card } from "@bu/ui/card";
-import { BuLogo } from "@bu/ui/bu-logo";
-import { GradientText } from "@bu/ui/gradient-text";
 import { getUser } from "@bu/supabase/cached-queries";
-import { Icons } from "@bu/ui/icons";
 import { Alert, AlertDescription, AlertTitle } from "@bu/ui/alert";
+import { BuLogo } from "@bu/ui/bu-logo";
+import { Card } from "@bu/ui/card";
+import { GradientText } from "@bu/ui/gradient-text";
+import { Icons } from "@bu/ui/icons";
+import type React from "react";
+import { Suspense } from "react";
 
 export default async function SetupLayout({
   children,
@@ -32,7 +32,7 @@ export default async function SetupLayout({
                 <div className="flex-shrink-0">
                   <BuLogo
                     text=""
-                    logo="/BooFi-icon.png"
+                    logo="/logo.png"
                     width={80}
                     height={80}
                   />
