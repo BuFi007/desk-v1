@@ -9,7 +9,8 @@ const meta: Meta<typeof Avatar> = {
     layout: "centered",
     docs: {
       description: {
-        component: "An avatar component for user profile images with fallback support.",
+        component:
+          "An avatar component for user profile images with fallback support.",
       },
     },
   },
@@ -66,7 +67,9 @@ export const AllVariants: Story = {
           </Avatar>
           <Avatar>
             <AvatarImage src="https://broken-link.jpg" alt="@broken" />
-            <AvatarFallback className="bg-blue-500 text-white">TB</AvatarFallback>
+            <AvatarFallback className="bg-blue-500 text-white">
+              TB
+            </AvatarFallback>
           </Avatar>
         </div>
       </section>

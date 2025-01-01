@@ -1,4 +1,13 @@
-export default function Layout({ children }: { children: React.ReactNode }) {
-  // This is where your authenticated app lives, add a sidebar, header etc.
-  return children;
+import { cookies } from "next/headers";
+import { LayoutWrapper } from "@/components/app-sidebar/sidebar-layout-wrapper";
+
+export default async function Layout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const cookieStore = await cookies();
+  const defaultOpen = cookieStore.get("sidebar:state")?.value === "true";
+
+  return <LayoutWrapper defaultOpen={defaultOpen}>{children}</LayoutWrapper>;
 }

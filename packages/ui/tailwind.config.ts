@@ -3,7 +3,23 @@ import type { Config } from "tailwindcss";
 export default {
   darkMode: ["class"],
   content: ["./src/**/*.{ts,tsx}"],
-  safelist: ["dark", "light"],
+  safelist: [
+    "dark",
+    // Add "theme-yellow" so Tailwind knows about it
+    "theme-yellow",
+    "theme-blue",
+    "theme-green",
+    "theme-orange",
+    "theme-red",
+    "theme-purple",
+    // Also add the " dark" variants if you need them:
+    "theme-yellow dark",
+    "theme-blue dark",
+    "theme-green dark",
+    "theme-orange dark",
+    "theme-red dark",
+    "theme-purple dark",
+  ],
   theme: {
     extend: {
       colors: {
@@ -13,53 +29,25 @@ export default {
           neue: "BaseNeue, sans-serif",
           nupower: "PowerNeue, sans-serif",
         },
-        main: "#c4a1ff",
-        mainAccent: "#9e66ff",
-        overlay: "rgba(0,0,0,0.8)",
-
-        // light mode
-        bg: "#daf5f0",
-        text: "#000",
-        border: "#000",
+        main: "var(--main)",
+        bg: "var(--bg)",
+        text: "var(--text)",
+        border: "var(--border)",
+        overlay: "var(--overlay)",
+        bw: "var(--bw)",
+        blank: "var(--blank)",
+        mtext: "var(--mtext)",
+        ring: "var(--ring)",
+        ringOffset: "var(--ring-offset)",
 
         // dark mode
-        darkBg: "#1D1F27",
-        darkText: "#eeefe9",
-        darkBorder: "#000",
-        secondaryBlack: "#1b1b1b",
+        darkBg: "var(--dark-bg)",
+        darkText: "var(--dark-text)",
 
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
+        darkBorder: "var(--dark-border)",
+        darkNavBorder: "var(--dark-nav-border)",
+
+        secondaryBlack: "var(--secondary-black)",
       },
       borderRadius: {
         base: "10px",
@@ -164,6 +152,10 @@ export default {
             transform: "scale(1) translateY(0)",
           },
         },
+        grid: {
+          "0%": { transform: "translateY(-50%)" },
+          "100%": { transform: "translateY(0)" },
+        },
       },
       animation: {
         "animate-webgl-scale-in-fade": "webgl-scale-in-fade 1s ease-in-out",
@@ -171,6 +163,7 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "caret-blink": "caret-blink 1.25s ease-out infinite",
+        grid: "grid 15s linear infinite",
         first: "moveVertical 30s ease infinite",
         second: "moveInCircle 20s reverse infinite",
         third: "moveInCircle 40s linear infinite",

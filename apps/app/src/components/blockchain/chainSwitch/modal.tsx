@@ -5,6 +5,7 @@ import { WalletSelector } from "./walletSelector";
 import { AllChains } from "@/constants/Chains";
 import { ChainList } from "@/types";
 import { Button } from "@bu/ui/button";
+
 import {
   Dialog,
   DialogContent,
@@ -15,7 +16,6 @@ import {
 import Image from "next/image";
 import { useState } from "react";
 import { useAccount, useChainId, useSwitchChain } from "wagmi";
-
 export function WalletSwitcherModal() {
   const [open, setOpen] = useState(false);
   const chainId = useChainId();
@@ -24,7 +24,7 @@ export function WalletSwitcherModal() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">Change Chain</Button>
+        <Button variant="ghost">Change Chain</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

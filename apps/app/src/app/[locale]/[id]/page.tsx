@@ -2,6 +2,7 @@
 
 import { Hex } from "viem";
 import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation"; // Add this import
 import { ChainSelect } from "@/components/chainSelect";
 import PresetAmountButtons from "@/components/presetAmounts";
 import { Button } from "@bu/ui/button";
@@ -16,21 +17,23 @@ import { useParams } from "next/navigation";
 
 export default function PayId() {
   const params = useParams();
+  const searchParams = useSearchParams(); // Use Next.js searchParams instead of window.location
   const [selectedToken, setSelectedToken] = useState<Token>();
   const [amount, setAmount] = useState<string>("1");
   const [receiver, setReceiver] = useState<string>("");
   const [ensNotFound, setEnsNotFound] = useState<boolean>(false);
   const [ensName, setEnsName] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+
   const id = params.id;
   const chainId = useChainId();
   const { switchChain } = useSwitchChain();
   const availableTokens = useGetTokensOrChain(chainId!, "tokens") as Token[];
-  const queryString = window.location.search;
-  const amountParam = new URLSearchParams(queryString);
-  const presetAmount = amountParam?.get("amount");
-  const tokenParam = amountParam?.get("token");
-  const chainParam = amountParam?.get("chain");
+
+  // Get URL parameters using Next.js searchParams
+  const presetAmount = searchParams.get("amount");
+  const tokenParam = searchParams.get("token");
+  const chainParam = searchParams.get("chain");
 
   const ensNameEthers = useEnsName({
     address: id as Hex,
@@ -38,33 +41,31 @@ export default function PayId() {
       ?.chainId as ChainList,
   });
 
-  async function getEnsAddress() {
-    setLoading(true);
-    try {
-      setReceiver(id as Hex);
-
-      setEnsName(ensNameEthers?.data!);
-      setReceiver(id as Hex);
-      setLoading(false);
-    } finally {
-      setLoading(false);
-    }
-  }
-
   useEffect(() => {
-    getEnsAddress();
-  }, []);
+    async function getEnsAddress() {
+      setLoading(true);
+      try {
+        setReceiver(id as Hex);
+        setEnsName(ensNameEthers?.data!);
+        setReceiver(id as Hex);
+      } finally {
+        setLoading(false);
+      }
+    }
 
-  //   const sameTargetChain = chainId === 43113;
+    getEnsAddress();
+  }, [id, ensNameEthers]);
 
   if (loading) return <Skeleton className="w-full h-full" />;
 
   function handleAmountSelect(amount: number) {
     setAmount(amount.toString());
   }
+
   const tokenFind = availableTokens?.filter(
     (token) => token?.symbol === tokenParam
   );
+
   return (
     <div className="flex flex-col items-center w-full p-4">
       <div className="flex flex-col w-full max-w-l">

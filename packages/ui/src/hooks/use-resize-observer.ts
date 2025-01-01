@@ -1,7 +1,7 @@
 import { type RefObject, useEffect, useState } from "react";
 
 export function useResizeObserver(
-  elementRef: RefObject<Element>
+  ElementRef: RefObject<Element>
 ): ResizeObserverEntry | undefined {
   const [entry, setEntry] = useState<ResizeObserverEntry>();
 
@@ -10,7 +10,7 @@ export function useResizeObserver(
   };
 
   useEffect(() => {
-    const node = elementRef?.current;
+    const node = ElementRef?.current;
     if (!node) return;
 
     const observer = new ResizeObserver(updateEntry);
@@ -18,7 +18,7 @@ export function useResizeObserver(
     observer.observe(node);
 
     return () => observer.disconnect();
-  }, [elementRef]);
+  }, [ElementRef]);
 
   return entry;
 }
