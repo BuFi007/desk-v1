@@ -1,6 +1,6 @@
-import { Dispatch } from "react";
-import { SetStateAction } from "react";
-import { Address, Hex } from "viem";
+import type { Dispatch } from "react";
+import type { SetStateAction } from "react";
+import type { Address, Hex } from "viem";
 
 // Get User types
 // Base user type representing the database schema
@@ -52,6 +52,7 @@ export interface LinkUiFormProps {
   tokenAmount: number;
   handleValueChange: (usdAmount: number, tokenAmount: number) => void;
   availableTokens: Token[];
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   setSelectedToken: Dispatch<SetStateAction<any>>;
   chainId: number | undefined;
   handleCreateLinkClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
@@ -185,4 +186,39 @@ export interface PaymentInfoProps {
     destinationChainId?: number;
     destinationChainName?: string;
   };
+}
+
+// Peanut Request types
+
+export type IGetRequestLinkDetailsProps = {
+  APIKey?: string;
+  apiUrl?: string;
+} & (
+  | {
+      link: string;
+    }
+  | {
+      uuid: string;
+    }
+);
+
+export interface IGetRequestLinkDetailsResponse {
+  uuid: string;
+  link: string;
+  chainId: string;
+  recipientAddress: string | null;
+  tokenAmount: string;
+  tokenAddress: string;
+  tokenDecimals: number;
+  tokenType: string;
+  tokenSymbol: string | null;
+  createdAt: string;
+  updatedAt: string;
+  reference: string | null;
+  attachmentUrl: string | null;
+  payerAddress: string | null;
+  trackId: string | null;
+  destinationChainFulfillmentHash: string | null;
+  originChainFulfillmentHash: string | null;
+  status: string;
 }

@@ -39,7 +39,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@bu/ui/sidebar";
-
+import { SignOutButton } from "./sign-out-button";
 export function NavUser({ onlySignOut }: { onlySignOut: boolean }) {
   const supabase = createClient();
   const [userData, setUserData] = useState<{ user_metadata?: { avatar_url?: string; full_name?: string, email?: string } } | null>(null);
@@ -195,8 +195,7 @@ export function NavUser({ onlySignOut }: { onlySignOut: boolean }) {
               </>
             )}
             <DropdownMenuItem>
-              <LogOut />
-              Log out
+              <SignOutButton />
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

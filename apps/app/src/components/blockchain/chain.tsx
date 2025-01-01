@@ -1,6 +1,4 @@
 import { AllChains } from "@/constants/Chains";
-import { useChain } from "@/hooks/useChain";
-import { AvatarImageNext } from "@bu/ui/avatar";
 import Image from "next/image";
 import { useChainId } from "wagmi";
 
@@ -13,7 +11,9 @@ export const Chain = () => {
       {chain && (
         <div className="flex items-center gap-1">
           <Image
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
             src={chain?.iconUrls[0]!}
+            // biome-ignore lint/style/noNonNullAssertion: <explanation>
             alt={chain?.name!}
             width={16}
             height={16}

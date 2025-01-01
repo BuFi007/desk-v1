@@ -8,11 +8,11 @@ export function SignOutButton() {
 
   return (
     <Button
-      variant="outline"
+      variant="ghost"
       className="w-full"
       onClick={() => supabase.auth.signOut()}
     >
-      Sign out
+      Log out
     </Button>
   );
 }

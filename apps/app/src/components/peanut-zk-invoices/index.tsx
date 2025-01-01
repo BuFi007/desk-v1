@@ -1,35 +1,36 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { useForm, FormProvider, useFormContext } from "react-hook-form";
-import { Button } from "@bu/ui/button";
-import {
-  Sheet,
-  SheetTrigger,
-  SheetContent,
-  SheetHeader,
-  SheetFooter,
-  SheetTitle,
-  SheetDescription,
-} from "@bu/ui/sheet";
-import { PlusCircle } from "lucide-react";
-import { ScrollArea } from "@bu/ui/scroll-area";
-import { Meta } from "@/components/invoice/meta";
-import { FromDetails } from "@/components/invoice/from-details";
 import { CustomerDetails } from "@/components/invoice/customer-details";
-import { LineItems } from "@/components/invoice/line-items";
-import { Summary } from "@/components/invoice/summary";
-import { PaymentDetails } from "@/components/invoice/payment-details";
-import { NoteDetails } from "@/components/invoice/note-details";
 import { EditBlock } from "@/components/invoice/edit-block";
-import { useToast } from "@bu/ui/use-toast";
-import { useAccount } from "wagmi";
-import { usePeanut } from "@/hooks/usePeanut";
+import { FromDetails } from "@/components/invoice/from-details";
+import { LineItems } from "@/components/invoice/line-items";
+import { Meta } from "@/components/invoice/meta";
+import { NoteDetails } from "@/components/invoice/note-details";
+import { PaymentDetails } from "@/components/invoice/payment-details";
+import { Summary } from "@/components/invoice/summary";
 import { OpenURL } from "@/components/open-url";
 import { useChain } from "@/hooks/useChain";
+import { usePeanut } from "@/hooks/usePeanut";
 import { useGetTokensOrChain } from "@/hooks/useTokensOrChain";
-import { Token, TransactionDetails } from "@/types";
+import type { Token, TransactionDetails } from "@/types";
+import { Button } from "@bu/ui/button";
+import { ScrollArea } from "@bu/ui/scroll-area";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@bu/ui/sheet";
 import ShinyButton from "@bu/ui/shiny-button";
+import { useToast } from "@bu/ui/use-toast";
+import { PlusCircle } from "lucide-react";
+import type React from "react";
+import { useEffect, useState } from "react";
+import { FormProvider, useForm, useFormContext } from "react-hook-form";
+import { useAccount } from "wagmi";
 
 function InvoiceSheetHeader() {
   return (
@@ -61,13 +62,10 @@ function InvoiceContent() {
   const { getValues } = useFormContext();
   const amount = getValues("amount");
   const recipientAddress = address as `0x${string}`;
-
   const chain = useChain();
-  const chainId = chain?.chainId!;
+  const chainId = chain?.chainId;
 
-  const availableTokens = useGetTokensOrChain(chainId,
-    "tokens"
-  ) as Token[];
+  const availableTokens = useGetTokensOrChain(chainId ?? 0, "tokens") as Token[];
 
   const usdc = availableTokens?.find((token) => token.symbol === "USDC");
   const tokenAddress = usdc?.address;
@@ -82,6 +80,7 @@ function InvoiceContent() {
     }
   }, [address]);
 
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const saveDraft = (values: any) => {
     setIsDraftSaving(true);
     const draft = {
@@ -99,6 +98,7 @@ function InvoiceContent() {
     }, 500);
   };
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     const subscription = watch((formData) => {
       if (formData) {
@@ -107,6 +107,7 @@ function InvoiceContent() {
     });
 
     return () => subscription.unsubscribe();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [watch, address]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
@@ -121,7 +122,8 @@ function InvoiceContent() {
       console.log("Sending request with tokenAddress:", tokenAddress);
       console.log("Sending request with amount:", amount.toString());
       console.log("Sending request with recipientAddress:", recipientAddress);
-
+      
+      if (!chainId) throw new Error("Chain ID is required");
       const linkResponse = await createRequestLink(
         chainId,
         tokenAddress as `0x${string}`, 
@@ -142,11 +144,11 @@ function InvoiceContent() {
         setCurrentText("Error creating pay link");
         console.log("Link Response in else:", linkResponse);
       }
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error creating pay link:", error);
       toast({
-        title: `Error`,
-        description: error.message,
+        title: "Error",
+        description: error instanceof Error ? error.message : "An unknown error occurred",
         variant: "destructive",
       });
     } finally {
@@ -154,7 +156,7 @@ function InvoiceContent() {
     }
   };
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: Record<string, unknown>) => {
     if (isDraftSaving) {
       toast({
         variant: "destructive",
@@ -353,7 +355,13 @@ export function InvoiceSheetWrapper() {
 
   return (
     <FormProvider {...methods}>
-      <InvoiceSheet />
+      <div className="flex flex-col items-center justify-center p-4 space-y-4 rounded-lg border border-dashed">
+        <h2 className="text-2xl font-bold">Create a Billable Invoice</h2>        
+        <p className="text-sm text-gray-500">
+          Fill out the form below to generate a new invoice that you can bill to your account.
+        </p>
+        <InvoiceSheet />
+      </div>
     </FormProvider>
   );
 }

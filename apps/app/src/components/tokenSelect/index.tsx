@@ -1,4 +1,5 @@
-import React from "react";
+import { useGetTokensOrChain } from "@/hooks/useTokensOrChain";
+import type { Token } from "@/types";
 import {
   Select,
   SelectContent,
@@ -6,8 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@bu/ui/select";
-import { Token } from "@/types";
-import { useGetTokensOrChain } from "@/hooks/useTokensOrChain";
+import type React from "react";
 import { useChainId } from "wagmi";
 
 interface TokenSelectProps {

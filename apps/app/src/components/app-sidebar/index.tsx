@@ -21,7 +21,7 @@ import {
   SidebarRail,
   useSidebar,
 } from "@bu/ui/sidebar";
-import { Wallet } from 'lucide-react';
+import { Wallet } from "lucide-react";
 import { sidebarItems } from "./sidebar-items";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -45,10 +45,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <ThemeSwitcherRadio />
         </SidebarContent>
         <SidebarFooter>
-           <SidebarLoanBorrowCta 
-              isExpanded={isExpanded} 
-              loanIcon={Wallet} 
-            />    
+          <SidebarLoanBorrowCta isExpanded={isExpanded} loanIcon={Wallet} />
           <Suspense fallback={<Skeleton className="h-8 w-8 rounded-full" />}>
             <NavUser onlySignOut={false} />
           </Suspense>

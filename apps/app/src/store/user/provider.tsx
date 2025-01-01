@@ -8,12 +8,11 @@ export type UserProviderProps = React.PropsWithChildren<UserProps>;
 export function UserProvider({ children, data }: UserProviderProps) {
   const store = createUserStore({ data });
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (data) {
       store.setState({ data });
     }
-  }, [data]);
+  }, [data, store]);
 
   return <UserContext.Provider value={store}>{children}</UserContext.Provider>;
 }

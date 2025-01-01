@@ -65,6 +65,7 @@
 :root {
   --main: #88aaee;
   --main50: #88aaeeb3;
+  --overlay: rgba(0, 0, 0, 0.8);
 
   --bg: #dfe5f2;
   --border: #000;
@@ -92,6 +93,7 @@
   --dark-border: #000;
   --dark-text: #eeefe9;
   --dark-nav-border: #000;
+  --bw: #fff;
 
   --border-radius: 5px;
   --horizontal-box-shadow: 4px;

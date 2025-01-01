@@ -1,24 +1,28 @@
-import { useMemo } from "react";
 import { ssoConnector } from "@/context/ZKsync";
-import { createConfig, http } from "@wagmi/core";
-import { useConnectorClient, Config } from "wagmi";
+import { http, createConfig } from "@wagmi/core";
 import {
+  bsc,
+  bscTestnet,
   optimism,
   sepolia,
   zksync,
-  zksyncSepoliaTestnet,
+  zksyncSepoliaTestnet
 } from "@wagmi/core/chains";
-import type { Account, Chain, Client, Transport } from "viem";
 import { providers } from "ethers";
+import { useMemo } from "react";
+import type { Account, Chain, Client, Transport } from "viem";
+import { type Config, useConnectorClient } from "wagmi";
 
 const config = createConfig({
-  chains: [ sepolia, zksync, zksyncSepoliaTestnet, optimism],
+  chains: [ sepolia, zksync, zksyncSepoliaTestnet, optimism, bsc, bscTestnet],
   connectors: [ssoConnector],
   transports: {
     [sepolia.id]: http(sepolia.rpcUrls.default.http[0]),
     [zksync.id]: http(zksync.rpcUrls.default.http[0]),
     [zksyncSepoliaTestnet.id]: http(zksyncSepoliaTestnet.rpcUrls.default.http[0]),
     [optimism.id]: http(optimism.rpcUrls.default.http[0]),
+    [bsc.id]: http(bsc.rpcUrls.default.http[0]),
+    [bscTestnet.id]: http(bscTestnet.rpcUrls.default.http[0])
   },
 });
 
