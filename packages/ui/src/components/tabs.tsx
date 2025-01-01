@@ -10,10 +10,10 @@ interface TabsTriggerRightProps
   position?: "left" | "right";
 }
 
-interface TabsListProps extends React.ComponentPropsWithoutRef<typeof TabsPrimitive.List> {
+interface TabsListProps
+  extends React.ComponentPropsWithoutRef<typeof TabsPrimitive.List> {
   stackBehavior?: "default" | "stacked-2" | "stacked";
 }
-
 
 const Tabs = TabsPrimitive.Root;
 

@@ -1,27 +1,23 @@
-'use client'
+"use client";
 
-import { Moon, Sun } from 'lucide-react'
-import { useTheme } from 'next-themes'
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 
-import * as React from 'react'
-
-import { Button } from '@bu/ui/button'
+import { Button } from "@bu/ui/button";
 
 export function ThemeSwitcher() {
-  const { setTheme, theme } = useTheme()
+  const { setTheme, theme } = useTheme();
 
   return (
-    <>
-      <Button
-        variant="brutalism"
-        size="icon"
-        className="fixed right-10 top-10 z-50"
-        onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-      >
-        <Sun className="stroke-text hidden h-6 w-6 w500:h-4 w500:w-4 dark:inline" />
-        <Moon className="stroke-text inline h-6 w-6 w500:h-4 w500:w-4 dark:hidden" />
-        <span className="sr-only">Toggle theme</span>
-      </Button>
-    </>
-  )
+    <Button
+      variant="ghost"
+      size="icon"
+      className="h-9 w-9 rounded-lg hover:bg-sidebar-accent active:scale-95 transition-all"
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+    >
+      <Sun className="h-4 w-4 hidden dark:inline text-sidebar-foreground" />
+      <Moon className="h-4 w-4 inline dark:hidden text-sidebar-foreground" />
+      <span className="sr-only">Toggle theme</span>
+    </Button>
+  );
 }

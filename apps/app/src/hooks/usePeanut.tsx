@@ -339,8 +339,9 @@ export const usePeanut = () => {
   };
 
   const createRequestLink = async (
-    amount: string,
+    chainId: number,
     tokenAddress: Token | string,
+    amount: string,
     recipientAddress: string,
     onInProgress?: () => void,
     onSuccess?: () => void,
@@ -351,37 +352,26 @@ export const usePeanut = () => {
     setLoading(true);
     setError(null);
 
+    console.log("Sending request with tokenAddress for peanut inside hook:", tokenAddress);
+    console.log("Sending request with amount for peanut inside hook:", amount);
+    console.log("Sending request with recipientAddress for peanut inside hook:", recipientAddress);
+    console.log("Sending request with chainId for peanut inside hook:", chainId);
+   
+    if (!address) {
+      throw new Error("Wallet not connected");
+    }
+
     try {
-      if (!address) {
-        throw new Error("Wallet not connected");
-      }
-
-      const actualTokenAddress =
-        typeof tokenAddress === "string" ? tokenAddress : tokenAddress.address;
-
-      const tokenDetails = getTokenDetails(actualTokenAddress);
-
+      onInProgress?.();
       const { link } = await peanut.createRequestLink({
         chainId: chainId.toString(),
-        tokenAddress: actualTokenAddress,
+        tokenAddress: tokenAddress as `0x${string}`,
         tokenAmount: amount,
         tokenType: peanut.interfaces.EPeanutLinkType.erc20,
-        tokenDecimals: tokenDetails.tokenDecimals.toString(),
+        tokenDecimals: '6',
         recipientAddress: recipientAddress as `0x${string}`,
-        baseUrl: `${window.location.origin}/invoice/id`,
+        // baseUrl: `${window.location.origin}/invoice/id`,
         APIKey: PEANUTAPIKEY!,
-        reference: `invoice-bu-${Date.now()}`,
-        attachment: new File(
-          [
-            JSON.stringify({
-              createdAt: new Date().toISOString(),
-              creator: address,
-              type: "invoice",
-            }),
-          ],
-          "attachment.json",
-          { type: "application/json" }
-        ),
       });
       console.log("this is the link for peanut payment requests", link);
 

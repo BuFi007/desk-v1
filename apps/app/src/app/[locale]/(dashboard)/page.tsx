@@ -1,6 +1,8 @@
 import { getUser } from "@bu/supabase/queries";
 import { InvoiceContainer } from "@/components/peanut-zk-invoices/invoice-container";
 import { CreateRegularPaymentSheet } from "@/components/createRegularPayment";
+import PageContainer from "@bu/ui/page-container";
+
 export default async function Page() {
   const { data } = await getUser();
 
@@ -12,15 +14,9 @@ export default async function Page() {
   };
 
   return (
-    <div className="min-h-screen relative p-4">
-      <div className="absolute top-4 right-4 z-10">
-        <InvoiceContainer userData={userData} />
-      </div>
-      <div className="h-screen w-screen flex flex-col items-center justify-center">
-        <div className="flex flex-col items-center justify-center gap-4">
-          <CreateRegularPaymentSheet />
-        </div>
-      </div>
-    </div>
+    <PageContainer>
+      <InvoiceContainer userData={userData} />
+      <CreateRegularPaymentSheet />
+    </PageContainer>
   );
 }

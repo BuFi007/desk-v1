@@ -55,7 +55,7 @@ You can find the smart contracts in the following repositories and you can test 
 - Base
 - Additional EVM-compatible networks
 
-### 🌉 OPERC20 Bridge & Automated Payments
+### 🌉 OPERC20 Bridge & Automated Payments with Optimism and Superchain
 
 #### Custom OP-ERC20 Token (MCL2T)
 Our specialized token for Optimism L2 features:
