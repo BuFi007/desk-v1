@@ -1,8 +1,8 @@
+import type { TokenChipProps } from "@/interfaces";
 import { Token } from "@/types";
-import { cn } from "@bu/ui/cn";
 import { pressable } from "@/utils/theme";
+import { cn } from "@bu/ui/cn";
 import Image from "next/image";
-import { TokenChipProps } from "@/interfaces";
 
 export function TokenChip({
   token,

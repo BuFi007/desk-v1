@@ -1,5 +1,5 @@
-import { Token, Chain } from "@/types";
-import {
+import type { Chain, Token } from "@/types";
+import type {
   PaymentTab,
   ViewTab,
 } from "../../../../packages/ui/src/store/interface";
@@ -51,6 +51,7 @@ export interface Message {
   content: string;
 
   toolName?: string;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   result?: any;
 }
 

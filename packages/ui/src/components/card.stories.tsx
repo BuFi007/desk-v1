@@ -9,8 +9,13 @@ import {
 } from "./card";
 import { Button } from "./button";
 import { Badge } from "./badge";
-import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
-import { Settings, MoreHorizontal, ExternalLink, Heart, Share2 } from "lucide-react";
+import {
+  Settings,
+  MoreHorizontal,
+  ExternalLink,
+  Heart,
+  Share2,
+} from "lucide-react";
 
 const meta: Meta<typeof Card> = {
   title: "Components/Card",
@@ -19,7 +24,8 @@ const meta: Meta<typeof Card> = {
     layout: "centered",
     docs: {
       description: {
-        component: "A versatile card component that can be used to display content in a contained way.",
+        component:
+          "A versatile card component that can be used to display content in a contained way.",
       },
     },
   },
@@ -55,49 +61,17 @@ export const AllVariants: Story = {
         <Card className="w-[350px]">
           <CardHeader>
             <CardTitle>Welcome back</CardTitle>
-            <CardDescription>Deploy your new project in one-click.</CardDescription>
+            <CardDescription>
+              Deploy your new project in one-click.
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <p>Your last deployment was 3 days ago. Check your metrics below.</p>
+            <p>
+              Your last deployment was 3 days ago. Check your metrics below.
+            </p>
           </CardContent>
           <CardFooter>
             <Button className="w-full">View Dashboard</Button>
-          </CardFooter>
-        </Card>
-      </section>
-
-      {/* Profile Card */}
-      <section>
-        <h3 className="text-lg font-semibold mb-4">Profile Card</h3>
-        <Card className="w-[350px]">
-          <CardHeader className="flex flex-row items-center gap-4">
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="User" />
-              <AvatarFallback>UN</AvatarFallback>
-            </Avatar>
-            <div className="flex flex-col">
-              <CardTitle>John Doe</CardTitle>
-              <CardDescription>Software Engineer</CardDescription>
-            </div>
-            <Button variant="ghost" size="icon" className="ml-auto">
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-col gap-2">
-              <Badge className="w-fit">Pro Member</Badge>
-              <p className="text-sm">Building amazing user experiences with React and TypeScript.</p>
-            </div>
-          </CardContent>
-          <CardFooter className="justify-between">
-            <Button variant="outline" size="sm">
-              <Share2 className="mr-2 h-4 w-4" />
-              Share
-            </Button>
-            <Button variant="outline" size="sm">
-              <Heart className="mr-2 h-4 w-4" />
-              Like
-            </Button>
           </CardFooter>
         </Card>
       </section>
@@ -117,16 +91,24 @@ export const AllVariants: Story = {
             <div className="flex items-center justify-between">
               <div className="flex flex-col gap-1">
                 <span className="text-sm font-medium">Notifications</span>
-                <span className="text-xs text-muted-foreground">Receive updates about your account</span>
+                <span className="text-xs text-muted-foreground">
+                  Receive updates about your account
+                </span>
               </div>
-              <Button variant="outline" size="sm">Configure</Button>
+              <Button variant="outline" size="sm">
+                Configure
+              </Button>
             </div>
             <div className="flex items-center justify-between">
               <div className="flex flex-col gap-1">
                 <span className="text-sm font-medium">Privacy</span>
-                <span className="text-xs text-muted-foreground">Manage your privacy settings</span>
+                <span className="text-xs text-muted-foreground">
+                  Manage your privacy settings
+                </span>
               </div>
-              <Button variant="outline" size="sm">Update</Button>
+              <Button variant="outline" size="sm">
+                Update
+              </Button>
             </div>
           </CardContent>
           <CardFooter>
@@ -143,7 +125,9 @@ export const AllVariants: Story = {
         <h3 className="text-lg font-semibold mb-4">Minimal Card</h3>
         <Card className="w-[350px]">
           <CardContent className="pt-6">
-            <p className="text-center">Sometimes you just need a simple card.</p>
+            <p className="text-center">
+              Sometimes you just need a simple card.
+            </p>
           </CardContent>
         </Card>
       </section>
@@ -151,7 +135,6 @@ export const AllVariants: Story = {
   ),
 };
 
-// Individual stories
 export const SimpleCard: Story = {
   render: () => (
     <Card className="w-[350px]">

@@ -1,13 +1,18 @@
-import { Img } from "@react-email/components";
+import { getEmailUrl } from "@bu/utils/envs";
+import { Img, Section } from "@react-email/components";
 
-export function Logo({ baseUrl }: { baseUrl: string }) {
+const baseUrl = getEmailUrl();
+
+export function Logo() {
   return (
-    <Img
-      src={`${baseUrl}/logo.png`}
-      alt="Logo"
-      className="my-0 mx-auto text-center"
-      width={70}
-      height={70}
-    />
+    <Section className="mt-[32px]">
+      <Img
+        src={`${baseUrl}/email/logo.png`}
+        width="45"
+        height="45"
+        alt="Bu"
+        className="my-0 mx-auto block"
+      />
+    </Section>
   );
 }

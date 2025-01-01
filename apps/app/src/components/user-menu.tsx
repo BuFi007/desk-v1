@@ -1,9 +1,5 @@
 "use client";
 
-import { createClient } from "../utils/client";
-import { Chain } from "./blockchain/chain";
-import { WalletSwitcherModal } from "./blockchain/chainSwitch/modal";
-import { SignOut } from "./sign-out";
 import { truncateAddress } from "@/utils";
 import { Avatar, AvatarFallback, AvatarImageNext } from "@bu/ui/avatar";
 import {
@@ -17,20 +13,29 @@ import {
 } from "@bu/ui/dropdown-menu";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useAccount } from "wagmi";
+import { createClient } from "../utils/client";
+import { Chain } from "./blockchain/chain";
+import { WalletSwitcherModal } from "./blockchain/chainSwitch/modal";
+import { SignOut } from "./sign-out";
 
 export function UserMenu({ onlySignOut }: { onlySignOut: boolean }) {
-  const supabase = createClient();
+
+  const supabase = useMemo(() => createClient(), []);
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const [userData, setUserData] = useState<any>(null);
   const { address } = useAccount();
-  async function fetchUserData() {
+
+  const fetchUserData = useCallback(async () => {
     const { data } = await supabase.auth.getUser();
     setUserData(data?.user);
-  }
+  }, [supabase]);
+
+  // Only re-run this effect if the `fetchUserData` function changes
   useEffect(() => {
     fetchUserData();
-  }, []);
+  }, [fetchUserData]);
 
   return (
     <DropdownMenu>
@@ -39,6 +44,7 @@ export function UserMenu({ onlySignOut }: { onlySignOut: boolean }) {
           {userData?.user_metadata?.avatar_url && (
             <AvatarImageNext
               src={userData?.user_metadata?.avatar_url}
+              // biome-ignore lint/style/noNonNullAssertion: <explanation>
               alt={userData?.user_metadata?.full_name!}
               width={32}
               height={32}
@@ -102,11 +108,6 @@ export function UserMenu({ onlySignOut }: { onlySignOut: boolean }) {
             <WalletSwitcherModal />
 
             <DropdownMenuSeparator />
-            {/* <div className="flex flex-row justify-between items-center p-2">
-              <p className="text-sm">Theme</p>
-              <ThemeSwitch />
-            </div>
-            <DropdownMenuSeparator /> */}
           </>
         )}
 

@@ -1,16 +1,16 @@
+import type { Chain, LocalStorageStore, TabState, Token } from "@/types";
 import { create } from "zustand";
-import {
-  PaymentStore,
-  TransactionState,
-  PaymentTab,
-  ViewTab,
-  NetworkState,
-  MarketStore,
-  AssistantState,
-  PayLinkStore,
-} from "../interfaces/index";
-import { Token, TabState, Chain, LocalStorageStore } from "@/types";
 import { persist } from "zustand/middleware";
+import type {
+  AssistantState,
+  MarketStore,
+  NetworkState,
+  PayLinkStore,
+  PaymentStore,
+  PaymentTab,
+  TransactionState,
+  ViewTab,
+} from "../interfaces/index";
 
 export const usePaymentStore = create<PaymentStore>((set) => ({
   currentPaymentTab: "send",

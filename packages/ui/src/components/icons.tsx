@@ -756,7 +756,7 @@ export const Icons = {
   Currency: MdAttachMoney,
   Inventory2: MdInventory2,
   Person: MdPerson,
-  Peolple: MdPeople,
+  People: MdPeople,
   Notifications: MdOutlineNotificationsNone,
   ChevronDown: MdExpandMore,
   ChevronUp: MdExpandLess,

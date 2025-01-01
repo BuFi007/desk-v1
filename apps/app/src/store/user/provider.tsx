@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { UserContext, type UserProps, createUserStore } from "./store";
 
-type UserProviderProps = React.PropsWithChildren<UserProps>;
+export type UserProviderProps = React.PropsWithChildren<UserProps>;
 
 export function UserProvider({ children, data }: UserProviderProps) {
   const store = createUserStore({ data });
@@ -12,7 +12,7 @@ export function UserProvider({ children, data }: UserProviderProps) {
     if (data) {
       store.setState({ data });
     }
-  }, [data]);
+  }, [data, store]);
 
   return <UserContext.Provider value={store}>{children}</UserContext.Provider>;
 }

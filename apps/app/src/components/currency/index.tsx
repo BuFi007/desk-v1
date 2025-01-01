@@ -1,4 +1,13 @@
-import React, { useState, ChangeEvent, useEffect } from "react";
+import { TokenChip } from "@/components/tokenChip";
+import { AllChains } from "@/constants/Chains";
+import { AvalancheTokens, NATIVE_TOKEN_ADDRESS } from "@/constants/Tokens";
+import { useTokenBalance } from "@/hooks/useTokenBalance";
+import { useGetTokensOrChain } from "@/hooks/useTokensOrChain";
+import type { CurrencyDisplayerProps, Token } from "@/types";
+import { sizeStyles } from "@/utils";
+import { Button } from "@bu/ui/button";
+import { cn } from "@bu/ui/cn";
+import { InputMoney } from "@bu/ui/input";
 import {
   Select,
   SelectContent,
@@ -8,19 +17,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@bu/ui/select";
-import { cn } from "@bu/ui/cn";
-import { InputMoney } from "@bu/ui/input";
-import { useAccount, useChainId } from "wagmi";
-import { formatUnits } from "viem";
-import { CurrencyDisplayerProps, Token } from "@/types";
-import { AllChains } from "@/constants/Chains";
-import { TokenChip } from "@/components/tokenChip";
-import { useGetTokensOrChain } from "@/hooks/useTokensOrChain";
-import { useTokenBalance } from "@/hooks/useTokenBalance";
-import { AvalancheTokens, NATIVE_TOKEN_ADDRESS } from "@/constants/Tokens";
 import { toast } from "@bu/ui/use-toast";
-import { sizeStyles } from "@/utils";
-import { Button } from "@bu/ui/button";
+import type React from "react";
+import { type ChangeEvent, useEffect, useState } from "react"
+import { formatUnits } from "viem";
+import { useAccount, useChainId } from "wagmi";
 
 const CurrencyDisplayer: React.FC<CurrencyDisplayerProps> = ({
   tokenAmount,
@@ -81,7 +82,7 @@ const CurrencyDisplayer: React.FC<CurrencyDisplayerProps> = ({
     }
   };
   const updateValues = (value: string) => {
-    const numericValue = parseFloat(value);
+    const numericValue = Number.parseFloat(value);
     if (!isNaN(numericValue)) {
       onValueChange(0, numericValue);
     } else {
@@ -92,7 +93,7 @@ const CurrencyDisplayer: React.FC<CurrencyDisplayerProps> = ({
   const getAvailableBalance = () => {
     const token = selectedToken;
     if (balance && token) {
-      return parseFloat(
+      return Number.parseFloat(
         formatUnits(balance.data?.value!, balance.data?.decimals!)
       );
     } else {
@@ -142,10 +143,10 @@ const CurrencyDisplayer: React.FC<CurrencyDisplayerProps> = ({
     if (/^\d*\.?\d*$/.test(value)) {
       setInputValue(value);
 
-      const numericValue = parseFloat(value) || 0;
+      const numericValue = Number.parseFloat(value) || 0;
 
       if (action === "default") {
-        const availableBalance = parseFloat(
+        const availableBalance = Number.parseFloat(
           formatUnits(balance.data?.value || 0n, balance.data?.decimals || 18)
         );
 

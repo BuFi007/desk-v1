@@ -3,14 +3,14 @@ export function getAppUrl() {
     process.env.VERCEL_ENV === "production" ||
     process.env.NODE_ENV === "production"
   ) {
-    return "https://app.bu.ai";
+    return "https://desk.bu.finance";
   }
 
   if (process.env.VERCEL_ENV === "preview") {
     return `https://${process.env.VERCEL_URL}`;
   }
 
-  return "http://localhost:3001";
+  return "http://localhost:3000";
 }
 
 export function getEmailUrl() {
@@ -18,7 +18,7 @@ export function getEmailUrl() {
     return "http://localhost:3000";
   }
 
-  return "https://bu.ai";
+  return "https://bu.finance";
 }
 
 export function getWebsiteUrl() {
@@ -26,7 +26,7 @@ export function getWebsiteUrl() {
     process.env.VERCEL_ENV === "production" ||
     process.env.NODE_ENV === "production"
   ) {
-    return "https://bu.ai";
+    return "https://bu.finance";
   }
 
   if (process.env.VERCEL_ENV === "preview") {
@@ -37,5 +37,5 @@ export function getWebsiteUrl() {
 }
 
 export function getCdnUrl() {
-  return "https://cdn.bu.ai";
+  return "https://cdn.bu.finance";
 }

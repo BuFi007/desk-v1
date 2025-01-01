@@ -65,16 +65,35 @@
 :root {
   --main: #88aaee;
   --main50: #88aaeeb3;
+  --overlay: rgba(0, 0, 0, 0.8);
 
   --bg: #dfe5f2;
   --border: #000;
   --text: '#000';
   --secondary-secondary: '#212121';
 
+  --blank: #000; /* blank black and white */
+  --border: #000;
+  --text: #000;
+  --mtext: #000; /* text that is placed on background with main color e.g. text color of default button */
+  --ring: #000;
+  --ring-offset: #fff;
+
+  --border-radius: 5px;
+  --box-shadow-x: 4px;
+  --box-shadow-y: 4px;
+  --reverse-box-shadow-x: -4px;
+  --reverse-box-shadow-y: -4px;
+  --base-font-weight: 500;
+  --heading-font-weight: 700;
+
+  --shadow: var(--box-shadow-x) var(--box-shadow-y) 0px 0px var(--border);
+
   --dark-bg: #272933;
   --dark-border: #000;
   --dark-text: #eeefe9;
   --dark-nav-border: #000;
+  --bw: #fff;
 
   --border-radius: 5px;
   --horizontal-box-shadow: 4px;
@@ -100,6 +119,9 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --shadow: var(--box-shadow-x) var(--box-shadow-y) 0px 0px var(--border);
+
   }
 }
 
@@ -320,8 +342,8 @@ body {
 }
 
 .custom-scrollbar::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 2px;
+  height: 2px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
@@ -336,8 +358,8 @@ body {
 html,
 body {
   &::-webkit-scrollbar {
-    width: 12px;
-    height: 6px;
+    width: 4px;
+    height: 2px;
   }
 
   &::-webkit-scrollbar:horizontal {
@@ -347,7 +369,7 @@ body {
 
   &::-webkit-scrollbar-thumb:vertical {
     background: #7c4dff;
-    border-radius: 4px;
+    border-radius: 2px;
   }
 
   &::-webkit-scrollbar-track {
@@ -358,9 +380,6 @@ body {
     background: transparent;
   }
 }
-
-
-
 
 body::-webkit-scrollbar,
 .scrollbar::-webkit-scrollbar {
@@ -386,8 +405,8 @@ body::-webkit-scrollbar-thumb,
 }
 
 .code::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+  width: 2px;
+  height: 2px;
   border: 0 !important;
 }
 
@@ -397,7 +416,7 @@ body::-webkit-scrollbar-thumb,
 }
 
 .command-scrollbar::-webkit-scrollbar {
-  width: 4px;
+  width: 2px;
 }
 
 .command-scrollbar::-webkit-scrollbar-track {
@@ -422,7 +441,7 @@ body::-webkit-scrollbar-thumb,
 .scrollbar {
   --sb-track-color: var(--bg);
   --sb-thumb-color: var(--main);
-  --sb-size: 16px;
+  --sb-size: 4px;
 }
 
 html.dark body,

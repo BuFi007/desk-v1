@@ -1,9 +1,10 @@
-import * as Sentry from "@sentry/nextjs";
-import { setupAnalytics } from "@bu/analytics/server";
-import { ratelimit } from "@bu/kv/ratelimit";
-import { logger } from "@bu/logger";
-import { getUser } from "@bu/supabase/queries";
+import { logger } from "@/utils/logger";
+import { setupAnalytics } from "@bu/events/server";
+import { client as RedisClient } from "@bu/kv";
+import { getUser } from "@bu/supabase/cached-queries";
 import { createClient } from "@bu/supabase/server";
+import * as Sentry from "@sentry/nextjs";
+import { Ratelimit } from "@upstash/ratelimit";
 import {
   DEFAULT_SERVER_ERROR_MESSAGE,
   createSafeActionClient,
@@ -11,22 +12,29 @@ import {
 import { headers } from "next/headers";
 import { z } from "zod";
 
-const handleServerError = (e: Error) => {
-  console.error("Action error:", e.message);
-
-  if (e instanceof Error) {
-    return e.message;
-  }
-
-  return DEFAULT_SERVER_ERROR_MESSAGE;
-};
+const ratelimit = new Ratelimit({
+  limiter: Ratelimit.fixedWindow(10, "10s"),
+  redis: RedisClient,
+});
 
 export const actionClient = createSafeActionClient({
-  handleServerError,
+  handleServerError(e) {
+    if (e instanceof Error) {
+      return e.message;
+    }
+
+    return DEFAULT_SERVER_ERROR_MESSAGE;
+  },
 });
 
 export const actionClientWithMeta = createSafeActionClient({
-  handleServerError,
+  handleServerError(e) {
+    if (e instanceof Error) {
+      return e.message;
+    }
+
+    return DEFAULT_SERVER_ERROR_MESSAGE;
+  },
   defineMetadataSchema() {
     return z.object({
       name: z.string(),
@@ -42,12 +50,12 @@ export const actionClientWithMeta = createSafeActionClient({
 
 export const authActionClient = actionClientWithMeta
   .use(async ({ next, clientInput, metadata }) => {
-    const result = await next({ ctx: {} });
+    const result = await next({ ctx: undefined });
 
     if (process.env.NODE_ENV === "development") {
-      logger.info(`Input -> ${JSON.stringify(clientInput)}`);
-      logger.info(`Result -> ${JSON.stringify(result.data)}`);
-      logger.info(`Metadata -> ${JSON.stringify(metadata)}`);
+      logger("Input ->", clientInput);
+      logger("Result ->", result.data);
+      logger("Metadata ->", metadata);
 
       return result;
     }
@@ -74,30 +82,28 @@ export const authActionClient = actionClientWithMeta
     });
   })
   .use(async ({ next, metadata }) => {
-    const {
-      data: { user },
-    } = await getUser();
+    const user = await getUser();
     const supabase = createClient();
 
-    if (!user) {
+    if (!user?.data) {
       throw new Error("Unauthorized");
     }
 
-    if (metadata) {
-      const analytics = await setupAnalytics({
-        userId: user.id,
-      });
+    const analytics = await setupAnalytics({
+      userId: user.data.id,
+      fullName: user.data.full_name,
+    });
 
-      if (metadata.track) {
-        analytics.track(metadata.track);
-      }
+    if (metadata?.track) {
+      analytics.track(metadata.track);
     }
 
     return Sentry.withServerActionInstrumentation(metadata.name, async () => {
       return next({
         ctx: {
           supabase,
-          user,
+          analytics,
+          user: user.data,
         },
       });
     });

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { cn } from "../utils";
 import { ScrollArea } from "./scroll-area";
 import { Separator } from "./separator";
-import { cn } from "../utils";
 
 const meta: Meta<typeof ScrollArea> = {
   title: "Components/ScrollArea",
@@ -89,6 +89,7 @@ export const HorizontalScroll: StoryObj<typeof ScrollArea> = {
       <div className="flex w-max space-x-4 p-4">
         {imageItems.map((item) => (
           <div key={item.id} className="w-40 shrink-0">
+            {/* biome-ignore lint/style/useSelfClosingElements: <explanation> */}
             <div className="aspect-square rounded-md bg-muted"></div>
             <h4 className="mt-2 font-medium">{item.title}</h4>
             <p className="text-sm text-muted-foreground">
@@ -110,9 +111,9 @@ export const BothScrollbars: StoryObj<typeof ScrollArea> = {
           Large Content Area
         </h4>
         <div className="w-[600px]">
-          {Array.from({ length: 20 }).map((_, i) => (
-            <div key={i} className="mb-4">
-              <h5 className="text-sm font-medium">Section {i + 1}</h5>
+          {Array.from({ length: 20 }).map((_, index) => (
+            <div key={`section-${index + 1}`} className="mb-4">
+              <h5 className="text-sm font-medium">Section {index + 1}</h5>
               <p className="text-sm text-muted-foreground">
                 This is a long paragraph that will cause horizontal scrolling.
                 It contains enough text to demonstrate both vertical and horizontal

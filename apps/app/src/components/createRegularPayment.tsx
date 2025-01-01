@@ -1,10 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
-import { useAccount, useSignTypedData } from "wagmi";
-import { encodeFunctionData } from "viem";
 import { AutomaticPayments } from "@/constants/Contracts";
-import { useToast } from "@bu/ui/use-toast";
+import { allTokens } from "@/constants/Tokens";
+import { createClient } from "@bu/supabase/client";
 import { Button } from "@bu/ui/button";
 import { Input } from "@bu/ui/input";
 import { Label } from "@bu/ui/label";
@@ -16,9 +14,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@bu/ui/sheet";
+import { useToast } from "@bu/ui/use-toast";
+import type React from "react";
+import { useState } from "react";
+import { encodeFunctionData } from "viem";
+import { useAccount, useSignTypedData } from "wagmi";
 import { TokenSelect } from "./tokenSelect";
-import { allTokens } from "@/constants/Tokens";
-import { createClient } from "@bu/supabase/client";
 interface ForwardRequest {
   [key: string]: unknown;
   from: string;
@@ -73,9 +74,10 @@ export function CreateRegularPaymentSheet() {
     setIsLoading(true);
 
     const value: ForwardRequest = {
+      // biome-ignore lint/style/noNonNullAssertion: <explanation>
       from: address! as `0x${string}`,
       to: recipient,
-      value: parseInt(amount),
+      value: Number.parseInt(amount),
       gas: 100000,
       nonce: 0,
       data: "0x",
@@ -158,16 +160,21 @@ export function CreateRegularPaymentSheet() {
 
   if (!address)
     return (
-      <div className="flex flex-col items-center justify-center h-screen">
+      <div className="flex flex-col items-center justify-center p-4 space-y-4">
         <p>Connect your wallet to create a regular payment</p>
       </div>
     );
   return (
+      <div className="flex flex-col items-center justify-center p-4 space-y-4 h-screen">
+           <h2 className="text-2xl font-bold">Create a Regular Payment </h2>        
+        <p className="text-sm text-gray-500">
+          Fill out the form below to generate a new invoice that you can bill to your account.
+        </p>
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         <Button variant="outline">Create Regular Payment</Button>
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent className="w-full p-6 space-y-4">
         <SheetHeader>
           <SheetTitle>Create Regular Payment</SheetTitle>
           <SheetDescription>Set up a new regular payment</SheetDescription>
@@ -206,5 +213,7 @@ export function CreateRegularPaymentSheet() {
         </form>
       </SheetContent>
     </Sheet>
+          </div>
+
   );
 }

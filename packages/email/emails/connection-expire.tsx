@@ -82,7 +82,7 @@ export const ConnectionExpireEmail = ({
               <strong>{bankName}</strong> for your team{" "}
               <strong>{teamName}</strong> will expire in{" "}
               {formatDistance(new Date(expiresAt), new Date())}. To ensure that
-              Bu continues to run smoothly, please reconnect your bank.
+              Bu Desk continues to run smoothly, please reconnect your bank.
               <br />
               <br />
               The good news? It only takes 60 seconds to get everything back on
@@ -92,7 +92,7 @@ export const ConnectionExpireEmail = ({
             <Section className="text-center mt-[50px] mb-[50px]">
               <Button
                 className="bg-transparent text-primary text-[14px] text-[#121212] font-medium no-underline text-center px-6 py-3 border border-solid border-[#121212]"
-                href="https://go.bu.ai/34Xt7XK"
+                href="https://desk.bu.finance/34Xt7XK"
               >
                 Reconnect
               </Button>

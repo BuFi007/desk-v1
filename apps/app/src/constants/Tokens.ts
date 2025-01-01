@@ -1,5 +1,5 @@
 import type { Token } from "@/types";
-import { Hex } from "viem";
+import type { Hex } from "viem";
 
 export const NATIVE_TOKEN_ADDRESS =
   "0x0000000000000000000000000000000000000000" as Hex;

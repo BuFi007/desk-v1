@@ -1,12 +1,12 @@
 "use client";
 
-import { SidebarProvider, SidebarTrigger, SidebarInset } from "@bu/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
-import { Separator } from "@bu/ui/separator";
 import { DynamicBreadcrumb } from "@/components/dynamic-breadcrumb";
-import GridPattern from "@bu/ui/grid-pattern";
 import { Header } from "@/components/header";
 import { cn } from "@bu/ui/cn";
+import GridPattern from "@bu/ui/grid-pattern";
+import { Separator } from "@bu/ui/separator";
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@bu/ui/sidebar";
 
 interface LayoutWrapperProps {
   children: React.ReactNode;

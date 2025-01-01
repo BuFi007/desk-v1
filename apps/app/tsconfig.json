@@ -14,7 +14,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "tailwind.config.ts",
-    "src/components/theme-provider"
+    "src/components/theme-provider",
+    "src/components/decorative-element"
   ],
   "exclude": ["node_modules"]
 }

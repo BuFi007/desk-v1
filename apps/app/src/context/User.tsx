@@ -1,11 +1,11 @@
 "use client";
 
-import { BlockchainContextProps } from "@/types";
+import type { BlockchainContextProps } from "@/types";
 import React, {
   createContext,
   useContext,
   useState,
-  ReactNode,
+  type ReactNode,
   useEffect,
 } from "react";
 import { useAccount, useChainId } from "wagmi";

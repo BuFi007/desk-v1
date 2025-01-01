@@ -48,26 +48,41 @@ export type Database = {
         Row: {
           avatar_url: string | null;
           created_at: string | null;
-          email: string;
+          date_format: string | null;
+          email: string | null;
           full_name: string | null;
           id: string;
-          updated_at: string | null;
+          locale: string | null;
+          team_id: string | null;
+          time_format: number | null;
+          timezone: string | null;
+          week_starts_on_monday: boolean | null;
         };
         Insert: {
           avatar_url?: string | null;
           created_at?: string | null;
-          email: string;
+          date_format?: string | null;
+          email?: string | null;
           full_name?: string | null;
           id: string;
-          updated_at?: string | null;
+          locale?: string | null;
+          team_id?: string | null;
+          time_format?: number | null;
+          timezone?: string | null;
+          week_starts_on_monday?: boolean | null;
         };
         Update: {
           avatar_url?: string | null;
           created_at?: string | null;
-          email?: string;
+          date_format?: string | null;
+          email?: string | null;
           full_name?: string | null;
           id?: string;
-          updated_at?: string | null;
+          locale?: string | null;
+          team_id?: string | null;
+          time_format?: number | null;
+          timezone?: string | null;
+          week_starts_on_monday?: boolean | null;
         };
         Relationships: [
           {
@@ -79,15 +94,149 @@ export type Database = {
           },
         ];
       };
+      user_invites: {
+        Row: {
+          code: string | null;
+          created_at: string;
+          email: string | null;
+          id: string;
+          invited_by: string | null;
+          role: Database["public"]["Enums"]["teamRoles"] | null;
+          team_id: string | null;
+        };
+        Insert: {
+          code?: string | null;
+          created_at?: string;
+          email?: string | null;
+          id?: string;
+          invited_by?: string | null;
+          role?: Database["public"]["Enums"]["teamRoles"] | null;
+          team_id?: string | null;
+        };
+        Update: {
+          code?: string | null;
+          created_at?: string;
+          email?: string | null;
+          id?: string;
+          invited_by?: string | null;
+          role?: Database["public"]["Enums"]["teamRoles"] | null;
+          team_id?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "public_user_invites_team_id_fkey";
+            columns: ["team_id"];
+            isOneToOne: false;
+            referencedRelation: "teams";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "user_invites_invited_by_fkey";
+            columns: ["invited_by"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      teams: {
+        Row: {
+          id: string;
+          name: string | null;
+          created_at: string;
+          updated_at: string | null;
+          logo_url: string | null;
+          inbox_id: string | null;
+          email: string | null;
+          inbox_email: string | null;
+          inbox_forwarding: boolean;
+        };
+        Insert: {
+          id?: string | null;
+          name: string | null;
+          created_at?: string | null;
+          updated_at?: string | null;
+        };
+        Update: {
+          id?: string | null;
+          name?: string | null;
+          created_at?: string | null;
+          updated_at?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "fk_users_on_team_team";
+            columns: ["id"];
+            isOneToOne: false;
+            referencedRelation: "users_on_team";
+            referencedColumns: ["team_id"];
+          },
+        ];
+      };
+      users_on_team: {
+        Row: {
+          created_at: string | null;
+          id: string;
+          role: Database["public"]["Enums"]["teamRoles"] | null;
+          team_id: string;
+          user_id: string;
+          is_primary_team: boolean;
+        };
+        Insert: {
+          created_at?: string | null;
+          id?: string;
+          role?: Database["public"]["Enums"]["teamRoles"] | null;
+          team_id: string;
+          user_id: string;
+          is_primary_team?: boolean;
+        };
+        Update: {
+          created_at?: string | null;
+          id?: string;
+          role?: Database["public"]["Enums"]["teamRoles"] | null;
+          team_id?: string;
+          user_id?: string;
+          is_primary_team?: boolean;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "users_on_team_team_id_fkey";
+            columns: ["team_id"];
+            isOneToOne: false;
+            referencedRelation: "teams";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "users_on_team_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
     };
     Views: {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      create_team: {
+        Args: {
+          name: string;
+        };
+        Returns: string;
+      };
+      create_team_v2: {
+        Args: {
+          name: string;
+          currency?: string;
+          logo_url?: string | null;
+        };
+        Returns: string;
+      };
     };
     Enums: {
-      [_ in never]: never;
+      teamRoles: "owner" | "member";
     };
     CompositeTypes: {
       [_ in never]: never;

@@ -2,16 +2,16 @@ import { PEANUTAPIKEY } from "@/constants/Env";
 import { NATIVE_TOKEN_ADDRESS } from "@/constants/Tokens";
 import { useEthersSigner } from "@/constants/wagmi";
 import { useTransactionStore } from "@/store";
-import { Token } from "@/types";
+import type { Token } from "@/types";
 import { useToast } from "@bu/ui/use-toast";
 import peanut, {
   getRandomString,
   claimLinkGasless,
   claimLinkXChainGasless,
 } from "@squirrel-labs/peanut-sdk";
+import { BigNumber } from "ethers";
 import { useCallback, useState } from "react";
 import { useAccount, useChainId } from "wagmi";
-import { BigNumber } from "ethers";
 // import { playAudio, saveCreatedLinkToLocalStorage } from "@/utils";
 
 export const usePeanut = () => {
@@ -53,7 +53,7 @@ export const usePeanut = () => {
 
         return {
           chainId: chainId.toString(),
-          tokenAmount: parseFloat(
+          tokenAmount: Number.parseFloat(
             Number(tokenValue).toFixed(tokenDetails.tokenDecimals)
           ),
           tokenType: tokenDetails.tokenType,
@@ -146,7 +146,7 @@ export const usePeanut = () => {
         txHash: txHash,
         passwords: [password],
       });
-      let links: string[] = getLinksFromTxResponse.links;
+      const links: string[] = getLinksFromTxResponse.links;
 
       toast({
         title: "Link created successfully",
@@ -352,11 +352,20 @@ export const usePeanut = () => {
     setLoading(true);
     setError(null);
 
-    console.log("Sending request with tokenAddress for peanut inside hook:", tokenAddress);
+    console.log(
+      "Sending request with tokenAddress for peanut inside hook:",
+      tokenAddress
+    );
     console.log("Sending request with amount for peanut inside hook:", amount);
-    console.log("Sending request with recipientAddress for peanut inside hook:", recipientAddress);
-    console.log("Sending request with chainId for peanut inside hook:", chainId);
-   
+    console.log(
+      "Sending request with recipientAddress for peanut inside hook:",
+      recipientAddress
+    );
+    console.log(
+      "Sending request with chainId for peanut inside hook:",
+      chainId
+    );
+
     if (!address) {
       throw new Error("Wallet not connected");
     }
@@ -368,9 +377,9 @@ export const usePeanut = () => {
         tokenAddress: tokenAddress as `0x${string}`,
         tokenAmount: amount,
         tokenType: peanut.interfaces.EPeanutLinkType.erc20,
-        tokenDecimals: '6',
+        tokenDecimals: "6",
         recipientAddress: recipientAddress as `0x${string}`,
-        // baseUrl: `${window.location.origin}/invoice/id`,
+        baseUrl: `${window.location.origin}/invoice/id`,
         APIKey: PEANUTAPIKEY!,
       });
       console.log("this is the link for peanut payment requests", link);

@@ -1,6 +1,12 @@
 import { BLOCKSCOUT_EXPLORERS } from "@/constants";
 import { PEANUTAPIKEY } from "@/constants/Env";
-import { Chain, ExtendedPaymentInfo, IGetLinkDetailsResponse } from "@/types";
+import type {
+  Chain,
+  ExtendedPaymentInfo,
+  IGetLinkDetailsResponse,
+  IGetRequestLinkDetailsProps,
+  IGetRequestLinkDetailsResponse,
+} from "@/types";
 import { toast } from "@bu/ui/use-toast";
 import peanut, { getLinkDetails } from "@squirrel-labs/peanut-sdk";
 
@@ -48,6 +54,7 @@ export const fetchLinkDetails = async (
       depositIndex: details.depositIndex,
     };
     setPaymentInfo(extendedPaymentInfo);
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   } catch (error: any) {
     console.error("Error fetching link details:", error.message);
     toast({
@@ -58,12 +65,17 @@ export const fetchLinkDetails = async (
   }
 };
 
-export async function getLinkDetailsRequest(id: string) {
+export async function getLinkDetailsRequest(
+  id: string
+): Promise<IGetRequestLinkDetailsResponse> {
   try {
-    const linkDetails = await peanut.getRequestLinkDetails({
-      link: id,
-      APIKey: PEANUTAPIKEY!,
-    });
+    const host = process.env.NEXT_PUBLIC_BASE_URL ?? '';
+    const props: IGetRequestLinkDetailsProps = {
+      uuid: id,
+      APIKey: PEANUTAPIKEY ?? '',
+    };
+    console.log("here are the propsprops", props);
+    const linkDetails = await peanut.getRequestLinkDetails(props);
     console.log("linkDetails", linkDetails);
     return linkDetails;
   } catch (error) {
@@ -212,6 +224,7 @@ export function formatDateRange(dates: TZDate[]): string {
   const formatDay = (date: TZDate) => format(date, "d");
 
   if (dates.length === 1 || dates[0]?.getTime() === dates[1]?.getTime()) {
+    // biome-ignore lint/style/noNonNullAssertion: <explanation>
     return formatFullDate(dates[0]!);
   }
 
