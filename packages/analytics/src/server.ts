@@ -1,43 +1,43 @@
-import { OpenPanel, type PostEventPayload } from "@openpanel/nextjs";
 import { logger } from "@bu/logger";
+import { OpenPanel, type PostEventPayload } from "@openpanel/nextjs";
 import { waitUntil } from "@vercel/functions";
 
 type Props = {
-  userId?: string;
-  fullName?: string | null;
+	userId?: string;
+	fullName?: string | null;
 };
 
 export const setupAnalytics = async (options?: Props) => {
-  const { userId, fullName } = options ?? {};
+	const { userId, fullName } = options ?? {};
 
-  const client = new OpenPanel({
-    clientId: process.env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID!,
-    clientSecret: process.env.OPENPANEL_SECRET_KEY!,
-  });
+	const client = new OpenPanel({
+		clientId: process.env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID!,
+		clientSecret: process.env.OPENPANEL_SECRET_KEY!,
+	});
 
-  if (userId && fullName) {
-    const [firstName, lastName] = fullName.split(" ");
+	if (userId && fullName) {
+		const [firstName, lastName] = fullName.split(" ");
 
-    waitUntil(
-      client.identify({
-        profileId: userId,
-        firstName,
-        lastName,
-      }),
-    );
-  }
+		waitUntil(
+			client.identify({
+				profileId: userId,
+				firstName,
+				lastName,
+			}),
+		);
+	}
 
-  return {
-    track: (options: { event: string } & PostEventPayload["properties"]) => {
-      if (process.env.NODE_ENV !== "production") {
-        logger.info("Track", options);
+	return {
+		track: (options: { event: string } & PostEventPayload["properties"]) => {
+			if (process.env.NODE_ENV !== "production") {
+				logger.info("Track", options);
 
-        return;
-      }
+				return;
+			}
 
-      const { event, ...rest } = options;
+			const { event, ...rest } = options;
 
-      waitUntil(client.track(event, rest));
-    },
-  };
+			waitUntil(client.track(event, rest));
+		},
+	};
 };
