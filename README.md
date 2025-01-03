@@ -8,7 +8,7 @@ Bu empowers freelancers, SMEs, and remote teams in emerging markets with an inte
 
 We've created a comprehensive invoicing system for 'ghosts' 👻 with USDC payment capabilities. Our platform leverages multiple blockchain technologies to provide secure, efficient, and flexible payment solutions.
 
-As part of the BNB Hack Q4 event, we have worked on two separate repos. The current one, Bu Desk, shows the workspace NeoBank notion app we plan to develop into production. While our [DeFi web app] (https://github.com/BuFi007/defi-web-app) shows the Hub & Spoke money market protocol we are developing for undercollateralized DeFi loans.
+As part of the BNB Hack Q4 event, we have worked on two separate repos. The current one, Bu Desk, shows the workspace NeoBank notion app we plan to develop into production. While our [DeFi web app](https://github.com/BuFi007/defi-web-app) shows the Hub & Spoke money market protocol we are developing for undercollateralized DeFi loans.
 
 ## 👻 Hub & Spoke Smart Contract Deployments
 - **Spoke BSC**: [0x2A97438Acf6f1c0745171C8DA7e199F5061a0C3b](https://testnet.bscscan.com/address/0x2A97438Acf6f1c0745171C8DA7e199F5061a0C3b)
