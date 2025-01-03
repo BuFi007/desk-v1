@@ -1,5 +1,4 @@
-import type { Dispatch } from "react";
-import type { SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import type { Address, Hex } from "viem";
 
 // Get User types
@@ -18,18 +17,24 @@ export type SupabaseUser = {
   date_format: string | null;
 };
 
+export interface Team {
+  id: string;
+  name: string | null;
+  logo_url: string | null;
+}
+
+export interface TeamRow {
+  id: string;
+  role: "owner" | "member" | null;
+  team: Team;
+}
+
 // Type for team-related errors
 export type SelectQueryError<T extends string> = {
   message: T;
   details: string;
   hint: string;
   code: string;
-};
-
-// Props type for the Setup page component
-export type SetupPageProps = {
-  params: Record<string, string>;
-  searchParams: Record<string, string>;
 };
 
 // Blockchain related types
@@ -69,7 +74,8 @@ export interface Token {
   image: string;
   isNative?: boolean;
 }
-export type ChainList = 11155111 | 324 | 300 | 10;
+
+export type ChainList = 11155111 | 324 | 300 | 10 | 56 | 97;
 
 export interface Chain {
   chainId: number;

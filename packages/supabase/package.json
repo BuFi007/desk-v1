@@ -31,7 +31,7 @@
     "./middleware": "./src/client/middleware.ts",
     "./queries": "./src/queries/index.ts",
     "./cached-queries": "./src/queries/cached-queries.ts",
-    "./storage": "./src/utils/storage.ts",
+    "./storage": "./src/storage/index.ts",
     "./types": "./src/types/index.ts"
   }
 }

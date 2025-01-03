@@ -37,9 +37,7 @@ export default async function Teams() {
                 Select team or create a new one.
               </p>
             </div>
-
             <SelectTeamTable data={teams.data} />
-
             <div className="text-center mt-8 border-t-[1px] border-border pt-6">
               <Link href="/teams/create" className="text-sm">
                 Create team

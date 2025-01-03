@@ -1,12 +1,13 @@
 "use client";
 
 import { changeTeamAction } from "@/actions/team/change-team-action";
+import type { TeamRow } from "@/types";
 import { Avatar, AvatarFallback, AvatarImageNext } from "@bu/ui/avatar";
 import { Button } from "@bu/ui/button";
 import { Table, TableBody, TableCell, TableRow } from "@bu/ui/table";
 import { useAction } from "next-safe-action/hooks";
 
-export function SelectTeamTable({ data }) {
+export function SelectTeamTable({ data }: { data: TeamRow[] }) {
   const changeTeam = useAction(changeTeamAction);
 
   return (
@@ -18,8 +19,8 @@ export function SelectTeamTable({ data }) {
               <div className="flex items-center space-x-4">
                 <Avatar className="rounded-full w-8 h-8">
                   <AvatarImageNext
-                    src={row.team?.logo_url}
-                    alt={row.team?.name ?? ""}
+                    src={row.team?.logo_url ?? ''}
+                    alt={row.team?.name ?? ''}
                     width={32}
                     height={32}
                   />

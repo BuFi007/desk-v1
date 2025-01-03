@@ -19,7 +19,7 @@ import {
 } from "@bu/ui/select";
 import { toast } from "@bu/ui/use-toast";
 import type React from "react";
-import { type ChangeEvent, useEffect, useState } from "react"
+import { type ChangeEvent, useEffect, useState } from "react";
 import { formatUnits } from "viem";
 import { useAccount, useChainId } from "wagmi";
 
@@ -56,6 +56,7 @@ const CurrencyDisplayer: React.FC<CurrencyDisplayerProps> = ({
     decimals: selectedToken?.decimals ?? 18,
   });
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (ETH && !selectedToken && !defaultToken) {
       setSelectedToken(ETH);
@@ -83,7 +84,7 @@ const CurrencyDisplayer: React.FC<CurrencyDisplayerProps> = ({
   };
   const updateValues = (value: string) => {
     const numericValue = Number.parseFloat(value);
-    if (!isNaN(numericValue)) {
+    if (!Number.isNaN(numericValue)) {
       onValueChange(0, numericValue);
     } else {
       onValueChange(0, 0);

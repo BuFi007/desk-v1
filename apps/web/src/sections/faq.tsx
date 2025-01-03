@@ -17,35 +17,27 @@ export default function Faq() {
         <div className="mx-auto grid w-[700px] max-w-full px-5">
           <Accordion className="text-base sm:text-lg" type="single" collapsible>
             <AccordionItem className="mb-2" value="item-1">
-              <AccordionTrigger>Lorem ipsum dolor sit amet</AccordionTrigger>
+              <AccordionTrigger>What is Bu.fi?</AccordionTrigger>
               <AccordionContent>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Accusantium suscipit sed nihil fuga sapiente facere dolore
-                corrupti labore illum reiciendis?
+                Bu.fi is a cutting-edge financial platform that combines traditional banking with blockchain technology, offering secure cross-border payments, DeFi services, and financial management tools for freelancers and businesses.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem className="mb-2" value="item-2">
-              <AccordionTrigger>Lorem ipsum dolor sit amet</AccordionTrigger>
+              <AccordionTrigger>How does Bu.fi protect my privacy?</AccordionTrigger>
               <AccordionContent>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Accusantium suscipit sed nihil fuga sapiente facere dolore
-                corrupti labore illum reiciendis?
+                Bu.fi employs state-of-the-art encryption and security protocols to safeguard your personal and financial information, including Zk-proofs for the most sensitive data. We adhere to strict data protection regulations and use advanced AI-driven fraud detection systems to prevent unauthorized access.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem className="mb-2" value="item-3">
-              <AccordionTrigger>Lorem ipsum dolor sit amet</AccordionTrigger>
+              <AccordionTrigger>What are stablecoins and how do they work?</AccordionTrigger>
               <AccordionContent>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Accusantium suscipit sed nihil fuga sapiente facere dolore
-                corrupti labore illum reiciendis?
+                Stablecoins are digital currencies pegged to stable assets like USD. Bu.fi makes it easy to use stablecoins for protecting your savings from inflation and accessing global financial services.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-4">
-              <AccordionTrigger>Lorem ipsum dolor sit amet</AccordionTrigger>
+              <AccordionTrigger>Is Bu.fi available in my country?</AccordionTrigger>
               <AccordionContent>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Accusantium suscipit sed nihil fuga sapiente facere dolore
-                corrupti labore illum reiciendis?
+                Bu.fi focuses on serving global markets with special attention to emerging markets. Our platform is designed to work across borders while maintaining compliance with local regulations.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
@@ -62,7 +54,7 @@ export default function Faq() {
               return (
                 <div className="flex items-center" key={id}>
                   <span className="mx-8 text-xl font-heading sm:text-2xl lg:text-4xl">
-                    Neobrutalism components
+                    What is Bu.fi?
                   </span>
                 </div>
               )

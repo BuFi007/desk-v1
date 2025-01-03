@@ -1,16 +1,15 @@
 import { SetupForm } from "@/components/setup-account/setup-form";
-import { getSession, getUser } from "@bu/supabase/cached-queries";
+import { getUser } from "@bu/supabase/cached-queries";
 import { Icons } from "@bu/ui/icons";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { SetupPageProps, SupabaseUser } from "@/types";
 
 export const metadata: Metadata = {
   title: "Setup your account | Bu Desk",
 };
-
-export default async function Setup(props: SetupPageProps) {
+  
+export default async function Setup() {
   const response = await getUser();
   const data = response?.data;
 
