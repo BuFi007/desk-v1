@@ -21,7 +21,6 @@ export default function InvoiceRequestPage() {
             <PaymentPanel />
           </div>
         </div>
-        
       </div>
     </>
   );

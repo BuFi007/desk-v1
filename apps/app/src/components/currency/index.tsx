@@ -42,10 +42,10 @@ const CurrencyDisplayer: React.FC<CurrencyDisplayerProps> = ({
     : undefined;
   const { address } = useAccount();
   const [selectedToken, setSelectedToken] = useState<Token | null>(
-    defaultToken || null
+    defaultToken || null,
   );
   const [inputValue, setInputValue] = useState<string>(
-    initialAmount.toFixed(3)
+    initialAmount.toFixed(3),
   );
 
   const balance = useTokenBalance({
@@ -56,14 +56,13 @@ const CurrencyDisplayer: React.FC<CurrencyDisplayerProps> = ({
     decimals: selectedToken?.decimals ?? 18,
   });
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (ETH && !selectedToken && !defaultToken) {
       setSelectedToken(ETH);
     } else if (defaultToken) {
       setSelectedToken(defaultToken);
     }
-  }, [ETH, defaultToken]);
+  }, [ETH, defaultToken, selectedToken]);
 
   useEffect(() => {
     if (tokenAmount !== undefined) {
@@ -95,7 +94,7 @@ const CurrencyDisplayer: React.FC<CurrencyDisplayerProps> = ({
     const token = selectedToken;
     if (balance && token) {
       return Number.parseFloat(
-        formatUnits(balance.data?.value!, balance.data?.decimals!)
+        formatUnits(balance.data?.value!, balance.data?.decimals!),
       );
     } else {
       return 0;
@@ -148,7 +147,7 @@ const CurrencyDisplayer: React.FC<CurrencyDisplayerProps> = ({
 
       if (action === "default") {
         const availableBalance = Number.parseFloat(
-          formatUnits(balance.data?.value || 0n, balance.data?.decimals || 18)
+          formatUnits(balance.data?.value || 0n, balance.data?.decimals || 18),
         );
 
         if (numericValue > availableBalance) {
@@ -175,7 +174,7 @@ const CurrencyDisplayer: React.FC<CurrencyDisplayerProps> = ({
     <div
       className={cn(
         "mx-auto flex flex-col items-center",
-        sizeStyles.container[size]
+        sizeStyles.container[size],
       )}
     >
       <div className="relative mb-2 text-center">
@@ -209,7 +208,7 @@ const CurrencyDisplayer: React.FC<CurrencyDisplayerProps> = ({
                     src={selectedToken.image}
                     alt={
                       AllChains?.find(
-                        (chain) => chain.chainId === currentNetwork
+                        (chain) => chain.chainId === currentNetwork,
                       )?.name || "Ethereum"
                     }
                     className="inline-block w-4 h-4 mr-2"

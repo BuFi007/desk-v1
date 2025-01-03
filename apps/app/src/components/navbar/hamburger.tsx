@@ -24,13 +24,13 @@ export default function Hamburger(props: HamburgerProps) {
           genericHamburgerLine,
           isOpen
             ? "translate-y-3 rotate-45 opacity-50 group-hover:opacity-100"
-            : "opacity-50 group-hover:opacity-100"
+            : "opacity-50 group-hover:opacity-100",
         )}
       />
       <div
         className={twMerge(
           genericHamburgerLine,
-          isOpen ? "opacity-0" : "opacity-50 group-hover:opacity-100"
+          isOpen ? "opacity-0" : "opacity-50 group-hover:opacity-100",
         )}
       />
       <div
@@ -38,7 +38,7 @@ export default function Hamburger(props: HamburgerProps) {
           genericHamburgerLine,
           isOpen
             ? "-translate-y-3 rotate-45 opacity-50 group-hover:opacity-100"
-            : "opacity-50 group-hover:opacity-100"
+            : "opacity-50 group-hover:opacity-100",
         )}
       />
     </button>

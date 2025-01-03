@@ -19,8 +19,8 @@ export function SelectTeamTable({ data }: { data: TeamRow[] }) {
               <div className="flex items-center space-x-4">
                 <Avatar className="rounded-full w-8 h-8">
                   <AvatarImageNext
-                    src={row.team?.logo_url ?? ''}
-                    alt={row.team?.name ?? ''}
+                    src={row.team?.logo_url ?? ""}
+                    alt={row.team?.name ?? ""}
                     width={32}
                     height={32}
                   />

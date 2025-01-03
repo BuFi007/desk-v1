@@ -11,7 +11,7 @@ import React, {
 import { useAccount, useChainId } from "wagmi";
 
 const BlockchainContext = createContext<BlockchainContextProps | undefined>(
-  undefined
+  undefined,
 );
 
 export const useBlockchain = () => {

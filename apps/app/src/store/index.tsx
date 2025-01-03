@@ -52,8 +52,8 @@ export const useTabStore = create<TabState>()(
           state.resetTab();
         }
       },
-    }
-  )
+    },
+  ),
 );
 
 export const useNetworkStore = create<NetworkState>((set) => ({

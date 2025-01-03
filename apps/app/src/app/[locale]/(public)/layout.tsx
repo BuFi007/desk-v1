@@ -9,8 +9,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <UserProvider data={null}>
-          <NavBar />
-          <main>{children}</main>
+        <NavBar />
+        <main>{children}</main>
       </UserProvider>
     </>
   );

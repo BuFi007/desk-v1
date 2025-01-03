@@ -1,36 +1,36 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { createTeamAction } from "@/actions/team/create-team-action";
 import { createTeamSchema } from "@/actions/team/schema";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { createClient } from "@bu/supabase/client";
 import { Button } from "@bu/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@bu/ui/card";
 import { FileUploadRound } from "@bu/ui/file-uploader-round";
-import { Progress } from "@bu/ui/progress";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
-  FormMessage,
   FormLabel,
+  FormMessage,
 } from "@bu/ui/form";
 import { Input } from "@bu/ui/input";
+import { Progress } from "@bu/ui/progress";
+import { toast } from "@bu/ui/use-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
+import type { SupabaseClient } from "@supabase/supabase-js";
 import { Loader2 } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import type { z } from "zod";
-import { toast } from "@bu/ui/use-toast";
-import { createClient } from "@bu/supabase/client";
-import { SupabaseClient } from "@supabase/supabase-js";
-import {
-  Card,
-  CardHeader,
-  CardFooter,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@bu/ui/card";
 
 export function CreateTeamForm() {
   const createTeam = useAction(createTeamAction);

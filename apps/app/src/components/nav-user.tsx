@@ -42,18 +42,19 @@ import {
 import { SignOutButton } from "./sign-out-button";
 export function NavUser({ onlySignOut }: { onlySignOut: boolean }) {
   const supabase = createClient();
-  const [userData, setUserData] = useState<{ user_metadata?: { avatar_url?: string; full_name?: string, email?: string } } | null>(null);
+  const [userData, setUserData] = useState<{
+    user_metadata?: { avatar_url?: string; full_name?: string; email?: string };
+  } | null>(null);
   const { address } = useAccount();
   const { isMobile } = useSidebar();
 
- const fetchUserData = useMemo(
+  const fetchUserData = useMemo(
     () => async () => {
       const { data } = await supabase.auth.getUser();
       setUserData(data?.user);
     },
-    [supabase]
+    [supabase],
   );
-
 
   useEffect(() => {
     fetchUserData();

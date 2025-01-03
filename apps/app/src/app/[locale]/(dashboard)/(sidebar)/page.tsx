@@ -7,17 +7,17 @@ import PageContainer from "@bu/ui/page-container";
 export default async function Home() {
   const { data } = await getUser();
 
-const userData: UserProps = {
-  data: {
-    id: data?.user?.id || "",
-    email: data?.user?.email || "",
-    full_name: "",
-    locale: "",
-    date_format: "",
-    timezone: "",
-    null: null
-  }
-};
+  const userData: UserProps = {
+    data: {
+      id: data?.user?.id || "",
+      email: data?.user?.email || "",
+      full_name: "",
+      locale: "",
+      date_format: "",
+      timezone: "",
+      null: null,
+    },
+  };
 
   return (
     <PageContainer>

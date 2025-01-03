@@ -1,5 +1,5 @@
 import { getCurrentUserTeamQuery } from "@bu/supabase/queries";
-import type { Session, SupabaseClient } from '@supabase/supabase-js';
+import type { Session, SupabaseClient } from "@supabase/supabase-js";
 import { type NextRequest, NextResponse } from "next/server";
 
 interface RedirectOptions {
@@ -8,7 +8,11 @@ interface RedirectOptions {
   searchParams?: URLSearchParams;
 }
 
-export const createRedirectResponse = ({ origin, pathname, searchParams }: RedirectOptions) => {
+export const createRedirectResponse = ({
+  origin,
+  pathname,
+  searchParams,
+}: RedirectOptions) => {
   const url = new URL(pathname, origin);
   if (searchParams) {
     url.search = searchParams.toString();
@@ -28,7 +32,7 @@ export const checkUserTeam = async (supabase: SupabaseClient) => {
 export const handleAuthRedirect = async (
   request: NextRequest,
   session: Session | null,
-  pathname: string
+  pathname: string,
 ) => {
   if (!session && pathname !== "/login") {
     const params = new URLSearchParams();
@@ -36,10 +40,10 @@ export const handleAuthRedirect = async (
     if (returnPath) {
       params.append("return_to", returnPath);
     }
-    return createRedirectResponse({ 
-      origin: request.url, 
+    return createRedirectResponse({
+      origin: request.url,
       pathname: "/login",
-      searchParams: params
+      searchParams: params,
     });
   }
   return null;
@@ -48,7 +52,7 @@ export const handleAuthRedirect = async (
 export const handleUserSetup = (
   pathname: string,
   session: Session | null,
-  origin: string
+  origin: string,
 ) => {
   const needsSetup = !session?.user?.user_metadata?.full_name;
   const isSetupRoute = pathname === "/setup" || pathname === "/teams/create";

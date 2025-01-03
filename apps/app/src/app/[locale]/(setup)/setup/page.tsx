@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 export const metadata: Metadata = {
   title: "Setup your account | Bu Desk",
 };
-  
+
 export default async function Setup() {
   const response = await getUser();
   const data = response?.data;

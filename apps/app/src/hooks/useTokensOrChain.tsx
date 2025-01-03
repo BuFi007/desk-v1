@@ -21,7 +21,7 @@ import {
 
 export const useGetTokensOrChain = (
   chainId: number,
-  type: "tokens" | "chain"
+  type: "tokens" | "chain",
 ) => {
   if (type === "tokens") {
     if (chainId === 8453) return BaseTokens;

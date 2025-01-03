@@ -50,5 +50,5 @@ export const createTeamAction = authActionClient
         console.error("Error creating team:", error);
         throw error;
       }
-    }
+    },
   );

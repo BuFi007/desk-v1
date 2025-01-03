@@ -37,7 +37,7 @@ export const sizeStyles = {
 export const fetchLinkDetails = async (
   link: string,
   setDetails: (details: IGetLinkDetailsResponse) => void,
-  setPaymentInfo: (paymentInfo: ExtendedPaymentInfo) => void
+  setPaymentInfo: (paymentInfo: ExtendedPaymentInfo) => void,
 ) => {
   try {
     const details = (await getLinkDetails({
@@ -54,7 +54,7 @@ export const fetchLinkDetails = async (
       depositIndex: details.depositIndex,
     };
     setPaymentInfo(extendedPaymentInfo);
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   } catch (error: any) {
     console.error("Error fetching link details:", error.message);
     toast({
@@ -66,13 +66,13 @@ export const fetchLinkDetails = async (
 };
 
 export async function getLinkDetailsRequest(
-  id: string
+  id: string,
 ): Promise<IGetRequestLinkDetailsResponse> {
   try {
-    const host = process.env.NEXT_PUBLIC_BASE_URL ?? '';
+    const host = process.env.NEXT_PUBLIC_BASE_URL ?? "";
     const props: IGetRequestLinkDetailsProps = {
       uuid: id,
-      APIKey: PEANUTAPIKEY ?? '',
+      APIKey: PEANUTAPIKEY ?? "",
     };
     console.log("here are the propsprops", props);
     const linkDetails = await peanut.getRequestLinkDetails(props);
@@ -113,7 +113,7 @@ export function formatSize(bytes: number): string {
 
   const unitIndex = Math.max(
     0,
-    Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1)
+    Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1),
   );
 
   return Intl.NumberFormat("en-US", {
@@ -236,7 +236,7 @@ export function formatDateRange(dates: TZDate[]): string {
   if (startDate.getMonth() === endDate.getMonth()) {
     // Same month
     return `${format(startDate, "MMM")} ${formatDay(startDate)} - ${formatDay(
-      endDate
+      endDate,
     )}`;
   }
   // Different months

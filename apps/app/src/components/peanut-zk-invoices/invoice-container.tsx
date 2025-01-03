@@ -5,18 +5,14 @@ import { UserProvider } from "@/components/providers";
 import type { UserProps } from "@/store/user/store";
 import { useAccount, useChainId } from "wagmi";
 
-
-
 interface InvoiceContainerProps {
   userData: UserProps;
 }
 
 export function InvoiceContainer({ userData }: InvoiceContainerProps) {
-
-
   return (
     <UserProvider initData={userData}>
-        <InvoiceSheetWrapper />
+      <InvoiceSheetWrapper />
     </UserProvider>
   );
 }

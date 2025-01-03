@@ -12,12 +12,7 @@ export default function NavBar() {
     <>
       <div className="sticky top-0 z-10 flex h-20 w-full items-center justify-between border-2 border-slate-900 bg-nepal-100 px-4 md:px-24">
         <h1 className="text-shadow-neo scroll-m-20 font-Space_Grotesk text-4xl font-extrabold tracking-tight text-cerulean-400 lg:text-5xl">
-          <BuLogo
-            logo="/logo.png"
-            text="Bu Desk"
-            width={50}
-            height={50}
-          />
+          <BuLogo logo="/logo.png" text="Bu Desk" width={50} height={50} />
         </h1>
         {/* Desktop Navbar */}
         <div className="hidden gap-8 md:flex">
@@ -37,7 +32,7 @@ export default function NavBar() {
       {isOpen && (
         <div
           className={twMerge(
-            "flex flex-col divide-y-4 divide-slate-900 border-2 sticky top-[80px] z-10 bg-nepal-100 border-slate-900"
+            "flex flex-col divide-y-4 divide-slate-900 border-2 sticky top-[80px] z-10 bg-nepal-100 border-slate-900",
           )}
         >
           <a

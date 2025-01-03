@@ -165,55 +165,55 @@ export function CreateRegularPaymentSheet() {
       </div>
     );
   return (
-      <div className="flex flex-col items-center justify-center p-4 space-y-4 h-screen">
-           <h2 className="text-2xl font-bold">Create a Regular Payment </h2>        
-        <p className="text-sm text-gray-500">
-          Fill out the form below to generate a new invoice that you can bill to your account.
-        </p>
-    <Sheet open={isOpen} onOpenChange={setIsOpen}>
-      <SheetTrigger asChild>
-        <Button variant="outline">Create Regular Payment</Button>
-      </SheetTrigger>
-      <SheetContent className="w-full p-6 space-y-4">
-        <SheetHeader>
-          <SheetTitle>Create Regular Payment</SheetTitle>
-          <SheetDescription>Set up a new regular payment</SheetDescription>
-        </SheetHeader>
-        <form onSubmit={handleSign} className="space-y-4 mt-4">
-          <div className="space-y-2">
-            <Label htmlFor="amount">Amount</Label>
-            <Input
-              id="amount"
-              placeholder="Enter amount"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              type="number"
-            />
-          </div>
-          <div className="space-y-2">
-            <TokenSelect
-              value={token}
-              onChange={setToken}
-              tokens={allTokens}
-              label="Select Token"
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="recipient">Recipient Address</Label>
-            <Input
-              id="recipient"
-              placeholder="Enter recipient address"
-              value={recipient}
-              onChange={(e) => setRecipient(e.target.value)}
-            />
-          </div>
-          <Button type="submit" disabled={isLoading} className="w-full">
-            {isLoading ? "Signing..." : "Sign ForwardRequest"}
-          </Button>
-        </form>
-      </SheetContent>
-    </Sheet>
-          </div>
-
+    <div className="flex flex-col items-center justify-center p-4 space-y-4 h-screen">
+      <h2 className="text-2xl font-bold">Create a Regular Payment </h2>
+      <p className="text-sm text-gray-500">
+        Fill out the form below to generate a new invoice that you can bill to
+        your account.
+      </p>
+      <Sheet open={isOpen} onOpenChange={setIsOpen}>
+        <SheetTrigger asChild>
+          <Button variant="outline">Create Regular Payment</Button>
+        </SheetTrigger>
+        <SheetContent className="w-full p-6 space-y-4">
+          <SheetHeader>
+            <SheetTitle>Create Regular Payment</SheetTitle>
+            <SheetDescription>Set up a new regular payment</SheetDescription>
+          </SheetHeader>
+          <form onSubmit={handleSign} className="space-y-4 mt-4">
+            <div className="space-y-2">
+              <Label htmlFor="amount">Amount</Label>
+              <Input
+                id="amount"
+                placeholder="Enter amount"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                type="number"
+              />
+            </div>
+            <div className="space-y-2">
+              <TokenSelect
+                value={token}
+                onChange={setToken}
+                tokens={allTokens}
+                label="Select Token"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="recipient">Recipient Address</Label>
+              <Input
+                id="recipient"
+                placeholder="Enter recipient address"
+                value={recipient}
+                onChange={(e) => setRecipient(e.target.value)}
+              />
+            </div>
+            <Button type="submit" disabled={isLoading} className="w-full">
+              {isLoading ? "Signing..." : "Sign ForwardRequest"}
+            </Button>
+          </form>
+        </SheetContent>
+      </Sheet>
+    </div>
   );
 }

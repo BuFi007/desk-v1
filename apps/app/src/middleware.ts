@@ -1,4 +1,9 @@
-import { checkUserTeam, createRedirectResponse, handleAuthRedirect, handleUserSetup } from "@/utils/auth";
+import {
+  checkUserTeam,
+  createRedirectResponse,
+  handleAuthRedirect,
+  handleUserSetup,
+} from "@/utils/auth";
 import { updateSession } from "@bu/supabase/middleware";
 import { createClient } from "@bu/supabase/server";
 import { createI18nMiddleware } from "next-international/middleware";
@@ -21,10 +26,16 @@ export async function middleware(request: NextRequest) {
     : nextUrl.pathname;
   const newUrl = new URL(pathnameWithoutLocale || "/", request.url);
 
-  const { data: { session } } = await supabase.auth.getSession();
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
 
   // Handle authentication redirect
-  const authRedirect = await handleAuthRedirect(request, session, newUrl.pathname);
+  const authRedirect = await handleAuthRedirect(
+    request,
+    session,
+    newUrl.pathname,
+  );
   if (authRedirect) return authRedirect;
 
   // Handle user setup redirect
@@ -32,14 +43,16 @@ export async function middleware(request: NextRequest) {
   if (setupRedirect) return setupRedirect;
 
   // Handle team check
-  if (session?.user?.user_metadata?.full_name && 
-      newUrl.pathname !== "/teams/create" && 
-      !newUrl.pathname.startsWith("/teams/invite/")) {
+  if (
+    session?.user?.user_metadata?.full_name &&
+    newUrl.pathname !== "/teams/create" &&
+    !newUrl.pathname.startsWith("/teams/invite/")
+  ) {
     const teamName = await checkUserTeam(supabase);
     if (!teamName) {
-      return createRedirectResponse({ 
-        origin: request.url, 
-        pathname: "/teams/create" 
+      return createRedirectResponse({
+        origin: request.url,
+        pathname: "/teams/create",
       });
     }
   }
@@ -49,6 +62,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|api|monitoring|images|logo.png|.*\\.png$).*)',
+    "/((?!_next/static|_next/image|favicon.ico|api|monitoring|images|logo.png|.*\\.png$).*)",
   ],
 };

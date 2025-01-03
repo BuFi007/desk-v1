@@ -71,7 +71,8 @@ export const inviteTeamMembersAction = authActionClient
         .upsert(data, {
           onConflict: "email, team_id",
           ignoreDuplicates: false,
-        }).select(`
+        })
+        .select(`
           email,
           code,
           user:invited_by(
@@ -151,5 +152,5 @@ export const inviteTeamMembersAction = authActionClient
       if (redirectTo) {
         redirect(redirectTo);
       }
-    }
+    },
   );
