@@ -53,9 +53,7 @@ export const AllVariants: Story = {
           <Badge className="py-1">
             <span className="mr-1">●</span> Online
           </Badge>
-          <Badge variant="secondary">
-            Version 2.0.0
-          </Badge>
+          <Badge variant="secondary">Version 2.0.0</Badge>
           <Badge variant="outline" className="gap-2">
             <span className="h-2 w-2 bg-blue-500 rounded-full" />
             Running

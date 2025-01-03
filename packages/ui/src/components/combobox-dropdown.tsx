@@ -66,7 +66,7 @@ export function ComboboxDropdown<T extends ComboboxItem>({
   const selectedItem = incomingSelectedItem ?? internalSelectedItem;
 
   const filteredItems = items.filter((item) =>
-    item.label.toLowerCase().includes(inputValue.toLowerCase())
+    item.label.toLowerCase().includes(inputValue.toLowerCase()),
   );
 
   const showCreate = onCreate && Boolean(inputValue) && !filteredItems.length;
@@ -111,7 +111,7 @@ export function ComboboxDropdown<T extends ComboboxItem>({
                     <Check
                       className={cn(
                         "mr-2 h-4 w-4",
-                        isChecked ? "opacity-100" : "opacity-0"
+                        isChecked ? "opacity-100" : "opacity-0",
                       )}
                     />
                     {item.label}

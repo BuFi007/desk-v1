@@ -17,7 +17,8 @@ const meta: Meta<typeof Breadcrumb> = {
     layout: "centered",
     docs: {
       description: {
-        component: "A breadcrumb navigation component with customizable separators and ellipsis support.",
+        component:
+          "A breadcrumb navigation component with customizable separators and ellipsis support.",
       },
     },
   },
@@ -154,11 +155,15 @@ export const AllVariants: Story = {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink href="/products/electronics">Electronics</BreadcrumbLink>
+              <BreadcrumbLink href="/products/electronics">
+                Electronics
+              </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink href="/products/electronics/phones">Phones</BreadcrumbLink>
+              <BreadcrumbLink href="/products/electronics/phones">
+                Phones
+              </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>

@@ -23,7 +23,12 @@ type IconDisplayProps = {
   className?: string;
 };
 
-const IconDisplay = ({ name, icon: Icon, size = 24, className }: IconDisplayProps) => (
+const IconDisplay = ({
+  name,
+  icon: Icon,
+  size = 24,
+  className,
+}: IconDisplayProps) => (
   <div className="flex flex-col items-center gap-2 p-4 rounded-lg border hover:bg-accent transition-colors">
     <Icon className={cn("text-foreground", className)} size={size} />
     <span className="text-xs text-muted-foreground text-center">{name}</span>

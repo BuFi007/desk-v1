@@ -11,7 +11,8 @@ const meta: Meta<typeof Checkbox> = {
     layout: "centered",
     docs: {
       description: {
-        component: "A checkbox component that can be used to toggle between checked and unchecked states.",
+        component:
+          "A checkbox component that can be used to toggle between checked and unchecked states.",
       },
     },
   },
@@ -23,21 +24,19 @@ type Story = StoryObj<typeof Checkbox>;
 // Helper component for controlled checkbox
 const ControlledCheckbox = () => {
   const [checked, setChecked] = useState<CheckedState>(false);
-  
+
   const handleCheckedChange = (state: CheckedState) => {
     setChecked(state);
   };
 
   return (
     <div className="flex items-center space-x-2">
-      <Checkbox 
-        id="controlled" 
-        checked={checked} 
+      <Checkbox
+        id="controlled"
+        checked={checked}
         onCheckedChange={handleCheckedChange}
       />
-      <Label htmlFor="controlled">
-        {checked ? "Checked" : "Unchecked"}
-      </Label>
+      <Label htmlFor="controlled">{checked ? "Checked" : "Unchecked"}</Label>
     </div>
   );
 };
@@ -120,7 +119,8 @@ export const AllVariants: Story = {
               Accept terms and conditions
             </Label>
             <p className="text-sm text-muted-foreground">
-              You agree to our Terms of Service and Privacy Policy by checking this box.
+              You agree to our Terms of Service and Privacy Policy by checking
+              this box.
             </p>
           </div>
         </div>
@@ -191,7 +191,9 @@ export const InFormGroup: Story = {
   render: () => (
     <form className="space-y-4">
       <fieldset className="space-y-2">
-        <legend className="text-sm font-medium">Notification Preferences</legend>
+        <legend className="text-sm font-medium">
+          Notification Preferences
+        </legend>
         <div className="flex items-center space-x-2">
           <Checkbox id="email" />
           <Label htmlFor="email">Email notifications</Label>

@@ -9,14 +9,15 @@ const meta: Meta<typeof Spinner> = {
     layout: "centered",
     docs: {
       description: {
-        component: "A versatile loading spinner with configurable size and usage contexts.",
+        component:
+          "A versatile loading spinner with configurable size and usage contexts.",
       },
     },
   },
   argTypes: {
     size: {
-      control: { type: 'number', min: 8, max: 64, step: 4 },
-      description: 'Size of the spinner in pixels',
+      control: { type: "number", min: 8, max: 64, step: 4 },
+      description: "Size of the spinner in pixels",
     },
   },
 };
@@ -54,7 +55,9 @@ export const AllVariants: Story = {
 
       {/* Contextual Usage */}
       <section>
-        <h3 className="text-lg font-semibold mb-4">Contextual Loading States</h3>
+        <h3 className="text-lg font-semibold mb-4">
+          Contextual Loading States
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Download Context */}
           <div className="flex flex-col items-center space-y-2 p-4 bg-background border rounded-lg">

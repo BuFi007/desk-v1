@@ -13,7 +13,13 @@ import { Button } from "./button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./select";
 import { Checkbox } from "./checkbox";
 import { useFieldArray } from "react-hook-form";
 import { Loader2, Plus, Trash } from "lucide-react";
@@ -26,7 +32,8 @@ const meta: Meta = {
     layout: "centered",
     docs: {
       description: {
-        component: "A form component built with React Hook Form and Zod validation.",
+        component:
+          "A form component built with React Hook Form and Zod validation.",
       },
     },
   },
@@ -36,11 +43,11 @@ export default meta;
 
 // Basic profile form schema
 const profileFormSchema = z.object({
-  username: z.string()
+  username: z
+    .string()
     .min(2, { message: "Username must be at least 2 characters." })
     .max(30, { message: "Username must not be longer than 30 characters." }),
-  email: z.string()
-    .email({ message: "Please enter a valid email address." }),
+  email: z.string().email({ message: "Please enter a valid email address." }),
   bio: z.string().max(160).min(4),
   notifications: z.boolean().default(false),
   role: z.string({
@@ -52,9 +59,11 @@ const profileFormSchema = z.object({
 const inviteFormSchema = z.object({
   invites: z.array(
     z.object({
-      email: z.string().email({ message: "Please enter a valid email address." }),
+      email: z
+        .string()
+        .email({ message: "Please enter a valid email address." }),
       role: z.enum(["owner", "member"]),
-    })
+    }),
   ),
 });
 
@@ -97,7 +106,7 @@ export const BasicForm: StoryObj = {
                 </FormItem>
               )}
             />
-            
+
             <FormField
               control={form.control}
               name="email"
@@ -118,7 +127,10 @@ export const BasicForm: StoryObj = {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Role</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Select a role" />
@@ -143,7 +155,9 @@ export const BasicForm: StoryObj = {
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
-                  <FormDescription>Brief description for your profile.</FormDescription>
+                  <FormDescription>
+                    Brief description for your profile.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -176,7 +190,7 @@ export const DynamicForm: StoryObj = {
 
     const onSubmit = async (data: z.infer<typeof inviteFormSchema>) => {
       setIsSubmitting(true);
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       console.log(data);
       setIsSubmitting(false);
     };
@@ -185,11 +199,9 @@ export const DynamicForm: StoryObj = {
       <div className="w-[600px] space-y-6">
         <div>
           <h2 className="text-2xl font-bold">Invite Team Members</h2>
-          <p className="text-muted-foreground">
-            Add members to your team.
-          </p>
+          <p className="text-muted-foreground">Add members to your team.</p>
         </div>
-        
+
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             {fields.map((field, index) => (
@@ -200,10 +212,7 @@ export const DynamicForm: StoryObj = {
                   render={({ field }) => (
                     <FormItem className="flex-1">
                       <FormControl>
-                        <Input
-                          placeholder="team@example.com"
-                          {...field}
-                        />
+                        <Input placeholder="team@example.com" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -333,9 +342,7 @@ export const ValidationStates: StoryObj = {
                     />
                   </FormControl>
                   <div className="space-y-1 leading-none">
-                    <FormLabel>
-                      Checkbox with Description
-                    </FormLabel>
+                    <FormLabel>Checkbox with Description</FormLabel>
                     <FormDescription>
                       Get notifications about account activity.
                     </FormDescription>

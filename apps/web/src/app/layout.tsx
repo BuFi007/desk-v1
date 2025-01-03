@@ -1,19 +1,19 @@
-import type { Metadata } from 'next'
-import { DM_Sans } from 'next/font/google'
-import './globals.css'
-import { ThemeSwitcher } from '@bu/ui/theme-switcher'
-import { ThemeProvider } from '@/components/theme-provider'
+import type { Metadata } from "next";
+import { DM_Sans } from "next/font/google";
+import "./globals.css";
+import { ThemeSwitcher } from "@bu/ui/theme-switcher";
+import { ThemeProvider } from "@/components/theme-provider";
 
-const dmSans = DM_Sans({ subsets: ['latin'] })
+const dmSans = DM_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'BuFi Landing Page',
-}
+  title: "BuFi Landing Page",
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
@@ -24,5 +24,5 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }

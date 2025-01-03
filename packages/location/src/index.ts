@@ -6,9 +6,9 @@ import { EU_COUNTRY_CODES } from "./eu-countries";
 import timezones from "./timezones.json";
 
 type CountryData = {
- currencies: Partial<Record<string, { name: string; symbol: string }>>;
- languages: Partial<Record<string, string>>;
- cca2: string;
+  currencies: Partial<Record<string, { name: string; symbol: string }>>;
+  languages: Partial<Record<string, string>>;
+  cca2: string;
 };
 
 export async function getCountryCode() {
@@ -27,21 +27,16 @@ export function getTimezones() {
   return timezones;
 }
 
-
-
 export async function getCurrency() {
   const countryCode = await getCountryCode();
   return currencies[countryCode as keyof typeof currencies];
 }
 
-
-
-
 export async function getDateFormat() {
   const country = getCountryCode();
 
   // US uses MM/dd/yyyy
-  if (await country === "US") {
+  if ((await country) === "US") {
     return "MM/dd/yyyy";
   }
 
@@ -59,15 +54,15 @@ export async function getDateFormat() {
 }
 
 export async function getCountryInfo() {
- const country = await getCountryCode();
- const countryInfo = countries.find((x) => x.cca2 === country) as CountryData;
- const currencyCode = countryInfo && Object.keys(countryInfo.currencies)[0]; 
- const currency = currencyCode && countryInfo.currencies[currencyCode];
- const languages = countryInfo?.languages && Object.values(countryInfo.languages).join(", ");
+  const country = await getCountryCode();
+  const countryInfo = countries.find((x) => x.cca2 === country) as CountryData;
+  const currencyCode = countryInfo && Object.keys(countryInfo.currencies)[0];
+  const currency = currencyCode && countryInfo.currencies[currencyCode];
+  const languages =
+    countryInfo?.languages && Object.values(countryInfo.languages).join(", ");
 
- return { currencyCode, currency, languages };
+  return { currencyCode, currency, languages };
 }
-
 
 export async function isEU() {
   const countryCode = getCountryCode();

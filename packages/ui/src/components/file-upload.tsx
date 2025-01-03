@@ -40,7 +40,7 @@ export function FileUpload({
         onChange(file);
       }
     },
-    [onChange]
+    [onChange],
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -64,7 +64,7 @@ export function FileUpload({
       className={cn(
         "relative flex flex-col items-center justify-center rounded-full border-2 border-dashed p-6 transition-colors",
         isDragActive ? "border-primary bg-muted" : "border-muted-foreground/25",
-        className
+        className,
       )}
       {...props}
     >

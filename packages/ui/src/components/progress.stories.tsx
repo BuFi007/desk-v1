@@ -12,7 +12,8 @@ const meta: Meta<typeof Progress> = {
     layout: "centered",
     docs: {
       description: {
-        component: "A progress indicator component that shows the completion status of a task or process.",
+        component:
+          "A progress indicator component that shows the completion status of a task or process.",
       },
     },
   },
@@ -109,15 +110,13 @@ export const AllVariants: StoryObj<typeof Progress> = {
             <div className="space-y-2">
               <div className="flex justify-between">
                 <Label>Uploading Files...</Label>
-                <span className="text-sm text-muted-foreground">{progress}%</span>
+                <span className="text-sm text-muted-foreground">
+                  {progress}%
+                </span>
               </div>
               <Progress value={progress} />
               <div className="flex gap-2">
-                <Button
-                  size="sm"
-                  onClick={startLoading}
-                  disabled={loading}
-                >
+                <Button size="sm" onClick={startLoading} disabled={loading}>
                   {loading ? (
                     <>
                       <Icons.Refresh className="mr-2 h-4 w-4 animate-spin" />
@@ -147,8 +146,8 @@ export const AllVariants: StoryObj<typeof Progress> = {
           <div className="grid gap-4">
             <div className="space-y-2">
               <Label>Success</Label>
-              <Progress 
-                value={66} 
+              <Progress
+                value={66}
                 className="bg-green-100 dark:bg-green-900/20"
               >
                 <div className="bg-green-500 h-full transition-all" />
@@ -156,8 +155,8 @@ export const AllVariants: StoryObj<typeof Progress> = {
             </div>
             <div className="space-y-2">
               <Label>Warning</Label>
-              <Progress 
-                value={33} 
+              <Progress
+                value={33}
                 className="bg-yellow-100 dark:bg-yellow-900/20"
               >
                 <div className="bg-yellow-500 h-full transition-all" />
@@ -165,10 +164,7 @@ export const AllVariants: StoryObj<typeof Progress> = {
             </div>
             <div className="space-y-2">
               <Label>Error</Label>
-              <Progress 
-                value={45} 
-                className="bg-red-100 dark:bg-red-900/20"
-              >
+              <Progress value={45} className="bg-red-100 dark:bg-red-900/20">
                 <div className="bg-red-500 h-full transition-all" />
               </Progress>
             </div>
@@ -212,7 +208,9 @@ export const Indeterminate: StoryObj<typeof Progress> = {
 export const FileUpload: StoryObj<typeof Progress> = {
   render: () => {
     const [progress, setProgress] = useState(0);
-    const [status, setStatus] = useState<"idle" | "uploading" | "complete">("idle");
+    const [status, setStatus] = useState<"idle" | "uploading" | "complete">(
+      "idle",
+    );
 
     const startUpload = () => {
       setStatus("uploading");

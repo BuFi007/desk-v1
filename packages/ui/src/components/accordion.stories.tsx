@@ -16,7 +16,8 @@ const meta: Meta<typeof Accordion> = {
     layout: "centered",
     docs: {
       description: {
-        component: "An accordion component for organizing content in collapsible sections.",
+        component:
+          "An accordion component for organizing content in collapsible sections.",
       },
     },
   },
@@ -88,7 +89,9 @@ export const AllVariants: Story = {
             <AccordionTrigger className="flex gap-2">
               <Calendar className="h-4 w-4" />
               <span>Upcoming Events</span>
-              <Badge variant="secondary" className="ml-auto mr-4">New</Badge>
+              <Badge variant="secondary" className="ml-auto mr-4">
+                New
+              </Badge>
             </AccordionTrigger>
             <AccordionContent>
               <div className="space-y-4">

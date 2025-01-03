@@ -3,7 +3,12 @@
 import { unstable_cache } from "next/cache";
 import { cache } from "react";
 import { createClient } from "../client/server";
-import { getPrimaryTeamQuery, getTeamNameQuery, getUserQuery, getUserTeamsQuery } from "./index";
+import {
+  getPrimaryTeamQuery,
+  getTeamNameQuery,
+  getUserQuery,
+  getUserTeamsQuery,
+} from "./index";
 
 // Cache per request
 export const getSession = cache(async () => {
@@ -37,7 +42,7 @@ export const getUser = cache(async () => {
       tags: [`user_${userId}`],
       // 30 minutes, jwt expires in 1 hour
       revalidate: 1800,
-    }
+    },
   )();
 });
 
@@ -73,11 +78,11 @@ export const getTeamName = cache(async (teamId: string) => {
     {
       tags: [`team_${teamId}`],
       revalidate: 1800,
-    }
+    },
   )();
 });
 
-export const getPrimaryTeam  = cache(async (userId: string) => {
+export const getPrimaryTeam = cache(async (userId: string) => {
   if (!userId) return null;
 
   const supabase = await createClient();
@@ -90,11 +95,11 @@ export const getPrimaryTeam  = cache(async (userId: string) => {
     {
       tags: [`primary_team_${userId}`],
       revalidate: 1800,
-    }
+    },
   )();
 });
 
-export const getUserTeams  = cache(async (userId: string) => {
+export const getUserTeams = cache(async (userId: string) => {
   if (!userId) return null;
 
   const supabase = await createClient();
@@ -107,7 +112,6 @@ export const getUserTeams  = cache(async (userId: string) => {
     {
       tags: [`user_teams_${userId}`],
       revalidate: 1800,
-    }
+    },
   )();
 });
-

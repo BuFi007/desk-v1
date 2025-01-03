@@ -1,12 +1,12 @@
-import { Button } from "../../button"
+import { Button } from "../../button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "../../card"
-import { SidebarInput } from "../../sidebar"
+} from "../../card";
+import { SidebarInput } from "../../sidebar";
 
 export function SidebarOptInForm() {
   return (
@@ -29,5 +29,5 @@ export function SidebarOptInForm() {
         </CardContent>
       </form>
     </Card>
-  )
+  );
 }

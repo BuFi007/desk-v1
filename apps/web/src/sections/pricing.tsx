@@ -1,4 +1,4 @@
-import PricingPlan from '@/components/pricing-plan'
+import PricingPlan from "@/components/pricing-plan";
 
 export default function Pricing() {
   return (
@@ -8,45 +8,45 @@ export default function Pricing() {
           Pricing
         </h2>
         <div className="grid grid-cols-3 gap-8 w900:mx-auto w900:w-2/3 w900:grid-cols-1 w500:w-full">
-            <PricingPlan
-              planName="Freelancer"
-              description="Perfect for independent professionals"
-              price="9.99"
-              perks={[
-                'Cross-border payments',
-                'Basic invoicing tools',
-                'Project management lite',
-                'Standard support'
-              ]}
-            />
-            <PricingPlan
-              planName="Business"
-              description="Ideal for growing teams"
-              price="29.99"
-              perks={[
-                'Unlimited transactions',
-                'Advanced DeFi tools',
-                'Team collaboration features',
-                'Priority support',
-                'Custom invoicing'
-              ]}
-              mostPopular
-            />
-            <PricingPlan
-              planName="Enterprise"
-              description="For established organizations"
-              price="99.99"
-              perks={[
-                'Custom payment solutions',
-                'Advanced analytics',
-                'Dedicated account manager',
-                'API access',
-                'Custom integrations',
-                'Enhanced security features'
-              ]}
-            />
+          <PricingPlan
+            planName="Freelancer"
+            description="Perfect for independent professionals"
+            price="9.99"
+            perks={[
+              "Cross-border payments",
+              "Basic invoicing tools",
+              "Project management lite",
+              "Standard support",
+            ]}
+          />
+          <PricingPlan
+            planName="Business"
+            description="Ideal for growing teams"
+            price="29.99"
+            perks={[
+              "Unlimited transactions",
+              "Advanced DeFi tools",
+              "Team collaboration features",
+              "Priority support",
+              "Custom invoicing",
+            ]}
+            mostPopular
+          />
+          <PricingPlan
+            planName="Enterprise"
+            description="For established organizations"
+            price="99.99"
+            perks={[
+              "Custom payment solutions",
+              "Advanced analytics",
+              "Dedicated account manager",
+              "API access",
+              "Custom integrations",
+              "Enhanced security features",
+            ]}
+          />
         </div>
       </div>
     </section>
-  )
+  );
 }

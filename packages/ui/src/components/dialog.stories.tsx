@@ -29,9 +29,7 @@ export const MainDialog: StoryObj = {
                 A simple dialog with title and description.
               </Dialog.DialogDescription>
             </Dialog.DialogHeader>
-            <div className="py-4">
-              This is the main content of the dialog.
-            </div>
+            <div className="py-4">This is the main content of the dialog.</div>
             <Dialog.DialogFooter>
               <Dialog.DialogClose asChild>
                 <Button>Close</Button>
@@ -84,9 +82,13 @@ export const MainDialog: StoryObj = {
               <Dialog.DialogTrigger asChild>
                 <Button variant="outline">{size.toUpperCase()}</Button>
               </Dialog.DialogTrigger>
-              <Dialog.DialogContent size={size as "sm" | "md" | "lg" | "xl" | "full"}>
+              <Dialog.DialogContent
+                size={size as "sm" | "md" | "lg" | "xl" | "full"}
+              >
                 <Dialog.DialogHeader>
-                  <Dialog.DialogTitle>{size.toUpperCase()} Dialog</Dialog.DialogTitle>
+                  <Dialog.DialogTitle>
+                    {size.toUpperCase()} Dialog
+                  </Dialog.DialogTitle>
                   <Dialog.DialogDescription>
                     This is a {size} sized dialog.
                   </Dialog.DialogDescription>
@@ -153,9 +155,15 @@ export const ZDialog: StoryObj = {
               <div className="grid gap-2">
                 <Label>Permission level</Label>
                 <div className="flex gap-4">
-                  <Button variant="outline" size="sm">View</Button>
-                  <Button variant="outline" size="sm">Edit</Button>
-                  <Button variant="outline" size="sm">Admin</Button>
+                  <Button variant="outline" size="sm">
+                    View
+                  </Button>
+                  <Button variant="outline" size="sm">
+                    Edit
+                  </Button>
+                  <Button variant="outline" size="sm">
+                    Admin
+                  </Button>
                 </div>
               </div>
             </div>

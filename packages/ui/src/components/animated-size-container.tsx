@@ -30,7 +30,7 @@ const AnimatedSizeContainer = forwardRef<
       children,
       ...rest
     }: AnimatedSizeContainerProps,
-    forwardedRef
+    forwardedRef,
   ) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const resizeObserverEntry = useResizeObserver(containerRef);
@@ -58,7 +58,7 @@ const AnimatedSizeContainer = forwardRef<
         </div>
       </motion.div>
     );
-  }
+  },
 );
 
 AnimatedSizeContainer.displayName = "AnimatedSizeContainer";

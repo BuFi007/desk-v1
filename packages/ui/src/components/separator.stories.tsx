@@ -118,19 +118,23 @@ export const AllVariants: StoryObj<typeof Separator> = {
           </div>
         </div>
       </section>
-      
+
       {/* Content Groups */}
       <section className="space-y-4">
         <h3 className="text-lg font-semibold">Content Groups</h3>
         <div className="space-y-4 w-[300px]">
           <div className="space-y-2">
             <h4 className="font-medium">Section 1</h4>
-            <p className="text-sm text-muted-foreground">Content for section 1</p>
+            <p className="text-sm text-muted-foreground">
+              Content for section 1
+            </p>
           </div>
           <Separator className="my-4" />
           <div className="space-y-2">
             <h4 className="font-medium">Section 2</h4>
-            <p className="text-sm text-muted-foreground">Content for section 2</p>
+            <p className="text-sm text-muted-foreground">
+              Content for section 2
+            </p>
           </div>
         </div>
       </section>

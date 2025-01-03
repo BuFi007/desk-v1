@@ -39,7 +39,9 @@ export const AllVariants: StoryObj<typeof ShinyBadge> = {
     <div className="flex flex-col items-center gap-8 p-6">
       {/* Basic Examples */}
       <section className="space-y-4">
-        <h3 className="text-lg font-semibold text-center mb-4">Basic Examples</h3>
+        <h3 className="text-lg font-semibold text-center mb-4">
+          Basic Examples
+        </h3>
         <div className="flex flex-wrap gap-4 justify-center">
           <ShinyBadge text="New Feature" />
           <ShinyBadge text="Premium" />
@@ -59,17 +61,19 @@ export const AllVariants: StoryObj<typeof ShinyBadge> = {
 
       {/* Custom Colors */}
       <section className="space-y-4">
-        <h3 className="text-lg font-semibold text-center mb-4">Custom Colors</h3>
+        <h3 className="text-lg font-semibold text-center mb-4">
+          Custom Colors
+        </h3>
         <div className="flex flex-wrap gap-4 justify-center">
-          <ShinyBadge 
+          <ShinyBadge
             text="Success"
             className="[&>span>span]:bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(74,222,128,0.6)_0%,rgba(74,222,128,0)_75%)] [&>span:last-child]:bg-gradient-to-r [&>span:last-child]:from-green-400/0 [&>span:last-child]:via-green-400/90 [&>span:last-child]:to-green-400/0"
           />
-          <ShinyBadge 
+          <ShinyBadge
             text="Warning"
             className="[&>span>span]:bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(234,179,8,0.6)_0%,rgba(234,179,8,0)_75%)] [&>span:last-child]:bg-gradient-to-r [&>span:last-child]:from-yellow-400/0 [&>span:last-child]:via-yellow-400/90 [&>span:last-child]:to-yellow-400/0"
           />
-          <ShinyBadge 
+          <ShinyBadge
             text="Error"
             className="[&>span>span]:bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(239,68,68,0.6)_0%,rgba(239,68,68,0)_75%)] [&>span:last-child]:bg-gradient-to-r [&>span:last-child]:from-red-400/0 [&>span:last-child]:via-red-400/90 [&>span:last-child]:to-red-400/0"
           />
@@ -78,7 +82,9 @@ export const AllVariants: StoryObj<typeof ShinyBadge> = {
 
       {/* With Icons */}
       <section className="space-y-4">
-        <h3 className="text-lg font-semibold text-center mb-4">With Custom Content</h3>
+        <h3 className="text-lg font-semibold text-center mb-4">
+          With Custom Content
+        </h3>
         <div className="flex flex-wrap gap-4 justify-center items-center">
           <ShinyBadge
             text={
@@ -89,43 +95,43 @@ export const AllVariants: StoryObj<typeof ShinyBadge> = {
             }
           />
           <ShinyBadge
-            text={
-              <span className="flex items-center gap-2">
-                ⭐ Premium
-              </span>
-            }
+            text={<span className="flex items-center gap-2">⭐ Premium</span>}
           />
           <ShinyBadge
-            text={
-              <span className="flex items-center gap-2">
-                🚀 Boost
-              </span>
-            }
+            text={<span className="flex items-center gap-2">🚀 Boost</span>}
           />
         </div>
       </section>
 
       {/* Interactive Examples */}
       <section className="space-y-4">
-        <h3 className="text-lg font-semibold text-center mb-4">Interactive Examples</h3>
+        <h3 className="text-lg font-semibold text-center mb-4">
+          Interactive Examples
+        </h3>
         <div className="flex flex-wrap gap-4 justify-center">
           <div className="flex flex-col items-center gap-2">
             <ShinyBadge text="Hover me slowly" />
-            <span className="text-sm text-muted-foreground">See the shine effect</span>
+            <span className="text-sm text-muted-foreground">
+              See the shine effect
+            </span>
           </div>
           <div className="flex flex-col items-center gap-2">
-            <ShinyBadge 
+            <ShinyBadge
               text="Click me"
               className="active:scale-95 transition-transform"
             />
-            <span className="text-sm text-muted-foreground">With click effect</span>
+            <span className="text-sm text-muted-foreground">
+              With click effect
+            </span>
           </div>
         </div>
       </section>
 
       {/* Group Example */}
       <section className="space-y-4">
-        <h3 className="text-lg font-semibold text-center mb-4">Group Example</h3>
+        <h3 className="text-lg font-semibold text-center mb-4">
+          Group Example
+        </h3>
         <div className="inline-flex flex-col items-center gap-2 border rounded-lg p-4">
           <ShinyBadge text="Pro Features" />
           <div className="text-sm text-muted-foreground space-y-2">

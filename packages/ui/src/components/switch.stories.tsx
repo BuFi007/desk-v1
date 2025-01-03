@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Switch } from "./switch";
-import { 
-  Settings, 
-  Bell, 
-  Moon, 
-  Sun, 
-  Palette, 
-  CloudOff, 
-  Lock, 
-  Globe 
+import {
+  Settings,
+  Bell,
+  Moon,
+  Sun,
+  Palette,
+  CloudOff,
+  Lock,
+  Globe,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -64,18 +64,21 @@ export const AllVariants: Story = {
 
         {/* Contextual Usage */}
         <section>
-          <h3 className="text-lg font-semibold mb-4">Contextual Applications</h3>
+          <h3 className="text-lg font-semibold mb-4">
+            Contextual Applications
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Dark Mode Toggle */}
             <div className="flex items-center justify-between p-4 bg-background border rounded-lg">
               <div className="flex items-center space-x-2">
-                {darkMode ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+                {darkMode ? (
+                  <Moon className="h-5 w-5" />
+                ) : (
+                  <Sun className="h-5 w-5" />
+                )}
                 <span>Dark Mode</span>
               </div>
-              <Switch 
-                checked={darkMode}
-                onCheckedChange={setDarkMode}
-              />
+              <Switch checked={darkMode} onCheckedChange={setDarkMode} />
             </div>
 
             {/* Notifications */}
@@ -84,7 +87,7 @@ export const AllVariants: Story = {
                 <Bell className="h-5 w-5" />
                 <span>Notifications</span>
               </div>
-              <Switch 
+              <Switch
                 checked={notifications}
                 onCheckedChange={setNotifications}
               />
@@ -93,13 +96,14 @@ export const AllVariants: Story = {
             {/* Cloud Sync */}
             <div className="flex items-center justify-between p-4 bg-background border rounded-lg">
               <div className="flex items-center space-x-2">
-                {cloudSync ? <Globe className="h-5 w-5" /> : <CloudOff className="h-5 w-5" />}
+                {cloudSync ? (
+                  <Globe className="h-5 w-5" />
+                ) : (
+                  <CloudOff className="h-5 w-5" />
+                )}
                 <span>Cloud Sync</span>
               </div>
-              <Switch 
-                checked={cloudSync}
-                onCheckedChange={setCloudSync}
-              />
+              <Switch checked={cloudSync} onCheckedChange={setCloudSync} />
             </div>
           </div>
         </section>
@@ -111,15 +115,23 @@ export const AllVariants: Story = {
             {/* Profile Visibility */}
             <div className="flex items-center justify-between p-4 bg-background border rounded-lg">
               <div className="flex items-center space-x-2">
-                {publicProfile ? <Globe className="h-5 w-5" /> : <Lock className="h-5 w-5" />}
+                {publicProfile ? (
+                  <Globe className="h-5 w-5" />
+                ) : (
+                  <Lock className="h-5 w-5" />
+                )}
                 <div>
-                  <span className="block text-sm font-medium">Public Profile</span>
+                  <span className="block text-sm font-medium">
+                    Public Profile
+                  </span>
                   <span className="text-xs text-muted-foreground">
-                    {publicProfile ? 'Visible to everyone' : 'Only visible to you'}
+                    {publicProfile
+                      ? "Visible to everyone"
+                      : "Only visible to you"}
                   </span>
                 </div>
               </div>
-              <Switch 
+              <Switch
                 checked={publicProfile}
                 onCheckedChange={setPublicProfile}
               />
@@ -130,7 +142,9 @@ export const AllVariants: Story = {
               <div className="flex items-center space-x-2">
                 <Settings className="h-5 w-5" />
                 <div>
-                  <span className="block text-sm font-medium">Advanced Settings</span>
+                  <span className="block text-sm font-medium">
+                    Advanced Settings
+                  </span>
                   <span className="text-xs text-muted-foreground">
                     Show advanced configuration options
                   </span>

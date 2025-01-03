@@ -27,7 +27,7 @@ export function TeamSwitcher() {
   const { isMobile } = useSidebar();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
-  
+
   const currentTeam = useTeamContext((state) => state.data);
   const teams = useTeamContext((state) => state.teams);
 
@@ -59,10 +59,10 @@ export function TeamSwitcher() {
             >
               <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                 {currentTeam?.team.logo_url && (
-                  <img 
-                    src={currentTeam.team.logo_url} 
+                  <img
+                    src={currentTeam.team.logo_url}
                     alt={currentTeam.team.name}
-                    className="size-4 object-contain" 
+                    className="size-4 object-contain"
                   />
                 )}
               </div>
@@ -71,7 +71,9 @@ export function TeamSwitcher() {
                   {currentTeam?.team.name || "Select Team"}
                 </span>
                 <span className="truncate text-xs">
-                  {currentTeam ? `Role: ${currentTeam.role}` : "No team selected"}
+                  {currentTeam
+                    ? `Role: ${currentTeam.role}`
+                    : "No team selected"}
                 </span>
               </div>
               <ChevronsUpDown className="ml-auto" />
@@ -95,10 +97,10 @@ export function TeamSwitcher() {
               >
                 <div className="flex size-6 items-center justify-center rounded-sm border">
                   {team.team.logo_url ? (
-                    <img 
-                      src={team.team.logo_url} 
+                    <img
+                      src={team.team.logo_url}
                       alt={team.team.name}
-                      className="size-4 shrink-0" 
+                      className="size-4 shrink-0"
                     />
                   ) : (
                     <div className="size-4 shrink-0 bg-muted" />

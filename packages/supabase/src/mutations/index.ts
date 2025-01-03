@@ -8,7 +8,7 @@ import type { Database, Tables, TablesUpdate } from "../types";
 
 export async function updateUser(
   userId: string,
-  data: TablesUpdate<"users">
+  data: TablesUpdate<"users">,
 ): Promise<PostgrestSingleResponse<{ id: string }>> {
   const supabase = await createClient();
 
@@ -30,7 +30,7 @@ export async function updateUser(
 export async function addUserToTeam(
   userId: string,
   teamId: string,
-  role: "owner" | "member" = "member"
+  role: "owner" | "member" = "member",
 ): Promise<PostgrestSingleResponse<{ user_id: string; team_id: string }>> {
   const supabase = await createClient();
 
@@ -95,7 +95,7 @@ type UpdateUserTeamRoleParams = {
 
 export async function updateUserTeamRole(
   supabase: Client,
-  params: UpdateUserTeamRoleParams
+  params: UpdateUserTeamRoleParams,
 ) {
   const { role, userId, teamId } = params;
 
@@ -117,7 +117,7 @@ type DeleteTeamMemberParams = {
 
 export async function deleteTeamMember(
   supabase: Client,
-  params: DeleteTeamMemberParams
+  params: DeleteTeamMemberParams,
 ) {
   return supabase
     .from("users_on_team")
@@ -211,15 +211,15 @@ export async function joinTeamByInviteCode(supabase: Client, code: string) {
 
 export async function switchPrimaryTeam(
   supabase: Client,
-  params: { userId: string; teamId: string }
+  params: { userId: string; teamId: string },
 ) {
   const { userId, teamId } = params;
-  
+
   await supabase
     .from("users_on_team")
     .update({ is_primary_team: false })
     .eq("user_id", userId);
-    
+
   return supabase
     .from("users_on_team")
     .update({ is_primary_team: true })

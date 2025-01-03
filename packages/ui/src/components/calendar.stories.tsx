@@ -2,7 +2,11 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Calendar } from "./calendar";
 import { useState } from "react";
 import { addDays, isBefore, isToday } from "date-fns";
-import { DateRange, SelectRangeEventHandler, SelectMultipleEventHandler } from "react-day-picker";
+import {
+  DateRange,
+  SelectRangeEventHandler,
+  SelectMultipleEventHandler,
+} from "react-day-picker";
 
 const meta: Meta<typeof Calendar> = {
   title: "Components/Calendar",
@@ -11,7 +15,8 @@ const meta: Meta<typeof Calendar> = {
     layout: "centered",
     docs: {
       description: {
-        component: "A calendar component with various selection modes and customization options.",
+        component:
+          "A calendar component with various selection modes and customization options.",
       },
     },
   },
@@ -37,26 +42,29 @@ const RangeCalendar = () => {
     setRange(range);
   };
 
-  return <Calendar
-    mode="range"
-    selected={range}
-    onSelect={handleRangeSelect}
-  />;
+  return (
+    <Calendar mode="range" selected={range} onSelect={handleRangeSelect} />
+  );
 };
 
 // Helper component for multiple selection
 const MultipleCalendar = () => {
-  const [dates, setDates] = useState<Date[]>([new Date(), addDays(new Date(), 2)]);
+  const [dates, setDates] = useState<Date[]>([
+    new Date(),
+    addDays(new Date(), 2),
+  ]);
 
   const handleMultipleSelect: SelectMultipleEventHandler = (days) => {
     setDates(days || []);
   };
 
-  return <Calendar
-    mode="multiple"
-    selected={dates}
-    onSelect={handleMultipleSelect}
-  />;
+  return (
+    <Calendar
+      mode="multiple"
+      selected={dates}
+      onSelect={handleMultipleSelect}
+    />
+  );
 };
 
 export const Default: Story = {
@@ -100,8 +108,8 @@ export const AllVariants: Story = {
             modifiersStyles={{
               today: {
                 fontWeight: "bold",
-                textDecoration: "underline"
-              }
+                textDecoration: "underline",
+              },
             }}
           />
         </div>
@@ -122,10 +130,7 @@ export const AllVariants: Story = {
       <section>
         <h3 className="text-lg font-semibold mb-4">Multiple Months</h3>
         <div className="flex flex-col items-center">
-          <Calendar
-            numberOfMonths={2}
-            defaultMonth={new Date()}
-          />
+          <Calendar numberOfMonths={2} defaultMonth={new Date()} />
         </div>
       </section>
 
@@ -169,12 +174,7 @@ export const DisabledDates: Story = {
 };
 
 export const TwoMonths: Story = {
-  render: () => (
-    <Calendar
-      numberOfMonths={2}
-      defaultMonth={new Date()}
-    />
-  ),
+  render: () => <Calendar numberOfMonths={2} defaultMonth={new Date()} />,
 };
 
 export const WithFooter: Story = {

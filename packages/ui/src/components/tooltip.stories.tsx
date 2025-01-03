@@ -1,19 +1,19 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { 
-  Tooltip, 
-  TooltipTrigger, 
-  TooltipContent, 
-  TooltipProvider 
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipProvider,
 } from "./tooltip";
-import { 
-  Info, 
-  HelpCircle, 
-  MousePointer, 
-  Save, 
-  Delete, 
-  Edit, 
-  Copy, 
-  Share2 
+import {
+  Info,
+  HelpCircle,
+  MousePointer,
+  Save,
+  Delete,
+  Edit,
+  Copy,
+  Share2,
 } from "lucide-react";
 import { Button } from "./button";
 
@@ -24,14 +24,15 @@ const meta: Meta<typeof Tooltip> = {
     layout: "centered",
     docs: {
       description: {
-        component: "A flexible tooltip component for providing additional information on hover.",
+        component:
+          "A flexible tooltip component for providing additional information on hover.",
       },
     },
   },
   argTypes: {
     open: {
-      control: 'boolean',
-      description: 'Manually control tooltip visibility',
+      control: "boolean",
+      description: "Manually control tooltip visibility",
     },
   },
 };
@@ -47,9 +48,7 @@ export const Default: Story = {
         <TooltipTrigger asChild>
           <Button variant="outline">Hover me</Button>
         </TooltipTrigger>
-        <TooltipContent>
-          This is a simple tooltip
-        </TooltipContent>
+        <TooltipContent>This is a simple tooltip</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   ),
@@ -68,33 +67,25 @@ export const AllVariants: Story = {
               <TooltipTrigger asChild>
                 <Button variant="outline">Top</Button>
               </TooltipTrigger>
-              <TooltipContent side="top">
-                Tooltip on top
-              </TooltipContent>
+              <TooltipContent side="top">Tooltip on top</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button variant="outline">Right</Button>
               </TooltipTrigger>
-              <TooltipContent side="right">
-                Tooltip on right
-              </TooltipContent>
+              <TooltipContent side="right">Tooltip on right</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button variant="outline">Bottom</Button>
               </TooltipTrigger>
-              <TooltipContent side="bottom">
-                Tooltip on bottom
-              </TooltipContent>
+              <TooltipContent side="bottom">Tooltip on bottom</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button variant="outline">Left</Button>
               </TooltipTrigger>
-              <TooltipContent side="left">
-                Tooltip on left
-              </TooltipContent>
+              <TooltipContent side="left">Tooltip on left</TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </div>
@@ -112,9 +103,7 @@ export const AllVariants: Story = {
                   Information
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>
-                Click for more details
-              </TooltipContent>
+              <TooltipContent>Click for more details</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -123,9 +112,7 @@ export const AllVariants: Story = {
                   Help
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>
-                Need assistance? Click here
-              </TooltipContent>
+              <TooltipContent>Need assistance? Click here</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -134,9 +121,7 @@ export const AllVariants: Story = {
                   Interactions
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>
-                Learn about user interactions
-              </TooltipContent>
+              <TooltipContent>Learn about user interactions</TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </div>
@@ -154,9 +139,7 @@ export const AllVariants: Story = {
                   Save
                 </Button>
               </TooltipTrigger>
-              <TooltipContent>
-                Save current changes
-              </TooltipContent>
+              <TooltipContent>Save current changes</TooltipContent>
             </Tooltip>
             <Tooltip>
               <TooltipTrigger asChild>
@@ -176,9 +159,7 @@ export const AllVariants: Story = {
                   Edit
                 </Button>
               </TooltipTrigger>
-              <TooltipContent side="left">
-                Modify current item
-              </TooltipContent>
+              <TooltipContent side="left">Modify current item</TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </div>
@@ -200,7 +181,8 @@ export const AllVariants: Story = {
                 <div className="max-w-[200px]">
                   <h4 className="font-bold mb-1">Copy to Clipboard</h4>
                   <p className="text-xs">
-                    Click to copy the current link. This will save the URL to your clipboard.
+                    Click to copy the current link. This will save the URL to
+                    your clipboard.
                   </p>
                 </div>
               </TooltipContent>
@@ -216,7 +198,8 @@ export const AllVariants: Story = {
                 <div className="max-w-[250px]">
                   <h4 className="font-bold mb-1">Share Options</h4>
                   <p className="text-xs">
-                    Quickly share this content across multiple platforms with a single click.
+                    Quickly share this content across multiple platforms with a
+                    single click.
                   </p>
                 </div>
               </TooltipContent>
@@ -238,9 +221,7 @@ export const Playground: Story = {
         <TooltipTrigger asChild>
           <Button variant="outline">Playground Tooltip</Button>
         </TooltipTrigger>
-        <TooltipContent>
-          Customize me in the controls panel
-        </TooltipContent>
+        <TooltipContent>Customize me in the controls panel</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   ),
@@ -257,9 +238,9 @@ export const LongContentTooltip: Story = {
           <div>
             <h4 className="font-bold mb-2">Detailed Tooltip Information</h4>
             <p className="text-xs">
-              This is a comprehensive tooltip that demonstrates how longer 
-              content can be displayed while maintaining readability and 
-              visual appeal across different screen sizes.
+              This is a comprehensive tooltip that demonstrates how longer
+              content can be displayed while maintaining readability and visual
+              appeal across different screen sizes.
             </p>
           </div>
         </TooltipContent>

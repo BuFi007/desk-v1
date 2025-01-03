@@ -121,7 +121,9 @@ export const AllVariants: StoryObj<typeof Popover> = {
               <div className="flex items-center gap-2">
                 <Icons.Notifications className="h-4 w-4" />
                 <div className="space-y-1">
-                  <h4 className="text-sm font-medium leading-none">Notifications</h4>
+                  <h4 className="text-sm font-medium leading-none">
+                    Notifications
+                  </h4>
                   <p className="text-sm text-muted-foreground">
                     Manage your notification preferences.
                   </p>

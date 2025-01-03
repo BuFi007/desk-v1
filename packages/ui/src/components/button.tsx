@@ -50,7 +50,7 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
+  },
 );
 
 export interface ButtonProps
@@ -74,7 +74,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       recordingState,
       ...props
     },
-    ref
+    ref,
   ) => {
     const Comp = asChild ? Slot : "button";
     const { activeTab } = useTabStore();
@@ -109,7 +109,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             buttonVariants({ variant, size, className }),
             isActive
               ? "bg-gradient-to-r from-indigo-200 via-pink-200 to-purple-200"
-              : ""
+              : "",
           )}
           ref={ref}
           {...props}
@@ -119,7 +119,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
               "block rounded-md px-4 py-2 font-medium transition-colors",
               isActive
                 ? "bg-transparent text-accent-foreground"
-                : "bg-background hover:bg-transparent hover:text-accent-foreground"
+                : "bg-background hover:bg-transparent hover:text-accent-foreground",
             )}
           >
             {props.children}
@@ -135,7 +135,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             buttonVariants({ variant, size, className }),
             isActive
               ? "bg-gradient-to-r from-indigo-200 via-pink-200 to-purple-200"
-              : ""
+              : "",
           )}
           ref={ref}
           {...props}
@@ -145,7 +145,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
               "block rounded-md px-4 py-2 font-medium transition-colors",
               isActive
                 ? "bg-transparent text-accent-foreground"
-                : "bg-background hover:bg-transparent hover:text-accent-foreground"
+                : "bg-background hover:bg-transparent hover:text-accent-foreground",
             )}
           >
             {props.children}
@@ -161,7 +161,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       />
     );
-  }
+  },
 );
 
 Button.displayName = "Button";

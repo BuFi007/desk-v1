@@ -1,10 +1,5 @@
 import { create } from "zustand";
-import {
-  PaymentStore,
-  ViewTab,
-  MarketStore,
-  PaymentTab
-} from "./interface";
+import { PaymentStore, ViewTab, MarketStore, PaymentTab } from "./interface";
 import { Token, TabState, Chain } from "./types";
 import { persist } from "zustand/middleware";
 
@@ -34,13 +29,13 @@ export const useTabStore = create<TabState>()(
       resetTab: () => set({ activeTab: "moneyMarket" }),
     }),
     {
-      name: 'tab-storage',
+      name: "tab-storage",
       onRehydrateStorage: () => (state) => {
         // Reset state on page load
         if (state) {
           state.resetTab();
         }
       },
-    }
-  )
+    },
+  ),
 );
