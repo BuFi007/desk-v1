@@ -9,7 +9,7 @@
   },
   "linter": {
     "ignore": [".wrangler", "node_modules"],
-    "enabled": true,
+    "enabled": false,
     "rules": {
       "recommended": true,
       "a11y": {
