@@ -18,7 +18,7 @@ export function Header() {
 
       <Link href="/">
         <Image
-          src="/logo.png"
+          src="/BooFi-icon.png"
           alt="bu logo"
           width={60}
           quality={100}
