@@ -12,7 +12,7 @@ export const useDestinationToken = () => {
       try {
         const destinationTokens = getTokensForChain(
           Number(destinationChainId),
-          "tokens"
+          "tokens",
         );
 
         if (!destinationTokens) {
@@ -24,18 +24,18 @@ export const useDestinationToken = () => {
         let matchingToken;
         if (Array.isArray(destinationTokens)) {
           matchingToken = destinationTokens.filter(
-            (token: Token) => token.symbol === tokenSymbol
+            (token: Token) => token.symbol === tokenSymbol,
           );
         } else {
           console.warn(
-            `Destination tokens is not an array for chain ${destinationChainId}`
+            `Destination tokens is not an array for chain ${destinationChainId}`,
           );
           return NATIVE_TOKEN_ADDRESS;
         }
 
         if (!matchingToken.length) {
           console.warn(
-            `No matching token found for ${tokenSymbol} on chain ${destinationChainId}`
+            `No matching token found for ${tokenSymbol} on chain ${destinationChainId}`,
           );
           return NATIVE_TOKEN_ADDRESS;
         }

@@ -30,7 +30,7 @@ const ContextMenuSubTrigger = React.forwardRef<
     className={cn(
       "flex cursor-default select-none items-center rounded-base border-2 border-transparent bg-main px-2 py-1.5 text-sm font-base text-mtext outline-none focus:border-border data-[state=open]:border-border",
       inset && "pl-8",
-      className
+      className,
     )}
     {...props}
   >
@@ -48,7 +48,7 @@ const ContextMenuSubContent = React.forwardRef<
     ref={ref}
     className={cn(
       "z-50 min-w-[8rem] overflow-hidden rounded-base border-2 border-border bg-main p-1 font-base text-mtext data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-      className
+      className,
     )}
     {...props}
   />
@@ -64,7 +64,7 @@ const ContextMenuContent = React.forwardRef<
       ref={ref}
       className={cn(
         "z-50 min-w-[8rem] overflow-hidden rounded-base border-2 border-border bg-main p-1 font-base text-mtext shadow-md animate-in fade-in-80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
-        className
+        className,
       )}
       {...props}
     />
@@ -83,7 +83,7 @@ const ContextMenuItem = React.forwardRef<
     className={cn(
       "relative flex cursor-default select-none items-center rounded-base border-2 border-transparent px-2 py-1.5 text-sm font-base outline-none focus:border-border focus:text-mtext data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       inset && "pl-8",
-      className
+      className,
     )}
     {...props}
   />
@@ -98,7 +98,7 @@ const ContextMenuCheckboxItem = React.forwardRef<
     ref={ref}
     className={cn(
       "relative flex cursor-default select-none items-center rounded-base border-2 border-transparent py-1.5 pl-8 pr-2 text-sm font-base text-mtext outline-none focus:border-border data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-      className
+      className,
     )}
     checked={checked}
     {...props}
@@ -122,7 +122,7 @@ const ContextMenuRadioItem = React.forwardRef<
     ref={ref}
     className={cn(
       "relative flex cursor-default select-none items-center rounded-base border-2 border-transparent py-1.5 pl-8 pr-2 text-sm font-base text-mtext outline-none focus:border-border data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
-      className
+      className,
     )}
     {...props}
   >
@@ -147,7 +147,7 @@ const ContextMenuLabel = React.forwardRef<
     className={cn(
       "px-2 py-1.5 text-sm font-base text-mtext",
       inset && "pl-8",
-      className
+      className,
     )}
     {...props}
   />
@@ -174,7 +174,7 @@ const ContextMenuShortcut = ({
     <span
       className={cn(
         "ml-auto text-xs font-base tracking-widest text-mtext",
-        className
+        className,
       )}
       {...props}
     />

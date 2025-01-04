@@ -56,7 +56,7 @@ export function InvoiceSearchFilter({ customers: customersData }: Props) {
     {
       enableOnFormTags: true,
       enabled: Boolean(prompt),
-    }
+    },
   );
 
   useHotkeys("meta+s", (evt) => {
@@ -116,7 +116,7 @@ export function InvoiceSearchFilter({ customers: customersData }: Props) {
               className={cn(
                 "absolute z-10 right-3 top-[10px] opacity-50 transition-opacity duration-300 hover:opacity-100",
                 // hasValidFilters && "opacity-100",
-                isOpen && "opacity-100"
+                isOpen && "opacity-100",
               )}
             >
               <Icons.Filter />

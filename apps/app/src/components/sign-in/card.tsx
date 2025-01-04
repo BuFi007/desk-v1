@@ -7,6 +7,7 @@ import { Card } from "@bu/ui/card";
 import { Checkbox } from "@bu/ui/checkbox";
 import { Input } from "@bu/ui/input";
 import { Label } from "@bu/ui/label";
+import Link from "next/link";
 
 const SignInCard = () => {
   return (
@@ -83,12 +84,12 @@ const SignInCard = () => {
                   Remember me
                 </label>
               </div>
-              <a
+              <Link
                 href="/forgot-password"
                 className="text-sm font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 hover:underline sm:ml-4"
               >
                 Forgot password?
-              </a>
+              </Link>
             </div>
             <Button
               type="submit"
@@ -103,12 +104,12 @@ const SignInCard = () => {
 
       <div className="mt-6 text-center text-sm text-gray-600 dark:text-gray-300">
         Don&apos;t have an account?{" "}
-        <a
+        <Link
           href="/sign-up"
           className="font-medium text-blue-600 hover:text-blue-500 dark:text-blue-400 dark:hover:text-blue-300 hover:underline"
         >
           Sign up
-        </a>
+        </Link>
       </div>
     </div>
   );

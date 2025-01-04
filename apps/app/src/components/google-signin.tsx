@@ -21,7 +21,7 @@ export function GoogleSignin() {
 
       const redirectTo = new URL(
         "/api/auth/bu/callback",
-        window.location.origin
+        window.location.origin,
       );
       if (returnTo) {
         redirectTo.searchParams.append("return_to", returnTo);
@@ -51,7 +51,7 @@ export function GoogleSignin() {
     } catch (err) {
       console.error("Unexpected error during sign-in:", err);
       setError(
-        err instanceof Error ? err.message : "An unexpected error occurred"
+        err instanceof Error ? err.message : "An unexpected error occurred",
       );
     } finally {
       setLoading(false);

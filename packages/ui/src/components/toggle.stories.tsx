@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Toggle } from "./toggle";
-import { 
-  Bold, 
-  Italic, 
-  Underline, 
-  AlignCenter, 
-  AlignLeft, 
-  AlignRight, 
-  Heart, 
-  Star, 
-  Lock, 
-  Unlock 
+import {
+  Bold,
+  Italic,
+  Underline,
+  AlignCenter,
+  AlignLeft,
+  AlignRight,
+  Heart,
+  Star,
+  Lock,
+  Unlock,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -21,22 +21,23 @@ const meta: Meta<typeof Toggle> = {
     layout: "centered",
     docs: {
       description: {
-        component: "A flexible toggle component with multiple variants and interactions.",
+        component:
+          "A flexible toggle component with multiple variants and interactions.",
       },
     },
   },
   argTypes: {
     variant: {
-      control: { type: 'select', options: ['default', 'outline'] },
-      description: 'Visual style of the toggle',
+      control: { type: "select", options: ["default", "outline"] },
+      description: "Visual style of the toggle",
     },
     size: {
-      control: { type: 'select', options: ['sm', 'default', 'lg'] },
-      description: 'Size of the toggle',
+      control: { type: "select", options: ["sm", "default", "lg"] },
+      description: "Size of the toggle",
     },
     disabled: {
-      control: 'boolean',
-      description: 'Disable the toggle',
+      control: "boolean",
+      description: "Disable the toggle",
     },
   },
 };
@@ -46,7 +47,11 @@ export default meta;
 type Story = StoryObj<typeof Toggle>;
 
 export const Default: Story = {
-  render: () => <Toggle><Bold className="h-4 w-4" /></Toggle>,
+  render: () => (
+    <Toggle>
+      <Bold className="h-4 w-4" />
+    </Toggle>
+  ),
 };
 
 export const AllVariants: Story = {
@@ -82,24 +87,24 @@ export const AllVariants: Story = {
           <div className="flex flex-wrap gap-4 items-center justify-center">
             <Toggle
               pressed={activeStyles.bold}
-              onPressedChange={(pressed) => 
-                setActiveStyles(prev => ({ ...prev, bold: pressed }))
+              onPressedChange={(pressed) =>
+                setActiveStyles((prev) => ({ ...prev, bold: pressed }))
               }
             >
               <Bold className="h-4 w-4" />
             </Toggle>
             <Toggle
               pressed={activeStyles.italic}
-              onPressedChange={(pressed) => 
-                setActiveStyles(prev => ({ ...prev, italic: pressed }))
+              onPressedChange={(pressed) =>
+                setActiveStyles((prev) => ({ ...prev, italic: pressed }))
               }
             >
               <Italic className="h-4 w-4" />
             </Toggle>
             <Toggle
               pressed={activeStyles.underline}
-              onPressedChange={(pressed) => 
-                setActiveStyles(prev => ({ ...prev, underline: pressed }))
+              onPressedChange={(pressed) =>
+                setActiveStyles((prev) => ({ ...prev, underline: pressed }))
               }
             >
               <Underline className="h-4 w-4" />
@@ -129,11 +134,13 @@ export const AllVariants: Story = {
           <div className="flex flex-wrap gap-4 items-center justify-center">
             <Toggle
               pressed={activeStyles.favorite}
-              onPressedChange={(pressed) => 
-                setActiveStyles(prev => ({ ...prev, favorite: pressed }))
+              onPressedChange={(pressed) =>
+                setActiveStyles((prev) => ({ ...prev, favorite: pressed }))
               }
             >
-              <Heart className={`h-4 w-4 ${activeStyles.favorite ? 'fill-red-500 text-red-500' : ''}`} />
+              <Heart
+                className={`h-4 w-4 ${activeStyles.favorite ? "fill-red-500 text-red-500" : ""}`}
+              />
             </Toggle>
             <Toggle disabled>
               <Star className="h-4 w-4" />
@@ -176,8 +183,8 @@ export const AllVariants: Story = {
 
 export const Playground: Story = {
   args: {
-    variant: 'default',
-    size: 'default',
+    variant: "default",
+    size: "default",
     children: <Bold className="h-4 w-4" />,
   },
 };

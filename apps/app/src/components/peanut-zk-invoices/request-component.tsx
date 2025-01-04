@@ -6,7 +6,8 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function InvoicePage() {
-  const [linkDetails, setLinkDetails] = useState<IGetRequestLinkDetailsResponse | null>(null);
+  const [linkDetails, setLinkDetails] =
+    useState<IGetRequestLinkDetailsResponse | null>(null);
   const searchParams = useSearchParams();
 
   useEffect(() => {
@@ -54,8 +55,13 @@ export default function InvoicePage() {
       <div>Attachment URL {linkDetails.attachmentUrl}</div>
       <div>Payer Address {linkDetails.payerAddress}</div>
       <div>Track ID {linkDetails.trackId}</div>
-      <div>Destination Chain Fulfillment Hash {linkDetails.destinationChainFulfillmentHash}</div>
-      <div>Origin Chain Fulfillment Hash {linkDetails.originChainFulfillmentHash}</div>
+      <div>
+        Destination Chain Fulfillment Hash{" "}
+        {linkDetails.destinationChainFulfillmentHash}
+      </div>
+      <div>
+        Origin Chain Fulfillment Hash {linkDetails.originChainFulfillmentHash}
+      </div>
     </main>
   );
 }

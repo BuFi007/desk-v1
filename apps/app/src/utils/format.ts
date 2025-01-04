@@ -7,12 +7,33 @@ import {
   startOfDay,
 } from "date-fns";
 
-export function formatSize(bytes: number): string {
-  const units = ["byte", "kilobyte", "megabyte", "gigabyte", "terabyte"];
+const units = ["byte", "kilobyte", "megabyte", "gigabyte", "terabyte"];
+const day_period = ["day", "night"] as const;
 
+type DayPeriod = (typeof day_period)[number];
+
+type GetDayPeriodParams = {
+  date?: Date;
+  dayStartHour?: number;
+  dayEndHour?: number;
+};
+
+export function getDayPeriod({
+  date = new Date(),
+  dayStartHour = 6,
+  dayEndHour = 18,
+}: GetDayPeriodParams = {}): DayPeriod {
+  const hours = date.getHours();
+
+  return hours >= dayStartHour && hours < dayEndHour
+    ? day_period[0]
+    : day_period[1];
+}
+
+export function formatSize(bytes: number): string {
   const unitIndex = Math.max(
     0,
-    Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1)
+    Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1),
   );
 
   return Intl.NumberFormat("en-US", {
@@ -134,7 +155,7 @@ export function formatDateRange(dates: TZDate[]): string {
   if (startDate.getMonth() === endDate.getMonth()) {
     // Same month
     return `${format(startDate, "MMM")} ${formatDay(startDate)} - ${formatDay(
-      endDate
+      endDate,
     )}`;
   }
   // Different months

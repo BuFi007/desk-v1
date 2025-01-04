@@ -27,7 +27,7 @@ export function LayoutWrapper({ children, defaultOpen }: LayoutWrapperProps) {
                 x={-1}
                 y={-1}
                 className={cn(
-                  "[mask-image:linear-gradient(to_bottom_right,white,transparent,transparent)]"
+                  "[mask-image:linear-gradient(to_bottom_right,white,transparent,transparent)]",
                 )}
               />
               <div className="flex items-center gap-2 px-4 flex-1">

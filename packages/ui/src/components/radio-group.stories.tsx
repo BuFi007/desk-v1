@@ -22,7 +22,8 @@ const meta: Meta<typeof RadioGroup> = {
     layout: "centered",
     docs: {
       description: {
-        component: "A radio group component for selecting a single option from a list.",
+        component:
+          "A radio group component for selecting a single option from a list.",
       },
     },
   },
@@ -75,7 +76,10 @@ const NotificationPreferences = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-[400px] space-y-6">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="w-[400px] space-y-6"
+      >
         <FormField
           control={form.control}
           name="type"
@@ -203,11 +207,15 @@ export const SmallGroup: StoryObj<typeof RadioGroup> = {
       <RadioGroup defaultValue="option-1" className="flex space-x-4">
         <div className="flex items-center space-x-1">
           <RadioGroupItem value="option-1" id="small-1" />
-          <Label htmlFor="small-1" className="text-sm">Yes</Label>
+          <Label htmlFor="small-1" className="text-sm">
+            Yes
+          </Label>
         </div>
         <div className="flex items-center space-x-1">
           <RadioGroupItem value="option-2" id="small-2" />
-          <Label htmlFor="small-2" className="text-sm">No</Label>
+          <Label htmlFor="small-2" className="text-sm">
+            No
+          </Label>
         </div>
       </RadioGroup>
     </div>

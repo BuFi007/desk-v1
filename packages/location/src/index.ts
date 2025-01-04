@@ -5,19 +5,22 @@ import { currencies } from "./currencies";
 import { EU_COUNTRY_CODES } from "./eu-countries";
 import timezones from "./timezones.json";
 
+type CountryData = {
+  currencies: Partial<Record<string, { name: string; symbol: string }>>;
+  languages: Partial<Record<string, string>>;
+  cca2: string;
+};
+
 export async function getCountryCode() {
-  const hdrs = await headers();
-  return hdrs.get("x-vercel-ip-country") || "SE";
+  return (await headers()).get("x-vercel-ip-country") || "SE";
 }
 
 export async function getTimezone() {
-  const hdrs = await headers();
-  return hdrs.get("x-vercel-ip-timezone") || "Europe/Berlin";
+  return (await headers()).get("x-vercel-ip-timezone") || "Europe/Berlin";
 }
 
 export async function getLocale() {
-  const hdrs = await headers();
-  return hdrs.get("x-vercel-ip-locale") || "en-US";
+  return (await headers()).get("x-vercel-ip-locale") || "en-US";
 }
 
 export function getTimezones() {
@@ -26,24 +29,23 @@ export function getTimezones() {
 
 export async function getCurrency() {
   const countryCode = await getCountryCode();
-
   return currencies[countryCode as keyof typeof currencies];
 }
 
 export async function getDateFormat() {
-  const country = await getCountryCode();
+  const country = getCountryCode();
 
   // US uses MM/dd/yyyy
-  if (country === "US") {
+  if ((await country) === "US") {
     return "MM/dd/yyyy";
   }
 
   // China, Japan, Korea, Taiwan use yyyy-MM-dd
-  if (["CN", "JP", "KR", "TW"].includes(country)) {
+  if (["CN", "JP", "KR", "TW"].includes(await country)) {
     return "yyyy-MM-dd";
   }
   // Most Latin American, African, and some Asian countries use dd/MM/yyyy
-  if (["AU", "NZ", "IN", "ZA", "BR", "AR"].includes(country)) {
+  if (["AU", "NZ", "IN", "ZA", "BR", "AR"].includes(await country)) {
     return "dd/MM/yyyy";
   }
 
@@ -53,26 +55,19 @@ export async function getDateFormat() {
 
 export async function getCountryInfo() {
   const country = await getCountryCode();
-
-  const countryInfo = countries.find((x) => x.cca2 === country);
-
-  const currencyCode =
-    countryInfo && Object.keys(countryInfo.currencies)?.at(0);
-  const currency = countryInfo?.currencies[currencyCode];
+  const countryInfo = countries.find((x) => x.cca2 === country) as CountryData;
+  const currencyCode = countryInfo && Object.keys(countryInfo.currencies)[0];
+  const currency = currencyCode && countryInfo.currencies[currencyCode];
   const languages =
-    countryInfo && Object.values(countryInfo.languages).join(", ");
+    countryInfo?.languages && Object.values(countryInfo.languages).join(", ");
 
-  return {
-    currencyCode,
-    currency,
-    languages,
-  };
+  return { currencyCode, currency, languages };
 }
 
 export async function isEU() {
-  const countryCode = await getCountryCode();
+  const countryCode = getCountryCode();
 
-  if (countryCode && EU_COUNTRY_CODES.includes(countryCode)) {
+  if (countryCode && EU_COUNTRY_CODES.includes(await countryCode)) {
     return true;
   }
 
@@ -81,6 +76,5 @@ export async function isEU() {
 
 export async function getCountry() {
   const country = await getCountryCode();
-
-  return flags[country];
+  return flags[country as keyof typeof flags];
 }

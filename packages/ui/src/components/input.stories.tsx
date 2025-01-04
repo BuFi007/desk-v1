@@ -11,7 +11,8 @@ const meta: Meta<typeof Input> = {
     layout: "centered",
     docs: {
       description: {
-        component: "An input component for collecting user data with various states and styles.",
+        component:
+          "An input component for collecting user data with various states and styles.",
       },
     },
   },
@@ -35,7 +36,7 @@ export const InputVariants: StoryObj<typeof Input> = {
             <Label>Default</Label>
             <Input placeholder="Enter text..." />
           </div>
-          
+
           <div className="space-y-2">
             <Label>Disabled</Label>
             <Input disabled placeholder="Disabled input" />

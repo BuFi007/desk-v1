@@ -10,10 +10,10 @@ export const metadata = {
   title: "Invoice Request | Bu Desk 👻 ",
 };
 
-export default function InvoiceRequestLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <InvoiceProvider>
-      {children}
-    </InvoiceProvider>
-  );
+export default function InvoiceRequestLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <InvoiceProvider>{children}</InvoiceProvider>;
 }

@@ -13,7 +13,7 @@ console.warn = (...args) => {
   const match = args.find((arg) =>
     typeof arg === "string"
       ? IGNORE_WARNINGS.find((warning) => arg.includes(warning))
-      : false
+      : false,
   );
   if (!match) {
     conWarn(...args);
@@ -24,7 +24,7 @@ console.log = (...args) => {
   const match = args.find((arg) =>
     typeof arg === "string"
       ? IGNORE_WARNINGS.find((warning) => arg.includes(warning))
-      : false
+      : false,
   );
   if (!match) {
     conLog(...args);
@@ -42,10 +42,10 @@ export const createClient = async (options?: CreateClientOptions) => {
   const cookieStore = await cookies();
 
   const key = admin
-    // biome-ignore lint/style/noNonNullAssertion: <explanation>
-    ? process.env.SUPABASE_SERVICE_KEY!
-    // biome-ignore lint/style/noNonNullAssertion: <explanation>
-    : process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+    ? // biome-ignore lint/style/noNonNullAssertion: <explanation>
+      process.env.SUPABASE_SERVICE_KEY!
+    : // biome-ignore lint/style/noNonNullAssertion: <explanation>
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
   const auth = admin
     ? {
@@ -85,6 +85,6 @@ export const createClient = async (options?: CreateClientOptions) => {
           "sb-lb-routing-mode": "alpha-all-services",
         },
       },
-    }
+    },
   );
 };

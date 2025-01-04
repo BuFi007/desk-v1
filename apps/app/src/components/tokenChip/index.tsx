@@ -18,7 +18,7 @@ export function TokenChip({
         pressable.secondary,
         pressable.shadow,
         "flex w-fit shrink-0 items-center gap-1 rounded-lg py-1 pr-3 pl-1 ",
-        className
+        className,
       )}
       onClick={() => onClick?.(token)}
     >

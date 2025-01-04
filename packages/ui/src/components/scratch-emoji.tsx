@@ -39,7 +39,7 @@ const ScratchToRevealEmoji: React.FC<ScratchToRevealProps> = ({
         0,
         0,
         canvas.width,
-        canvas.height
+        canvas.height,
       );
       gradient.addColorStop(0, gradientColors[0]);
       gradient.addColorStop(0.5, gradientColors[1]);

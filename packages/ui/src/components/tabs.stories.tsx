@@ -1,22 +1,22 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { 
-  Tabs, 
-  TabsList, 
-  TabsListAlt, 
-  TabsTrigger, 
-  TabsContent, 
+import {
+  Tabs,
+  TabsList,
+  TabsListAlt,
+  TabsTrigger,
+  TabsContent,
   TabsTriggerAlt,
-  TabsTriggerRight 
+  TabsTriggerRight,
 } from "./tabs";
-import { 
-  User, 
-  Settings, 
-  Bell, 
-  CreditCard, 
-  Workflow, 
-  Shield, 
-  Lock, 
-  Palette 
+import {
+  User,
+  Settings,
+  Bell,
+  CreditCard,
+  Workflow,
+  Shield,
+  Lock,
+  Palette,
 } from "lucide-react";
 
 const meta: Meta<typeof Tabs> = {
@@ -26,7 +26,8 @@ const meta: Meta<typeof Tabs> = {
     layout: "centered",
     docs: {
       description: {
-        component: "A flexible tab component with multiple styling and layout options.",
+        component:
+          "A flexible tab component with multiple styling and layout options.",
       },
     },
   },
@@ -44,15 +45,9 @@ export const Default: Story = {
         <TabsTrigger value="password">Password</TabsTrigger>
         <TabsTrigger value="team">Team</TabsTrigger>
       </TabsList>
-      <TabsContent value="account">
-        Manage your account settings
-      </TabsContent>
-      <TabsContent value="password">
-        Change your password
-      </TabsContent>
-      <TabsContent value="team">
-        Manage your team members
-      </TabsContent>
+      <TabsContent value="account">Manage your account settings</TabsContent>
+      <TabsContent value="password">Change your password</TabsContent>
+      <TabsContent value="team">Manage your team members</TabsContent>
     </Tabs>
   ),
 };
@@ -87,7 +82,9 @@ export const AllVariants: Story = {
           <TabsContent value="notifications" className="space-y-4">
             <div className="flex items-center space-x-4">
               <Bell className="h-6 w-6" />
-              <h4 className="text-md font-semibold">Notification Preferences</h4>
+              <h4 className="text-md font-semibold">
+                Notification Preferences
+              </h4>
             </div>
             <p>Manage how and when you receive notifications.</p>
           </TabsContent>

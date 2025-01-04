@@ -1,22 +1,22 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { 
-  Table, 
-  TableBody, 
-  TableCaption, 
-  TableCell, 
-  TableFooter, 
-  TableHead, 
-  TableHeader, 
-  TableRow 
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from "./table";
-import { 
-  User, 
-  CreditCard, 
-  Package, 
-  Activity, 
-  Layers, 
-  ChevronDown, 
-  MoreHorizontal 
+import {
+  User,
+  CreditCard,
+  Package,
+  Activity,
+  Layers,
+  ChevronDown,
+  MoreHorizontal,
 } from "lucide-react";
 import { Button } from "./button";
 import { Checkbox } from "./checkbox";
@@ -28,7 +28,8 @@ const meta: Meta = {
     layout: "centered",
     docs: {
       description: {
-        component: "A flexible and responsive table component with multiple sub-components.",
+        component:
+          "A flexible and responsive table component with multiple sub-components.",
       },
     },
   },
@@ -38,13 +39,7 @@ export default meta;
 
 type Story = StoryObj<typeof Table>;
 
-const userDataColumns = [
-  "Name",
-  "Email",
-  "Status",
-  "Plan",
-  "Actions"
-];
+const userDataColumns = ["Name", "Email", "Status", "Plan", "Actions"];
 
 const userData = [
   {
@@ -89,13 +84,13 @@ export const Default: Story = {
             <TableCell>{user.name}</TableCell>
             <TableCell>{user.email}</TableCell>
             <TableCell>
-              <span 
+              <span
                 className={`px-2 py-1 rounded-full text-xs ${
-                  user.status === "Active" 
-                    ? "bg-green-100 text-green-800" 
-                    : user.status === "Inactive" 
-                    ? "bg-red-100 text-red-800" 
-                    : "bg-yellow-100 text-yellow-800"
+                  user.status === "Active"
+                    ? "bg-green-100 text-green-800"
+                    : user.status === "Inactive"
+                      ? "bg-red-100 text-red-800"
+                      : "bg-yellow-100 text-yellow-800"
                 }`}
               >
                 {user.status}
@@ -132,22 +127,37 @@ export const AllVariants: Story = {
           </TableHeader>
           <TableBody>
             {[
-              { product: "Laptop", category: "Electronics", price: "$999", stock: "In Stock" },
-              { product: "Headphones", category: "Accessories", price: "$199", stock: "Low Stock" },
-              { product: "Smartphone", category: "Mobile", price: "$599", stock: "Out of Stock" },
+              {
+                product: "Laptop",
+                category: "Electronics",
+                price: "$999",
+                stock: "In Stock",
+              },
+              {
+                product: "Headphones",
+                category: "Accessories",
+                price: "$199",
+                stock: "Low Stock",
+              },
+              {
+                product: "Smartphone",
+                category: "Mobile",
+                price: "$599",
+                stock: "Out of Stock",
+              },
             ].map((item, index) => (
               <TableRow key={index}>
                 <TableCell>{item.product}</TableCell>
                 <TableCell>{item.category}</TableCell>
                 <TableCell>{item.price}</TableCell>
                 <TableCell>
-                  <span 
+                  <span
                     className={`px-2 py-1 rounded-full text-xs ${
-                      item.stock === "In Stock" 
-                        ? "bg-green-100 text-green-800" 
-                        : item.stock === "Low Stock" 
-                        ? "bg-yellow-100 text-yellow-800" 
-                        : "bg-red-100 text-red-800"
+                      item.stock === "In Stock"
+                        ? "bg-green-100 text-green-800"
+                        : item.stock === "Low Stock"
+                          ? "bg-yellow-100 text-yellow-800"
+                          : "bg-red-100 text-red-800"
                     }`}
                   >
                     {item.stock}
@@ -176,17 +186,17 @@ export const AllVariants: Story = {
           </TableHeader>
           <TableBody>
             {[
-              { 
-                name: "John Doe", 
-                email: "john@example.com", 
-                role: "Admin", 
-                lastLogin: "2 hours ago" 
+              {
+                name: "John Doe",
+                email: "john@example.com",
+                role: "Admin",
+                lastLogin: "2 hours ago",
               },
-              { 
-                name: "Jane Smith", 
-                email: "jane@example.com", 
-                role: "User", 
-                lastLogin: "Yesterday" 
+              {
+                name: "Jane Smith",
+                email: "jane@example.com",
+                role: "User",
+                lastLogin: "Yesterday",
               },
             ].map((user, index) => (
               <TableRow key={index}>
@@ -253,17 +263,17 @@ export const AllVariants: Story = {
           </TableHeader>
           <TableBody>
             {[
-              { 
-                member: "Alex Rodriguez", 
-                activity: "Completed Project", 
-                date: "2023-06-15", 
-                status: "Completed" 
+              {
+                member: "Alex Rodriguez",
+                activity: "Completed Project",
+                date: "2023-06-15",
+                status: "Completed",
               },
-              { 
-                member: "Sam Johnson", 
-                activity: "Code Review", 
-                date: "2023-06-14", 
-                status: "In Progress" 
+              {
+                member: "Sam Johnson",
+                activity: "Code Review",
+                date: "2023-06-14",
+                status: "In Progress",
               },
             ].map((activity, index) => (
               <TableRow key={index}>
@@ -276,10 +286,10 @@ export const AllVariants: Story = {
                 <TableCell>{activity.activity}</TableCell>
                 <TableCell>{activity.date}</TableCell>
                 <TableCell>
-                  <span 
+                  <span
                     className={`px-2 py-1 rounded-full text-xs ${
-                      activity.status === "Completed" 
-                        ? "bg-green-100 text-green-800" 
+                      activity.status === "Completed"
+                        ? "bg-green-100 text-green-800"
                         : "bg-yellow-100 text-yellow-800"
                     }`}
                   >
@@ -331,20 +341,35 @@ export const CompactTable: Story = {
       </TableHeader>
       <TableBody>
         {[
-          { invoice: "INV001", status: "Paid", method: "Credit Card", amount: "$250.00" },
-          { invoice: "INV002", status: "Pending", method: "PayPal", amount: "$150.00" },
-          { invoice: "INV003", status: "Unpaid", method: "Bank Transfer", amount: "$350.00" },
+          {
+            invoice: "INV001",
+            status: "Paid",
+            method: "Credit Card",
+            amount: "$250.00",
+          },
+          {
+            invoice: "INV002",
+            status: "Pending",
+            method: "PayPal",
+            amount: "$150.00",
+          },
+          {
+            invoice: "INV003",
+            status: "Unpaid",
+            method: "Bank Transfer",
+            amount: "$350.00",
+          },
         ].map((item) => (
           <TableRow key={item.invoice}>
             <TableCell className="font-medium">{item.invoice}</TableCell>
             <TableCell>
-              <span 
+              <span
                 className={`px-2 py-1 rounded-full text-xs ${
-                  item.status === "Paid" 
-                    ? "bg-green-100 text-green-800" 
-                    : item.status === "Pending" 
-                    ? "bg-yellow-100 text-yellow-800" 
-                    : "bg-red-100 text-red-800"
+                  item.status === "Paid"
+                    ? "bg-green-100 text-green-800"
+                    : item.status === "Pending"
+                      ? "bg-yellow-100 text-yellow-800"
+                      : "bg-red-100 text-red-800"
                 }`}
               >
                 {item.status}

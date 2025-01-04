@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Textarea } from "./textarea";
-import { 
-  Edit, 
-  MessageSquare, 
-  AlignLeft, 
-  FileText, 
-  Send, 
-  Clipboard 
+import {
+  Edit,
+  MessageSquare,
+  AlignLeft,
+  FileText,
+  Send,
+  Clipboard,
 } from "lucide-react";
 import { useState } from "react";
 import { Label } from "./label";
@@ -24,12 +24,12 @@ const meta: Meta<typeof Textarea> = {
   },
   argTypes: {
     placeholder: {
-      control: 'text',
-      description: 'Placeholder text for the textarea',
+      control: "text",
+      description: "Placeholder text for the textarea",
     },
     disabled: {
-      control: 'boolean',
-      description: 'Disable the textarea',
+      control: "boolean",
+      description: "Disable the textarea",
     },
   },
 };
@@ -45,7 +45,7 @@ export const Default: Story = {
 export const AllVariants: Story = {
   name: "Textarea Variations",
   render: () => {
-    const [comment, setComment] = useState('');
+    const [comment, setComment] = useState("");
     const [feedbackLength, setFeedbackLength] = useState(0);
 
     const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -65,17 +65,16 @@ export const AllVariants: Story = {
             </div>
             <div>
               <Label>Disabled Textarea</Label>
-              <Textarea 
-                placeholder="This textarea is disabled" 
-                disabled 
-              />
+              <Textarea placeholder="This textarea is disabled" disabled />
             </div>
           </div>
         </section>
 
         {/* Contextual Usage */}
         <section>
-          <h3 className="text-lg font-semibold mb-4">Contextual Input Examples</h3>
+          <h3 className="text-lg font-semibold mb-4">
+            Contextual Input Examples
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Feedback Form */}
             <div className="space-y-2">
@@ -84,7 +83,7 @@ export const AllVariants: Story = {
                 <Label>Feedback</Label>
               </div>
               <div className="relative">
-                <Textarea 
+                <Textarea
                   placeholder="Share your feedback..."
                   value={comment}
                   onChange={handleCommentChange}
@@ -102,7 +101,7 @@ export const AllVariants: Story = {
                 <FileText className="h-5 w-5 text-muted-foreground" />
                 <Label>Support Ticket</Label>
               </div>
-              <Textarea 
+              <Textarea
                 placeholder="Describe your issue in detail..."
                 rows={5}
               />
@@ -114,7 +113,7 @@ export const AllVariants: Story = {
                 <Edit className="h-5 w-5 text-muted-foreground" />
                 <Label>Personal Notes</Label>
               </div>
-              <Textarea 
+              <Textarea
                 placeholder="Write your notes here..."
                 className="min-h-[100px]"
               />
@@ -124,7 +123,9 @@ export const AllVariants: Story = {
 
         {/* Advanced Input Scenarios */}
         <section>
-          <h3 className="text-lg font-semibold mb-4">Advanced Input Scenarios</h3>
+          <h3 className="text-lg font-semibold mb-4">
+            Advanced Input Scenarios
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Copy-Paste Scenario */}
             <div className="space-y-2">
@@ -132,7 +133,7 @@ export const AllVariants: Story = {
                 <Clipboard className="h-5 w-5 text-muted-foreground" />
                 <Label>Copy-Paste Area</Label>
               </div>
-              <Textarea 
+              <Textarea
                 placeholder="Paste your content here..."
                 className="min-h-[150px]"
               />
@@ -144,10 +145,7 @@ export const AllVariants: Story = {
                 <Send className="h-5 w-5 text-muted-foreground" />
                 <Label>Compose Message</Label>
               </div>
-              <Textarea 
-                placeholder="Write your message..."
-                rows={6}
-              />
+              <Textarea placeholder="Write your message..." rows={6} />
             </div>
           </div>
         </section>
@@ -158,21 +156,18 @@ export const AllVariants: Story = {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
               <Label>Default (No Resize)</Label>
-              <Textarea 
+              <Textarea
                 placeholder="Cannot be resized"
                 className="resize-none"
               />
             </div>
             <div>
               <Label>Vertical Resize</Label>
-              <Textarea 
-                placeholder="Resize vertically"
-                className="resize-y"
-              />
+              <Textarea placeholder="Resize vertically" className="resize-y" />
             </div>
             <div>
               <Label>Horizontal Resize</Label>
-              <Textarea 
+              <Textarea
                 placeholder="Resize horizontally"
                 className="resize-x"
               />

@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Spotlight } from "./spotlight";
 import { useState } from "react";
-import { 
-  Layers, 
-  Wand2, 
-  Palette, 
-  Sparkles, 
-  FocusIcon, 
-  Lightbulb 
+import {
+  Layers,
+  Wand2,
+  Palette,
+  Sparkles,
+  FocusIcon,
+  Lightbulb,
 } from "lucide-react";
 
 const meta: Meta<typeof Spotlight> = {
@@ -17,18 +17,19 @@ const meta: Meta<typeof Spotlight> = {
     layout: "centered",
     docs: {
       description: {
-        component: "A dynamic SVG spotlight effect for highlighting and drawing attention.",
+        component:
+          "A dynamic SVG spotlight effect for highlighting and drawing attention.",
       },
     },
   },
   argTypes: {
     fill: {
-      control: 'color',
-      description: 'Color of the spotlight fill',
+      control: "color",
+      description: "Color of the spotlight fill",
     },
     className: {
-      control: 'text',
-      description: 'Additional CSS classes for customization',
+      control: "text",
+      description: "Additional CSS classes for customization",
     },
   },
 };
@@ -48,14 +49,14 @@ export const Default: Story = {
 export const AllVariants: Story = {
   name: "Spotlight Variations",
   render: () => {
-    const [activeColor, setActiveColor] = useState('white');
-    
+    const [activeColor, setActiveColor] = useState("white");
+
     const colors = [
-      { name: 'White', value: 'white' },
-      { name: 'Blue', value: '#3b82f6' },
-      { name: 'Purple', value: '#8b5cf6' },
-      { name: 'Green', value: '#10b981' },
-      { name: 'Red', value: '#ef4444' },
+      { name: "White", value: "white" },
+      { name: "Blue", value: "#3b82f6" },
+      { name: "Purple", value: "#8b5cf6" },
+      { name: "Green", value: "#10b981" },
+      { name: "Red", value: "#ef4444" },
     ];
 
     return (
@@ -65,15 +66,16 @@ export const AllVariants: Story = {
           <h3 className="text-lg font-semibold mb-4">Color Variations</h3>
           <div className="flex flex-wrap gap-4 justify-center items-center">
             {colors.map((color) => (
-              <div 
-                key={color.name} 
+              <div
+                key={color.name}
                 className="flex flex-col items-center space-y-2"
               >
-                <div 
+                <div
                   className="w-16 h-16 rounded-full cursor-pointer border-2 transition-all hover:scale-110"
-                  style={{ 
+                  style={{
                     backgroundColor: color.value,
-                    borderColor: activeColor === color.value ? 'black' : 'transparent'
+                    borderColor:
+                      activeColor === color.value ? "black" : "transparent",
                   }}
                   onClick={() => setActiveColor(color.value)}
                 />
@@ -88,7 +90,9 @@ export const AllVariants: Story = {
 
         {/* Contextual Usage */}
         <section>
-          <h3 className="text-lg font-semibold mb-4">Contextual Applications</h3>
+          <h3 className="text-lg font-semibold mb-4">
+            Contextual Applications
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Design Highlight */}
             <div className="relative bg-white dark:bg-black p-6 rounded-lg border">
@@ -165,8 +169,8 @@ export const AllVariants: Story = {
 
 export const Playground: Story = {
   args: {
-    fill: 'white',
-    className: 'opacity-30',
+    fill: "white",
+    className: "opacity-30",
   },
 };
 

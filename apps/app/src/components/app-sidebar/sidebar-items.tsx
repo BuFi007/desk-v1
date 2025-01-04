@@ -11,7 +11,7 @@ import {
   Users,
 } from "lucide-react";
 
-  // TODO: replace icons with https://icons.pqoqubbw.dev/
+// TODO: replace icons with https://icons.pqoqubbw.dev/
 
 export const sidebarItems = {
   navMain: [
@@ -31,7 +31,7 @@ export const sidebarItems = {
         },
       ],
     },
-      {
+    {
       title: "Invoices",
       url: "/invoices",
       icon: Bot,
@@ -59,19 +59,17 @@ export const sidebarItems = {
           title: "Customer History",
           url: "#",
         },
-
       ],
     },
     {
       title: "Teams",
       url: "/teams",
       icon: Users,
-         items: [
+      items: [
         {
           title: "Members & Roles",
           url: "#",
         },
-
       ],
     },
     {

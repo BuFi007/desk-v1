@@ -20,9 +20,4 @@ interface MarketStore {
   setToChain: (Chain: Chain) => void;
 }
 
-export type {
-  PaymentStore,
-  ViewTab,
-  MarketStore,
-  PaymentTab
-};
+export type { PaymentStore, ViewTab, MarketStore, PaymentTab };

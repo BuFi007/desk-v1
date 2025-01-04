@@ -38,7 +38,7 @@ export default async function RootLayout({
       <body
         className={cn(
           `${GeistSans.variable} ${GeistMono.variable}`,
-          "antialiased bg-[(var(--bg))] text-[(var(--text))]"
+          "antialiased bg-[(var(--bg))] text-[(var(--text))]",
         )}
       >
         <ThemeProvider

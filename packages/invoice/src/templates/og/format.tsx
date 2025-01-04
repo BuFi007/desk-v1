@@ -4,15 +4,14 @@ export function formatEditorContent(doc?: EditorDoc): JSX.Element | null {
   if (!doc || !doc.content) {
     return null;
   }
-
   return (
-    <div tw="flex flex-col text-white">
+    <div className="flex flex-col text-white">
       {doc.content.map((node, nodeIndex) => {
         if (node.type === "paragraph") {
           return (
             <p
               key={`paragraph-${nodeIndex.toString()}`}
-              tw="flex flex-col mb-0"
+              className="flex flex-col mb-0"
             >
               {node.content?.map((inlineContent, inlineIndex) => {
                 if (inlineContent.type === "text") {
@@ -32,7 +31,7 @@ export function formatEditorContent(doc?: EditorDoc): JSX.Element | null {
                     return (
                       <span
                         key={`text-${nodeIndex}-${inlineIndex.toString()}`}
-                        tw={style}
+                        className={style}
                       >
                         {inlineContent.text}
                       </span>

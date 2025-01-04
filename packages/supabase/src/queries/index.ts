@@ -1,4 +1,4 @@
-'use server';
+"use server";
 
 import { logger } from "@bu/logger";
 import { createClient } from "@bu/supabase/server";
@@ -50,7 +50,7 @@ export async function getUserQuery(supabase: Client, userId: string) {
           inbox_forwarding
         )
       )
-    `
+    `,
     )
     .eq("id", userId)
     .single()
@@ -75,7 +75,7 @@ type GetUserInviteQueryParams = {
 
 export async function getUserInviteQuery(
   supabase: Client,
-  params: GetUserInviteQueryParams
+  params: GetUserInviteQueryParams,
 ) {
   return supabase
     .from("user_invites")
@@ -94,7 +94,7 @@ export async function getTeamMembersQuery(supabase: Client, teamId: string) {
       role,
       team_id,
       user:users(id, full_name, avatar_url, email)
-    `
+    `,
     )
     .eq("team_id", teamId)
     .order("created_at")
@@ -112,7 +112,7 @@ type GetTeamUserParams = {
 
 export async function getTeamUserQuery(
   supabase: Client,
-  params: GetTeamUserParams
+  params: GetTeamUserParams,
 ) {
   const { data } = await supabase
     .from("users_on_team")
@@ -122,7 +122,7 @@ export async function getTeamUserQuery(
       role,
       team_id,
       user:users(id, full_name, avatar_url, email)
-    `
+    `,
     )
     .eq("team_id", params.teamId)
     .eq("user_id", params.userId)
@@ -140,7 +140,7 @@ export async function getTeamsByUserIdQuery(supabase: Client, userId: string) {
       `
       id,
       role,
-      team:team_id(*)`
+      team:team_id(*)`,
     )
     .eq("user_id", userId)
     .throwOnError();

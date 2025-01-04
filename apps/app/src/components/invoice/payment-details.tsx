@@ -33,7 +33,7 @@ export function PaymentDetails() {
             onBlur={(content) => {
               setValue(
                 "payment_details",
-                content ? JSON.stringify(content) : ""
+                content ? JSON.stringify(content) : "",
               );
             }}
             className="min-h-[78px]"

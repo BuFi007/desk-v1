@@ -21,7 +21,6 @@ import { WalletSwitcherModal } from "./blockchain/chainSwitch/modal";
 import { SignOut } from "./sign-out";
 
 export function UserMenu({ onlySignOut }: { onlySignOut: boolean }) {
-
   const supabase = useMemo(() => createClient(), []);
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const [userData, setUserData] = useState<any>(null);

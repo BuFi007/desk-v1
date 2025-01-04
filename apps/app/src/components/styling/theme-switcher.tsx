@@ -37,7 +37,7 @@ export function ThemeSwitcher() {
       const r = window.document.querySelector(":root") as HTMLElement;
       r.style.setProperty(
         "--bg",
-        newTheme === "dark" ? palette.darkBg : palette.bg
+        newTheme === "dark" ? palette.darkBg : palette.bg,
       );
     }
   };

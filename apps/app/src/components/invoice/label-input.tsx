@@ -25,7 +25,7 @@ export function LabelInput({
       className={cn(
         "text-[11px] text-[#878787] min-w-10 font-mono outline-none inline-block p-1",
         "hover:bg-gray-50 focus:bg-gray-50",
-        className
+        className,
       )}
       id={name}
       contentEditable

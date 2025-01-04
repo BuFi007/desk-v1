@@ -14,7 +14,8 @@ type InvoiceContextType = {
 const InvoiceContext = createContext<InvoiceContextType | undefined>(undefined);
 
 export function InvoiceProvider({ children }: { children: React.ReactNode }) {
-  const [linkDetails, setLinkDetails] = useState<IGetRequestLinkDetailsResponse | null>(null);
+  const [linkDetails, setLinkDetails] =
+    useState<IGetRequestLinkDetailsResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const searchParams = useSearchParams();

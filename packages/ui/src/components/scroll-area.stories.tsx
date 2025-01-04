@@ -18,9 +18,7 @@ const meta: Meta<typeof ScrollArea> = {
 
 export default meta;
 
-const tags = Array.from({ length: 50 }).map(
-  (_, i, a) => `Tag ${a.length - i}`
-);
+const tags = Array.from({ length: 50 }).map((_, i, a) => `Tag ${a.length - i}`);
 
 export const Default: StoryObj<typeof ScrollArea> = {
   render: () => (
@@ -63,7 +61,7 @@ export const ChatList: StoryObj<typeof ScrollArea> = {
                 "flex flex-col rounded-lg p-3",
                 message.id % 2 === 0
                   ? "ml-auto bg-primary text-primary-foreground"
-                  : "bg-muted"
+                  : "bg-muted",
               )}
             >
               <p className="text-sm">{message.content}</p>
@@ -92,9 +90,7 @@ export const HorizontalScroll: StoryObj<typeof ScrollArea> = {
             {/* biome-ignore lint/style/useSelfClosingElements: <explanation> */}
             <div className="aspect-square rounded-md bg-muted"></div>
             <h4 className="mt-2 font-medium">{item.title}</h4>
-            <p className="text-sm text-muted-foreground">
-              {item.description}
-            </p>
+            <p className="text-sm text-muted-foreground">{item.description}</p>
           </div>
         ))}
       </div>
@@ -116,8 +112,8 @@ export const BothScrollbars: StoryObj<typeof ScrollArea> = {
               <h5 className="text-sm font-medium">Section {index + 1}</h5>
               <p className="text-sm text-muted-foreground">
                 This is a long paragraph that will cause horizontal scrolling.
-                It contains enough text to demonstrate both vertical and horizontal
-                scrollbars working together.
+                It contains enough text to demonstrate both vertical and
+                horizontal scrollbars working together.
               </p>
             </div>
           ))}
@@ -131,7 +127,8 @@ export const BothScrollbars: StoryObj<typeof ScrollArea> = {
 const cards = Array.from({ length: 10 }).map((_, i) => ({
   id: i,
   title: `Card ${i + 1}`,
-  description: "This is a card description that might need scrolling if it gets too long.",
+  description:
+    "This is a card description that might need scrolling if it gets too long.",
   tags: ["Tag 1", "Tag 2", "Tag 3"],
 }));
 
@@ -142,10 +139,7 @@ export const CardList: StoryObj<typeof ScrollArea> = {
         <h4 className="mb-4 text-sm font-medium leading-none">Cards</h4>
         <div className="space-y-4">
           {cards.map((card) => (
-            <div
-              key={card.id}
-              className="rounded-lg border p-4"
-            >
+            <div key={card.id} className="rounded-lg border p-4">
               <h3 className="font-medium">{card.title}</h3>
               <p className="mt-2 text-sm text-muted-foreground">
                 {card.description}

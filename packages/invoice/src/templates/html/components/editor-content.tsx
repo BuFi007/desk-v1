@@ -1,4 +1,4 @@
-import { EditorDoc } from "../../types";
+import type { EditorDoc } from "../../types";
 import { formatEditorContent } from "../format";
 
 export function EditorContent({ content }: { content?: JSON }) {

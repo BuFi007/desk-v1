@@ -11,16 +11,21 @@ import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
-  title: "Join team | bu",
+  title: "Join team | Bu Desk",
 };
+
+type InviteCodeParams = Promise<{
+  code: string;
+  locale: string;
+}>;
 
 export default async function InviteCode({
   params,
 }: {
-  params: { code: string };
+  params: InviteCodeParams;
 }) {
+  const { code } = await params;
   const supabase = await createClient();
-  const { code } = params;
 
   if (code) {
     const user = await joinTeamByInviteCode(supabase, code);

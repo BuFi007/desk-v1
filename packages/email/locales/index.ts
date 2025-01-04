@@ -14,13 +14,13 @@ export function getI18n({ locale = "en" }: Options) {
   const getTranslation = (
     key: string,
     Preview: unknown,
-    params?: TranslationParams
+    params?: TranslationParams,
   ) => {
     const translationSet: { [key: string]: string } = Object.fromEntries(
       Object.entries(translations(safeLocale, params) || {}).map(([k, v]) => [
         k,
         v ?? "",
-      ])
+      ]),
     );
 
     if (!translationSet || !(key in translationSet)) {

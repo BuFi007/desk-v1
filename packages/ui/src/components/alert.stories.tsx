@@ -45,7 +45,7 @@ export const AllVariants: Story = {
               This is a default alert with an informational message.
             </AlertDescription>
           </Alert>
-          
+
           <Alert variant="destructive">
             <AlertCircle className="h-4 w-4" />
             <AlertTitle>Error Alert</AlertTitle>

@@ -1,20 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { 
-  ToastProvider, 
-  ToastViewport, 
-  Toast, 
-  ToastTitle, 
-  ToastDescription, 
-  ToastClose, 
-  ToastAction 
+import {
+  ToastProvider,
+  ToastViewport,
+  Toast,
+  ToastTitle,
+  ToastDescription,
+  ToastClose,
+  ToastAction,
 } from "./toast";
-import { 
-  CheckCircle2, 
-  AlertTriangle, 
-  Info, 
-  XCircle, 
-  Send, 
-  Save 
+import {
+  CheckCircle2,
+  AlertTriangle,
+  Info,
+  XCircle,
+  Send,
+  Save,
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./button";
@@ -26,14 +26,15 @@ const meta: Meta<typeof Toast> = {
     layout: "centered",
     docs: {
       description: {
-        component: "A flexible toast notification component with multiple variants and interactions.",
+        component:
+          "A flexible toast notification component with multiple variants and interactions.",
       },
     },
   },
   argTypes: {
     variant: {
-      control: { type: 'select', options: ['default', 'destructive'] },
-      description: 'Visual style of the toast',
+      control: { type: "select", options: ["default", "destructive"] },
+      description: "Visual style of the toast",
     },
   },
 };
@@ -50,7 +51,9 @@ export const Default: Story = {
           <CheckCircle2 className="h-5 w-5 text-green-500" />
           <div>
             <ToastTitle>Notification Title</ToastTitle>
-            <ToastDescription>This is a default toast message.</ToastDescription>
+            <ToastDescription>
+              This is a default toast message.
+            </ToastDescription>
           </div>
           <ToastClose />
         </div>
@@ -63,57 +66,67 @@ export const Default: Story = {
 export const AllVariants: Story = {
   name: "Toast Variations",
   render: () => {
-    const [toastType, setToastType] = useState<'success' | 'warning' | 'error' | 'info'>('success');
+    const [toastType, setToastType] = useState<
+      "success" | "warning" | "error" | "info"
+    >("success");
 
     const renderToast = () => {
       switch (toastType) {
-        case 'success':
+        case "success":
           return (
             <Toast variant="default">
               <div className="flex items-center space-x-4">
                 <CheckCircle2 className="h-5 w-5 text-green-500" />
                 <div>
                   <ToastTitle>Success</ToastTitle>
-                  <ToastDescription>Your action was completed successfully.</ToastDescription>
+                  <ToastDescription>
+                    Your action was completed successfully.
+                  </ToastDescription>
                 </div>
                 <ToastClose />
               </div>
             </Toast>
           );
-        case 'warning':
+        case "warning":
           return (
             <Toast variant="destructive">
               <div className="flex items-center space-x-4">
                 <AlertTriangle className="h-5 w-5 text-yellow-500" />
                 <div>
                   <ToastTitle>Warning</ToastTitle>
-                  <ToastDescription>Proceed with caution. Potential risks detected.</ToastDescription>
+                  <ToastDescription>
+                    Proceed with caution. Potential risks detected.
+                  </ToastDescription>
                 </div>
                 <ToastClose />
               </div>
             </Toast>
           );
-        case 'error':
+        case "error":
           return (
             <Toast variant="destructive">
               <div className="flex items-center space-x-4">
                 <XCircle className="h-5 w-5 text-red-500" />
                 <div>
                   <ToastTitle>Error</ToastTitle>
-                  <ToastDescription>An error occurred. Please try again.</ToastDescription>
+                  <ToastDescription>
+                    An error occurred. Please try again.
+                  </ToastDescription>
                 </div>
                 <ToastClose />
               </div>
             </Toast>
           );
-        case 'info':
+        case "info":
           return (
             <Toast variant="default">
               <div className="flex items-center space-x-4">
                 <Info className="h-5 w-5 text-blue-500" />
                 <div>
                   <ToastTitle>Information</ToastTitle>
-                  <ToastDescription>Here's some important information for you.</ToastDescription>
+                  <ToastDescription>
+                    Here's some important information for you.
+                  </ToastDescription>
                 </div>
                 <ToastClose />
               </div>
@@ -128,28 +141,16 @@ export const AllVariants: Story = {
         <section>
           <h3 className="text-lg font-semibold mb-4">Toast Types</h3>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Button 
-              variant="outline" 
-              onClick={() => setToastType('success')}
-            >
+            <Button variant="outline" onClick={() => setToastType("success")}>
               Success Toast
             </Button>
-            <Button 
-              variant="outline" 
-              onClick={() => setToastType('warning')}
-            >
+            <Button variant="outline" onClick={() => setToastType("warning")}>
               Warning Toast
             </Button>
-            <Button 
-              variant="outline" 
-              onClick={() => setToastType('error')}
-            >
+            <Button variant="outline" onClick={() => setToastType("error")}>
               Error Toast
             </Button>
-            <Button 
-              variant="outline" 
-              onClick={() => setToastType('info')}
-            >
+            <Button variant="outline" onClick={() => setToastType("info")}>
               Info Toast
             </Button>
           </div>
@@ -162,7 +163,9 @@ export const AllVariants: Story = {
 
         {/* Advanced Toast Scenarios */}
         <section>
-          <h3 className="text-lg font-semibold mb-4">Advanced Toast Scenarios</h3>
+          <h3 className="text-lg font-semibold mb-4">
+            Advanced Toast Scenarios
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Toast with Action */}
             <ToastProvider>
@@ -171,11 +174,11 @@ export const AllVariants: Story = {
                   <Send className="h-5 w-5 text-indigo-500" />
                   <div>
                     <ToastTitle>Message Sent</ToastTitle>
-                    <ToastDescription>Your message has been sent successfully.</ToastDescription>
+                    <ToastDescription>
+                      Your message has been sent successfully.
+                    </ToastDescription>
                   </div>
-                  <ToastAction altText="Undo">
-                    Undo
-                  </ToastAction>
+                  <ToastAction altText="Undo">Undo</ToastAction>
                   <ToastClose />
                 </div>
               </Toast>
@@ -189,11 +192,11 @@ export const AllVariants: Story = {
                   <Save className="h-5 w-5 text-red-500" />
                   <div>
                     <ToastTitle>Unsaved Changes</ToastTitle>
-                    <ToastDescription>You have unsaved changes.</ToastDescription>
+                    <ToastDescription>
+                      You have unsaved changes.
+                    </ToastDescription>
                   </div>
-                  <ToastAction altText="Save">
-                    Save
-                  </ToastAction>
+                  <ToastAction altText="Save">Save</ToastAction>
                   <ToastClose />
                 </div>
               </Toast>
@@ -208,7 +211,7 @@ export const AllVariants: Story = {
 
 export const Playground: Story = {
   args: {
-    variant: 'default',
+    variant: "default",
   },
   render: (args) => (
     <ToastProvider>
@@ -236,9 +239,9 @@ export const LongContentToast: Story = {
           <div>
             <ToastTitle>Long Content Toast Notification</ToastTitle>
             <ToastDescription>
-              This is a very long toast message that demonstrates how the component 
-              handles multiple lines of text. It will wrap and ensure readability 
-              across different screen sizes.
+              This is a very long toast message that demonstrates how the
+              component handles multiple lines of text. It will wrap and ensure
+              readability across different screen sizes.
             </ToastDescription>
           </div>
           <ToastClose />

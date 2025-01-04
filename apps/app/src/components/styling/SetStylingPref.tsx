@@ -22,7 +22,7 @@ export default function SetStylingPref() {
       r.style.setProperty("--main50", colorObj.main + "b3");
       r.style.setProperty(
         "--bg",
-        theme === "dark" ? colorObj.darkBg : colorObj.bg
+        theme === "dark" ? colorObj.darkBg : colorObj.bg,
       );
     }
   }, [theme]);

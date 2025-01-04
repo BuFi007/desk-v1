@@ -7,7 +7,6 @@ import { revalidateTag } from "next/cache";
 import { authActionClient } from "../safe-action";
 import { switchTeamSchema } from "./schema";
 
-
 export const switchTeamAction = authActionClient
   .schema(switchTeamSchema)
   .metadata({
@@ -19,7 +18,7 @@ export const switchTeamAction = authActionClient
   })
   .action(async ({ parsedInput: { teamId }, ctx: { user } }) => {
     const supabase = await createClient();
-    
+
     const result = await switchPrimaryTeam(supabase, {
       userId: user.id,
       teamId,

@@ -104,7 +104,7 @@ export default function OgTemplate({
 
   const truncatedAddress = `${recipientAddress?.slice(
     0,
-    6
+    6,
   )}...${recipientAddress?.slice(-4)}`;
 
   return (

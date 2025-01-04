@@ -6,9 +6,9 @@ const nextConfig = {
   transpilePackages: ["@bu/supabase"],
   experimental: {
     instrumentationHook: process.env.NODE_ENV === "production",
-    serverActions: { 
+    serverActions: {
       bodySizeLimit: "10mb",
-    }
+    },
   },
   reactStrictMode: true,
   images: {
@@ -37,7 +37,6 @@ const nextConfig = {
     ],
   },
 };
-
 
 export default withSentryConfig(nextConfig, {
   silent: !process.env.CI,

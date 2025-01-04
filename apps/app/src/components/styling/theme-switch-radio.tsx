@@ -59,7 +59,7 @@ export function ThemeSwitcherRadio() {
       setSelectedTheme(newTheme);
       applyColorTheme(newTheme, theme === "dark");
     },
-    [theme]
+    [theme],
   );
   const getCurrentThemeColor = () => {
     return colorMap[selectedTheme]?.main;

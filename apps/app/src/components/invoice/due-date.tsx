@@ -43,7 +43,7 @@ export function DueDate() {
             variant="outline"
             className={cn(
               "w-[180px] justify-start text-left font-normal",
-              !dueDate && "text-muted-foreground"
+              !dueDate && "text-muted-foreground",
             )}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />

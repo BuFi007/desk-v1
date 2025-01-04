@@ -54,7 +54,7 @@ export const usePeanut = () => {
         return {
           chainId: chainId.toString(),
           tokenAmount: Number.parseFloat(
-            Number(tokenValue).toFixed(tokenDetails.tokenDecimals)
+            Number(tokenValue).toFixed(tokenDetails.tokenDecimals),
           ),
           tokenType: tokenDetails.tokenType,
           tokenAddress: tokenAddress,
@@ -67,7 +67,7 @@ export const usePeanut = () => {
         throw new Error("Error getting the linkDetails.");
       }
     },
-    [getTokenDetails, chainId]
+    [getTokenDetails, chainId],
   );
 
   const createPayLink = async (
@@ -76,7 +76,7 @@ export const usePeanut = () => {
     onInProgress?: () => void,
     onSuccess?: () => void,
     onFailed?: (error: Error) => void,
-    onFinished?: () => void
+    onFinished?: () => void,
   ) => {
     setIsLoading(true);
     setLoading(true);
@@ -199,7 +199,7 @@ export const usePeanut = () => {
     onInProgress?: () => void,
     onSuccess?: () => void,
     onFailed?: (error: Error) => void,
-    onFinished?: () => void
+    onFinished?: () => void,
   ) => {
     setIsLoading(true);
     setLoading(true);
@@ -262,7 +262,7 @@ export const usePeanut = () => {
     onSuccess?: () => void,
     onFailed?: (error: Error) => void,
     onFinished?: () => void,
-    isMainnet?: boolean
+    isMainnet?: boolean,
   ) => {
     setIsLoading(true);
     setLoading(true);
@@ -346,7 +346,7 @@ export const usePeanut = () => {
     onInProgress?: () => void,
     onSuccess?: () => void,
     onFailed?: (error: Error) => void,
-    onFinished?: () => void
+    onFinished?: () => void,
   ) => {
     setIsLoading(true);
     setLoading(true);
@@ -354,16 +354,16 @@ export const usePeanut = () => {
 
     console.log(
       "Sending request with tokenAddress for peanut inside hook:",
-      tokenAddress
+      tokenAddress,
     );
     console.log("Sending request with amount for peanut inside hook:", amount);
     console.log(
       "Sending request with recipientAddress for peanut inside hook:",
-      recipientAddress
+      recipientAddress,
     );
     console.log(
       "Sending request with chainId for peanut inside hook:",
-      chainId
+      chainId,
     );
 
     if (!address) {
@@ -417,7 +417,7 @@ export const usePeanut = () => {
     onInProgress?: () => void,
     onSuccess?: () => void,
     onFailed?: (error: Error) => void,
-    onFinished?: () => void
+    onFinished?: () => void,
   ) => {
     setIsLoading(true);
     setLoading(true);
@@ -501,7 +501,7 @@ export const usePeanut = () => {
     onSuccess?: () => void,
     onFailed?: (error: Error) => void,
     onFinished?: () => void,
-    isMainnet?: boolean
+    isMainnet?: boolean,
   ) => {
     setIsLoading(true);
     setLoading(true);

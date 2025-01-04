@@ -1,22 +1,22 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue, 
-  SelectGroup, 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  SelectGroup,
   SelectLabel,
-  SelectSeparator
+  SelectSeparator,
 } from "./select";
-import { 
-  User, 
-  Globe, 
-  CreditCard, 
-  Settings, 
-  Package, 
-  LogIn, 
-  MapPin 
+import {
+  User,
+  Globe,
+  CreditCard,
+  Settings,
+  Package,
+  LogIn,
+  MapPin,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -27,7 +27,8 @@ const meta: Meta<typeof Select> = {
     layout: "centered",
     docs: {
       description: {
-        component: "A flexible select component with multiple configuration options.",
+        component:
+          "A flexible select component with multiple configuration options.",
       },
     },
   },
@@ -180,7 +181,9 @@ export const AllVariants: Story = {
 
         {/* Disabled and Grouped Selects */}
         <section>
-          <h3 className="text-lg font-semibold mb-4">Disabled and Grouped Selects</h3>
+          <h3 className="text-lg font-semibold mb-4">
+            Disabled and Grouped Selects
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <div className="flex items-center space-x-2 mb-2">
@@ -201,7 +204,9 @@ export const AllVariants: Story = {
                   <SelectGroup>
                     <SelectLabel>Accessibility</SelectLabel>
                     <SelectItem value="high-contrast">High Contrast</SelectItem>
-                    <SelectItem value="screen-reader" disabled>Screen Reader (Coming Soon)</SelectItem>
+                    <SelectItem value="screen-reader" disabled>
+                      Screen Reader (Coming Soon)
+                    </SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>

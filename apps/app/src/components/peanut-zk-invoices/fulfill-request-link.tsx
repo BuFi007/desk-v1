@@ -5,10 +5,10 @@ import { usePeanut } from "@/hooks/usePeanut";
 import { Button } from "@bu/ui/button";
 import { Input } from "@bu/ui/input";
 import { useToast } from "@bu/ui/use-toast";
-import { Loader2 } from 'lucide-react';
+import { Loader2 } from "lucide-react";
 import { useState } from "react";
-import { useAccount, useConnect } from 'wagmi'
-import { injected } from 'wagmi/connectors'
+import { useAccount, useConnect } from "wagmi";
+import { injected } from "wagmi/connectors";
 
 export default function FulfillRequestLink({
   link,
@@ -22,7 +22,7 @@ export default function FulfillRequestLink({
   const [isProcessing, setIsProcessing] = useState(false);
   const { fulfillRequestLink } = usePeanut();
   const { toast } = useToast();
-  const account = useAccount()
+  const account = useAccount();
 
   const handlePayment = async () => {
     if (!account.isConnected) {
@@ -58,7 +58,7 @@ export default function FulfillRequestLink({
         },
         () => {
           setIsProcessing(false);
-        }
+        },
       );
     } catch (error) {
       console.error("Payment error:", error);
@@ -98,4 +98,3 @@ export default function FulfillRequestLink({
     </div>
   );
 }
-

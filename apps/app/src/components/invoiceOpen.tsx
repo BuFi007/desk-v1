@@ -16,7 +16,7 @@ export async function InvoicesOpen({ defaultCurrency }: Props) {
   ];
   const totalInvoiceCount = data?.reduce(
     (acc, curr) => acc + (curr.invoice_count ?? 0),
-    0
+    0,
   );
 
   return (

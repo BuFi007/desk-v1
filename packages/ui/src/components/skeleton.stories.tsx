@@ -1,6 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Skeleton } from "./skeleton";
-import { User, Layout, ChevronRight, Star, Clipboard, Calendar } from "lucide-react";
+import {
+  User,
+  Layout,
+  ChevronRight,
+  Star,
+  Clipboard,
+  Calendar,
+} from "lucide-react";
 
 const meta: Meta<typeof Skeleton> = {
   title: "Components/Skeleton",
@@ -9,7 +16,8 @@ const meta: Meta<typeof Skeleton> = {
     layout: "centered",
     docs: {
       description: {
-        component: "A flexible skeleton loader component for showing content placeholders.",
+        component:
+          "A flexible skeleton loader component for showing content placeholders.",
       },
     },
   },
@@ -36,15 +44,21 @@ export const AllVariants: Story = {
         <h3 className="text-lg font-semibold mb-4">Basic Shapes and Sizes</h3>
         <div className="flex flex-wrap gap-4 items-center justify-center">
           <div className="space-y-2 text-center">
-            <div className="w-24 h-24"><Skeleton /></div>
+            <div className="w-24 h-24">
+              <Skeleton />
+            </div>
             <span className="text-sm">Square</span>
           </div>
           <div className="space-y-2 text-center">
-            <div className="w-24 h-12"><Skeleton /></div>
+            <div className="w-24 h-12">
+              <Skeleton />
+            </div>
             <span className="text-sm">Rectangle</span>
           </div>
           <div className="space-y-2 text-center">
-            <div className="w-24 h-24 rounded-full"><Skeleton className="rounded-full" /></div>
+            <div className="w-24 h-24 rounded-full">
+              <Skeleton className="rounded-full" />
+            </div>
             <span className="text-sm">Circle</span>
           </div>
         </div>
@@ -93,7 +107,9 @@ export const AllVariants: Story = {
 
       {/* Complex Layout Simulation */}
       <section>
-        <h3 className="text-lg font-semibold mb-4">Complex Layout Simulation</h3>
+        <h3 className="text-lg font-semibold mb-4">
+          Complex Layout Simulation
+        </h3>
         <div className="bg-background border rounded-lg p-6 space-y-4">
           <div className="flex justify-between items-center">
             <Skeleton className="h-8 w-1/4" />
@@ -113,7 +129,9 @@ export const AllVariants: Story = {
 
       {/* Contextual Loading Examples */}
       <section>
-        <h3 className="text-lg font-semibold mb-4">Contextual Loading Examples</h3>
+        <h3 className="text-lg font-semibold mb-4">
+          Contextual Loading Examples
+        </h3>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           <div className="flex flex-col items-center space-y-2">
             <User className="h-6 w-6 text-muted-foreground" />

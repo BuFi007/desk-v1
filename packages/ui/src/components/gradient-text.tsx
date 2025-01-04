@@ -37,7 +37,7 @@ const gradientTextVariants = cva(
       font: "clash",
       gradient: "default",
     },
-  }
+  },
 );
 
 export interface GradientTextProps
@@ -58,14 +58,14 @@ const GradientText = React.forwardRef<HTMLSpanElement, GradientTextProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const content = (
       <span
         ref={ref}
         className={cn(
           gradientTextVariants({ size, font, gradient }),
-          className
+          className,
         )}
         {...props}
       >
@@ -82,7 +82,7 @@ const GradientText = React.forwardRef<HTMLSpanElement, GradientTextProps>(
     }
 
     return content;
-  }
+  },
 );
 
 GradientText.displayName = "GradientText";

@@ -21,7 +21,8 @@ const meta: Meta<typeof Sheet> = {
     layout: "centered",
     docs: {
       description: {
-        component: "A sheet component for displaying content in a sliding panel.",
+        component:
+          "A sheet component for displaying content in a sliding panel.",
       },
     },
   },
@@ -90,21 +91,13 @@ export const ProfileEdit: StoryObj<typeof Sheet> = {
             <Label htmlFor="name" className="text-right">
               Name
             </Label>
-            <Input
-              id="name"
-              value="John Doe"
-              className="col-span-3"
-            />
+            <Input id="name" value="John Doe" className="col-span-3" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right">
               Username
             </Label>
-            <Input
-              id="username"
-              value="@johndoe"
-              className="col-span-3"
-            />
+            <Input id="username" value="@johndoe" className="col-span-3" />
           </div>
         </div>
         <SheetFooter>
@@ -172,21 +165,17 @@ export const SettingsPanel: StoryObj<typeof Sheet> = {
         </SheetHeader>
         <div className="py-4">
           <div className="space-y-4">
-            {[
-              "Account",
-              "Notifications",
-              "Appearance",
-              "Security",
-              "Help",
-            ].map((item) => (
-              <div
-                key={item}
-                className="flex items-center justify-between py-2 cursor-pointer hover:bg-accent rounded-md px-2"
-              >
-                <span>{item}</span>
-                <ChevronRight className="h-4 w-4" />
-              </div>
-            ))}
+            {["Account", "Notifications", "Appearance", "Security", "Help"].map(
+              (item) => (
+                <div
+                  key={item}
+                  className="flex items-center justify-between py-2 cursor-pointer hover:bg-accent rounded-md px-2"
+                >
+                  <span>{item}</span>
+                  <ChevronRight className="h-4 w-4" />
+                </div>
+              ),
+            )}
           </div>
         </div>
         <SheetFooter className="absolute bottom-0 left-0 right-0 p-6 border-t">
@@ -211,21 +200,16 @@ export const MobileMenu: StoryObj<typeof Sheet> = {
           <SheetTitle>Menu</SheetTitle>
         </SheetHeader>
         <div className="grid gap-2 py-6">
-          {[
-            "Home",
-            "About",
-            "Products",
-            "Contact",
-            "Blog",
-            "Careers",
-          ].map((item) => (
-            <div
-              key={item}
-              className="px-4 py-2 hover:bg-accent rounded-md cursor-pointer"
-            >
-              {item}
-            </div>
-          ))}
+          {["Home", "About", "Products", "Contact", "Blog", "Careers"].map(
+            (item) => (
+              <div
+                key={item}
+                className="px-4 py-2 hover:bg-accent rounded-md cursor-pointer"
+              >
+                {item}
+              </div>
+            ),
+          )}
         </div>
         <SheetFooter className="grid gap-2">
           <Button variant="outline">Sign In</Button>

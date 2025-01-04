@@ -65,7 +65,10 @@ function InvoiceContent() {
   const chain = useChain();
   const chainId = chain?.chainId;
 
-  const availableTokens = useGetTokensOrChain(chainId ?? 0, "tokens") as Token[];
+  const availableTokens = useGetTokensOrChain(
+    chainId ?? 0,
+    "tokens",
+  ) as Token[];
 
   const usdc = availableTokens?.find((token) => token.symbol === "USDC");
   const tokenAddress = usdc?.address;
@@ -75,7 +78,7 @@ function InvoiceContent() {
     if (savedDraft) {
       const draft = JSON.parse(savedDraft);
       setLastEditedText(
-        `Last edited ${new Date(draft.lastEdited).toLocaleString()}`
+        `Last edited ${new Date(draft.lastEdited).toLocaleString()}`,
       );
     }
   }, [address]);
@@ -90,7 +93,7 @@ function InvoiceContent() {
 
     localStorage.setItem(`invoice_draft_${address}`, JSON.stringify(draft));
     setLastEditedText(
-      `Last edited ${new Date(draft.lastEdited).toLocaleString()}`
+      `Last edited ${new Date(draft.lastEdited).toLocaleString()}`,
     );
 
     setTimeout(() => {
@@ -107,7 +110,7 @@ function InvoiceContent() {
     });
 
     return () => subscription.unsubscribe();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [watch, address]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
@@ -115,24 +118,24 @@ function InvoiceContent() {
       e.preventDefault();
     }
   };
-  
+
   const handleCreateLinkRequest = async () => {
     setCurrentText("Beginning invoice request");
     try {
       console.log("Sending request with tokenAddress:", tokenAddress);
       console.log("Sending request with amount:", amount.toString());
       console.log("Sending request with recipientAddress:", recipientAddress);
-      
+
       if (!chainId) throw new Error("Chain ID is required");
       const linkResponse = await createRequestLink(
         chainId,
-        tokenAddress as `0x${string}`, 
+        tokenAddress as `0x${string}`,
         amount.toString(),
         recipientAddress as `0x${string}`,
         () => setCurrentText("In Progress"),
         () => setCurrentText("Success"),
         (error: Error) => setCurrentText(`Error: ${error.message}`),
-        () => setCurrentText("Complete")
+        () => setCurrentText("Complete"),
       );
 
       console.log("Link Response in try:", linkResponse);
@@ -148,7 +151,8 @@ function InvoiceContent() {
       console.error("Error creating pay link:", error);
       toast({
         title: "Error",
-        description: error instanceof Error ? error.message : "An unknown error occurred",
+        description:
+          error instanceof Error ? error.message : "An unknown error occurred",
         variant: "destructive",
       });
     } finally {
@@ -356,9 +360,10 @@ export function InvoiceSheetWrapper() {
   return (
     <FormProvider {...methods}>
       <div className="flex flex-col items-center justify-center p-4 space-y-4 rounded-lg border border-dashed">
-        <h2 className="text-2xl font-bold">Create a Billable Invoice</h2>        
+        <h2 className="text-2xl font-bold">Create a Billable Invoice</h2>
         <p className="text-sm text-gray-500">
-          Fill out the form below to generate a new invoice that you can bill to your account.
+          Fill out the form below to generate a new invoice that you can bill to
+          your account.
         </p>
         <InvoiceSheet />
       </div>

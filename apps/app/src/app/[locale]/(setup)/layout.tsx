@@ -30,12 +30,7 @@ export default async function SetupLayout({
             <Card className="w-[94%] sm:w-[90%] md:w-full max-w-7xl px-2 sm:px-4 md:px-6 lg:px-8 shadow-lg bg-cerulean-400">
               <div className="flex justify-between items-center py-3 sm:py-4 md:py-6">
                 <div className="flex-shrink-0">
-                  <BuLogo
-                    text=""
-                    logo="/logo.png"
-                    width={80}
-                    height={80}
-                  />
+                  <BuLogo text="" logo="/logo.png" width={80} height={80} />
                 </div>
                 <div className="flex items-center gap-3">
                   <span className="text-sm sm:text-base font-medium hidden sm:inline-block">

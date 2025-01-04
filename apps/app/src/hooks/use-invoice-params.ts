@@ -29,7 +29,7 @@ export function useInvoiceParams(options?: { shallow: boolean }) {
       lineItems: parseAsJson<z.infer<typeof lineItemSchema>>(),
       currency: parseAsString,
     },
-    options
+    options,
   );
 
   return {

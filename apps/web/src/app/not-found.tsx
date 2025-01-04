@@ -1,12 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import appIcon from "public/logo.png";
 
 export default function NotFound() {
   return (
     <div className="h-screen flex flex-col items-center justify-center text-center text-sm text-[#606060]">
       <Image
-        src={appIcon}
+        src="/BooFi-icon.png"
         width={80}
         height={80}
         alt="BuFi"

@@ -1,5 +1,5 @@
-import { OpenPanel, type PostEventPayload } from "@openpanel/nextjs";
 import { logger } from "@bu/logger";
+import { OpenPanel, type PostEventPayload } from "@openpanel/nextjs";
 import { waitUntil } from "@vercel/functions";
 
 type Props = {

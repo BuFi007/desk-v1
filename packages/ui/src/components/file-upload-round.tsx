@@ -64,7 +64,7 @@ File name: ${rejection.file.name}`);
         onChange(file);
       }
     },
-    [onChange, maxSize]
+    [onChange, maxSize],
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -94,7 +94,7 @@ File name: ${rejection.file.name}`);
             : error
               ? "border-destructive"
               : "border-muted-foreground/25",
-          className
+          className,
         )}
         {...props}
       >

@@ -25,12 +25,7 @@ export function BuLogo({
       >
         <div className="relative flex items-center">
           <SparklesText>
-            <Image
-              src={logo}
-              alt="Bu Logo"
-              width={width}
-              height={height}
-            />
+            <Image src={logo} alt="Bu Logo" width={width} height={height} />
           </SparklesText>
           <span className="absolute mt-28 sm:mt-20 transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:-rotate-12">
             <span className="inline-block pl-5 text-3xl font-clash bg-gradient-to-r from-indigo-300 via-purple-400 to-cyan-300 bg-clip-text text-transparent">

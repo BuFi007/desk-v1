@@ -47,7 +47,7 @@ export const inviteTeamMembersSchema = z.object({
     z.object({
       email: z.string().email().optional(),
       role: z.enum(["owner", "member"]),
-    })
+    }),
   ),
   redirectTo: z.string().optional(),
   revalidatePath: z.string().optional(),

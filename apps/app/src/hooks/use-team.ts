@@ -1,6 +1,10 @@
-'use client';
+"use client";
 
-import { getPrimaryTeam, getUser, getUserTeams } from "@bu/supabase/cached-queries";
+import {
+  getPrimaryTeam,
+  getUser,
+  getUserTeams,
+} from "@bu/supabase/cached-queries";
 import { useCallback } from "react";
 import useSWR from "swr";
 
@@ -18,7 +22,7 @@ export function useUserTeams() {
   }, [userId]);
 
   return useSWR(userId ? ["userTeams", userId] : null, fetcher, {
-    revalidateOnFocus: false
+    revalidateOnFocus: false,
   });
 }
 
@@ -32,6 +36,6 @@ export function usePrimaryTeam() {
   }, [userId]);
 
   return useSWR(userId ? ["primaryTeam", userId] : null, fetcher, {
-    revalidateOnFocus: false
+    revalidateOnFocus: false,
   });
 }

@@ -46,23 +46,18 @@ export const AllVariants: StoryObj<typeof Label> = {
           {/* With Input */}
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
-            <Input
-              type="email"
-              id="email"
-              placeholder="Enter your email"
-            />
+            <Input type="email" id="email" placeholder="Enter your email" />
           </div>
 
           {/* Required Field */}
           <div className="grid gap-2">
-            <Label htmlFor="required" className="after:content-['*'] after:ml-0.5 after:text-red-500">
+            <Label
+              htmlFor="required"
+              className="after:content-['*'] after:ml-0.5 after:text-red-500"
+            >
               Required Field
             </Label>
-            <Input
-              type="text"
-              id="required"
-              placeholder="Required field"
-            />
+            <Input type="text" id="required" placeholder="Required field" />
           </div>
 
           {/* With Checkbox */}
@@ -79,15 +74,21 @@ export const AllVariants: StoryObj<typeof Label> = {
             <RadioGroup defaultValue="all">
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="all" id="all" />
-                <Label htmlFor="all" className="font-normal">All notifications</Label>
+                <Label htmlFor="all" className="font-normal">
+                  All notifications
+                </Label>
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="important" id="important" />
-                <Label htmlFor="important" className="font-normal">Important only</Label>
+                <Label htmlFor="important" className="font-normal">
+                  Important only
+                </Label>
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="none" id="none" />
-                <Label htmlFor="none" className="font-normal">None</Label>
+                <Label htmlFor="none" className="font-normal">
+                  None
+                </Label>
               </div>
             </RadioGroup>
           </div>
@@ -106,9 +107,7 @@ export const AllVariants: StoryObj<typeof Label> = {
         <div className="grid gap-4">
           {/* Disabled State */}
           <div className="space-y-2 opacity-50">
-            <Label className="cursor-not-allowed">
-              Disabled Label
-            </Label>
+            <Label className="cursor-not-allowed">Disabled Label</Label>
             <Input disabled placeholder="Disabled input" />
           </div>
 
@@ -181,7 +180,10 @@ export const RequiredFields: StoryObj<typeof Label> = {
     <div className="space-y-4">
       {/* Asterisk style */}
       <div className="space-y-2">
-        <Label htmlFor="field1" className="after:content-['*'] after:ml-0.5 after:text-red-500">
+        <Label
+          htmlFor="field1"
+          className="after:content-['*'] after:ml-0.5 after:text-red-500"
+        >
           Required Field (Asterisk)
         </Label>
         <Input id="field1" placeholder="Enter value" />

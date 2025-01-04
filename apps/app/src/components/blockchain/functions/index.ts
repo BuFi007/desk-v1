@@ -5,7 +5,7 @@ export const ApproveERC20 = async (
   tokenAddress: string,
   spenderAddress: string,
   signer: ethers.Signer,
-  amount: string
+  amount: string,
 ) => {
   const tokenContract = new ethers.Contract(tokenAddress, erc20Abi, signer);
 
@@ -20,7 +20,7 @@ export const CreateInvoice = async (
   tokenAddress: string,
   spenderAddress: string,
   signer: ethers.Signer,
-  amount: string
+  amount: string,
 ) => {
   const tokenContract = new ethers.Contract(tokenAddress, erc20Abi, signer);
 };

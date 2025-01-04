@@ -7,25 +7,27 @@ import { truncateAddress } from "@/utils";
 export function PaymentPanel() {
   const { linkDetails, isLoading, error } = useInvoice();
 
-const chainMapping = {
-  11155111: "Sepolia",
-  324: "Base",
-  300: "Base",
-  10: "Optimism",
-  97: "BscTestnet",
-  56: "Bsc"
-};           
+  const chainMapping = {
+    11155111: "Sepolia",
+    324: "Base",
+    300: "Base",
+    10: "Optimism",
+    97: "BscTestnet",
+    56: "Bsc",
+  };
 
-const contractMapping = {
-  "0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85": "USDC",
-  "0x64544969ed7EBf5f083679233325356EbE738930": "USDC",
-  "0x0000000000000000000000000000000000000000": "ETH"
-};
-const tokenaddress = linkDetails?.tokenAddress
-const chainId = linkDetails?.chainId
-const chainName = chainMapping[chainId as unknown as keyof typeof chainMapping] ?? 'Unknown';
-const tokenTicker = contractMapping[tokenaddress as unknown as keyof typeof contractMapping] ?? 'Unknown';
-
+  const contractMapping = {
+    "0x0b2C639c533813f4Aa9D7837CAf62653d097Ff85": "USDC",
+    "0x64544969ed7EBf5f083679233325356EbE738930": "USDC",
+    "0x0000000000000000000000000000000000000000": "ETH",
+  };
+  const tokenaddress = linkDetails?.tokenAddress;
+  const chainId = linkDetails?.chainId;
+  const chainName =
+    chainMapping[chainId as unknown as keyof typeof chainMapping] ?? "Unknown";
+  const tokenTicker =
+    contractMapping[tokenaddress as unknown as keyof typeof contractMapping] ??
+    "Unknown";
 
   if (isLoading) {
     return (
@@ -38,17 +40,17 @@ const tokenTicker = contractMapping[tokenaddress as unknown as keyof typeof cont
             fill="none"
             viewBox="0 0 24 24"
           >
-            <circle 
-              className="opacity-25" 
-              cx="12" 
-              cy="12" 
-              r="10" 
-              stroke="currentColor" 
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
               strokeWidth="4"
             />
-            <path 
-              className="opacity-75" 
-              fill="currentColor" 
+            <path
+              className="opacity-75"
+              fill="currentColor"
               d="M4 12a8 8 0 018-8v8z"
             />
           </svg>
@@ -63,7 +65,9 @@ const tokenTicker = contractMapping[tokenaddress as unknown as keyof typeof cont
       <div className="flex h-screen items-center justify-center bg-gray-50 dark:bg-black">
         <div className="text-center">
           <p className="text-red-600 font-semibold">Error</p>
-          <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">{error.message}</p>
+          <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">
+            {error.message}
+          </p>
         </div>
       </div>
     );
@@ -72,7 +76,9 @@ const tokenTicker = contractMapping[tokenaddress as unknown as keyof typeof cont
   if (!linkDetails) return null;
 
   const isUnclaimed = linkDetails.status === "PENDING";
-  const recipient = linkDetails.recipientAddress ? truncateAddress(linkDetails.recipientAddress) : '';
+  const recipient = linkDetails.recipientAddress
+    ? truncateAddress(linkDetails.recipientAddress)
+    : "";
 
   return (
     <div className="flex min-h-screen items-center justify-center">
@@ -96,13 +102,14 @@ const tokenTicker = contractMapping[tokenaddress as unknown as keyof typeof cont
           )}
         </div>
 
-             {/* --- Top Section: Who is requesting & how much --- */}
+        {/* --- Top Section: Who is requesting & how much --- */}
         <div className="text-center">
           <h2 className="text-md font-medium text-gray-700 dark:text-gray-200">
             {recipient} is requesting
           </h2>
           <p className="mt-1 text-3xl font-bold text-gray-900 dark:text-white">
-              {linkDetails.tokenAmount} ${tokenTicker} <span className="text-sm text-gray-500 dark:text-gray-400">on</span>
+            {linkDetails.tokenAmount} ${tokenTicker}{" "}
+            <span className="text-sm text-gray-500 dark:text-gray-400">on</span>
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400">
             {chainName}
@@ -112,8 +119,9 @@ const tokenTicker = contractMapping[tokenaddress as unknown as keyof typeof cont
         {/* Invoice Details */}
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4 text-sm">
-    
-            <div className="font-medium text-gray-500 dark:text-gray-400">Invoice Created</div>
+            <div className="font-medium text-gray-500 dark:text-gray-400">
+              Invoice Created
+            </div>
             <div className="text-gray-800 dark:text-gray-200">
               {new Date(linkDetails.createdAt).toLocaleDateString()}
             </div>
