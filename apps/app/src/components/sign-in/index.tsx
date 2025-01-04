@@ -9,8 +9,8 @@ import SignInCard from "./card";
 
 const SigninPage = () => {
   return (
-    <main className="flex h-screen w-full items-center justify-center overflow-hidden">
-      <div className="h-full w-full bg-grid-black/[0.2] relative flex items-center justify-center">
+    <main className="flex h-screen w-full items-center justify-center overflow-hidden dark:bg-gray-900">
+      <div className="h-full w-full bg-grid-black/[0.2] dark:bg-grid-white/[0.2] relative flex items-center justify-center">
         {/* Neobrutalism decorative elements */}
         <DecorativeElement
           className="absolute top-20 left-20 w-40 h-40 bg-yellow-300 rounded-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] border-2 border-black"

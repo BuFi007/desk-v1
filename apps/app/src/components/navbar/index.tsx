@@ -10,19 +10,19 @@ export default function NavBar() {
   const [isOpen, setIsOpen] = React.useState(false);
   return (
     <>
-      <div className="sticky top-0 z-10 flex h-20 w-full items-center justify-between border-2 border-slate-900 bg-nepal-100 px-4 md:px-24">
-        <h1 className="text-shadow-neo scroll-m-20 font-Space_Grotesk text-4xl font-extrabold tracking-tight text-cerulean-400 lg:text-5xl">
+      <div className="sticky top-0 z-10 flex h-20 w-full items-center justify-between border-2 border-slate-900 bg-nepal-100 dark:bg-gray-900 px-4 md:px-24">
+        <h1 className="text-shadow-neo scroll-m-20 font-Space_Grotesk text-4xl font-extrabold tracking-tight text-cerulean-400 dark:text-white lg:text-5xl">
           <BuLogo logo="/logo.png" text="Bu Desk" width={50} height={50} />
         </h1>
         {/* Desktop Navbar */}
         <div className="hidden gap-8 md:flex">
-          <a href="https://defi.bu.finance" className="text-xl text-slate-900">
+          <a href="https://defi.bu.finance" className="text-xl text-slate-900 dark:text-white">
             Loan and Borrow
           </a>
-          <a href="https://bu.finance" className="text-xl text-slate-900">
+          <a href="https://bu.finance" className="text-xl text-slate-900 dark:text-white">
             Website
           </a>
-          <a href="https://doc.bu.finance" className="text-xl text-slate-900">
+          <a href="https://doc.bu.finance" className="text-xl text-slate-900 dark:text-white">
             Docs
           </a>
         </div>

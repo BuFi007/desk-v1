@@ -4,6 +4,14 @@ import { Icons } from "@bu/ui/icons";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@bu/ui/card";
 
 export const metadata: Metadata = {
   title: "Setup your account | Bu Desk",
@@ -18,27 +26,30 @@ export default async function Setup() {
   }
 
   return (
-    <div>
-      <div className="absolute left-5 top-4 md:left-10 md:top-10">
-        <Link href="/">
-          <Icons.Logo />
-        </Link>
-      </div>
+    <Card className="w-full max-w-2xl shadow-lg">
+      <CardHeader className="space-y-1">
+        <CardTitle className="text-3xl font-bold">
+Update your account        </CardTitle>
+        <CardDescription>
+                    Add your name and an optional avatar.
 
-      <div className="flex min-h-screen justify-center items-center overflow-hidden p-6 md:p-0">
-        <div className="relative z-20 m-auto flex w-full max-w-[380px] flex-col">
-          <h1 className="text-2xl font-medium pb-4">Update your account</h1>
-          <p className="text-sm text-[#878787] mb-8">
-            Add your name and an optional avatar.
-          </p>
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+  
 
-          <SetupForm
-            userId={data.id}
-            avatarUrl={data.avatar_url ?? undefined}
-            fullName={data.full_name ?? undefined}
-          />
-        </div>
-      </div>
-    </div>
+            <SetupForm
+              userId={data.id}
+              avatarUrl={data.avatar_url ?? undefined}
+              fullName={data.full_name ?? undefined}
+            />
+    
+      </CardContent>
+      <CardFooter>
+        <p className="text-xs text-muted-foreground text-center w-full">
+          Here you can update your account information.
+        </p>
+      </CardFooter>
+    </Card>
   );
 }

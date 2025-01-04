@@ -13,7 +13,7 @@ const SignInCard = () => {
 	return (
 		<div className="relative w-full max-w-3xl mx-auto">
 			{/* Enhanced background effect */}
-			<div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-blue-300 to-blue-200 opacity-75 blur-3xl" />
+			<div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-blue-300 to-blue-200 dark:from-blue-900 dark:via-blue-800 dark:to-blue-700 opacity-75 blur-3xl" />
 
 			<Card className="w-96 md:w-72 lg:w-96 xl:w-[60vh]  relative overflow-hidden backdrop-blur-sm hover:backdrop-blur-xl bg-white/30 dark:bg-gray-800/30 border border-white/30 shadow-2xl transition-all duration-300 hover:shadow-blue-200/50 dark:hover:shadow-blue-500/30 hover:translate-y-[-5px]">
 				<div className="p-8 space-y-6">
