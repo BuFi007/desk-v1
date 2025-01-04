@@ -3,16 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "sideEffects": false,
-  "files": [
-    "tailwind.config.ts",
-    "postcss.config.js",
-    "globals.css",
-    "styles/globals.css"
-  ],
+  "files": ["tailwind.config.ts", "postcss.config.js", "globals.css", "styles/globals.css"],
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
     "lint": "biome check .",
-    "format": "biome format --write . .",
+    "format": "biome --write .",
     "typecheck": "tsc --noEmit",
     "dev": "storybook dev -p 6006",
     "build": "storybook build"
